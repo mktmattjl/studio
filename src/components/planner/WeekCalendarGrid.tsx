@@ -1,6 +1,7 @@
 
 'use client';
 
+import React from 'react'; // Added this line
 import type { PlannerEvent } from '@/app/planner/page';
 import { cn } from '@/lib/utils';
 import { 
