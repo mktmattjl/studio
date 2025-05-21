@@ -5,13 +5,13 @@ import { PixelatedContainer } from '@/components/PixelatedContainer';
 import { PixelatedButton } from '@/components/PixelatedButton';
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
-import { format, addMonths, subMonths, setHours, setMinutes, setSeconds, addWeeks, subWeeks, startOfWeek, endOfWeek, isToday as dateFnsIsToday, addHours } from 'date-fns'; // Using date-fns directly now
+import { format, addMonths, subMonths, setHours, setMinutes, setSeconds, addWeeks, subWeeks, startOfWeek, endOfWeek } from '@/lib/dateUtils'; // Using date-fns directly now
 import { PlannerControls, type PlannerViewMode } from '@/components/planner/PlannerControls';
 import { MonthCalendarGrid } from '@/components/planner/MonthCalendarGrid';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
-import { EventFormDialog } from '@/components/planner/EventFormDialog'; // New component
+import { EventFormDialog } from '@/components/planner/EventFormDialog';
 
-// Define a type for our events for clarity (can be moved to types/index.ts)
+// Define a type for our events for clarity
 export interface PlannerEvent {
   id: string;
   title: string;
@@ -19,8 +19,19 @@ export interface PlannerEvent {
   endTime: Date;
   type: 'class' | 'deadline' | 'study_session' | 'exam' | 'meeting' | 'personal';
   description?: string;
-  color?: string; // For event block color, e.g., 'bg-blue-500/70 border-blue-700'
+  color: string; // Tailwind classes for event block color, e.g., 'bg-blue-500/70 border-blue-700 text-white'
 }
+
+// Color mapping for event types
+const eventTypeColors: Record<PlannerEvent['type'], string> = {
+  class: 'bg-blue-600/80 border-blue-700 text-white',
+  deadline: 'bg-red-600/80 border-red-700 text-white',
+  study_session: 'bg-green-600/80 border-green-700 text-white',
+  exam: 'bg-yellow-500/90 border-yellow-700 text-black', // Yellow needs dark text
+  meeting: 'bg-purple-600/80 border-purple-700 text-white',
+  personal: 'bg-pink-600/80 border-pink-700 text-white',
+};
+
 
 // Sample events - in a real app, these would be fetched or managed globally
 const todayDate = new Date();
@@ -42,7 +53,7 @@ const sampleEventsData: Omit<PlannerEvent, 'id' | 'color'>[] = [
   {
     title: 'Physics Lab DUE',
     startTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
-    endTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0), 
+    endTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     type: 'deadline',
     description: 'Online Portal',
   },
@@ -55,7 +66,7 @@ const sampleEventsData: Omit<PlannerEvent, 'id' | 'color'>[] = [
   },
    {
     title: 'History Exam Prep Long Session',
-    startTime: setSeconds(setMinutes(setHours(new Date(2024, 7, 15), 10), 0), 0),
+    startTime: setSeconds(setMinutes(setHours(new Date(2024, 7, 15), 10), 0), 0), // Note: JS months are 0-indexed, so 7 is August
     endTime: setSeconds(setMinutes(setHours(new Date(2024, 7, 15), 13), 0), 0),
     type: 'study_session',
   },
@@ -67,18 +78,9 @@ const sampleEventsData: Omit<PlannerEvent, 'id' | 'color'>[] = [
   },
 ];
 
-const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-blue-500/70 border-blue-700 text-white',
-  deadline: 'bg-red-500/70 border-red-700 text-white',
-  study_session: 'bg-green-500/70 border-green-700 text-white',
-  exam: 'bg-yellow-500/80 border-yellow-700 text-black',
-  meeting: 'bg-purple-500/70 border-purple-700 text-white',
-  personal: 'bg-pink-500/70 border-pink-700 text-white',
-};
-
 const initialEvents: PlannerEvent[] = sampleEventsData.map((event, index) => ({
   ...event,
-  id: `event-${index + 1}-${Date.now()}`, // More unique ID
+  id: `event-${index + 1}-${Date.now()}`,
   color: eventTypeColors[event.type],
 }));
 
@@ -121,8 +123,8 @@ export default function PlannerPage() {
     if (viewMode === 'month') {
       return format(currentDate, 'MMMM yyyy');
     } else { // week view
-      const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 }); // Assuming week starts on Monday
-      const weekEnd = endOfWeek(currentDate, { weekStartsOn: 1 });
+      const weekStart = startOfWeek(currentDate, { weekStartsOn: 0 }); // Assuming week starts on Sunday for label consistency
+      const weekEnd = endOfWeek(currentDate, { weekStartsOn: 0 });
       if (format(weekStart, 'MMMM') === format(weekEnd, 'MMMM')) {
         return `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'd, yyyy')}`;
       }
@@ -205,11 +207,11 @@ export default function PlannerPage() {
           <MonthCalendarGrid 
               currentDate={currentDate} 
               events={events}
-              onDateClick={(date) => { // Example: Switch to week view and go to that date
+              onDateClick={(date) => { 
                 setViewMode('week');
                 setCurrentDate(date);
               }}
-              onEventClick={handleEventClick} // Pass event click handler
+              onEventClick={handleEventClick}
           />
         )}
         {viewMode === 'week' && (
@@ -239,4 +241,3 @@ export default function PlannerPage() {
     </div>
   );
 }
-

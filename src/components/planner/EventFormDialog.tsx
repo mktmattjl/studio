@@ -45,7 +45,7 @@ export function EventFormDialog({
   onSave,
   onDelete,
 }: EventFormDialogProps) {
-  const { register, handleSubmit, control, reset, watch, formState: { errors } } = useForm<EventFormData>({
+  const { register, handleSubmit, control, reset, formState: { errors } } = useForm<EventFormData>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: {
       title: '',
@@ -64,7 +64,13 @@ export function EventFormDialog({
         initialEndTime = eventData.endTime;
       } else if (proposedStartTime) {
         initialStartTime = proposedStartTime;
-        initialEndTime = addHours(proposedStartTime, 1); // Default to 1 hour duration
+        // Default to 1 hour duration for new events, ensuring end time is after start time
+        const potentialEndTime = addHours(proposedStartTime, 1);
+        if (potentialEndTime <= proposedStartTime) {
+            initialEndTime = addHours(proposedStartTime, 1); // Fallback if somehow it's not later
+        } else {
+            initialEndTime = potentialEndTime;
+        }
       } else {
         initialStartTime = new Date();
         initialEndTime = addHours(new Date(), 1);
@@ -84,7 +90,12 @@ export function EventFormDialog({
 
   const onSubmit: SubmitHandler<EventFormData> = (data) => {
     const combinedStartTime = parseISO(`${data.startTimeDate}T${data.startTimeTime}:00`);
-    const combinedEndTime = parseISO(`${data.endTimeDate}T${data.endTimeTime}:00`);
+    let combinedEndTime = parseISO(`${data.endTimeDate}T${data.endTimeTime}:00`);
+
+    // Ensure end time is after start time
+    if (combinedEndTime <= combinedStartTime) {
+        combinedEndTime = addHours(combinedStartTime, 1); // Default to 1 hour after start if invalid
+    }
     
     onSave({
       id: eventData?.id,
@@ -98,63 +109,63 @@ export function EventFormDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-card border-accent shadow-[4px_4px_0px_hsl(var(--primary))] rounded-none p-4 md:p-6">
+      <DialogContent className="bg-card border-2 md:border-4 border-accent shadow-[2px_2px_0px_hsl(var(--primary))] md:shadow-[4px_4px_0px_hsl(var(--primary))] rounded-none p-4 md:p-6 max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-primary-foreground">
+          <DialogTitle className="text-2xl text-primary-foreground font-bold">
             {eventData ? 'Edit Event' : 'Add New Event'}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 pt-2">
           <div>
-            <Label htmlFor="title" className="text-primary-foreground">Title</Label>
-            <Input id="title" {...register('title')} className="bg-input text-input-foreground border-primary focus:border-accent" />
+            <Label htmlFor="title" className="text-primary-foreground text-sm">Title</Label>
+            <Input id="title" {...register('title')} className="bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1" />
             {errors.title && <p className="text-xs text-destructive mt-1">{errors.title.message}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="startTimeDate" className="text-primary-foreground">Start Date</Label>
-              <Input id="startTimeDate" type="date" {...register('startTimeDate')} className="bg-input text-input-foreground border-primary focus:border-accent"/>
+              <Label htmlFor="startTimeDate" className="text-primary-foreground text-sm">Start Date</Label>
+              <Input id="startTimeDate" type="date" {...register('startTimeDate')} className="bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1"/>
               {errors.startTimeDate && <p className="text-xs text-destructive mt-1">{errors.startTimeDate.message}</p>}
             </div>
             <div>
-              <Label htmlFor="startTimeTime" className="text-primary-foreground">Start Time</Label>
-              <Input id="startTimeTime" type="time" {...register('startTimeTime')} className="bg-input text-input-foreground border-primary focus:border-accent"/>
+              <Label htmlFor="startTimeTime" className="text-primary-foreground text-sm">Start Time</Label>
+              <Input id="startTimeTime" type="time" {...register('startTimeTime')} className="bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1"/>
               {errors.startTimeTime && <p className="text-xs text-destructive mt-1">{errors.startTimeTime.message}</p>}
             </div>
           </div>
 
-           <div className="grid grid-cols-2 gap-4">
+           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="endTimeDate" className="text-primary-foreground">End Date</Label>
-              <Input id="endTimeDate" type="date" {...register('endTimeDate')} className="bg-input text-input-foreground border-primary focus:border-accent"/>
+              <Label htmlFor="endTimeDate" className="text-primary-foreground text-sm">End Date</Label>
+              <Input id="endTimeDate" type="date" {...register('endTimeDate')} className="bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1"/>
               {errors.endTimeDate && <p className="text-xs text-destructive mt-1">{errors.endTimeDate.message}</p>}
             </div>
             <div>
-              <Label htmlFor="endTimeTime" className="text-primary-foreground">End Time</Label>
-              <Input id="endTimeTime" type="time" {...register('endTimeTime')} className="bg-input text-input-foreground border-primary focus:border-accent"/>
+              <Label htmlFor="endTimeTime" className="text-primary-foreground text-sm">End Time</Label>
+              <Input id="endTimeTime" type="time" {...register('endTimeTime')} className="bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1"/>
               {errors.endTimeTime && <p className="text-xs text-destructive mt-1">{errors.endTimeTime.message}</p>}
             </div>
           </div>
 
 
           <div>
-            <Label htmlFor="type" className="text-primary-foreground">Type</Label>
+            <Label htmlFor="type" className="text-primary-foreground text-sm">Type</Label>
             <Controller
               name="type"
               control={control}
               render={({ field }) => (
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <SelectTrigger className="w-full bg-input text-input-foreground border-primary focus:border-accent">
+                  <SelectTrigger className="w-full bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1">
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover border-accent text-popover-foreground">
-                    <SelectItem value="class">Class</SelectItem>
-                    <SelectItem value="deadline">Deadline</SelectItem>
-                    <SelectItem value="study_session">Study Session</SelectItem>
-                    <SelectItem value="exam">Exam</SelectItem>
-                    <SelectItem value="meeting">Meeting</SelectItem>
-                    <SelectItem value="personal">Personal</SelectItem>
+                  <SelectContent className="bg-popover border-accent text-popover-foreground rounded-none">
+                    <SelectItem value="class" className="hover:bg-accent/20">Class</SelectItem>
+                    <SelectItem value="deadline" className="hover:bg-accent/20">Deadline</SelectItem>
+                    <SelectItem value="study_session" className="hover:bg-accent/20">Study Session</SelectItem>
+                    <SelectItem value="exam" className="hover:bg-accent/20">Exam</SelectItem>
+                    <SelectItem value="meeting" className="hover:bg-accent/20">Meeting</SelectItem>
+                    <SelectItem value="personal" className="hover:bg-accent/20">Personal</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -163,29 +174,33 @@ export function EventFormDialog({
           </div>
 
           <div>
-            <Label htmlFor="description" className="text-primary-foreground">Description (Optional)</Label>
-            <Textarea id="description" {...register('description')} className="bg-input text-input-foreground border-primary focus:border-accent" rows={3} />
+            <Label htmlFor="description" className="text-primary-foreground text-sm">Description (Optional)</Label>
+            <Textarea id="description" {...register('description')} className="bg-input text-input-foreground border-primary focus:border-accent rounded-none mt-1" rows={3} />
           </div>
 
-          <DialogFooter className="sm:justify-between gap-2 mt-6">
-            {eventData && onDelete && (
-                 <PixelatedButton
-                    type="button"
-                    variant="destructive"
-                    onClick={() => onDelete(eventData.id)}
-                    className="mr-auto bg-destructive text-destructive-foreground border-destructive shadow-[2px_2px_0px_hsl(var(--primary))] md:shadow-[3px_3px_0px_hsl(var(--primary))] hover:bg-destructive/90"
-                >
-                    <Trash2 size={16} className="mr-2" /> Delete
+          <DialogFooter className="sm:justify-between gap-2 mt-6 flex-col-reverse sm:flex-row">
+            <div className="flex gap-2">
+                {eventData && onDelete && (
+                    <PixelatedButton
+                        type="button"
+                        variant="destructive" 
+                        onClick={() => onDelete(eventData.id)}
+                        className="w-full sm:w-auto"
+                    >
+                        <Trash2 size={16} className="mr-2" /> Delete
+                    </PixelatedButton>
+                )}
+            </div>
+            <div className="flex gap-2 flex-col-reverse sm:flex-row">
+                 <DialogClose asChild>
+                    <PixelatedButton type="button" variant="outline" className="w-full sm:w-auto">
+                        Cancel
+                    </PixelatedButton>
+                </DialogClose>
+                <PixelatedButton type="submit" className="w-full sm:w-auto">
+                {eventData ? 'Save Changes' : 'Add Event'}
                 </PixelatedButton>
-            )}
-            <DialogClose asChild>
-              <PixelatedButton type="button" variant="outline">
-                Cancel
-              </PixelatedButton>
-            </DialogClose>
-            <PixelatedButton type="submit">
-              {eventData ? 'Save Changes' : 'Add Event'}
-            </PixelatedButton>
+            </div>
           </DialogFooter>
         </form>
       </DialogContent>
