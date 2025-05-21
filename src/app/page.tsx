@@ -4,10 +4,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
-import { QuickActionCard } from '@/components/dashboard/QuickActionCard'; // This component is used by RightSidebar
+import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid'; 
+import { EventFormDialog } from '@/components/planner/EventFormDialog';
+import type { PlannerEvent } from '@/app/planner/page'; // Import PlannerEvent
+import { eventTypeColors } from '@/app/planner/page'; // Import eventTypeColors
 
 // Import Pixel Art Icons
 import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
@@ -15,7 +18,7 @@ import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
 import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
 import { PixelTrophyIcon } from '@/components/icons/PixelTrophyIcon';
 import type { ElementType } from 'react';
-import { format, addDays } from '@/lib/dateUtils';
+import { format, addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
 
 
 const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/1A1D2B/E0EFFF.png"; 
@@ -29,31 +32,36 @@ interface QuickActionItem {
   iconTextClass?: string;
 }
 
+const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
+    { title: 'Submit History Essay Outline', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'Deadline'}, 
+    { title: 'CS101 Lecture - Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'Class'}, 
+    { title: 'Team Sync Meeting', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'Meeting'}, 
+    { title: 'Review Chapter 3 Notes - Biology', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'Study Session'},
+    { title: 'Physics Exam II', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'Exam'},
+    { title: 'Daily Scrum Meeting', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'Meeting' },
+    { title: 'Work on Project Cerebro', startTime: setSeconds(setMinutes(setHours(new Date(), 14),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 16),0),0), type: 'Study Session' }
+  ];
+
+
 export default function DashboardPage() {
   const userName = "Norta Hwørting"; 
   const petName = "Vel"; 
 
+  const [dashboardEvents, setDashboardEvents] = useState<PlannerEvent[]>(
+    initialDashboardEvents.map((event, index) => ({
+      ...event,
+      id: `dash-event-${index + 1}-${Date.now()}`,
+      color: eventTypeColors[event.type],
+    }))
+  );
+
+  const [isDashboardEventDialogOpen, setIsDashboardEventDialogOpen] = useState(false);
+  const [selectedEventForDialogDashboard, setSelectedEventForDialogDashboard] = useState<PlannerEvent | null>(null);
+  const [newProposedStartTimeDashboard, setNewProposedStartTimeDashboard] = useState<Date | null>(null);
+
+
   const [dashboardPetImageUrl, setDashboardPetImageUrl] = useState(DEFAULT_DASHBOARD_PET_IMAGE);
   const [isGeneratingPetImage, setIsGeneratingPetImage] = useState(true);
-
-  const upcomingEvents = [
-    { id: '1', title: 'Submit History Essay Outline', date: new Date().toISOString().split('T')[0], type: 'Deadline', startTime: new Date(new Date().setHours(0,0,0,0)), endTime: new Date(new Date().setHours(0,0,0,0))}, 
-    { id: '2', title: 'CS101 Lecture - Algorithms', date: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0], type: 'Class', startTime: new Date(new Date(new Date().setDate(new Date().getDate() + 1)).setHours(10,0,0,0)), endTime: new Date(new Date(new Date().setDate(new Date().getDate() + 1)).setHours(11,30,0,0)) }, 
-    { id: '3', title: 'Team Sync Meeting', date: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0], type: 'Meeting', startTime: new Date(new Date(new Date().setDate(new Date().getDate() + 1)).setHours(14,0,0,0)), endTime: new Date(new Date(new Date().setDate(new Date().getDate() + 1)).setHours(15,0,0,0)) }, 
-    { id: '4', title: 'Review Chapter 3 Notes - Biology', date: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().split('T')[0], type: 'Study Session', startTime: new Date(new Date(new Date().setDate(new Date().getDate() + 2)).setHours(16,0,0,0)), endTime: new Date(new Date(new Date().setDate(new Date().getDate() + 2)).setHours(17,30,0,0)) },
-    { id: '5', title: 'Physics Exam II', date: new Date(new Date().setDate(new Date().getDate() + 5)).toISOString().split('T')[0], type: 'Exam', startTime: new Date(new Date(new Date().setDate(new Date().getDate() + 5)).setHours(9,0,0,0)), endTime: new Date(new Date(new Date().setDate(new Date().getDate() + 5)).setHours(11,0,0,0)) },
-    { id: '6', title: 'Daily Scrum Meeting', date: new Date().toISOString().split('T')[0], type: 'Meeting', startTime: new Date(new Date().setHours(9,0,0,0)), endTime: new Date(new Date().setHours(9,30,0,0)) },
-    { id: '7', title: 'Work on Project Cerebro', date: new Date().toISOString().split('T')[0], type: 'Study Session', startTime: new Date(new Date().setHours(14,0,0,0)), endTime: new Date(new Date().setHours(16,0,0,0)) }
-  ].map(event => ({
-    ...event,
-    color: event.type === 'Deadline' ? 'bg-red-500/80 border-red-400 text-red-50' :
-           event.type === 'Class' ? 'bg-blue-500/80 border-blue-400 text-blue-50' :
-           event.type === 'Meeting' ? 'bg-purple-500/80 border-purple-400 text-purple-50' :
-           event.type === 'Study Session' ? 'bg-green-500/80 border-green-400 text-green-50' :
-           event.type === 'Exam' ? 'bg-yellow-500/80 border-yellow-400 text-yellow-950' :
-           'bg-gray-500/80 border-gray-400 text-gray-50',
-  }));
-
 
   const quickActions: QuickActionItem[] = [
     { 
@@ -76,7 +84,7 @@ export default function DashboardPage() {
       title: "Plan Your Week", 
       description: "Add tasks, deadlines, and study sessions.", 
       href: "/planner",
-      Icon: PixelPlusIcon,
+      Icon: PixelPlusIcon, // Using PixelPlusIcon as PixelCalendarIcon is used for nav
       iconBgClass: "bg-blue-500/10",
       iconTextClass: "text-blue-400"
     },
@@ -130,6 +138,45 @@ export default function DashboardPage() {
   const today = new Date();
   const displayDays = [today, addDays(today, 1), addDays(today, 2)];
 
+  const handleSlotClickDashboard = (dateTime: Date) => {
+    setSelectedEventForDialogDashboard(null);
+    setNewProposedStartTimeDashboard(dateTime);
+    setIsDashboardEventDialogOpen(true);
+  };
+
+  const handleEventClickDashboard = (event: PlannerEvent) => {
+    setSelectedEventForDialogDashboard(event);
+    setNewProposedStartTimeDashboard(null);
+    setIsDashboardEventDialogOpen(true);
+  };
+  
+  const handleSaveEventDashboard = (eventData: Omit<PlannerEvent, 'id' | 'color'> & { id?: string }) => {
+    if (eventData.id) { 
+      setDashboardEvents(prevEvents => 
+        prevEvents.map(e => 
+          e.id === eventData.id ? { ...e, ...eventData, color: eventTypeColors[eventData.type] } : e
+        )
+      );
+    } else { 
+      const newEvent: PlannerEvent = {
+        ...eventData,
+        id: `dash-event-${Date.now()}`,
+        color: eventTypeColors[eventData.type],
+      };
+      setDashboardEvents(prevEvents => [...prevEvents, newEvent]);
+    }
+    setIsDashboardEventDialogOpen(false);
+    setSelectedEventForDialogDashboard(null);
+    setNewProposedStartTimeDashboard(null);
+  };
+
+  const handleDeleteEventDashboard = (eventId: string) => {
+    setDashboardEvents(prevEvents => prevEvents.filter(e => e.id !== eventId));
+    setIsDashboardEventDialogOpen(false);
+    setSelectedEventForDialogDashboard(null);
+    setNewProposedStartTimeDashboard(null);
+  };
+
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 xl:gap-8">
@@ -137,7 +184,7 @@ export default function DashboardPage() {
       <div className="flex-grow space-y-6 xl:space-y-8">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
           {/* Column 1: Agenda View */}
-          <DashboardAgendaView events={upcomingEvents} title={pageTitle} subtitle={pageSubtitle} />
+          <DashboardAgendaView events={dashboardEvents} title={pageTitle} subtitle={pageSubtitle} />
 
           {/* Column 2: Mini Week Calendar */}
           <ContentCard className="flex flex-col">
@@ -146,10 +193,12 @@ export default function DashboardPage() {
               <WeekCalendarGrid
                 currentDate={new Date()}
                 daysToDisplay={displayDays}
-                events={upcomingEvents}
+                events={dashboardEvents}
                 startHour={8}
                 endHour={18}
                 condensedMode={true}
+                onSlotClick={handleSlotClickDashboard}
+                onEventClick={handleEventClickDashboard}
               />
             </div>
           </ContentCard>
@@ -163,6 +212,19 @@ export default function DashboardPage() {
         petImageUrl={dashboardPetImageUrl}
         isGeneratingPetImage={isGeneratingPetImage} 
         quickActions={quickActions}
+      />
+
+      <EventFormDialog
+        isOpen={isDashboardEventDialogOpen}
+        onClose={() => {
+          setIsDashboardEventDialogOpen(false);
+          setSelectedEventForDialogDashboard(null);
+          setNewProposedStartTimeDashboard(null);
+        }}
+        eventData={selectedEventForDialogDashboard}
+        proposedStartTime={newProposedStartTimeDashboard}
+        onSave={handleSaveEventDashboard}
+        onDelete={selectedEventForDialogDashboard ? handleDeleteEventDashboard : undefined}
       />
     </div>
   );

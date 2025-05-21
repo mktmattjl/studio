@@ -2,54 +2,48 @@
 'use client';
 
 import { ContentCard } from '@/components/ui/ContentCard';
-import { format, isToday, isTomorrow, parseISO, differenceInDays } from '@/lib/dateUtils';
+import { format, isToday, isTomorrow, differenceInDays, parseISO } from '@/lib/dateUtils';
 import { cn } from '@/lib/utils';
 import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
 import type { ReactNode } from 'react';
+import type { PlannerEvent } from '@/app/planner/page'; // Import PlannerEvent
 
-interface EventItem {
-  id: string;
-  title: string;
-  date: string; // ISO string 'YYYY-MM-DD' or full ISO datetime
-  type: string; // 'Deadline', 'Meeting', 'Study Session', etc.
-  parsedDate: Date; // Added parsedDate to avoid parsing in render
-}
+// Cyberpunk Neon Theme color mapping for event types using CSS variables
+const eventTypeColorMap: Record<string, string> = {
+    'Deadline': 'border-l-[hsl(var(--destructive))]', // Red
+    'Meeting': 'border-l-[hsl(var(--secondary))]', // Magenta
+    'Class': 'border-l-[hsl(var(--secondary))]', // Magenta
+    'Study Session': 'border-l-[hsl(var(--chart-3))]', // Glitch Lime Green
+    'Exam': 'border-l-[hsl(var(--chart-4))]', // Neon Orange
+    'Personal': 'border-l-purple-500', // Keep custom if needed
+    'Default': 'border-l-[hsl(var(--primary))]', // Electric Cyan
+};
+
 
 interface DashboardAgendaViewProps {
-  events: Omit<EventItem, 'parsedDate'>[]; // Accept events without pre-parsed date
+  events: PlannerEvent[]; 
   title: ReactNode;
   subtitle?: string;
 }
 
-// Cyberpunk Neon Theme color mapping for event types
-const eventTypeColorMap: Record<string, string> = {
-    'Deadline': 'border-l-[hsl(var(--destructive))]',
-    'Meeting': 'border-l-[hsl(var(--secondary))]', 
-    'Class': 'border-l-[hsl(var(--secondary))]',
-    'Study Session': 'border-l-[hsl(var(--chart-3))]', 
-    'Exam': 'border-l-[hsl(var(--chart-4))]',
-    'Default': 'border-l-[hsl(var(--primary))]',
-};
-
-
 export function DashboardAgendaView({ events: rawEvents, title, subtitle }: DashboardAgendaViewProps) {
   
   const today = new Date();
+  // Events are now PlannerEvent[], already having Date objects
   const events = rawEvents
-    .map(event => ({ ...event, parsedDate: parseISO(event.date) }))
-    .filter(event => differenceInDays(event.parsedDate, today) >= -1) 
-    .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
+    .filter(event => differenceInDays(event.startTime, today) >= -1) 
+    .sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
 
   if (!events || events.length === 0) {
     return (
-      <ContentCard>
-        <div className="mb-5">
+      <ContentCard className="w-full flex flex-col" padding="p-0">
+        <div className="p-4 sm:p-6 mb-0 border-b border-border">
           <h1 className="text-xl sm:text-2xl font-bold text-foreground">
             {title}
           </h1>
           {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
         </div>
-        <div className="text-center py-12">
+        <div className="text-center py-12 flex-grow flex flex-col justify-center items-center">
           <PixelCalendarIcon className="w-12 h-12 mx-auto text-muted-foreground/50 mb-6" />
           <h3 className="text-xl font-semibold text-foreground mb-2">No Upcoming Events</h3>
           <p className="text-muted-foreground">Your schedule is clear for now! Add some tasks in the planner.</p>
@@ -58,31 +52,31 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
     );
   }
 
-  const groupedEvents: { Today: EventItem[]; Tomorrow: EventItem[]; Upcoming: EventItem[] } = {
+  const groupedEvents: { Today: PlannerEvent[]; Tomorrow: PlannerEvent[]; Upcoming: PlannerEvent[] } = {
     Today: [],
     Tomorrow: [],
     Upcoming: [],
   };
 
   events.forEach(event => {
-    if (isToday(event.parsedDate)) {
+    if (isToday(event.startTime)) {
       groupedEvents.Today.push(event);
-    } else if (isTomorrow(event.parsedDate)) {
+    } else if (isTomorrow(event.startTime)) {
       groupedEvents.Tomorrow.push(event);
-    } else if (differenceInDays(event.parsedDate, today) > 0) { 
+    } else if (differenceInDays(event.startTime, today) > 0) { 
       groupedEvents.Upcoming.push(event);
     }
   });
 
   return (
-    <ContentCard className="w-full flex flex-col" padding="p-0"> {/* Changed padding to p-0 */}
-      <div className="p-4 sm:p-6 mb-0 border-b border-border"> {/* Header/Title Area */}
+    <ContentCard className="w-full flex flex-col" padding="p-0">
+      <div className="p-4 sm:p-6 mb-0 border-b border-border">
         <h1 className="text-xl sm:text-2xl font-bold text-foreground">
           {title}
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
       </div>
-      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[calc(100vh-20rem)] sm:max-h-[calc(100vh-22rem)] md:max-h-[60vh]"> {/* Scrollable content area with max-h */}
+      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[calc(100vh-20rem)] sm:max-h-[calc(100vh-22rem)] md:max-h-[60vh]">
         {Object.entries(groupedEvents).map(([groupName, groupEvents]) => {
           if (groupEvents.length === 0 && groupName !== "Today") return null; 
 
@@ -96,6 +90,10 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                 <ul className="space-y-3">
                   {groupEvents.map((event) => {
                     const eventColorClass = eventTypeColorMap[event.type] || eventTypeColorMap.Default;
+                    const displayTime = event.type.toLowerCase() === 'deadline' || differenceInDays(event.startTime, event.endTime) >=1 || !isSameDay(event.startTime, event.endTime)
+                        ? format(event.startTime, 'EEE, MMM d') // Only show date for deadlines or multi-day events
+                        : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`; // Show time range for others
+
                     return (
                       <li
                         key={event.id}
@@ -107,7 +105,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                         <div className="flex-grow">
                           <p className="font-semibold text-foreground text-md">{event.title}</p>
                           <p className="text-sm text-muted-foreground mt-0.5">
-                            {format(event.parsedDate, (groupName === "Today" || groupName === "Tomorrow") && !event.type.toLowerCase().includes('deadline') ? 'p' : 'EEE, MMM d, p')} - {event.type}
+                            {displayTime} - {event.type}
                           </p>
                         </div>
                       </li>
