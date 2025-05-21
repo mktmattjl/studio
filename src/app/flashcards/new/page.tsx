@@ -1,3 +1,4 @@
+'use client';
 
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
