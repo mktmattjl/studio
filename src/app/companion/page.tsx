@@ -4,12 +4,12 @@
 import { PixelatedContainer } from '@/components/PixelatedContainer';
 import { PixelatedButton } from '@/components/PixelatedButton';
 import Image from 'next/image';
-import { ShoppingBag, RefreshCw } from 'lucide-react'; // Heart and Drumstick removed
+import { ShoppingBag, RefreshCw } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
-import { PixelHeartIcon } from '@/components/icons/PixelHeartIcon'; // New import
-import { PixelDrumstickIcon } from '@/components/icons/PixelDrumstickIcon'; // New import
+import { PixelHeartIcon } from '@/components/icons/PixelHeartIcon';
+import { PixelSoupBowlIcon } from '@/components/icons/PixelSoupBowlIcon'; // Changed from PixelDrumstickIcon
 import { cn } from '@/lib/utils';
 
 const DEFAULT_PET_IMAGE = "https://placehold.co/250x250.png?bg=333333&fc=FFFFFF";
@@ -103,7 +103,7 @@ export default function CompanionPage() {
               <div className="w-1/2 bg-muted h-4 border-2 border-primary"><div className="bg-destructive h-full" style={{ width: `${happiness}%`}}></div></div>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-primary-foreground flex items-center"><PixelDrumstickIcon className="w-[18px] h-[18px] mr-2" /> Hunger:</span>
+              <span className="text-primary-foreground flex items-center"><PixelSoupBowlIcon className="w-[18px] h-[18px] mr-2" /> Hunger:</span> {/* Changed from PixelDrumstickIcon */}
               <div className="w-1/2 bg-muted h-4 border-2 border-primary"><div className="bg-accent h-full" style={{ width: `${hunger}%`}}></div></div>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function CompanionPage() {
             <h3 className="text-xl font-semibold text-primary-foreground mb-3">Actions</h3>
             <div className="space-y-3">
               <PixelatedButton className="w-full" onClick={handleFeed} disabled={isGeneratingImage}>
-                <PixelDrumstickIcon className="w-[18px] h-[18px] mr-2"/> Feed {petName} (10 Coins)
+                <PixelSoupBowlIcon className="w-[18px] h-[18px] mr-2"/> Feed {petName} (10 Coins) {/* Changed from PixelDrumstickIcon */}
               </PixelatedButton>
               <PixelatedButton className="w-full" onClick={handlePlay} disabled={isGeneratingImage}>
                 <PixelHeartIcon className="w-[18px] h-[18px] mr-2"/> Play with {petName}
