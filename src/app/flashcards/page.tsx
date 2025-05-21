@@ -8,10 +8,9 @@ import type { FlashcardSet } from '@/types';
 
 // Import Pixel Art Icons
 import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
-import { PixelEyeIcon } from '@/components/icons/PixelEyeIcon';
+import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon'; // Changed from PixelEyeIcon
 import { PixelMagnifyingGlassIcon } from '@/components/icons/PixelMagnifyingGlassIcon';
 import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
-import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
 import { PixelLightningIcon } from '@/components/icons/PixelLightningIcon';
 
 
@@ -20,7 +19,7 @@ export default function FlashcardsPage() {
     {
       id: '1',
       name: 'History - WW2 Dates & Events',
-      cardCount: 5, // Updated to 5
+      cardCount: 5,
       lastStudied: '2 days ago',
       progress: 75,
       cards: [
@@ -89,10 +88,10 @@ export default function FlashcardsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {flashcardSets.map((set) => (
                 <ContentCard key={set.id} className="flex flex-col hover:shadow-xl transition-all duration-150 ease-in-out group" interactive>
-                  <Link href={`/flashcards/set/${set.id}`} className="flex flex-col h-full">
+                  <Link href={`/flashcards/quiz?set=${set.id}`} className="flex flex-col h-full"> {/* Updated href here */}
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{set.name}</h3>
-                      <PixelEyeIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                      <PixelBrainIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" /> {/* Changed icon */}
                     </div>
                     <p className="text-sm text-muted-foreground">{set.cards.length > 0 ? `${set.cards.length} card${set.cards.length === 1 ? '' : 's'}` : `${set.cardCount} cards (placeholder)`}</p>
                     <p className="text-xs text-muted-foreground mt-1">Last studied: {set.lastStudied}</p>
