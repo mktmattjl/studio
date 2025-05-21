@@ -1,7 +1,7 @@
 
 'use client';
 
-import React from 'react'; // Added this line
+import React from 'react';
 import type { PlannerEvent } from '@/app/planner/page';
 import { cn } from '@/lib/utils';
 import { 
@@ -13,7 +13,9 @@ import {
   getMinutes,
   differenceInMinutes,
   isToday,
-  dayNamesFull,
+  setHours,
+  setMinutes,
+  setSeconds,
 } from '@/lib/dateUtils';
 import type { HourSegment } from '@/lib/dateUtils';
 
@@ -22,31 +24,40 @@ interface WeekCalendarGridProps {
   events: PlannerEvent[];
   startHour: number; // e.g., 7 for 7 AM
   endHour: number;   // e.g., 23 for 11 PM (slots up to 23:59)
+  onSlotClick?: (dateTime: Date) => void;
+  onEventClick?: (event: PlannerEvent) => void;
 }
 
 const HOUR_ROW_HEIGHT_REM = 3.5; // Each hour slot is 3.5rem high (approx 56px with 16px base)
 
-export function WeekCalendarGrid({ currentDate, events, startHour, endHour }: WeekCalendarGridProps) {
-  const weekDays = getWeekDays(currentDate);
-  const hourSegments = getHourSegments(startHour, endHour); // Generates [{hour: 7, label: "7 AM"}, ...]
+export function WeekCalendarGrid({ 
+  currentDate, 
+  events, 
+  startHour, 
+  endHour,
+  onSlotClick,
+  onEventClick 
+}: WeekCalendarGridProps) {
+  const weekDays = getWeekDays(currentDate); // Assumes week starts on Sunday by default from date-fns
+  const hourSegments = getHourSegments(startHour, endHour); 
 
   const getEventsForDay = (day: Date) => {
     return events.filter(event => isSameDay(event.startTime, day));
   };
 
   return (
-    <div className="flex-grow flex flex-col border-t-2 border-l-2 border-accent bg-card text-card-foreground">
+    <div className="flex-grow flex flex-col border-t-2 border-l-2 border-accent bg-card text-card-foreground overflow-auto">
       {/* Grid container: Time column + 7 Day columns */}
-      <div className="grid grid-cols-[auto_repeat(7,minmax(0,1fr))]"> {/* Time labels + 7 days */}
+      <div className="grid grid-cols-[auto_repeat(7,minmax(0,1fr))] min-w-[max-content]"> {/* Time labels + 7 days */}
         {/* Header Row: Empty Top-Left + Day Names & Dates */}
-        <div className="border-b-2 border-r-2 border-accent p-1 sm:p-2 text-center sticky top-0 bg-card z-10"> {/* Time col header */}
+        <div className="border-b-2 border-r-2 border-accent p-1 sm:p-2 text-center sticky top-0 bg-card z-20"> {/* Time col header */}
           <span className="text-xs text-muted-foreground">Time</span>
         </div>
         {weekDays.map((day, index) => (
           <div
             key={index}
             className={cn(
-              "border-b-2 border-r-2 border-accent p-1 sm:p-2 text-center sticky top-0 bg-card z-10",
+              "border-b-2 border-r-2 border-accent p-1 sm:p-2 text-center sticky top-0 bg-card z-20 min-w-[80px] sm:min-w-[100px]",
               isToday(day) && "bg-accent/30"
             )}
           >
@@ -60,8 +71,7 @@ export function WeekCalendarGrid({ currentDate, events, startHour, endHour }: We
           <React.Fragment key={segment.hour}>
             {/* Time Label Cell for current hour */}
             <div className={cn(
-              "border-b-2 border-r-2 border-accent p-1 sm:p-2 text-right text-xs sm:text-sm text-muted-foreground sticky left-0 bg-card z-[5]",
-              `h-[${HOUR_ROW_HEIGHT_REM}rem]` // Explicit height for time label cell
+              "border-b-2 border-r-2 border-accent p-1 pr-2 sm:p-2 text-right text-xs sm:text-sm text-muted-foreground sticky left-0 bg-card z-10",
               )}
               style={{ height: `${HOUR_ROW_HEIGHT_REM}rem` }}
             >
@@ -70,10 +80,10 @@ export function WeekCalendarGrid({ currentDate, events, startHour, endHour }: We
 
             {/* Day Cells for current hour */}
             {weekDays.map((day, dayIndex) => {
+              const slotDateTime = setSeconds(setMinutes(setHours(day, segment.hour), 0),0);
               const dayEvents = getEventsForDay(day);
               const eventsInThisHourSlot = dayEvents.filter(event => {
                 const eventStartHour = getHours(event.startTime);
-                // Check if the event STARTS in this hour slot
                 return eventStartHour === segment.hour;
               });
 
@@ -81,24 +91,17 @@ export function WeekCalendarGrid({ currentDate, events, startHour, endHour }: We
                 <div
                   key={`${segment.hour}-${dayIndex}`}
                   className={cn(
-                    "border-b-2 border-r-2 border-accent relative", // Each hour slot for a day
-                    isToday(day) && segment.hour === getHours(new Date()) && "bg-accent/10", // Highlight current hour on today
-                    `min-h-[${HOUR_ROW_HEIGHT_REM}rem]`
+                    "border-b-2 border-r-2 border-accent relative cursor-pointer min-w-[80px] sm:min-w-[100px]", 
+                    isToday(day) && segment.hour === getHours(new Date()) && "bg-accent/10",
+                    "hover:bg-accent/5"
                   )}
                   style={{ height: `${HOUR_ROW_HEIGHT_REM}rem` }}
+                  onClick={() => onSlotClick?.(slotDateTime)}
                 >
                   {eventsInThisHourSlot.map(event => {
                     const eventStartMinutes = getMinutes(event.startTime);
-                    // Duration in minutes, ensure at least some visible height for short events
-                    const durationMinutes = Math.max(30, differenceInMinutes(event.endTime, event.startTime)); 
-                    
-                    // Calculate top offset based on start minutes (percentage of hour slot height)
+                    const durationMinutes = Math.max(15, differenceInMinutes(event.endTime, event.startTime)); 
                     const topOffsetPercent = (eventStartMinutes / 60) * 100;
-                    
-                    // Calculate height based on duration (proportion of standard hour slot height)
-                    // An event from 9:00 to 10:50 (110 mins) should span roughly 2 hour slots
-                    // Each hour slot is HOUR_ROW_HEIGHT_REM.
-                    // So height is (durationMinutes / 60) * HOUR_ROW_HEIGHT_REM
                     const eventHeightRem = (durationMinutes / 60) * HOUR_ROW_HEIGHT_REM;
                     
                     return (
@@ -106,19 +109,22 @@ export function WeekCalendarGrid({ currentDate, events, startHour, endHour }: We
                         key={event.id}
                         title={`${event.title} (${format(event.startTime, 'p')} - ${format(event.endTime, 'p')})`}
                         className={cn(
-                          'absolute left-0.5 right-0.5 rounded-none p-1 text-[0.6rem] sm:text-xs leading-tight overflow-hidden shadow-sm',
-                          event.color || 'bg-primary/70 border-primary text-primary-foreground'
+                          'absolute left-0.5 right-0.5 rounded-none p-1 text-[0.6rem] sm:text-xs leading-tight overflow-hidden shadow-[1px_1px_0px_hsl(var(--primary))]',
+                          event.color || 'bg-primary/70 border-primary text-primary-foreground',
+                          'cursor-pointer hover:opacity-80'
                         )}
                         style={{
                           top: `${topOffsetPercent}%`, 
-                          height: `${eventHeightRem}rem`,
-                          // Prevent event from exceeding bottom of its conceptual starting slot IF its too large
-                          // This might need more sophisticated overlap handling later. For now, let it overflow.
-                          zIndex: 10, // Ensure events are above the grid lines
+                          height: `${Math.max(eventHeightRem, HOUR_ROW_HEIGHT_REM / 4)}rem`, // Ensure min height
+                          zIndex: 10, 
+                        }}
+                        onClick={(e) => {
+                            e.stopPropagation(); // Prevent slot click from firing
+                            onEventClick?.(event);
                         }}
                       >
                         <p className="font-semibold truncate">{event.title}</p>
-                        <p className="truncate">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>
+                        <p className="truncate hidden sm:block">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>
                       </div>
                     );
                   })}
@@ -132,6 +138,3 @@ export function WeekCalendarGrid({ currentDate, events, startHour, endHour }: We
   );
 }
 
-// Helper needed in this file scope for dynamic Tailwind classes (if they were being used directly)
-// For style prop, this is not strictly necessary but good practice to keep calculations clear.
-const hourlyRowHeightClass = `h-[${HOUR_ROW_HEIGHT_REM}rem]`; // e.g. h-[3.5rem]
