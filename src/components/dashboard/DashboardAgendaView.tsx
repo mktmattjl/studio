@@ -2,7 +2,7 @@
 'use client';
 
 import { ContentCard } from '@/components/ui/ContentCard';
-import { format, isToday, isTomorrow, differenceInDays, parseISO } from '@/lib/dateUtils';
+import { format, isToday, isTomorrow, differenceInDays, parseISO, isSameDay } from '@/lib/dateUtils';
 import { cn } from '@/lib/utils';
 import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
 import type { ReactNode } from 'react';
@@ -21,7 +21,7 @@ const eventTypeColorMap: Record<string, string> = {
 
 
 interface DashboardAgendaViewProps {
-  events: PlannerEvent[]; 
+  events: PlannerEvent[];
   title: ReactNode;
   subtitle?: string;
 }
@@ -90,7 +90,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                 <ul className="space-y-3">
                   {groupEvents.map((event) => {
                     const eventColorClass = eventTypeColorMap[event.type] || eventTypeColorMap.Default;
-                    const displayTime = event.type.toLowerCase() === 'deadline' || differenceInDays(event.startTime, event.endTime) >=1 || !isSameDay(event.startTime, event.endTime)
+                    const displayTime = event.type.toLowerCase() === 'deadline' || differenceInDays(event.startTime, event.endTime) >=1 || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
                         ? format(event.startTime, 'EEE, MMM d') // Only show date for deadlines or multi-day events
                         : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`; // Show time range for others
 
