@@ -1,15 +1,15 @@
-
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; 
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from '@/contexts/AuthContext'; // Import AuthProvider
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter', 
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -26,13 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(inter.variable, "dark h-full")}>
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
-        <TooltipProvider delayDuration={0}>
-          <Header />
-          <main className="flex-grow container mx-auto px-4 py-6 sm:py-8">
-            {children}
-          </main>
-          <Toaster />
-        </TooltipProvider>
+        <AuthProvider> {/* Wrap with AuthProvider */}
+          <TooltipProvider delayDuration={0}>
+            <Header />
+            <main className="flex-grow container mx-auto px-4 py-6 sm:py-8">
+              {children}
+            </main>
+            <Toaster />
+          </TooltipProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -8,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import type { ElementType } from 'react';
 import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
+import { useRouter } from 'next/navigation';
 
 // Import Pixel Art Icons
 import { PixelPetIcon } from '@/components/icons/PixelPetIcon';
@@ -16,6 +16,7 @@ import { PixelShieldIcon } from '@/components/icons/PixelShieldIcon';
 import { PixelFlameIcon } from '@/components/icons/PixelFlameIcon';
 import { PixelUserIcon } from '@/components/icons/PixelUserIcon';
 import { PixelGearIcon } from '@/components/icons/PixelGearIcon';
+import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
 
 interface QuickActionItem {
   title: string;
@@ -41,6 +42,7 @@ export function RightSidebar({
   isGeneratingPetImage,
   quickActions,
 }: RightSidebarProps) {
+  const router = useRouter();
   const userLevel = 5;
   const userXP = 65;
   const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}];
@@ -71,7 +73,7 @@ export function RightSidebar({
         <div className="p-4 space-y-3 border-t border-border">
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#F50087]" /> {/* Vibrant Magenta for Streak */}
+                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#00E5FF]" /> {/* Electric Cyan */}
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
@@ -81,22 +83,21 @@ export function RightSidebar({
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-[#39FF14]" /> {/* Glitch Lime Green for Coins */}
+                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-[#39FF14]" /> {/* Glitch Lime Green */}
                     <p className="text-sm font-medium text-foreground">125</p>
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
             </div>
             <div className="flex gap-2 pt-2 border-t border-border">
-                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:bg-muted hover:text-foreground">
+                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:bg-muted hover:text-foreground" onClick={() => router.push('/profile')}>
                     <PixelUserIcon className="mr-1.5 h-4 w-4" /> Profile
                 </Button>
-                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:bg-muted hover:text-foreground">
+                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:bg-muted hover:text-foreground" onClick={() => router.push('/settings')}>
                     <PixelGearIcon className="mr-1.5 h-4 w-4" /> Settings
                 </Button>
             </div>
         </div>
       </ContentCard>
-
 
       {/* Companion Module */}
       <ContentCard>
@@ -135,7 +136,7 @@ export function RightSidebar({
             <QuickActionCard
               key={action.title}
               title={action.title}
-              description={action.description}
+              description={action.description} // Kept for prop consistency, used in aria-label
               href={action.href}
               Icon={action.Icon}
               iconBgClass={action.iconBgClass}
@@ -144,7 +145,6 @@ export function RightSidebar({
           ))}
         </div>
       </ContentCard>
-
     </aside>
   );
 }
