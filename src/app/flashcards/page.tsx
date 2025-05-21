@@ -16,44 +16,44 @@ import { PixelLightningIcon } from '@/components/icons/PixelLightningIcon';
 
 
 export default function FlashcardsPage() {
-  // Updated to include a 'cards' array for each set
   const flashcardSets: FlashcardSet[] = [
-    { 
-      id: '1', 
-      name: 'History - WW2 Dates & Events', 
-      cardCount: 3, // Updated to reflect actual cards
-      lastStudied: '2 days ago', 
+    {
+      id: '1',
+      name: 'History - WW2 Dates & Events',
+      cardCount: 5, // Updated to 5
+      lastStudied: '2 days ago',
       progress: 75,
       cards: [
         { id: '1-1', question: 'When did World War II begin?', answer: 'World War II began on September 1, 1939, when Germany invaded Poland.', options: ['September 1, 1939', 'December 7, 1941', 'June 6, 1944'], correctOption: 'September 1, 1939' },
         { id: '1-2', question: 'What event triggered the US entry into WWII?', answer: 'The attack on Pearl Harbor on December 7, 1941, by Japan led to the US officially entering the war.', options: ['D-Day Invasion', 'Battle of Britain', 'Attack on Pearl Harbor'], correctOption: 'Attack on Pearl Harbor' },
         { id: '1-3', question: 'Which countries were the primary Axis powers?', answer: 'The primary Axis powers were Germany, Italy, and Japan.', options: ['Germany, Italy, Spain', 'Germany, Japan, Russia', 'Germany, Italy, Japan'], correctOption: 'Germany, Italy, Japan' },
+        { id: '1-4', question: 'What was the code name for the Allied invasion of Normandy in 1944?', answer: 'Operation Overlord was the code name for the Allied invasion of Normandy.', options: ['Operation Barbarossa', 'Operation Overlord', 'Operation Market Garden'], correctOption: 'Operation Overlord' },
+        { id: '1-5', question: 'Which battle is considered the turning point on the Eastern Front in WWII?', answer: 'The Battle of Stalingrad is widely considered the turning point on the Eastern Front.', options: ['Battle of Moscow', 'Battle of Kursk', 'Battle of Stalingrad'], correctOption: 'Battle of Stalingrad' },
       ]
     },
-    { 
-      id: '2', 
-      name: 'Biology - Cell Structure', 
-      cardCount: 1, // Placeholder, add cards if needed
-      lastStudied: '5 days ago', 
+    {
+      id: '2',
+      name: 'Biology - Cell Structure',
+      cardCount: 1,
+      lastStudied: '5 days ago',
       progress: 40,
       cards: [
-        // Add sample cards for Biology if this set is to be used in quiz
         { id: '2-1', question: 'What is the powerhouse of the cell?', answer: 'Mitochondria are known as the powerhouses of the cell because they generate most of the cell\'s supply of adenosine triphosphate (ATP), used as a source of chemical energy.', options: ['Nucleus', 'Mitochondria', 'Ribosome'], correctOption: 'Mitochondria' },
       ]
     },
-    { 
-      id: '3', 
-      name: 'JavaScript Fundamentals', 
-      cardCount: 75, // Placeholder
-      lastStudied: 'Yesterday', 
+    {
+      id: '3',
+      name: 'JavaScript Fundamentals',
+      cardCount: 75,
+      lastStudied: 'Yesterday',
       progress: 90,
-      cards: [] 
+      cards: []
     },
-    { 
-      id: '4', 
-      name: 'Philosophical Concepts', 
-      cardCount: 25, // Placeholder
-      lastStudied: 'Never', 
+    {
+      id: '4',
+      name: 'Philosophical Concepts',
+      cardCount: 25,
+      lastStudied: 'Never',
       progress: 0,
       cards: []
     },

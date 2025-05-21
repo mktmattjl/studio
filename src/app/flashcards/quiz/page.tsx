@@ -16,18 +16,19 @@ import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
 import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react'; // Using Lucide for feedback icons for now
 
 // Sample flashcard sets (ideally this would come from a data store or API)
-// For now, using a simplified version of the data from flashcards/page.tsx for this quiz component
 const AllFlashcardSets: FlashcardSet[] = [
     { 
       id: '1', 
       name: 'History - WW2 Dates & Events', 
-      cardCount: 3,
+      cardCount: 5, // Updated to 5
       lastStudied: '2 days ago', 
       progress: 75,
       cards: [
         { id: '1-1', question: 'When did World War II begin?', answer: 'World War II began on September 1, 1939, when Germany invaded Poland.', options: ['September 1, 1939', 'December 7, 1941', 'June 6, 1944'], correctOption: 'September 1, 1939' },
         { id: '1-2', question: 'What event triggered the US entry into WWII?', answer: 'The attack on Pearl Harbor on December 7, 1941, by Japan led to the US officially entering the war.', options: ['D-Day Invasion', 'Battle of Britain', 'Attack on Pearl Harbor'], correctOption: 'Attack on Pearl Harbor' },
         { id: '1-3', question: 'Which countries were the primary Axis powers?', answer: 'The primary Axis powers were Germany, Italy, and Japan.', options: ['Germany, Italy, Spain', 'Germany, Japan, Russia', 'Germany, Italy, Japan'], correctOption: 'Germany, Italy, Japan' },
+        { id: '1-4', question: 'What was the code name for the Allied invasion of Normandy in 1944?', answer: 'Operation Overlord was the code name for the Allied invasion of Normandy.', options: ['Operation Barbarossa', 'Operation Overlord', 'Operation Market Garden'], correctOption: 'Operation Overlord' },
+        { id: '1-5', question: 'Which battle is considered the turning point on the Eastern Front in WWII?', answer: 'The Battle of Stalingrad is widely considered the turning point on the Eastern Front.', options: ['Battle of Moscow', 'Battle of Kursk', 'Battle of Stalingrad'], correctOption: 'Battle of Stalingrad' },
       ]
     },
     { 
