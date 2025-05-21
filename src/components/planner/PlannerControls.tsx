@@ -33,10 +33,10 @@ export function PlannerControls({
           Today
         </PixelatedButton>
       </div>
-      <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground order-first sm:order-none">
+      <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground order-first sm:order-none text-center flex-grow sm:flex-grow-0">
         {currentMonthLabel}
       </h2>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 sm:min-w-[180px] justify-end"> {/* Adjusted for balance */}
         {/* Placeholder for View Switcher (Month/Week/Day) */}
         {/* <PixelatedButton variant="outline" size="sm" disabled>Month</PixelatedButton> */}
         {/* <PixelatedButton variant="ghost" size="sm" disabled>Week</PixelatedButton> */}
@@ -44,3 +44,4 @@ export function PlannerControls({
     </div>
   );
 }
+
