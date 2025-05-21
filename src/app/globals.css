@@ -5,34 +5,34 @@
 
 @layer base {
   :root {
-    /* Cyberpunk Neon Palette - Cyan Primary */
-    --background: 240 16% 8%; /* #0F0F18 Near-Black cool */
-    --foreground: 216 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
+    /* Cyberpunk Neon Palette - Electric Cyan Primary */
+    --background: 228 16% 6%; /* #0F0F18 Near-Black cool */
+    --foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
 
-    --card: 229 25% 14%; /* #1A1D2B Very Dark Cool Gray */
-    --card-foreground: 216 100% 94%; /* #E0EFFF */
+    --card: 227 25% 11%; /* #1A1D2B Very Dark Cool Gray */
+    --card-foreground: 213 100% 94%; /* #E0EFFF */
 
-    --popover: 229 25% 14%; /* #1A1D2B */
-    --popover-foreground: 216 100% 94%; /* #E0EFFF */
+    --popover: 227 25% 11%; /* #1A1D2B */
+    --popover-foreground: 213 100% 94%; /* #E0EFFF */
 
     --primary: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --primary-foreground: 240 16% 8%; /* Near-Black for contrast on Cyan */
+    --primary-foreground: 228 16% 6%; /* #0F0F18 Near-Black for contrast on Cyan */
     
-    --secondary: 325 100% 48%; /* #F50087 Vibrant Magenta */
-    --secondary-foreground: 216 100% 94%; /* Icy Light Blue for contrast on Magenta */
+    --secondary: 326 100% 48%; /* #F50087 Vibrant Magenta */
+    --secondary-foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue for contrast on Magenta */
 
     --muted: 229 15% 18%; /* Darker muted for less emphasis */
-    --muted-foreground: 223 13% 50%; /* #707890 Cool Medium Gray */
+    --muted-foreground: 223 23% 50%; /* #707890 Cool Medium Gray */
 
-    --accent: 325 100% 48%; /* #F50087 Vibrant Magenta (for hovers, secondary interactions) */
-    --accent-foreground: 216 100% 94%; /* Icy Light Blue for contrast on Magenta */
+    --accent: 326 100% 48%; /* #F50087 Vibrant Magenta (for hovers, secondary interactions) */
+    --accent-foreground: 213 100% 94%; /* Icy Light Blue for contrast on Magenta */
 
-    --destructive: 0 100% 50%; /* #FF0000 Bright Red */
+    --destructive: 0 85% 50%; /* #F23D3D Strong Red (toned down from pure #FF0000) */
     --destructive-foreground: 0 0% 100%; /* White */
 
     --border: 229 15% 22%; /* Subtle border, slightly lighter than card */
     --input: 229 25% 10%; /* Slightly darker than card for input fields */
-    --input-foreground: 216 100% 94%; /* #E0EFFF */
+    --input-foreground: 213 100% 94%; /* #E0EFFF */
     --ring: 187 100% 50%; /* #00E5FF Electric Cyan for focus rings */
     
     --radius: 0.5rem; /* Rounded corners */
@@ -46,25 +46,25 @@
   }
 
   .dark { /* This is the active theme */
-    --background: 240 16% 8%; /* #0F0F18 */
-    --foreground: 216 100% 94%; /* #E0EFFF */
-    --card: 229 25% 14%; /* #1A1D2B */
-    --card-foreground: 216 100% 94%; /* #E0EFFF */
-    --popover: 229 25% 14%; 
-    --popover-foreground: 216 100% 94%; /* #E0EFFF */
+    --background: 228 16% 6%; /* #0F0F18 */
+    --foreground: 213 100% 94%; /* #E0EFFF */
+    --card: 227 25% 11%; /* #1A1D2B */
+    --card-foreground: 213 100% 94%; /* #E0EFFF */
+    --popover: 227 25% 11%; 
+    --popover-foreground: 213 100% 94%; /* #E0EFFF */
     --primary: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --primary-foreground: 240 16% 8%; 
-    --secondary: 325 100% 48%; /* #F50087 Vibrant Magenta */
-    --secondary-foreground: 216 100% 94%; 
+    --primary-foreground: 228 16% 6%; /* #0F0F18 */
+    --secondary: 326 100% 48%; /* #F50087 Vibrant Magenta */
+    --secondary-foreground: 213 100% 94%; 
     --muted: 229 15% 18%; 
-    --muted-foreground: 223 13% 50%; /* #707890 */
-    --accent: 325 100% 48%; /* #F50087 Vibrant Magenta */
-    --accent-foreground: 216 100% 94%; 
-    --destructive: 0 100% 50%; /* #FF0000 */
+    --muted-foreground: 223 23% 50%; /* #707890 */
+    --accent: 326 100% 48%; /* #F50087 Vibrant Magenta */
+    --accent-foreground: 213 100% 94%; 
+    --destructive: 0 85% 50%; /* #F23D3D Strong Red (toned down) */
     --destructive-foreground: 0 0% 100%; 
     --border: 229 15% 22%; 
     --input: 229 25% 10%; 
-    --input-foreground: 216 100% 94%; /* #E0EFFF */
+    --input-foreground: 213 100% 94%; /* #E0EFFF */
     --ring: 187 100% 50%; /* #00E5FF Electric Cyan */
     
     --radius: 0.5rem;
@@ -91,13 +91,13 @@
 
 /* Custom Button Styles for Cyberpunk Neon */
 @layer components {
-  .btn-primary-action { /* For main call-to-action buttons */
+  .btn-primary-action { /* For main call-to-action buttons, uses --primary (Electric Cyan) */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
   }
-  .btn-secondary-action { /* For other important buttons */
+  .btn-secondary-action { /* For other important buttons, uses --secondary (Vibrant Magenta) */
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md transition-all duration-150;
   }
-  /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables */
+  /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
 }
 
 @layer utilities {
@@ -119,7 +119,7 @@
 
   /* Quiz Animations */
   @keyframes pulse-correct {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-3) / 0.4); }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-3) / 0.4); } /* chart-3 is Lime Green */
     50% { transform: scale(1.03); box-shadow: 0 0 12px 3px hsl(var(--chart-3) / 0.5); }
   }
   .animate-button-correct-pulse {
@@ -128,7 +128,7 @@
 
   @keyframes glow-card-correct {
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--chart-3)); box-shadow: 0 0 20px hsl(var(--chart-3) / 0.4); }
+    50% { border-color: hsl(var(--chart-3)); box-shadow: 0 0 20px hsl(var(--chart-3) / 0.4); } /* chart-3 is Lime Green */
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;
