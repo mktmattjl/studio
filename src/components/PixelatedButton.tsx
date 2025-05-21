@@ -8,38 +8,32 @@ export function PixelatedButton({ className, children, variant, size, ...props }
   const basePixelStyle = 
     'border-2 md:border-4 rounded-sm transition-all duration-100 ease-in-out transform active:translate-y-px active:translate-x-px';
 
-  // Default styling for pixelated buttons
+  // Default styling for pixelated buttons: Accent background, Accent-foreground text, Primary shadow
   const defaultVariantStyle = 
-    'bg-primary text-primary-foreground border-primary shadow-[2px_2px_0px_hsl(var(--primary))] md:shadow-[3px_3px_0px_hsl(var(--primary))] hover:shadow-[1px_1px_0px_hsl(var(--primary))] md:hover:shadow-[2px_2px_0px_hsl(var(--primary))] active:shadow-[0px_0px_0px_hsl(var(--primary))]';
+    'bg-accent text-accent-foreground border-accent shadow-[2px_2px_0px_hsl(var(--primary))] md:shadow-[3px_3px_0px_hsl(var(--primary))] hover:bg-accent/90 hover:shadow-[1px_1px_0px_hsl(var(--primary))] md:hover:shadow-[2px_2px_0px_hsl(var(--primary))] active:shadow-[0px_0px_0px_hsl(var(--primary))]';
   
-  // Style for outline variant
+  // Style for outline variant: Transparent background, Accent border/text, Primary shadow
   const outlineVariantStyle =
     'bg-transparent border-accent text-accent shadow-[2px_2px_0px_hsl(var(--primary))] md:shadow-[3px_3px_0px_hsl(var(--primary))] hover:bg-accent hover:text-accent-foreground hover:shadow-[1px_1px_0px_hsl(var(--primary))] md:hover:shadow-[2px_2px_0px_hsl(var(--primary))] active:shadow-[0px_0px_0px_hsl(var(--primary))]';
 
-  let variantStyle = defaultVariantStyle;
+  let variantStyle = ''; // Initialize with empty
   if (variant === 'outline') {
     variantStyle = outlineVariantStyle;
-  } else if (variant === 'link' || variant === 'ghost' || variant === 'secondary' || variant === 'destructive') {
-    // For other shadcn variants, we might not want the full pixel border/shadow or specific pixelated versions.
-    // For now, 'ghost' and 'link' will not have the pronounced pixel shadow.
-    // 'secondary' and 'destructive' might need their own specific pixel styles if used frequently.
-    variantStyle = ''; // Reset to only apply basePixelStyle + ShadCN's own variant styles
-    if (variant === 'ghost') {
-      // Ghosts shouldn't have a border typically, or a very subtle one.
-      // Keeping the basePixelStyle for consistency if a border is desired, but usually ghost is borderless.
-      // If you want ghost to have a border, it can be added here, or basePixelStyle can be conditional.
-    }
+  } else if (variant === 'default' || !variant) { // Apply default if variant is 'default' or undefined
+    variantStyle = defaultVariantStyle;
   }
-
+  // For other shadcn variants (link, ghost, secondary, destructive), 
+  // we let ShadCN's styles take precedence, only applying basePixelStyle.
+  // Specific overrides for ghost/link are handled in the cn() call below.
 
   return (
     <ShadcnButton
-      variant={variant}
+      variant={variant} // Pass original variant to ShadcnButton
       size={size}
       className={cn(
-        basePixelStyle,
-        variantStyle,
-        (variant === 'ghost' || variant === 'link') && 'border-transparent shadow-none hover:shadow-none active:shadow-none', // Remove border and shadow for ghost/link
+        basePixelStyle, // Base pixel styles (border, rounding)
+        variantStyle,   // Our custom default or outline styles
+        (variant === 'ghost' || variant === 'link') && 'border-transparent shadow-none hover:shadow-none active:shadow-none', // Special handling for ghost/link
         'uppercase tracking-wider text-sm md:text-base py-2 px-3 md:py-2 md:px-4', // General text styling
         size === 'sm' && 'text-xs md:text-sm py-1 px-2 md:py-1 md:px-3',
         size === 'lg' && 'text-base md:text-lg py-3 px-5 md:py-3 md:px-6',
@@ -51,4 +45,3 @@ export function PixelatedButton({ className, children, variant, size, ...props }
     </ShadcnButton>
   );
 }
-
