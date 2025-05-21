@@ -12,26 +12,34 @@ interface EventItem {
   title: string;
   date: string; // ISO string 'YYYY-MM-DD' or full ISO datetime
   type: string; // 'Deadline', 'Meeting', 'Study Session', etc.
+  parsedDate: Date; // Added parsedDate to avoid parsing in render
 }
 
 interface DashboardAgendaViewProps {
-  events: EventItem[];
+  events: Omit<EventItem, 'parsedDate'>[]; // Accept events without pre-parsed date
   title: ReactNode;
   subtitle?: string;
 }
 
 // Cyberpunk Neon Theme color mapping for event types
 const eventTypeColorMap: Record<string, string> = {
-    'Deadline': 'border-l-[hsl(var(--destructive))]',       // Red (from theme)
-    'Meeting': 'border-l-[hsl(var(--secondary))]',          // Electric Cyan (Secondary Accent)
-    'Class': 'border-l-[hsl(var(--secondary))]',             // Electric Cyan
-    'Study Session': 'border-l-[hsl(var(--chart-3))]',       // Glitch Lime Green (Tertiary Accent)
-    'Exam': 'border-l-[hsl(var(--chart-4))]',                // Neon Orange (from chart colors)
-    'Default': 'border-l-[hsl(var(--primary))]',             // Vibrant Magenta (Primary Accent)
+    'Deadline': 'border-l-[hsl(var(--destructive))]',
+    'Meeting': 'border-l-[hsl(var(--secondary))]', 
+    'Class': 'border-l-[hsl(var(--secondary))]',
+    'Study Session': 'border-l-[hsl(var(--chart-3))]', 
+    'Exam': 'border-l-[hsl(var(--chart-4))]',
+    'Default': 'border-l-[hsl(var(--primary))]',
 };
 
 
-export function DashboardAgendaView({ events, title, subtitle }: DashboardAgendaViewProps) {
+export function DashboardAgendaView({ events: rawEvents, title, subtitle }: DashboardAgendaViewProps) {
+  
+  const today = new Date();
+  const events = rawEvents
+    .map(event => ({ ...event, parsedDate: parseISO(event.date) }))
+    .filter(event => differenceInDays(event.parsedDate, today) >= -1) 
+    .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
+
   if (!events || events.length === 0) {
     return (
       <ContentCard>
@@ -50,39 +58,33 @@ export function DashboardAgendaView({ events, title, subtitle }: DashboardAgenda
     );
   }
 
-  const today = new Date();
-  const sortedEvents = events
-    .map(event => ({ ...event, parsedDate: parseISO(event.date) }))
-    .filter(event => differenceInDays(event.parsedDate, today) >= -1) // Show today, or events that started yesterday but might still be relevant
-    .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
-
   const groupedEvents: { Today: EventItem[]; Tomorrow: EventItem[]; Upcoming: EventItem[] } = {
     Today: [],
     Tomorrow: [],
     Upcoming: [],
   };
 
-  sortedEvents.forEach(event => {
+  events.forEach(event => {
     if (isToday(event.parsedDate)) {
       groupedEvents.Today.push(event);
     } else if (isTomorrow(event.parsedDate)) {
       groupedEvents.Tomorrow.push(event);
-    } else if (differenceInDays(event.parsedDate, today) > 0) { // Only future events for upcoming
+    } else if (differenceInDays(event.parsedDate, today) > 0) { 
       groupedEvents.Upcoming.push(event);
     }
   });
 
   return (
-    <ContentCard className="w-full" padding="p-4 sm:p-6">
-      <div className="mb-5">
+    <ContentCard className="w-full flex flex-col" padding="p-0"> {/* Changed padding to p-0 */}
+      <div className="p-4 sm:p-6 mb-0 border-b border-border"> {/* Header/Title Area */}
         <h1 className="text-xl sm:text-2xl font-bold text-foreground">
           {title}
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
       </div>
-      <div className="space-y-6">
-        {Object.entries(groupedEvents).map(([groupName, groupEvents], index) => {
-          if (groupEvents.length === 0 && groupName !== "Today") return null; // Always show Today section even if empty for context
+      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[calc(100vh-20rem)] sm:max-h-[calc(100vh-22rem)] md:max-h-[60vh]"> {/* Scrollable content area with max-h */}
+        {Object.entries(groupedEvents).map(([groupName, groupEvents]) => {
+          if (groupEvents.length === 0 && groupName !== "Today") return null; 
 
           return (
             <div key={groupName}>
@@ -108,8 +110,6 @@ export function DashboardAgendaView({ events, title, subtitle }: DashboardAgenda
                             {format(event.parsedDate, (groupName === "Today" || groupName === "Tomorrow") && !event.type.toLowerCase().includes('deadline') ? 'p' : 'EEE, MMM d, p')} - {event.type}
                           </p>
                         </div>
-                        {/* Optional: Add a button/link to planner details */}
-                        {/* <Button variant="ghost" size="sm" className="text-primary self-center">Details</Button> */}
                       </li>
                     );
                   })}

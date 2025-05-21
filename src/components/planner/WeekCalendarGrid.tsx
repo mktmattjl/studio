@@ -26,11 +26,12 @@ interface WeekCalendarGridProps {
   endHour: number;
   onSlotClick?: (dateTime: Date) => void;
   onEventClick?: (event: PlannerEvent) => void;
-  condensedMode?: boolean; // New prop
+  condensedMode?: boolean;
+  daysToDisplay?: Date[]; // New optional prop
 }
 
 const DEFAULT_HOUR_ROW_HEIGHT_REM = 3;
-const CONDENSED_HOUR_ROW_HEIGHT_REM = 1.25; // Further reduced for more compactness
+const CONDENSED_HOUR_ROW_HEIGHT_REM = 1.25;
 
 export function WeekCalendarGrid({
   currentDate,
@@ -40,19 +41,23 @@ export function WeekCalendarGrid({
   onSlotClick,
   onEventClick,
   condensedMode = false,
+  daysToDisplay, // Use this prop
 }: WeekCalendarGridProps) {
-  const weekDays = getWeekDays(currentDate);
+  // Use daysToDisplay if provided, otherwise default to the full week
+  const weekDays = daysToDisplay || getWeekDays(currentDate);
   const hourSegments = getHourSegments(startHour, endHour);
   const hourRowHeightRem = condensedMode ? CONDENSED_HOUR_ROW_HEIGHT_REM : DEFAULT_HOUR_ROW_HEIGHT_REM;
 
   const [clientCurrentHour, setClientCurrentHour] = useState<number | null>(null);
 
   useEffect(() => {
+    // This will only run on the client, after initial hydration
     setClientCurrentHour(getHours(new Date()));
+    // Update current hour every minute
     const timerId = setInterval(() => {
       setClientCurrentHour(getHours(new Date()));
-    }, 60000);
-    return () => clearInterval(timerId);
+    }, 60000); // 60000ms = 1 minute
+    return () => clearInterval(timerId); // Cleanup timer on unmount
   }, []);
 
 
@@ -62,10 +67,10 @@ export function WeekCalendarGrid({
 
   return (
     <div className="flex-grow flex flex-col border-t border-l border-border rounded-b-lg bg-card text-card-foreground overflow-auto styled-scrollbar">
-      <div className={cn(
-          "grid min-w-[max-content]",
-          condensedMode ? "grid-cols-[auto_repeat(7,minmax(0,1fr))]" : "grid-cols-[auto_repeat(7,minmax(0,1fr))]"
-        )}>
+      <div
+        className={cn("grid min-w-[max-content]")}
+        style={{ gridTemplateColumns: `auto repeat(${weekDays.length}, minmax(0, 1fr))` }}
+      >
         {/* Header Row */}
         <div className={cn(
             "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
@@ -73,7 +78,7 @@ export function WeekCalendarGrid({
           )}>
           <span className={cn(
               "text-muted-foreground",
-              condensedMode ? "text-[0.45rem] sm:text-[0.5rem]" : "text-xs sm:text-sm" // Further reduced text
+              condensedMode ? "text-[0.45rem] sm:text-[0.5rem]" : "text-xs sm:text-sm"
             )}>Time</span>
         </div>
         {weekDays.map((day, index) => (
@@ -81,18 +86,18 @@ export function WeekCalendarGrid({
             key={index}
             className={cn(
               "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
-              condensedMode ? "p-0.5 min-w-[30px] sm:min-w-[40px]" : "p-1 sm:p-2 min-w-[80px] sm:min-w-[100px]", // Further reduced min-width and padding
+              condensedMode ? "p-0.5 min-w-[30px] sm:min-w-[40px]" : "p-1 sm:p-2 min-w-[80px] sm:min-w-[100px]",
               isToday(day) && "bg-primary/10"
             )}
           >
             <div className={cn(
                 "text-muted-foreground",
-                condensedMode ? "text-[0.45rem] sm:text-[0.5rem]" : "text-xs sm:text-sm" // Further reduced text
+                condensedMode ? "text-[0.45rem] sm:text-[0.5rem]" : "text-xs sm:text-sm"
               )}>{format(day, 'EEE')}</div>
             <div className={cn(
                 "font-semibold",
                 isToday(day) ? "text-primary" : "text-foreground",
-                condensedMode ? "text-[0.5rem] sm:text-[0.6rem]" : "text-sm sm:text-lg" // Further reduced text
+                condensedMode ? "text-[0.5rem] sm:text-[0.6rem]" : "text-sm sm:text-lg"
               )}>{format(day, 'd')}</div>
           </div>
         ))}
@@ -102,7 +107,7 @@ export function WeekCalendarGrid({
           <React.Fragment key={segment.hour}>
             <div className={cn(
               "border-b border-r border-border text-right text-muted-foreground sticky left-0 bg-card z-10",
-              condensedMode ? "px-0.5 py-0 text-[0.45rem] sm:text-[0.5rem]" : "px-1.5 py-1 text-[0.65rem] sm:text-xs" // Further reduced padding and text
+              condensedMode ? "px-0.5 py-0 text-[0.45rem] sm:text-[0.5rem]" : "px-1.5 py-1 text-[0.65rem] sm:text-xs"
               )}
               style={{ height: `${hourRowHeightRem}rem` }}
             >
@@ -122,7 +127,7 @@ export function WeekCalendarGrid({
                   key={`${segment.hour}-${dayIndex}`}
                   className={cn(
                     "border-b border-r border-border relative cursor-pointer group",
-                    condensedMode ? "min-w-[30px] sm:min-w-[40px]" : "min-w-[80px] sm:min-w-[100px]", // Further reduced min-width
+                    condensedMode ? "min-w-[30px] sm:min-w-[40px]" : "min-w-[80px] sm:min-w-[100px]",
                     isToday(day) && clientCurrentHour !== null && segment.hour === clientCurrentHour && "bg-primary/5",
                     onSlotClick ? "hover:bg-muted/30 transition-colors duration-100" : ""
                   )}
@@ -146,11 +151,11 @@ export function WeekCalendarGrid({
                           'absolute left-0.5 right-0.5 rounded-sm overflow-hidden shadow-md',
                           event.color,
                           onEventClick ? 'cursor-pointer hover:brightness-110 transition-all duration-150 group-hover:shadow-lg' : '',
-                           condensedMode ? "p-px text-[0.4rem] sm:text-[0.45rem] leading-tight" : "p-1.5 text-[0.7rem] sm:text-xs leading-tight" // Further reduced padding and text
+                           condensedMode ? "p-px text-[0.4rem] sm:text-[0.45rem] leading-tight" : "p-1.5 text-[0.7rem] sm:text-xs leading-tight"
                         )}
                         style={{
                           top: `${topOffsetPercent}%`,
-                          height: `${Math.max(eventHeightRem, hourRowHeightRem / (condensedMode ? 1.5 : 4) )}rem`, // Adjusted min height for condensed
+                          height: `${Math.max(eventHeightRem, hourRowHeightRem / (condensedMode ? 1.5 : 4) )}rem`,
                           zIndex: 10,
                         }}
                         onClick={(e) => {
@@ -158,7 +163,7 @@ export function WeekCalendarGrid({
                             onEventClick?.(event);
                         }}
                       >
-                        <p className={cn("font-semibold truncate", condensedMode && "text-[0.35rem] sm:text-[0.4rem]")}>{event.title}</p> {/* Further reduced text */}
+                        <p className={cn("font-semibold truncate", condensedMode && "text-[0.35rem] sm:text-[0.4rem]")}>{event.title}</p>
                         {!condensedMode && <p className="truncate hidden sm:block text-[0.65rem] opacity-90">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>}
                       </div>
                     );
@@ -172,4 +177,3 @@ export function WeekCalendarGrid({
     </div>
   );
 }
-
