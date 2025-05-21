@@ -4,10 +4,10 @@
 
 @layer base {
   :root {
-    --background: 220 17% 10%; /* Even darker base background */
+    --background: 220 17% 10%; /* Deep dark blue-gray */
     --foreground: 220 15% 90%; /* Light gray for text */
 
-    --card: 220 17% 15%; /* Dark card background */
+    --card: 220 17% 16%; /* Slightly lighter than background for modules */
     --card-foreground: 220 15% 90%; /* Light gray text on cards */
 
     --popover: 220 17% 12%; /* Darker popover */
@@ -16,20 +16,20 @@
     --primary: 175 70% 45%; /* Teal - main interactive accent */
     --primary-foreground: 20 0% 100%; /* White text on primary accent */
     
-    --secondary: 220 15% 25%; /* Medium dark gray for secondary elements */
+    --secondary: 220 15% 25%; /* Medium dark gray for secondary elements/buttons */
     --secondary-foreground: 220 15% 85%; /* Lighter gray for text on secondary */
 
-    --muted: 220 15% 20%; /* Dark muted gray */
+    --muted: 220 15% 20%; /* Dark muted gray - for subtle backgrounds or dividers */
     --muted-foreground: 220 15% 60%; /* Medium-light gray for muted text */
 
-    --accent: 260 70% 65%; /* Purple - secondary accent, e.g. for user stats or highlights */
+    --accent: 260 70% 65%; /* Purple - secondary accent, e.g. for hover on neutral buttons */
     --accent-foreground: 20 0% 100%; /* White text on purple accent */
 
     --destructive: 0 60% 50%; /* Softer Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 220 17% 22%; /* Subtle border color, slightly lighter than card */
-    --input: 220 17% 18%; /* Dark input background */
+    --border: 220 17% 22%; /* Subtle border color */
+    --input: 220 17% 18%; /* Dark input background, distinct from card */
     --input-foreground: 220 15% 88%; 
     --ring: 175 70% 55%; /* Teal for focus rings, slightly brighter */
     
@@ -46,7 +46,7 @@
   .dark { /* This is the active theme */
     --background: 220 17% 10%; 
     --foreground: 220 15% 90%; 
-    --card: 220 17% 15%; 
+    --card: 220 17% 16%; 
     --card-foreground: 220 15% 90%; 
     --popover: 220 17% 12%; 
     --popover-foreground: 220 15% 90%; 

@@ -73,17 +73,17 @@ export function RightSidebar({
         <div className="p-4 space-y-3">
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-primary" />
+                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-orange-500" />
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
                 <div>
-                    <PixelShieldIcon className="mx-auto mb-1 h-6 w-6 text-primary" />
+                    <PixelShieldIcon className="mx-auto mb-1 h-6 w-6 text-sky-500" />
                     <p className="text-sm font-medium text-foreground">{badges.length}</p>
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-primary" />
+                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-yellow-500" />
                     <p className="text-sm font-medium text-foreground">125</p> 
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
