@@ -4,72 +4,83 @@
 
 @layer base {
   :root {
-    /* These are fallback light mode colors, not actively used with current 'dark' class on html */
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 101 100% 52%; /* Neon Green (was muted blue) */
-    --accent-foreground: 0 0% 0%; /* Black for text on neon green */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%; /* Was 240 5.9% 90% */
-    --input: 0 0% 15%; /* Was 240 5.9% 90% */
-    --input-foreground: 0 0% 95%;
-    --ring: 101 100% 52%; /* Neon Green for focus rings */
-    --radius: 0rem;
+    /* New Light Theme Fallback Colors */
+    --background: 220 20% 95%; /* Very light cool gray */
+    --foreground: 220 10% 20%; /* Dark cool gray */
 
-    --chart-1: 101 70% 60%; 
-    --chart-2: 180 70% 50%; 
-    --chart-3: 270 70% 65%; 
-    --chart-4: 45 90% 60%;  
-    --chart-5: 0 80% 60%;   
-  }
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 220 10% 20%; /* Dark cool gray */
 
-  .dark {
-    --background: 0 0% 20%; /* Dark Gray #333333 */
-    --foreground: 0 0% 95%; /* Light Gray/White */
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 220 10% 20%; /* Dark cool gray */
 
-    --card: 0 0% 15%; /* Slightly darker than background */
-    --card-foreground: 0 0% 95%;
+    --primary: 220 40% 30%; /* Medium-dark blue (for shadows etc) */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --popover: 0 0% 10%; /* Even darker for popovers */
-    --popover-foreground: 0 0% 95%;
+    --secondary: 220 15% 90%; /* Light cool gray */
+    --secondary-foreground: 220 10% 30%; /* Slightly lighter dark gray */
 
-    --primary: 0 0% 0%; /* Black #000000 */
-    --primary-foreground: 0 0% 90%; /* Light Gray */
+    --muted: 220 15% 85%; /* Another light cool gray */
+    --muted-foreground: 220 10% 45%; /* Medium gray */
 
-    --secondary: 0 0% 25%; /* A bit lighter than background */
-    --secondary-foreground: 0 0% 90%; /* Light Gray */
+    --accent: 45 90% 60%; /* Pixel Yellow */
+    --accent-foreground: 45 100% 15%; /* Dark Brown/Orange for text on yellow */
 
-    --muted: 0 0% 30%; /* Muted background tones */
-    --muted-foreground: 0 0% 65%; /* Muted text */
+    --destructive: 0 70% 60%; /* Clear Red */
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --accent: 101 100% 52%; /* Neon Green #39FF14 */
-    --accent-foreground: 0 0% 0%; /* Black - text on accent */
-
-    --destructive: 0 70% 55%; /* Brighter retro red */
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 35%; /* Darker border, distinct from primary for shadows. Was 0 0% 25% */
-    --input: 0 0% 15%; /* Darker input background */
-    --input-foreground: 0 0% 95%;
-    --ring: 101 100% 52%; /* Neon Green for focus rings */
+    --border: 220 15% 80%; /* Light gray border */
+    --input: 220 15% 88%; /* Slightly darker light gray for input */
+    --input-foreground: 220 10% 20%; /* Dark cool gray for input text */
+    --ring: 45 90% 60%; /* Pixel Yellow for focus rings */
     
-    --radius: 0rem;
+    --radius: 0rem; /* Keeping sharp edges */
 
-    --chart-1: 101 70% 60%; /* Lighter Neon Green */
+    /* New Chart Colors for Light Theme */
+    --chart-1: 45 90% 60%; /* Pixel Yellow */
     --chart-2: 180 70% 50%; /* Pixel Cyan/Teal */
     --chart-3: 270 70% 65%; /* Pixel Purple */
-    --chart-4: 45 90% 60%;  /* Pixel Yellow */
+    --chart-4: 10 80% 60%;  /* Pixel Orange */
+    --chart-5: 0 80% 60%;   /* Pixel Red */
+  }
+
+  .dark { /* This will now be our active Light Theme */
+    --background: 220 20% 95%; /* Very light cool gray */
+    --foreground: 220 10% 20%; /* Dark cool gray */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 220 10% 20%; /* Dark cool gray */
+
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 220 10% 20%; /* Dark cool gray */
+
+    --primary: 220 40% 30%; /* Medium-dark blue (for shadows etc) */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 220 15% 90%; /* Light cool gray */
+    --secondary-foreground: 220 10% 30%; /* Slightly lighter dark gray */
+
+    --muted: 220 15% 85%; /* Another light cool gray */
+    --muted-foreground: 220 10% 45%; /* Medium gray */
+
+    --accent: 45 90% 60%; /* Pixel Yellow */
+    --accent-foreground: 45 100% 15%; /* Dark Brown/Orange for text on yellow */
+
+    --destructive: 0 70% 60%; /* Clear Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 220 15% 80%; /* Light gray border */
+    --input: 220 15% 88%; /* Slightly darker light gray for input */
+    --input-foreground: 220 10% 20%; /* Dark cool gray for input text */
+    --ring: 45 90% 60%; /* Pixel Yellow for focus rings */
+    
+    --radius: 0rem; /* Keeping sharp edges */
+
+    /* New Chart Colors for Light Theme */
+    --chart-1: 45 90% 60%; /* Pixel Yellow */
+    --chart-2: 180 70% 50%; /* Pixel Cyan/Teal */
+    --chart-3: 270 70% 65%; /* Pixel Purple */
+    --chart-4: 10 80% 60%;  /* Pixel Orange */
     --chart-5: 0 80% 60%;   /* Pixel Red */
   }
 }
