@@ -4,10 +4,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
-import { JumpBackInCard } from '@/components/dashboard/JumpBackInCard';
+// import { JumpBackInCard } from '@/components/dashboard/JumpBackInCard'; // Removed
 import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
 import { ContentCard } from '@/components/ui/ContentCard';
-import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView'; // New import
+import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
 
 // Import Pixel Art Icons
 import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
@@ -25,7 +25,6 @@ export default function DashboardPage() {
   const [dashboardPetImageUrl, setDashboardPetImageUrl] = useState(DEFAULT_DASHBOARD_PET_IMAGE);
   const [isGeneratingPetImage, setIsGeneratingPetImage] = useState(true);
 
-  // This data will now be used by DashboardAgendaView
   const upcomingEvents = [
     { id: '1', title: 'Submit History Essay Outline', date: new Date().toISOString().split('T')[0], type: 'Deadline' }, // Example for today
     { id: '2', title: 'CS101 Lecture - Algorithms', date: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0], type: 'Class' }, // Example for tomorrow
@@ -40,8 +39,8 @@ export default function DashboardPage() {
       description: "Craft new sets for your subjects.", 
       href: "/flashcards/new", 
       Icon: PixelBookIcon,
-      iconBgClass: "bg-purple-500/10", // Will be overridden by ContentCard theme
-      iconTextClass: "text-purple-400" // Will be overridden by ContentCard theme
+      iconBgClass: "bg-purple-500/10", 
+      iconTextClass: "text-purple-400" 
     },
     { 
       title: "AI Card Generator", 
@@ -62,7 +61,7 @@ export default function DashboardPage() {
      { 
       title: "Explore Challenges", 
       description: "Test your knowledge with new packs.", 
-      href: "/challenges", // Assuming /challenges page exists or will be created
+      href: "/challenges", 
       Icon: PixelTrophyIcon,
       iconBgClass: "bg-orange-500/10",
       iconTextClass: "text-orange-400"
@@ -99,25 +98,22 @@ export default function DashboardPage() {
     else setCurrentTimeGreeting('Good evening');
   }, []);
 
+  const pageTitle = (
+    <>
+      {currentTimeGreeting}, <span className="text-primary">{userName}!</span>
+    </>
+  );
+  const pageSubtitle = "Ready to conquer your studies today?";
+
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 xl:gap-8">
       {/* Main Content Area */}
       <div className="flex-grow space-y-6 xl:space-y-8">
-        <div className="mb-4"> 
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground"> 
-            {currentTimeGreeting}, <span className="text-primary">{userName}!</span>
-          </h1>
-          <p className="text-md text-muted-foreground">
-            Ready to conquer your studies today?
-          </p>
-        </div>
-
-        {/* New Central Focus: Agenda View */}
-        <DashboardAgendaView events={upcomingEvents} />
         
-        {/* Relocated Jump Back In Card */}
-        <JumpBackInCard />
+        <DashboardAgendaView events={upcomingEvents} title={pageTitle} subtitle={pageSubtitle} />
+        
+        {/* JumpBackInCard removed from here */}
         
         <ContentCard>
           <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
@@ -129,7 +125,6 @@ export default function DashboardPage() {
                 description={action.description}
                 href={action.href}
                 Icon={action.Icon}
-                // iconBgClass and iconTextClass are handled by ContentCard's theme or internal QuickActionCard styling
               />
             ))}
           </div>
@@ -142,7 +137,6 @@ export default function DashboardPage() {
         petName={petName}
         petImageUrl={dashboardPetImageUrl}
         isGeneratingPetImage={isGeneratingPetImage} 
-        // upcomingEvents prop removed
       />
     </div>
   );

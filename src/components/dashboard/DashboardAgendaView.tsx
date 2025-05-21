@@ -5,8 +5,7 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { format, isToday, isTomorrow, parseISO, differenceInDays } from '@/lib/dateUtils';
 import { cn } from '@/lib/utils';
 import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
-// Note: Specific event type icons (PixelAlertTriangleIcon, PixelBookIcon, PixelLightningIcon) are not used here
-// to simplify and rely on border colors for differentiation, matching the current design.
+import type { ReactNode } from 'react';
 
 interface EventItem {
   id: string;
@@ -17,6 +16,8 @@ interface EventItem {
 
 interface DashboardAgendaViewProps {
   events: EventItem[];
+  title: ReactNode;
+  subtitle?: string;
 }
 
 // Cyberpunk Neon Theme color mapping for event types
@@ -30,10 +31,16 @@ const eventTypeColorMap: Record<string, string> = {
 };
 
 
-export function DashboardAgendaView({ events }: DashboardAgendaViewProps) {
+export function DashboardAgendaView({ events, title, subtitle }: DashboardAgendaViewProps) {
   if (!events || events.length === 0) {
     return (
       <ContentCard>
+        <div className="mb-5">
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground">
+            {title}
+          </h1>
+          {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
+        </div>
         <div className="text-center py-12">
           <PixelCalendarIcon className="w-12 h-12 mx-auto text-muted-foreground/50 mb-6" />
           <h3 className="text-xl font-semibold text-foreground mb-2">No Upcoming Events</h3>
@@ -67,7 +74,12 @@ export function DashboardAgendaView({ events }: DashboardAgendaViewProps) {
 
   return (
     <ContentCard className="w-full" padding="p-4 sm:p-6">
-      <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-5">What's On Your Plate?</h2>
+      <div className="mb-5">
+        <h1 className="text-xl sm:text-2xl font-bold text-foreground">
+          {title}
+        </h1>
+        {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
+      </div>
       <div className="space-y-6">
         {Object.entries(groupedEvents).map(([groupName, groupEvents], index) => {
           if (groupEvents.length === 0 && groupName !== "Today") return null; // Always show Today section even if empty for context
