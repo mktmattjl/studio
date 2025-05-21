@@ -15,8 +15,8 @@
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%; /* Consider if this needs adjustment too */
+    --accent: 210 15% 30%; /* Muted and darker blue accent */
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -51,7 +51,7 @@
     --muted: 0 0% 30%; /* Muted background tones */
     --muted-foreground: 0 0% 65%; /* Muted text */
 
-    --accent: 210 80% 60%; /* Retro Blue - Was Neon Green */
+    --accent: 210 20% 40%; /* Muted and darker blue accent in dark mode */
     --accent-foreground: 0 0% 0%; /* Black - text on accent */
 
     --destructive: 0 70% 55%; /* Brighter retro red */
@@ -60,7 +60,7 @@
     --border: 0 0% 25%; /* Subtle border, components can override */
     --input: 0 0% 15%; /* Darker input background */
     --input-foreground: 0 0% 95%;
-    --ring: 210 80% 60%; /* Retro Blue for focus rings - Was Neon Green */
+    --ring: 210 20% 40%; /* Muted and darker blue for focus rings in dark mode */
     
     --radius: 0rem; /* Updated for pixelated style */
 
