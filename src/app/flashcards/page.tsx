@@ -93,20 +93,24 @@ export default function FlashcardsPage() {
       <ContentCard>
         <h2 className="text-2xl font-semibold text-foreground mb-4">Study Modes</h2>
         <div className="grid md:grid-cols-2 gap-4">
-            <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
-                <PixelBrainIcon className="w-5 h-5 mr-3 text-primary"/> 
-                <div>
-                    <span className="font-medium">Multiple Choice Quiz</span>
-                    <p className="text-xs text-muted-foreground font-normal">Test your knowledge with MCQs.</p>
-                </div>
-            </Button>
-            <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
-                <PixelLightningIcon className="w-5 h-5 mr-3 text-primary"/> 
-                 <div>
-                    <span className="font-medium">Spaced Repetition</span>
-                    <p className="text-xs text-muted-foreground font-normal">Optimize learning with SRS.</p>
-                </div>
-            </Button>
+            <Link href="/flashcards/quiz" passHref className="w-full">
+              <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
+                  <PixelBrainIcon className="w-5 h-5 mr-3 text-primary"/> 
+                  <div>
+                      <span className="font-medium">Multiple Choice Quiz</span>
+                      <p className="text-xs text-muted-foreground font-normal">Test your knowledge with MCQs.</p>
+                  </div>
+              </Button>
+            </Link>
+            <Link href="/flashcards/srs" passHref className="w-full">
+              <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
+                  <PixelLightningIcon className="w-5 h-5 mr-3 text-primary"/> 
+                   <div>
+                      <span className="font-medium">Spaced Repetition</span>
+                      <p className="text-xs text-muted-foreground font-normal">Optimize learning with SRS.</p>
+                  </div>
+              </Button>
+            </Link>
         </div>
         <p className="text-sm text-muted-foreground mt-4">Select a flashcard set to start studying, or try a general quiz based on difficulty.</p>
       </ContentCard>
