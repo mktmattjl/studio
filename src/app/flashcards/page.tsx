@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
+import type { FlashcardSet } from '@/types';
 
 // Import Pixel Art Icons
 import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
@@ -15,11 +16,47 @@ import { PixelLightningIcon } from '@/components/icons/PixelLightningIcon';
 
 
 export default function FlashcardsPage() {
-  const flashcardSets = [
-    { id: '1', name: 'History - WW2 Dates', cardCount: 50, lastStudied: '2 days ago', progress: 75 },
-    { id: '2', name: 'Biology - Cell Structure', cardCount: 30, lastStudied: '5 days ago', progress: 40 },
-    { id: '3', name: 'JavaScript Fundamentals', cardCount: 75, lastStudied: 'Yesterday', progress: 90 },
-    { id: '4', name: 'Philosophical Concepts', cardCount: 25, lastStudied: 'Never', progress: 0 },
+  // Updated to include a 'cards' array for each set
+  const flashcardSets: FlashcardSet[] = [
+    { 
+      id: '1', 
+      name: 'History - WW2 Dates & Events', 
+      cardCount: 3, // Updated to reflect actual cards
+      lastStudied: '2 days ago', 
+      progress: 75,
+      cards: [
+        { id: '1-1', question: 'When did World War II begin?', answer: 'World War II began on September 1, 1939.', options: ['September 1, 1939', 'December 7, 1941', 'June 6, 1944'], correctOption: 'September 1, 1939' },
+        { id: '1-2', question: 'What event triggered the US entry into WWII?', answer: 'The attack on Pearl Harbor on December 7, 1941.', options: ['D-Day Invasion', 'Battle of Britain', 'Attack on Pearl Harbor'], correctOption: 'Attack on Pearl Harbor' },
+        { id: '1-3', question: 'Which countries were the primary Axis powers?', answer: 'Germany, Italy, and Japan.', options: ['Germany, Italy, Spain', 'Germany, Japan, Russia', 'Germany, Italy, Japan'], correctOption: 'Germany, Italy, Japan' },
+      ]
+    },
+    { 
+      id: '2', 
+      name: 'Biology - Cell Structure', 
+      cardCount: 30, // Placeholder, add cards if needed
+      lastStudied: '5 days ago', 
+      progress: 40,
+      cards: [
+        // Add sample cards for Biology if this set is to be used in quiz
+        { id: '2-1', question: 'What is the powerhouse of the cell?', answer: 'Mitochondria', options: ['Nucleus', 'Mitochondria', 'Ribosome'], correctOption: 'Mitochondria' },
+      ]
+    },
+    { 
+      id: '3', 
+      name: 'JavaScript Fundamentals', 
+      cardCount: 75, // Placeholder
+      lastStudied: 'Yesterday', 
+      progress: 90,
+      cards: [] 
+    },
+    { 
+      id: '4', 
+      name: 'Philosophical Concepts', 
+      cardCount: 25, // Placeholder
+      lastStudied: 'Never', 
+      progress: 0,
+      cards: []
+    },
   ];
 
   return (
@@ -57,14 +94,13 @@ export default function FlashcardsPage() {
                       <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{set.name}</h3>
                       <PixelEyeIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                     </div>
-                    <p className="text-sm text-muted-foreground">{set.cardCount} cards</p>
+                    <p className="text-sm text-muted-foreground">{set.cards.length > 0 ? `${set.cards.length} card${set.cards.length === 1 ? '' : 's'}` : `${set.cardCount} cards (placeholder)`}</p>
                     <p className="text-xs text-muted-foreground mt-1">Last studied: {set.lastStudied}</p>
                     
-                    <div className="mt-4 mb-2 flex-grow"> {/* Pushes progress to bottom */}
-                        {/* Spacer or other content could go here */}
+                    <div className="mt-4 mb-2 flex-grow"> 
                     </div>
 
-                    <div className="mt-auto"> {/* Progress bar at the bottom */}
+                    <div className="mt-auto"> 
                         <div className="flex justify-between text-xs text-muted-foreground mb-1">
                             <span>Progress</span>
                             <span className="font-medium text-foreground">{set.progress}%</span>
@@ -93,7 +129,7 @@ export default function FlashcardsPage() {
       <ContentCard>
         <h2 className="text-2xl font-semibold text-foreground mb-4">Study Modes</h2>
         <div className="grid md:grid-cols-2 gap-4">
-            <Link href="/flashcards/quiz" passHref className="w-full">
+            <Link href="/flashcards/quiz?set=1" passHref className="w-full"> {/* Example: quiz for set 1 */}
               <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
                   <PixelBrainIcon className="w-5 h-5 mr-3 text-primary"/> 
                   <div>

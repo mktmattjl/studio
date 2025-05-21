@@ -5,12 +5,21 @@ export interface FlashcardCore {
 
 export interface Flashcard extends FlashcardCore {
   id: string;
-  options?: string[]; // For multiple choice
-  correctOption?: string; // For multiple choice
+  options?: string[]; // For multiple choice, array of 3-4 options
+  correctOption?: string; // The correct string from the options array
   lastReviewed?: string; // ISO date string
   nextReview?: string; // ISO date string
   leitnerBox?: number;
   tags?: string[];
+}
+
+export interface FlashcardSet {
+  id: string;
+  name: string;
+  cardCount: number; // This might become dynamic based on cards.length
+  lastStudied: string;
+  progress: number;
+  cards: Flashcard[]; // Array of flashcards within the set
 }
 
 export interface StudyEvent {
