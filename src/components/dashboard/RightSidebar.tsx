@@ -67,13 +67,13 @@ export function RightSidebar({
                 <span>XP</span>
                 <span>{userXP}% to Level {userLevel+1}</span>
               </div>
-              <Progress value={userXP} className="h-2 bg-muted/50 [&>div]:bg-primary" /> {/* Primary for progress bar */}
+              <Progress value={userXP} className="h-2 bg-muted/50 [&>div]:bg-primary" /> {/* Primary accent for progress bar */}
             </div>
         </div>
         <div className="p-4 space-y-3 border-t border-border"> {/* Added border */}
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#F50087]" /> {/* Vibrant Magenta for Streak */}
+                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#00E5FF]" /> {/* Electric Cyan for Streak */}
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>

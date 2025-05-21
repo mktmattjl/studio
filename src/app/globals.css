@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Cyberpunk Neon Palette - Defaulting to dark values */
+    /* Cyberpunk Neon Palette - Magenta Primary */
     --background: 240 16% 8%; /* #0F0F18 Near-Black cool */
     --foreground: 216 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
 
@@ -14,17 +14,17 @@
     --popover: 229 25% 14%; /* #1A1D2B */
     --popover-foreground: 216 100% 94%; /* #E0EFFF */
 
-    --primary: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --primary-foreground: 240 16% 8%; /* Dark for contrast on Cyan */
+    --primary: 325 100% 48%; /* #F50087 Vibrant Magenta */
+    --primary-foreground: 216 100% 94%; /* Icy Light Blue for contrast on Magenta */
     
-    --secondary: 325 100% 48%; /* #F50087 Vibrant Magenta */
-    --secondary-foreground: 216 100% 94%; /* #E0EFFF */
+    --secondary: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --secondary-foreground: 240 16% 8%; /* Near-Black for contrast on Cyan */
 
-    --muted: 229 15% 18%; /* Darker muted for less emphasis, fits cool theme */
+    --muted: 229 15% 18%; /* Darker muted for less emphasis */
     --muted-foreground: 223 13% 50%; /* #707890 Cool Medium Gray */
 
-    --accent: 325 100% 48%; /* #F50087 Vibrant Magenta (for hovers, secondary interactions) */
-    --accent-foreground: 216 100% 94%; /* #E0EFFF */
+    --accent: 187 100% 50%; /* #00E5FF Electric Cyan (for hovers, secondary interactions) */
+    --accent-foreground: 240 16% 8%; /* Near-Black for contrast on Cyan */
 
     --destructive: 0 100% 50%; /* #FF0000 Bright Red */
     --destructive-foreground: 0 0% 100%; /* White */
@@ -32,13 +32,13 @@
     --border: 229 15% 22%; /* Subtle border, slightly lighter than card */
     --input: 229 25% 10%; /* Slightly darker than card for input fields */
     --input-foreground: 216 100% 94%; /* #E0EFFF */
-    --ring: 187 100% 50%; /* #00E5FF Electric Cyan for focus rings */
+    --ring: 325 100% 48%; /* #F50087 Vibrant Magenta for focus rings */
     
     --radius: 0.5rem; /* Rounded corners */
 
     /* Cyberpunk Neon Chart Colors */
-    --chart-1: hsl(var(--primary)); /* Electric Cyan */
-    --chart-2: hsl(var(--accent)); /* Vibrant Magenta */
+    --chart-1: hsl(var(--primary)); /* Vibrant Magenta */
+    --chart-2: hsl(var(--secondary)); /* Electric Cyan */
     --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
     --chart-4: 39 100% 50%;  /* #FFA500 Neon Orange */
     --chart-5: 60 100% 50%; /* #FFFF00 Bright Yellow */
@@ -51,25 +51,25 @@
     --card-foreground: 216 100% 94%; /* #E0EFFF */
     --popover: 229 25% 14%; 
     --popover-foreground: 216 100% 94%; /* #E0EFFF */
-    --primary: 187 100% 50%; /* #00E5FF */
-    --primary-foreground: 240 16% 8%; 
-    --secondary: 325 100% 48%; /* #F50087 */
-    --secondary-foreground: 216 100% 94%; /* #E0EFFF */
+    --primary: 325 100% 48%; /* #F50087 Vibrant Magenta */
+    --primary-foreground: 216 100% 94%; 
+    --secondary: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --secondary-foreground: 240 16% 8%; 
     --muted: 229 15% 18%; 
     --muted-foreground: 223 13% 50%; /* #707890 */
-    --accent: 325 100% 48%; /* #F50087 */
-    --accent-foreground: 216 100% 94%; /* #E0EFFF */
+    --accent: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --accent-foreground: 240 16% 8%; 
     --destructive: 0 100% 50%; /* #FF0000 */
     --destructive-foreground: 0 0% 100%; 
     --border: 229 15% 22%; 
     --input: 229 25% 10%; 
     --input-foreground: 216 100% 94%; /* #E0EFFF */
-    --ring: 187 100% 50%; /* #00E5FF */
+    --ring: 325 100% 48%; /* #F50087 Vibrant Magenta */
     
     --radius: 0.5rem;
 
     --chart-1: hsl(var(--primary));
-    --chart-2: hsl(var(--accent));
+    --chart-2: hsl(var(--secondary));
     --chart-3: 108 100% 54%;
     --chart-4: 39 100% 50%;
     --chart-5: 60 100% 50%;
@@ -82,16 +82,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03"; /* Added some stylistic sets for Inter */
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03"; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Custom Button Styles to match "sleek, modern dashboard" */
-/* These will be applied via className to ShadCN Button components */
+/* Custom Button Styles for Cyberpunk Neon */
 @layer components {
-  .btn-primary-action { /* For main call-to-action buttons like "Continue Learning" */
+  .btn-primary-action { /* For main call-to-action buttons */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
   }
   .btn-secondary-action { /* For other important buttons */
