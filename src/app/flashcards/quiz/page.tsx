@@ -9,18 +9,19 @@ import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import type { Flashcard, FlashcardSet } from '@/types';
 import { cn } from '@/lib/utils';
+import { AnimateCoinBonus } from '@/components/ui/AnimateCoinBonus'; // Import the new component
 
 // Import Pixel Art Icons
 import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
 import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
-import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react'; // Using Lucide for feedback icons for now
+import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react';
 
 // Sample flashcard sets (ideally this would come from a data store or API)
 const AllFlashcardSets: FlashcardSet[] = [
     { 
       id: '1', 
       name: 'History - WW2 Dates & Events', 
-      cardCount: 5, // Updated to 5
+      cardCount: 5,
       lastStudied: '2 days ago', 
       progress: 75,
       cards: [
@@ -61,16 +62,20 @@ export default function QuizPage() {
   const [progressValue, setProgressValue] = useState(0);
   const [coins, setCoins] = useState(0);
   const [isQuizComplete, setIsQuizComplete] = useState(false);
+  
+  const [animateCoinKey, setAnimateCoinKey] = useState(0);
+  const [animateCardGlowKey, setAnimateCardGlowKey] = useState(0);
+  const [correctButtonPulse, setCorrectButtonPulse] = useState(false);
+
 
   useEffect(() => {
     const setId = searchParams.get('set');
     const foundSet = AllFlashcardSets.find(s => s.id === setId);
     if (foundSet && foundSet.cards.length > 0) {
       setQuizSet(foundSet);
-      // Shuffle cards for variety? For now, sequential.
       setQuizFlashcards(foundSet.cards.filter(card => card.options && card.options.length >= 3 && card.correctOption));
     } else {
-      toast({ title: "Quiz Set Not Found", description: "Could not load the selected flashcard set for the quiz or it has no quizable cards.", variant: "destructive" });
+      toast({ title: "Quiz Set Not Found", description: "Could not load the selected flashcard set or it has no quizable cards.", variant: "destructive" });
       router.push('/flashcards');
     }
   }, [searchParams, router, toast]);
@@ -84,6 +89,8 @@ export default function QuizPage() {
     setIsCorrect(null);
     setShowFullAnswer(false);
     setProgressValue(0);
+    setCorrectButtonPulse(false);
+    // setAnimateCardGlowKey(prev => prev +1); // Re-trigger glow on next card if desired, but usually per answer
     if (currentCardIndex < quizFlashcards.length - 1) {
       setCurrentCardIndex(prevIndex => prevIndex + 1);
     } else {
@@ -104,7 +111,7 @@ export default function QuizPage() {
           clearInterval(timerInterval);
           handleNextCard();
         }
-      }, 100); // Update progress bar frequently
+      }, 100);
     }
     return () => clearInterval(timerInterval);
   }, [isAnswered, showFullAnswer, handleNextCard]);
@@ -121,6 +128,9 @@ export default function QuizPage() {
 
     if (correct) {
       setCoins(prevCoins => prevCoins + 5);
+      setAnimateCoinKey(prevKey => prevKey + 1);
+      setAnimateCardGlowKey(prevKey => prevKey + 1);
+      setCorrectButtonPulse(true);
       toast({
         title: "Correct!",
         description: "+5 Coins!",
@@ -140,11 +150,18 @@ export default function QuizPage() {
     setCurrentCardIndex(0);
     setCoins(0);
     setIsQuizComplete(false);
-    // Optionally re-shuffle cards if shuffling is implemented
-     if (quizSet) {
+    if (quizSet) {
       setQuizFlashcards(quizSet.cards.filter(card => card.options && card.options.length >= 3 && card.correctOption));
     }
-    handleNextCard(); // Reset states for the first card
+    // Reset states for the first card by advancing to it (which also resets necessary states)
+    setIsAnswered(false);
+    setSelectedAnswer(null);
+    setIsCorrect(null);
+    setShowFullAnswer(false);
+    setProgressValue(0);
+    setCorrectButtonPulse(false);
+    // Reset animation keys if desired, though next card will naturally clear these effects
+    // setAnimateCardGlowKey(0); 
   };
 
 
@@ -164,8 +181,8 @@ export default function QuizPage() {
         <PixelBrainIcon className="w-16 h-16 mx-auto text-primary mb-6" />
         <h1 className="text-3xl font-semibold text-foreground mb-3">Quiz Complete!</h1>
         <p className="text-xl text-muted-foreground mb-2">You earned a total of</p>
-        <div className="flex items-center justify-center gap-2 text-4xl font-bold text-primary mb-6">
-          <PixelCoinIcon className="w-10 h-10 text-[#39FF14]" /> 
+        <div className="flex items-center justify-center gap-2 text-4xl font-bold text-chart-3 mb-6">
+          <PixelCoinIcon className="w-10 h-10 text-yellow-400" /> 
           {coins}
         </div>
         <div className="space-y-3 sm:space-y-0 sm:flex sm:gap-3 justify-center">
@@ -182,17 +199,18 @@ export default function QuizPage() {
 
 
   if (!currentCard) {
-    // Should not happen if quizFlashcards is populated and isQuizComplete is false
      return <p className="text-center text-muted-foreground">Error: Could not load current card.</p>;
   }
 
   return (
-    <div className="space-y-6 max-w-2xl mx-auto">
+    <div className="space-y-6 max-w-2xl mx-auto relative">
+      {animateCoinKey > 0 && <AnimateCoinBonus key={animateCoinKey} amount={5} />}
+
       <ContentCard>
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-semibold text-foreground">{quizSet.name} - Quiz</h1>
-          <div className="flex items-center gap-2 text-lg font-medium text-primary">
-            <PixelCoinIcon className="w-5 h-5 text-[#39FF14]" />
+          <div className="flex items-center gap-2 text-lg font-medium text-chart-3">
+            <PixelCoinIcon className="w-5 h-5 text-yellow-400" />
             <span>{coins}</span>
           </div>
         </div>
@@ -200,10 +218,12 @@ export default function QuizPage() {
          <Progress value={(currentCardIndex / quizFlashcards.length) * 100} className="h-2 mb-6 [&>div]:bg-secondary" />
       </ContentCard>
 
-      <ContentCard className={cn(
+      <ContentCard 
+        key={`card-glow-${animateCardGlowKey}`}
+        className={cn(
           "transition-all duration-300 ease-in-out",
-          isAnswered && isCorrect === true && "border-green-500 ring-2 ring-green-500/50 shadow-lg shadow-green-500/20",
-          isAnswered && isCorrect === false && "border-red-500 ring-2 ring-red-500/50 shadow-lg shadow-red-500/20"
+          isAnswered && isCorrect === true && "animate-card-correct-glow",
+          isAnswered && isCorrect === false && "border-destructive ring-2 ring-destructive/50 shadow-lg shadow-destructive/20"
         )}>
         <div className="p-6 min-h-[120px] flex items-center justify-center">
           <p className="text-xl md:text-2xl text-center font-medium text-foreground">{currentCard.question}</p>
@@ -218,18 +238,19 @@ export default function QuizPage() {
             className={cn(
               "text-left justify-start p-4 h-auto text-base leading-normal w-full transition-all duration-150 ease-in-out",
               "hover:bg-accent/50 focus:bg-accent/60",
-              selectedAnswer === option && !isCorrect && "bg-red-500/20 border-red-500 text-red-200 hover:bg-red-500/30",
-              selectedAnswer === option && isCorrect && "bg-green-500/20 border-green-500 text-green-200 hover:bg-green-500/30",
+              selectedAnswer === option && !isCorrect && "bg-destructive/20 border-destructive text-destructive-foreground hover:bg-destructive/30",
+              selectedAnswer === option && isCorrect && "bg-chart-3/20 border-chart-3 text-foreground hover:bg-chart-3/30",
+              selectedAnswer === option && isCorrect && correctButtonPulse && "animate-button-correct-pulse",
               isAnswered && option !== currentCard.correctOption && option !== selectedAnswer && "opacity-60 cursor-not-allowed",
-              isAnswered && option === currentCard.correctOption && "bg-green-500/20 border-green-500 text-green-200"
+              isAnswered && option === currentCard.correctOption && selectedAnswer !== option && "bg-chart-3/20 border-chart-3 text-foreground" // Show correct if user chose wrong
             )}
             onClick={() => handleAnswerSelect(option)}
             disabled={isAnswered}
           >
             <span className="mr-3 font-mono text-muted-foreground">{(index + 1)}.</span>
             {option}
-            {selectedAnswer === option && isCorrect === true && <CheckCircle2 className="ml-auto w-5 h-5 text-green-400" />}
-            {selectedAnswer === option && isCorrect === false && <XCircle className="ml-auto w-5 h-5 text-red-400" />}
+            {selectedAnswer === option && isCorrect === true && <CheckCircle2 className="ml-auto w-5 h-5 text-chart-3" />}
+            {selectedAnswer === option && isCorrect === false && <XCircle className="ml-auto w-5 h-5 text-destructive" />}
           </Button>
         ))}
       </div>

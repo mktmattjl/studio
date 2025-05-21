@@ -71,9 +71,9 @@
 
     --chart-1: hsl(var(--primary));
     --chart-2: hsl(var(--secondary));
-    --chart-3: 108 100% 54%;
-    --chart-4: 39 100% 50%;
-    --chart-5: 60 100% 50%;
+    --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
+    --chart-4: 39 100% 50%;  /* #FFA500 Neon Orange */
+    --chart-5: 60 100% 50%; /* #FFFF00 Bright Yellow */
   }
 }
 
@@ -115,5 +115,32 @@
   .styled-scrollbar::-webkit-scrollbar-track {
     background: hsl(var(--card) / 0.5); /* Slightly visible track on card background */
     border-radius: var(--radius);
+  }
+
+  /* Quiz Animations */
+  @keyframes pulse-correct {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-3) / 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 0 12px 3px hsl(var(--chart-3) / 0.5); }
+  }
+  .animate-button-correct-pulse {
+    animation: pulse-correct 0.6s ease-in-out;
+  }
+
+  @keyframes glow-card-correct {
+    0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
+    50% { border-color: hsl(var(--chart-3)); box-shadow: 0 0 20px hsl(var(--chart-3) / 0.4); }
+  }
+  .animate-card-correct-glow {
+    animation: glow-card-correct 0.8s ease-in-out;
+  }
+
+  @keyframes coin-bonus-animation {
+    0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+    20% { opacity: 1; transform: translateY(0) scale(1); }
+    80% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-40px) scale(1.1); }
+  }
+  .coin-bonus-animate {
+    animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
