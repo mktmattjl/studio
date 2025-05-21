@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
 
 const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150.png?bg=333333&fc=FFFFFF";
 
@@ -61,7 +62,7 @@ export default function DashboardPage() {
             <ul className="space-y-3">
               {upcomingEvents.map((event) => (
                 <li key={event.id} className="p-3 bg-background/50 border-l-4 border-accent">
-                  <p className="font-semibold text-primary-foreground">{event.title} - <span className="text-sm text-muted-foreground">{new Date(event.date).toLocaleDateString()}</span></p>
+                  <p className="font-semibold text-primary-foreground">{event.title} - <span className="text-sm text-muted-foreground">{format(new Date(event.date), 'MM/dd/yyyy')}</span></p>
                   <p className="text-xs text-muted-foreground">{event.type}</p>
                 </li>
               ))}
