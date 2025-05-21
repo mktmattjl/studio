@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -6,9 +7,19 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { PawPrint, Coins, Zap, ShieldCheck, CalendarDays, ChevronRight, Flame, User, Settings } from 'lucide-react'; // Added User, Settings
-import { format } from 'date-fns';
+import { format } from '@/lib/dateUtils';
 import { cn } from '@/lib/utils';
+
+// Import Pixel Art Icons
+import { PixelPetIcon } from '@/components/icons/PixelPetIcon';
+import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
+import { PixelShieldIcon } from '@/components/icons/PixelShieldIcon';
+import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
+import { PixelChevronRightIcon } from '@/components/icons/PixelChevronRightIcon';
+import { PixelFlameIcon } from '@/components/icons/PixelFlameIcon';
+import { PixelUserIcon } from '@/components/icons/PixelUserIcon';
+import { PixelGearIcon } from '@/components/icons/PixelGearIcon';
+
 
 interface UpcomingEvent {
   id: string;
@@ -34,7 +45,7 @@ export function RightSidebar({
 }: RightSidebarProps) {
   const userLevel = 5; 
   const userXP = 65; 
-  const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}]; // Placeholder badges
+  const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}];
   const dayStreak = 7;
 
   return (
@@ -62,27 +73,27 @@ export function RightSidebar({
         <div className="p-4 space-y-3">
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <Flame className="mx-auto mb-1 h-6 w-6 text-primary" />
+                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-primary" />
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
                 <div>
-                    <ShieldCheck className="mx-auto mb-1 h-6 w-6 text-primary" />
+                    <PixelShieldIcon className="mx-auto mb-1 h-6 w-6 text-primary" />
                     <p className="text-sm font-medium text-foreground">{badges.length}</p>
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <Coins className="mx-auto mb-1 h-6 w-6 text-primary" />
+                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-primary" />
                     <p className="text-sm font-medium text-foreground">125</p> 
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
             </div>
             <div className="flex gap-2 pt-2 border-t border-border">
                 <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:text-foreground hover:bg-muted">
-                    <User size={16} className="mr-1.5" /> Profile
+                    <PixelUserIcon className="mr-1.5 h-4 w-4" /> Profile
                 </Button>
                 <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:text-foreground hover:bg-muted">
-                    <Settings size={16} className="mr-1.5" /> Settings
+                    <PixelGearIcon className="mr-1.5 h-4 w-4" /> Settings
                 </Button>
             </div>
         </div>
@@ -93,7 +104,7 @@ export function RightSidebar({
       <ContentCard>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-md font-semibold text-foreground flex items-center gap-2">
-            <PawPrint className="h-5 w-5 text-primary" />
+            <PixelPetIcon className="h-5 w-5 text-primary" />
             Companion
           </h3>
           <Link href="/companion" className="text-xs text-primary hover:underline">View All</Link>
@@ -124,7 +135,7 @@ export function RightSidebar({
       <ContentCard>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-md font-semibold text-foreground flex items-center gap-2">
-             <CalendarDays className="h-5 w-5 text-primary" />
+             <PixelCalendarIcon className="h-5 w-5 text-primary" />
              Upcoming
           </h3>
           <Link href="/planner" className="text-xs text-primary hover:underline">View Planner</Link>
@@ -138,7 +149,7 @@ export function RightSidebar({
                   <p className="text-sm font-medium text-foreground truncate">{event.title}</p>
                   <p className="text-xs text-muted-foreground">{format(new Date(event.date), 'EEE, MMM d')} - {event.type}</p>
                 </div>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <PixelChevronRightIcon className="h-4 w-4 text-muted-foreground" />
               </li>
             ))}
           </ul>

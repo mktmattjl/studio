@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -7,13 +8,18 @@ import { z } from 'zod';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { generateFlashcards, type GenerateFlashcardsOutput, type GenerateFlashcardsInput } from '@/ai/flows/generate-flashcards-from-notes';
-import { Loader2, Wand2, Save } from 'lucide-react';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
+import { Loader2 } from 'lucide-react'; // Loader can stay as lucide for now or be replaced later
+
+// Import Pixel Art Icons
+import { PixelWandIcon } from '@/components/icons/PixelWandIcon';
+import { PixelFloppyDiskIcon } from '@/components/icons/PixelFloppyDiskIcon';
+
 
 const FormSchema = z.object({
-  notes: z.string().min(50, { message: "Notes must be at least 50 characters long." }).max(10000, { message: "Notes must be at most 10,000 characters long." }), // Increased max length
+  notes: z.string().min(50, { message: "Notes must be at least 50 characters long." }).max(10000, { message: "Notes must be at most 10,000 characters long." }),
 });
 
 type FormData = z.infer<typeof FormSchema>;
@@ -71,7 +77,7 @@ export function AiFlashcardGeneratorForm() {
         <Textarea
           id="notes"
           {...register('notes')}
-          rows={12} // Increased rows
+          rows={12}
           className="bg-input text-input-foreground border-border focus:border-primary focus:ring-primary p-3 rounded-md shadow-sm text-sm"
           placeholder="e.g., Photosynthesis is a process used by plants, algae, and certain bacteria to convert light energy into chemical energy... Key concepts include chloroplasts, chlorophyll, light-dependent reactions, and the Calvin cycle."
         />
@@ -87,7 +93,7 @@ export function AiFlashcardGeneratorForm() {
           </>
         ) : (
           <>
-            <Wand2 size={20} className="mr-2" />
+            <PixelWandIcon className="w-5 h-5 mr-2" />
             Generate Flashcards
           </>
         )}
@@ -117,11 +123,10 @@ export function AiFlashcardGeneratorForm() {
             ))}
           </Accordion>
            <Button variant="outline" onClick={() => toast({title: "Save Feature", description: "Save flashcards functionality will be implemented soon."})}>
-            <Save size={18} className="mr-2" /> Save These Flashcards
+            <PixelFloppyDiskIcon className="w-4 h-4 mr-2" /> Save These Flashcards
           </Button>
         </div>
       )}
-      {/* Message for no flashcards generated is handled by toast now */}
     </form>
   );
 }

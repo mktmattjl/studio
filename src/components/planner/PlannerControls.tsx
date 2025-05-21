@@ -2,8 +2,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// Import Pixel Art Icons
+import { PixelChevronLeftIcon } from '@/components/icons/PixelChevronLeftIcon';
+import { PixelChevronRightIcon } from '@/components/icons/PixelChevronRightIcon';
+
 
 export type PlannerViewMode = 'month' | 'week';
 
@@ -30,10 +34,10 @@ export function PlannerControls({
     <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4 sm:mb-6">
       <div className="flex items-center gap-2">
         <Button onClick={onPrev} variant="outline" size="icon" aria-label={`Previous ${viewMode}`} className="rounded-md">
-          <ChevronLeft size={18} />
+          <PixelChevronLeftIcon className="w-4 h-4" />
         </Button>
         <Button onClick={onNext} variant="outline" size="icon" aria-label={`Next ${viewMode}`} className="rounded-md">
-          <ChevronRight size={18} />
+          <PixelChevronRightIcon className="w-4 h-4" />
         </Button>
         <Button onClick={onToday} variant="outline" size="default" className="rounded-md px-4">
           Today
@@ -42,7 +46,7 @@ export function PlannerControls({
       <h2 className="text-xl md:text-2xl font-semibold text-foreground order-first sm:order-none text-center">
         {currentViewLabel}
       </h2>
-      <div className="flex items-center gap-2 p-1 bg-muted rounded-lg"> {/* Group buttons in a styled container */}
+      <div className="flex items-center gap-2 p-1 bg-muted rounded-lg">
         <Button 
             variant={viewMode === 'month' ? 'default' : 'ghost'} 
             size="sm" 

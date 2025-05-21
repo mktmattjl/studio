@@ -1,6 +1,9 @@
+
 import { ContentCard } from '@/components/ui/ContentCard';
 import { AiFlashcardGeneratorForm } from '@/components/features/ai-flashcard-generator/AiFlashcardGeneratorForm';
-import { Sparkles, Brain } from 'lucide-react'; // Added Brain icon
+// Import Pixel Art Icons
+import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
+
 
 export default function AiGeneratorPage() {
   return (
@@ -8,7 +11,7 @@ export default function AiGeneratorPage() {
       <ContentCard>
         <div className="flex items-center gap-4">
           <div className="p-3 bg-primary/10 rounded-lg">
-            <Brain size={28} className="text-primary" />
+            <PixelBrainIcon className="w-7 h-7 text-primary" />
           </div>
           <div>
             <h1 className="text-2xl md:text-3xl font-semibold text-foreground">AI Flashcard Generator</h1>

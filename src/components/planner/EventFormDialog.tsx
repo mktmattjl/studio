@@ -14,7 +14,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import type { PlannerEvent } from '@/app/planner/page';
-import { Trash2 } from 'lucide-react';
+
+// Import Pixel Art Icons
+import { PixelTrashIcon } from '@/components/icons/PixelTrashIcon';
+
 
 const eventFormSchema = z.object({
   title: z.string().min(1, 'Title is required').max(100, 'Title is too long'),
@@ -109,7 +112,7 @@ export function EventFormDialog({
             {eventData ? 'Edit Event' : 'Add New Event'}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 pt-2"> {/* Increased space-y */}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 pt-2">
           <div>
             <Label htmlFor="title" className="text-foreground text-sm font-medium">Title</Label>
             <Input id="title" {...register('title')} className="bg-input text-input-foreground border-border focus:border-primary rounded-md mt-1 shadow-sm" />
@@ -181,7 +184,7 @@ export function EventFormDialog({
                         onClick={() => onDelete(eventData.id)}
                         className="w-full sm:w-auto"
                     >
-                        <Trash2 size={16} className="mr-2" /> Delete
+                        <PixelTrashIcon className="w-4 h-4 mr-2" /> Delete
                     </Button>
                 )}
             </div>

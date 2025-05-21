@@ -6,14 +6,20 @@ import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
 import { JumpBackInCard } from '@/components/dashboard/JumpBackInCard';
 import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
-import { PlusCircle, Brain, BookCopy, FileText, Settings, MessageSquare, Award } from 'lucide-react';
-import { format } from 'date-fns';
+import { format } from '@/lib/dateUtils';
 
-const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/151A21/9CA3AF.png"; // Dark placeholder
+// Import Pixel Art Icons
+import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
+import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
+import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
+import { PixelTrophyIcon } from '@/components/icons/PixelTrophyIcon';
+
+
+const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/151A21/9CA3AF.png"; 
 
 export default function DashboardPage() {
-  const userName = "Norta Hwørting"; // As per reference style
-  const petName = "Vel"; // As per reference
+  const userName = "Norta Hwørting"; 
+  const petName = "Vel"; 
 
   const [dashboardPetImageUrl, setDashboardPetImageUrl] = useState(DEFAULT_DASHBOARD_PET_IMAGE);
   const [isGeneratingPetImage, setIsGeneratingPetImage] = useState(true);
@@ -29,15 +35,15 @@ export default function DashboardPage() {
       title: "Create Flashcards", 
       description: "Craft new sets for your subjects.", 
       href: "/flashcards/new", 
-      Icon: BookCopy,
+      Icon: PixelBookIcon, // Changed
       iconBgClass: "bg-purple-500/10",
-      iconTextClass: "text-purple-400"
+      iconTextClass: "text-purple-400" // Will be overridden by icon's own color
     },
     { 
       title: "AI Card Generator", 
       description: "Let AI create flashcards from notes.", 
       href: "/ai-generator", 
-      Icon: Brain,
+      Icon: PixelBrainIcon, // Changed
       iconBgClass: "bg-teal-500/10",
       iconTextClass: "text-teal-400"
     },
@@ -45,15 +51,15 @@ export default function DashboardPage() {
       title: "Plan Your Week", 
       description: "Add tasks, deadlines, and study sessions.", 
       href: "/planner",
-      Icon: PlusCircle,
+      Icon: PixelPlusIcon, // Changed
       iconBgClass: "bg-blue-500/10",
       iconTextClass: "text-blue-400"
     },
      { 
       title: "Explore Challenges", 
       description: "Test your knowledge with new packs.", 
-      href: "/challenges", // New hypothetical page
-      Icon: Award,
+      href: "/challenges", 
+      Icon: PixelTrophyIcon, // Changed
       iconBgClass: "bg-orange-500/10",
       iconTextClass: "text-orange-400"
     },
@@ -107,7 +113,7 @@ export default function DashboardPage() {
         
         <div>
           <h2 className="text-xl font-semibold text-foreground mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"> {/* Changed to 2 columns for better fit */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {quickActions.map(action => (
               <QuickActionCard 
                 key={action.title}
@@ -116,7 +122,7 @@ export default function DashboardPage() {
                 href={action.href}
                 Icon={action.Icon}
                 iconBgClass={action.iconBgClass}
-                iconTextClass={action.iconTextClass}
+                iconTextClass={action.iconTextClass} // Icon color might be inherent in SVG
               />
             ))}
           </div>
@@ -128,7 +134,7 @@ export default function DashboardPage() {
         userName={userName}
         petName={petName}
         petImageUrl={dashboardPetImageUrl}
-        isGeneratingPetImage={isGeneratingPetImage} // Pass this down if needed by sidebar logic
+        isGeneratingPetImage={isGeneratingPetImage} 
         upcomingEvents={upcomingEvents}
       />
     </div>

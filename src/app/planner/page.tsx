@@ -3,13 +3,16 @@
 
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
-import { PlusCircle } from 'lucide-react';
 import React from 'react';
 import { format, addMonths, subMonths, setHours, setMinutes, setSeconds, addWeeks, subWeeks, startOfWeek, endOfWeek } from '@/lib/dateUtils'; 
 import { PlannerControls, type PlannerViewMode } from '@/components/planner/PlannerControls';
 import { MonthCalendarGrid } from '@/components/planner/MonthCalendarGrid';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
+
+// Import Pixel Art Icons
+import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
+
 
 export interface PlannerEvent {
   id: string;
@@ -26,7 +29,7 @@ const eventTypeColors: Record<PlannerEvent['type'], string> = {
   class: 'bg-blue-500/80 border-blue-400 text-blue-50',
   deadline: 'bg-red-500/80 border-red-400 text-red-50',
   study_session: 'bg-green-500/80 border-green-400 text-green-50',
-  exam: 'bg-yellow-500/80 border-yellow-400 text-yellow-950', // Darker text for yellow
+  exam: 'bg-yellow-500/80 border-yellow-400 text-yellow-950', 
   meeting: 'bg-purple-500/80 border-purple-400 text-purple-50',
   personal: 'bg-pink-500/80 border-pink-400 text-pink-50',
 };
@@ -158,8 +161,7 @@ export default function PlannerPage() {
 
 
   return (
-    // Ensure this div allows its children to take up height, e.g. by setting a min-height or being a flex item
-    <div className="flex flex-col h-[calc(100vh-var(--header-height,8rem)-2rem)] space-y-6"> {/* Approx header height + page padding */}
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,8rem)-2rem)] space-y-6">
       <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
@@ -167,13 +169,12 @@ export default function PlannerPage() {
             <p className="text-muted-foreground mt-1">Organize your classes, deadlines, and study sessions.</p>
           </div>
           <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
-            <PlusCircle size={18} className="mr-2" />
+            <PixelPlusIcon className="w-4 h-4 mr-2" />
             New Event
           </Button>
         </div>
       </ContentCard>
 
-      {/* The main calendar area needs to be flexible */}
       <ContentCard className="flex-grow flex flex-col overflow-hidden" padding="p-3 md:p-4">
         <PlannerControls
           currentDate={currentDate}
@@ -184,7 +185,7 @@ export default function PlannerPage() {
           viewMode={viewMode}
           onViewChange={handleViewChange}
         />
-        <div className="flex-grow overflow-auto"> {/* This div will scroll if content overflows */}
+        <div className="flex-grow overflow-auto">
             {viewMode === 'month' && (
             <MonthCalendarGrid 
                 currentDate={currentDate} 
@@ -224,7 +225,3 @@ export default function PlannerPage() {
     </div>
   );
 }
-
-// Add a CSS variable for header height if it's fixed, or adjust the h-[] calc
-// For example, in your globals.css or layout:
-// :root { --header-height: 4rem; /* Or your actual header height */ }

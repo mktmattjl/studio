@@ -1,9 +1,18 @@
+
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { PlusCircle, Eye, Search, BookCopy, Brain, Zap } from 'lucide-react'; // Added Brain, Zap
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
+
+// Import Pixel Art Icons
+import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
+import { PixelEyeIcon } from '@/components/icons/PixelEyeIcon';
+import { PixelMagnifyingGlassIcon } from '@/components/icons/PixelMagnifyingGlassIcon';
+import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
+import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
+import { PixelLightningIcon } from '@/components/icons/PixelLightningIcon';
+
 
 export default function FlashcardsPage() {
   const flashcardSets = [
@@ -11,7 +20,6 @@ export default function FlashcardsPage() {
     { id: '2', name: 'Biology - Cell Structure', cardCount: 30, lastStudied: '5 days ago', progress: 40 },
     { id: '3', name: 'JavaScript Fundamentals', cardCount: 75, lastStudied: 'Yesterday', progress: 90 },
     { id: '4', name: 'Philosophical Concepts', cardCount: 25, lastStudied: 'Never', progress: 0 },
-
   ];
 
   return (
@@ -24,14 +32,14 @@ export default function FlashcardsPage() {
           </div>
           <Link href="/flashcards/new" passHref>
             <Button className="btn-primary-action w-full sm:w-auto">
-              <PlusCircle size={20} className="mr-2" />
+              <PixelPlusIcon className="w-5 h-5 mr-2" />
               Create New Set
             </Button>
           </Link>
         </div>
         <div className="mt-6">
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
+            <PixelMagnifyingGlassIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
             <Input placeholder="Search flashcard sets by name or tag..." className="pl-10 text-base" />
           </div>
         </div>
@@ -47,7 +55,7 @@ export default function FlashcardsPage() {
                   <Link href={`/flashcards/set/${set.id}`} className="flex flex-col h-full">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{set.name}</h3>
-                      <Eye size={20} className="text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                      <PixelEyeIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                     </div>
                     <p className="text-sm text-muted-foreground">{set.cardCount} cards</p>
                     <p className="text-xs text-muted-foreground mt-1">Last studied: {set.lastStudied}</p>
@@ -71,12 +79,12 @@ export default function FlashcardsPage() {
         </div>
       ) : (
         <ContentCard className="text-center py-16">
-          <BookCopy size={56} className="mx-auto text-muted-foreground/50 mb-6" />
+          <PixelBookIcon className="w-14 h-14 mx-auto text-muted-foreground/50 mb-6" />
           <h2 className="text-2xl font-semibold text-foreground mb-2">No Flashcard Sets Yet</h2>
           <p className="text-lg text-muted-foreground mb-6 max-w-md mx-auto">Start by creating your first set of flashcards to begin your learning journey.</p>
           <Link href="/flashcards/new" passHref>
             <Button size="lg" className="btn-primary-action">
-                <PlusCircle size={20} className="mr-2" /> Get Started
+                <PixelPlusIcon className="w-5 h-5 mr-2" /> Get Started
             </Button>
           </Link>
         </ContentCard>
@@ -85,15 +93,15 @@ export default function FlashcardsPage() {
       <ContentCard>
         <h2 className="text-2xl font-semibold text-foreground mb-4">Study Modes</h2>
         <div className="grid md:grid-cols-2 gap-4">
-            <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto"> {/* Increased padding & h-auto */}
-                <Brain size={22} className="mr-3 text-primary"/> 
+            <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
+                <PixelBrainIcon className="w-5 h-5 mr-3 text-primary"/> 
                 <div>
                     <span className="font-medium">Multiple Choice Quiz</span>
                     <p className="text-xs text-muted-foreground font-normal">Test your knowledge with MCQs.</p>
                 </div>
             </Button>
             <Button variant="outline" size="lg" className="w-full py-3 justify-start text-base h-auto">
-                <Zap size={22} className="mr-3 text-primary"/> 
+                <PixelLightningIcon className="w-5 h-5 mr-3 text-primary"/> 
                  <div>
                     <span className="font-medium">Spaced Repetition</span>
                     <p className="text-xs text-muted-foreground font-normal">Optimize learning with SRS.</p>

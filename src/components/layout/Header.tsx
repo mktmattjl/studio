@@ -1,15 +1,17 @@
+
 import Link from 'next/link';
 import { NavItem } from './NavItem';
-import { 
-  LayoutDashboard, 
-  NotebookText, 
-  CalendarDays, 
-  Sparkles, 
-  UserCircle, 
-  Bell, 
-  Coins as CoinsIcon // Renamed to avoid conflict with coins variable
-} from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+// Import Pixel Art Icons
+import { PixelJoystickIcon } from '@/components/icons/PixelJoystickIcon';
+import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
+import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
+import { PixelSparkleIcon } from '@/components/icons/PixelSparkleIcon';
+import { PixelUserIcon } from '@/components/icons/PixelUserIcon';
+import { PixelBellIcon } from '@/components/icons/PixelBellIcon';
+import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
+
 
 export function Header() {
   const coins = 125; // Placeholder value
@@ -23,24 +25,24 @@ export function Header() {
           </Link>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            <NavItem href="/" icon={<LayoutDashboard size={16} />}>Dashboard</NavItem>
-            <NavItem href="/flashcards" icon={<NotebookText size={16} />}>Flashcards</NavItem>
-            <NavItem href="/planner" icon={<CalendarDays size={16} />}>Planner</NavItem>
-            <NavItem href="/ai-generator" icon={<Sparkles size={16} />}>AI Gen</NavItem>
+            <NavItem href="/" icon={<PixelJoystickIcon className="w-4 h-4" />}>Dashboard</NavItem>
+            <NavItem href="/flashcards" icon={<PixelBookIcon className="w-4 h-4" />}>Flashcards</NavItem>
+            <NavItem href="/planner" icon={<PixelCalendarIcon className="w-4 h-4" />}>Planner</NavItem>
+            <NavItem href="/ai-generator" icon={<PixelSparkleIcon className="w-4 h-4" />}>AI Gen</NavItem>
           </nav>
         </div>
         
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-1.5 text-sm text-foreground bg-secondary px-3 py-1.5 rounded-full">
-            <CoinsIcon size={16} className="text-primary" />
+            <PixelCoinIcon className="w-4 h-4" />
             <span className="font-medium">{coins}</span>
           </div>
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-full">
-            <Bell size={20} />
+            <PixelBellIcon className="w-5 h-5" />
             <span className="sr-only">Notifications</span>
           </Button>
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-full">
-            <UserCircle size={24} />
+            <PixelUserIcon className="w-6 h-6" />
             <span className="sr-only">User Profile</span>
           </Button>
           {/* TODO: Mobile Menu Trigger for smaller screens */}
