@@ -6,10 +6,8 @@ import Link from 'next/link';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
 import type { ElementType } from 'react';
 import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
-
 
 // Import Pixel Art Icons
 import { PixelPetIcon } from '@/components/icons/PixelPetIcon';
@@ -43,8 +41,8 @@ export function RightSidebar({
   isGeneratingPetImage,
   quickActions,
 }: RightSidebarProps) {
-  const userLevel = 5; 
-  const userXP = 65; 
+  const userLevel = 5;
+  const userXP = 65;
   const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}];
   const dayStreak = 7;
 
@@ -84,7 +82,7 @@ export function RightSidebar({
                 </div>
                  <div>
                     <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-[#39FF14]" /> {/* Glitch Lime Green for Coins */}
-                    <p className="text-sm font-medium text-foreground">125</p> 
+                    <p className="text-sm font-medium text-foreground">125</p>
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
             </div>
@@ -132,9 +130,9 @@ export function RightSidebar({
       {/* Quick Actions Module */}
       <ContentCard>
         <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 gap-3 max-h-32 overflow-y-auto styled-scrollbar pr-1">
+        <div className="flex flex-row flex-wrap gap-2 justify-start items-center"> {/* Changed to flex row for compact icons */}
           {quickActions.map(action => (
-            <QuickActionCard 
+            <QuickActionCard
               key={action.title}
               title={action.title}
               description={action.description}
