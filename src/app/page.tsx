@@ -4,7 +4,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
-// import { JumpBackInCard } from '@/components/dashboard/JumpBackInCard'; // Removed
 import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
@@ -14,9 +13,19 @@ import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
 import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
 import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
 import { PixelTrophyIcon } from '@/components/icons/PixelTrophyIcon';
+import type { ElementType } from 'react';
 
 
 const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/1A1D2B/E0EFFF.png"; 
+
+interface QuickActionItem {
+  title: string;
+  description: string;
+  href: string;
+  Icon: ElementType;
+  iconBgClass?: string;
+  iconTextClass?: string;
+}
 
 export default function DashboardPage() {
   const userName = "Norta Hwørting"; 
@@ -33,7 +42,7 @@ export default function DashboardPage() {
     { id: '5', title: 'Physics Exam II', date: new Date(new Date().setDate(new Date().getDate() + 5)).toISOString().split('T')[0], type: 'Exam' },
   ];
 
-  const quickActions = [
+  const quickActions: QuickActionItem[] = [
     { 
       title: "Create Flashcards", 
       description: "Craft new sets for your subjects.", 
@@ -113,22 +122,8 @@ export default function DashboardPage() {
         
         <DashboardAgendaView events={upcomingEvents} title={pageTitle} subtitle={pageSubtitle} />
         
-        {/* JumpBackInCard removed from here */}
+        {/* Quick Actions section removed from here */}
         
-        <ContentCard>
-          <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {quickActions.map(action => (
-              <QuickActionCard 
-                key={action.title}
-                title={action.title}
-                description={action.description}
-                href={action.href}
-                Icon={action.Icon}
-              />
-            ))}
-          </div>
-        </ContentCard>
       </div>
 
       {/* Right Sidebar */}
@@ -137,6 +132,7 @@ export default function DashboardPage() {
         petName={petName}
         petImageUrl={dashboardPetImageUrl}
         isGeneratingPetImage={isGeneratingPetImage} 
+        quickActions={quickActions}
       />
     </div>
   );

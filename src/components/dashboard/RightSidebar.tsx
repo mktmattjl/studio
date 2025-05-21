@@ -7,34 +7,33 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-// Removed format and cn from here as they are not used directly in this version
-// import { format } from '@/lib/dateUtils';
-// import { cn } from '@/lib/utils';
+import type { ElementType } from 'react';
+import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
+
 
 // Import Pixel Art Icons
 import { PixelPetIcon } from '@/components/icons/PixelPetIcon';
 import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
 import { PixelShieldIcon } from '@/components/icons/PixelShieldIcon';
-// import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon'; // No longer needed here
-// import { PixelChevronRightIcon } from '@/components/icons/PixelChevronRightIcon'; // No longer needed here
 import { PixelFlameIcon } from '@/components/icons/PixelFlameIcon';
 import { PixelUserIcon } from '@/components/icons/PixelUserIcon';
 import { PixelGearIcon } from '@/components/icons/PixelGearIcon';
 
-
-// interface UpcomingEvent { // No longer needed here
-//   id: string;
-//   title: string;
-//   date: string; // ISO string
-//   type: string;
-// }
+interface QuickActionItem {
+  title: string;
+  description: string;
+  href: string;
+  Icon: ElementType;
+  iconBgClass?: string;
+  iconTextClass?: string;
+}
 
 interface RightSidebarProps {
   userName: string;
   petName: string;
   petImageUrl: string;
   isGeneratingPetImage: boolean;
-  // upcomingEvents: UpcomingEvent[]; // Removed upcomingEvents prop
+  quickActions: QuickActionItem[];
 }
 
 export function RightSidebar({
@@ -42,7 +41,7 @@ export function RightSidebar({
   petName,
   petImageUrl,
   isGeneratingPetImage,
-  // upcomingEvents, // Prop removed
+  quickActions,
 }: RightSidebarProps) {
   const userLevel = 5; 
   const userXP = 65; 
@@ -117,9 +116,10 @@ export function RightSidebar({
               alt={petName}
               width={64}
               height={64}
-              className={("object-contain transition-opacity duration-300 " + (isGeneratingPetImage && petImageUrl !== 'https://placehold.co/150x150/2A2E37/E0E0E0.png' ? 'opacity-30' : 'opacity-100'))}
+              className={("object-contain transition-opacity duration-300 " + (isGeneratingPetImage && petImageUrl !== 'https://placehold.co/150x150/1A1D2B/E0EFFF.png' ? 'opacity-30' : 'opacity-100'))}
               unoptimized={petImageUrl.startsWith('data:')}
               priority
+              data-ai-hint="digital creature mascot"
             />
           </div>
           <div className="flex-1">
@@ -129,34 +129,24 @@ export function RightSidebar({
         </div>
       </ContentCard>
 
-      {/* Upcoming Events List - REMOVED */}
-      {/*
+      {/* Quick Actions Module */}
       <ContentCard>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-             <PixelCalendarIcon className="h-5 w-5 text-primary" />
-             Upcoming
-          </h3>
-          <Link href="/planner" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View Planner</Link>
+        <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-1 gap-3"> {/* Changed to 1 column for sidebar */}
+          {quickActions.map(action => (
+            <QuickActionCard 
+              key={action.title}
+              title={action.title}
+              description={action.description}
+              href={action.href}
+              Icon={action.Icon}
+              iconBgClass={action.iconBgClass}
+              iconTextClass={action.iconTextClass}
+            />
+          ))}
         </div>
-        {upcomingEvents.length > 0 ? (
-          <ul className="space-y-2.5">
-            {upcomingEvents.slice(0, 3).map((event) => (
-              <li key={event.id} className="flex items-center gap-3 p-2.5 bg-muted/30 hover:bg-muted rounded-md transition-colors cursor-pointer border-b border-border last:border-b-0">
-                <div className={cn("w-1.5 h-8 rounded-full", event.type === 'Exam' ? 'bg-destructive' : event.type === 'Deadline' ? 'bg-orange-500' : 'bg-primary' )}></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-foreground truncate">{event.title}</p>
-                  <p className="text-xs text-muted-foreground">{format(new Date(event.date), 'EEE, MMM d')} - {event.type}</p>
-                </div>
-                <PixelChevronRightIcon className="h-4 w-4 text-muted-foreground" />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-center text-muted-foreground py-4">No upcoming events. Time to plan!</p>
-        )}
       </ContentCard>
-      */}
+
     </aside>
   );
 }
