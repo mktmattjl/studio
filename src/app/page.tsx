@@ -6,7 +6,7 @@ import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
 import { JumpBackInCard } from '@/components/dashboard/JumpBackInCard';
 import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
-import { format } from '@/lib/dateUtils';
+import { ContentCard } from '@/components/ui/ContentCard'; // Added for Quick Actions wrapper
 
 // Import Pixel Art Icons
 import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
@@ -35,15 +35,15 @@ export default function DashboardPage() {
       title: "Create Flashcards", 
       description: "Craft new sets for your subjects.", 
       href: "/flashcards/new", 
-      Icon: PixelBookIcon, // Changed
+      Icon: PixelBookIcon,
       iconBgClass: "bg-purple-500/10",
-      iconTextClass: "text-purple-400" // Will be overridden by icon's own color
+      iconTextClass: "text-purple-400"
     },
     { 
       title: "AI Card Generator", 
       description: "Let AI create flashcards from notes.", 
       href: "/ai-generator", 
-      Icon: PixelBrainIcon, // Changed
+      Icon: PixelBrainIcon,
       iconBgClass: "bg-teal-500/10",
       iconTextClass: "text-teal-400"
     },
@@ -51,7 +51,7 @@ export default function DashboardPage() {
       title: "Plan Your Week", 
       description: "Add tasks, deadlines, and study sessions.", 
       href: "/planner",
-      Icon: PixelPlusIcon, // Changed
+      Icon: PixelPlusIcon,
       iconBgClass: "bg-blue-500/10",
       iconTextClass: "text-blue-400"
     },
@@ -59,7 +59,7 @@ export default function DashboardPage() {
       title: "Explore Challenges", 
       description: "Test your knowledge with new packs.", 
       href: "/challenges", 
-      Icon: PixelTrophyIcon, // Changed
+      Icon: PixelTrophyIcon,
       iconBgClass: "bg-orange-500/10",
       iconTextClass: "text-orange-400"
     },
@@ -100,8 +100,8 @@ export default function DashboardPage() {
     <div className="flex flex-col lg:flex-row gap-6 xl:gap-8">
       {/* Main Content Area */}
       <div className="flex-grow space-y-6 xl:space-y-8">
-        <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+        <div className="mb-4"> {/* Reduced margin from mb-6 */}
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground"> {/* Reduced font size */}
             {currentTimeGreeting}, <span className="text-primary">{userName}!</span>
           </h1>
           <p className="text-md text-muted-foreground">
@@ -111,8 +111,8 @@ export default function DashboardPage() {
 
         <JumpBackInCard />
         
-        <div>
-          <h2 className="text-xl font-semibold text-foreground mb-4">Quick Actions</h2>
+        <ContentCard> {/* Wrapper for Quick Actions */}
+          <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {quickActions.map(action => (
               <QuickActionCard 
@@ -122,11 +122,11 @@ export default function DashboardPage() {
                 href={action.href}
                 Icon={action.Icon}
                 iconBgClass={action.iconBgClass}
-                iconTextClass={action.iconTextClass} // Icon color might be inherent in SVG
+                iconTextClass={action.iconTextClass}
               />
             ))}
           </div>
-        </div>
+        </ContentCard>
       </div>
 
       {/* Right Sidebar */}

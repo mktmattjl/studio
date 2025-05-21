@@ -3,15 +3,15 @@
 
 import Link from 'next/link';
 import { ContentCard } from '@/components/ui/ContentCard';
-import type { ElementType } from 'react'; // Changed from LucideIcon
-import { ArrowRight } from 'lucide-react'; // Keep for the "Go to" link, or replace with pixel version if available
+import type { ElementType } from 'react'; 
+import { ArrowRight } from 'lucide-react'; // Will be replaced if pixel version needed
 import { cn } from '@/lib/utils';
 
 interface QuickActionCardProps {
   title: string;
   description: string;
   href: string;
-  Icon: ElementType; // Changed from LucideIcon
+  Icon: ElementType; 
   iconBgClass?: string; 
   iconTextClass?: string; 
 }
@@ -22,7 +22,7 @@ export function QuickActionCard({
   href, 
   Icon, 
   iconBgClass = 'bg-primary/10', 
-  iconTextClass = 'text-primary' // This class will apply if the SVG uses currentColor
+  iconTextClass = 'text-primary'
 }: QuickActionCardProps) {
   return (
     <Link href={href} passHref className="flex">
@@ -33,15 +33,13 @@ export function QuickActionCard({
       >
         <div className="flex items-center gap-3 mb-3">
           <div className={cn("p-2.5 rounded-lg", iconBgClass)}>
-             {/* Removed size={22}, added w-6 h-6 for sizing pixel icons */}
              <Icon className={cn('w-6 h-6 transition-transform group-hover:scale-110', iconTextClass)} />
           </div>
-           <h3 className="text-md font-semibold text-foreground group-hover:text-primary transition-colors">{title}</h3>
+           <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">{title}</h3> {/* text-md to text-base */}
         </div>
         <p className="text-sm text-muted-foreground flex-grow mb-3 leading-relaxed">{description}</p>
         <div className="mt-auto">
-          {/* Using Lucide ArrowRight here, can be swapped for a pixel version if one exists */}
-          <span className="text-xs text-primary font-medium flex items-center">
+          <span className="text-sm text-primary font-medium flex items-center"> {/* text-xs to text-sm */}
             Go to {title.split(' ')[0]} <ArrowRight size={14} className="ml-1 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
