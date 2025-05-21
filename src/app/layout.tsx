@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google'; // Changed from VT323 to Inter
 import './globals.css';
@@ -22,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, "dark h-full")}> {/* Ensure 'dark' class is applied for the dark theme */}
+    <html lang="en" className={cn(inter.variable, "dark h-full")}>
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow container mx-auto px-4 py-6 sm:py-8">
