@@ -4,74 +4,75 @@
 
 @layer base {
   :root {
-    --background: 220 27% 14%; /* #1A202C - Primary Background */
-    --foreground: 208 60% 98%; /* #F7FAFC - Primary Text */
+    /* Cyberpunk Neon Palette - Defaulting to dark values */
+    --background: 240 16% 8%; /* #0F0F18 Near-Black cool */
+    --foreground: 216 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
 
-    --card: 215 20% 23%; /* #2D3748 - Secondary Background (Cards, Modules, Sidebar) */
-    --card-foreground: 208 60% 98%; /* #F7FAFC */
+    --card: 229 25% 14%; /* #1A1D2B Very Dark Cool Gray */
+    --card-foreground: 216 100% 94%; /* #E0EFFF */
 
-    --popover: 215 20% 18%; /* Darker than card for popovers, can adjust if needed */
-    --popover-foreground: 208 60% 98%; /* #F7FAFC */
+    --popover: 229 25% 14%; /* #1A1D2B */
+    --popover-foreground: 216 100% 94%; /* #E0EFFF */
 
-    --primary: 208 65% 50%; /* #3182CE - Primary Accent (Bright Blue) */
-    --primary-foreground: 208 60% 98%; /* #F7FAFC - Off-white, good on bright blue */
+    --primary: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --primary-foreground: 240 16% 8%; /* Dark for contrast on Cyan */
     
-    --secondary: 177 48% 44%; /* #38B2AC - Secondary Accent (Vivid Teal) */
-    --secondary-foreground: 208 60% 98%; /* #F7FAFC - Off-white, good on teal */
+    --secondary: 325 100% 48%; /* #F50087 Vibrant Magenta */
+    --secondary-foreground: 216 100% 94%; /* #E0EFFF */
 
-    --muted: 215 20% 30%; /* Slightly lighter muted for less emphasis */
-    --muted-foreground: 215 16% 65%; /* #A0AEC0 - Secondary Text */
+    --muted: 229 15% 18%; /* Darker muted for less emphasis, fits cool theme */
+    --muted-foreground: 223 13% 50%; /* #707890 Cool Medium Gray */
 
-    --accent: 177 48% 44%; /* #38B2AC - Vivid Teal (for hovers, secondary interactions) */
-    --accent-foreground: 208 60% 98%; /* #F7FAFC */
+    --accent: 325 100% 48%; /* #F50087 Vibrant Magenta (for hovers, secondary interactions) */
+    --accent-foreground: 216 100% 94%; /* #E0EFFF */
 
-    --destructive: 0 72% 51%; /* #E53E3E - A suitable red */
+    --destructive: 0 100% 50%; /* #FF0000 Bright Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 215 20% 30%; /* #4A5568 - A border color between card and background */
-    --input: 215 20% 20%; /* Slightly darker than card for input fields */
-    --input-foreground: 208 60% 98%; /* #F7FAFC */
-    --ring: 208 65% 50%; /* #3182CE - Primary Accent (Bright Blue) for focus rings */
+    --border: 229 15% 22%; /* Subtle border, slightly lighter than card */
+    --input: 229 25% 10%; /* Slightly darker than card for input fields */
+    --input-foreground: 216 100% 94%; /* #E0EFFF */
+    --ring: 187 100% 50%; /* #00E5FF Electric Cyan for focus rings */
     
     --radius: 0.5rem; /* Rounded corners */
 
-    /* Chart Colors for Dark Theme */
-    --chart-1: hsl(var(--primary)); /* Bright Blue */
-    --chart-2: hsl(var(--accent)); /* Vivid Teal */
-    --chart-3: 260 60% 65%; /* Complementary Purple */
-    --chart-4: 45 82% 61%;  /* Golden Yellow */
-    --chart-5: 215 16% 75%; /* Light Gray (for neutral series) */
+    /* Cyberpunk Neon Chart Colors */
+    --chart-1: hsl(var(--primary)); /* Electric Cyan */
+    --chart-2: hsl(var(--accent)); /* Vibrant Magenta */
+    --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
+    --chart-4: 39 100% 50%;  /* #FFA500 Neon Orange */
+    --chart-5: 60 100% 50%; /* #FFFF00 Bright Yellow */
   }
 
   .dark { /* This is the active theme */
-    --background: 220 27% 14%; /* #1A202C */
-    --foreground: 208 60% 98%; /* #F7FAFC */
-    --card: 215 20% 23%; /* #2D3748 */
-    --card-foreground: 208 60% 98%; /* #F7FAFC */
-    --popover: 215 20% 18%; 
-    --popover-foreground: 208 60% 98%; /* #F7FAFC */
-    --primary: 208 65% 50%; /* #3182CE */
-    --primary-foreground: 208 60% 98%; /* #F7FAFC */
-    --secondary: 177 48% 44%; /* #38B2AC */
-    --secondary-foreground: 208 60% 98%; /* #F7FAFC */
-    --muted: 215 20% 30%; 
-    --muted-foreground: 215 16% 65%; /* #A0AEC0 */
-    --accent: 177 48% 44%; /* #38B2AC */
-    --accent-foreground: 208 60% 98%; /* #F7FAFC */
-    --destructive: 0 72% 51%; /* #E53E3E */
+    --background: 240 16% 8%; /* #0F0F18 */
+    --foreground: 216 100% 94%; /* #E0EFFF */
+    --card: 229 25% 14%; /* #1A1D2B */
+    --card-foreground: 216 100% 94%; /* #E0EFFF */
+    --popover: 229 25% 14%; 
+    --popover-foreground: 216 100% 94%; /* #E0EFFF */
+    --primary: 187 100% 50%; /* #00E5FF */
+    --primary-foreground: 240 16% 8%; 
+    --secondary: 325 100% 48%; /* #F50087 */
+    --secondary-foreground: 216 100% 94%; /* #E0EFFF */
+    --muted: 229 15% 18%; 
+    --muted-foreground: 223 13% 50%; /* #707890 */
+    --accent: 325 100% 48%; /* #F50087 */
+    --accent-foreground: 216 100% 94%; /* #E0EFFF */
+    --destructive: 0 100% 50%; /* #FF0000 */
     --destructive-foreground: 0 0% 100%; 
-    --border: 215 20% 30%; /* #4A5568 */
-    --input: 215 20% 20%; 
-    --input-foreground: 208 60% 98%; /* #F7FAFC */
-    --ring: 208 65% 50%; /* #3182CE */
+    --border: 229 15% 22%; 
+    --input: 229 25% 10%; 
+    --input-foreground: 216 100% 94%; /* #E0EFFF */
+    --ring: 187 100% 50%; /* #00E5FF */
     
     --radius: 0.5rem;
 
     --chart-1: hsl(var(--primary));
     --chart-2: hsl(var(--accent));
-    --chart-3: 260 60% 65%;
-    --chart-4: 45 82% 61%;
-    --chart-5: 215 16% 75%;
+    --chart-3: 108 100% 54%;
+    --chart-4: 39 100% 50%;
+    --chart-5: 60 100% 50%;
   }
 }
 

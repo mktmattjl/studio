@@ -34,7 +34,7 @@ export function Header() {
         
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-1.5 text-sm bg-muted px-3 py-1.5 rounded-full">
-            <PixelCoinIcon className="w-4 h-4 text-[#ECC94B]" /> {/* Golden Yellow for Coins */}
+            <PixelCoinIcon className="w-4 h-4 text-[#39FF14]" /> {/* Glitch Lime Green for Coins */}
             <span className="font-medium text-foreground">{coins}</span>
           </div>
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-full">

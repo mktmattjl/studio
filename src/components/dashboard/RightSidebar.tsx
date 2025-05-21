@@ -73,17 +73,17 @@ export function RightSidebar({
         <div className="p-4 space-y-3 border-t border-border"> {/* Added border */}
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#38B2AC]" /> {/* Vivid Teal for Streak */}
+                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#F50087]" /> {/* Vibrant Magenta for Streak */}
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
                 <div>
-                    <PixelShieldIcon className="mx-auto mb-1 h-6 w-6 text-sky-500" />
+                    <PixelShieldIcon className="mx-auto mb-1 h-6 w-6 text-sky-500" /> {/* Keep sky blue or use another neon like Cyan */}
                     <p className="text-sm font-medium text-foreground">{badges.length}</p>
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-[#ECC94B]" /> {/* Golden Yellow for Coins */}
+                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-[#39FF14]" /> {/* Glitch Lime Green for Coins */}
                     <p className="text-sm font-medium text-foreground">125</p> 
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
@@ -144,7 +144,7 @@ export function RightSidebar({
           <ul className="space-y-2.5">
             {upcomingEvents.slice(0, 3).map((event) => (
               <li key={event.id} className="flex items-center gap-3 p-2.5 bg-muted/30 hover:bg-muted rounded-md transition-colors cursor-pointer border-b border-border last:border-b-0">
-                <div className={cn("w-1.5 h-8 rounded-full", event.type === 'Exam' ? 'bg-red-500' : event.type === 'Deadline' ? 'bg-orange-500' : 'bg-blue-500' )}></div>
+                <div className={cn("w-1.5 h-8 rounded-full", event.type === 'Exam' ? 'bg-destructive' : event.type === 'Deadline' ? 'bg-orange-500' : 'bg-primary' )}></div> {/* Use theme colors */}
                 <div className="flex-1">
                   <p className="text-sm font-medium text-foreground truncate">{event.title}</p>
                   <p className="text-xs text-muted-foreground">{format(new Date(event.date), 'EEE, MMM d')} - {event.type}</p>
