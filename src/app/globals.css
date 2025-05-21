@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    /* Cyberpunk Neon Palette - Electric Cyan Primary (Updated to Magenta Primary) */
+    /* Cyberpunk Neon Palette - Vibrant Magenta Primary */
     --background: 228 16% 6%; /* #0F0F18 Near-Black cool */
     --foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
 
@@ -69,6 +69,7 @@
     
     --radius: 0.5rem;
 
+    /* Cyberpunk Neon Chart Colors */
     --chart-1: hsl(var(--primary));
     --chart-2: hsl(var(--secondary));
     --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
@@ -144,3 +145,5 @@
     animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
+
+    
