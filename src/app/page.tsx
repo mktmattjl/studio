@@ -51,18 +51,18 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <PixelatedContainer>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-foreground">Welcome back, <span className="text-accent">{userName}</span>!</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground">Welcome back, <span className="text-accent">{userName}</span>!</h1> {/* Changed text-primary-foreground to text-foreground */}
         <p className="text-muted-foreground mt-2 text-lg">Ready to supercharge your studies? Let's get to it!</p>
       </PixelatedContainer>
 
       <div className="grid md:grid-cols-2 gap-6">
         <PixelatedContainer className="bg-card">
-          <h2 className="text-2xl font-semibold text-primary-foreground mb-4">Upcoming Deadlines & Events</h2>
+          <h2 className="text-2xl font-semibold text-foreground mb-4">Upcoming Deadlines & Events</h2> {/* Changed text-primary-foreground to text-foreground */}
           {upcomingEvents.length > 0 ? (
             <ul className="space-y-3">
               {upcomingEvents.map((event) => (
                 <li key={event.id} className="p-3 bg-background/50 border-l-4 border-accent">
-                  <p className="font-semibold text-primary-foreground">{event.title} - <span className="text-sm text-muted-foreground">{format(new Date(event.date), 'MM/dd/yyyy')}</span></p>
+                  <p className="font-semibold text-foreground">{event.title} - <span className="text-sm text-muted-foreground">{format(new Date(event.date), 'MM/dd/yyyy')}</span></p> {/* Changed text-primary-foreground to text-foreground */}
                   <p className="text-xs text-muted-foreground">{event.type}</p>
                 </li>
               ))}
@@ -77,7 +77,7 @@ export default function DashboardPage() {
 
         <PixelatedContainer className="bg-card flex flex-col items-center justify-center">
           <div className="flex justify-between items-center w-full mb-2 px-2">
-            <h2 className="text-2xl font-semibold text-primary-foreground">Your Companion: {petName}</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Your Companion: {petName}</h2> {/* Changed text-primary-foreground to text-foreground */}
             <PixelatedButton
               size="sm"
               variant="ghost"
@@ -112,7 +112,7 @@ export default function DashboardPage() {
       </div>
       
       <PixelatedContainer className="bg-card">
-        <h2 className="text-2xl font-semibold text-primary-foreground mb-4">Quick Actions</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-4">Quick Actions</h2> {/* Changed text-primary-foreground to text-foreground */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link href="/flashcards/new" passHref><PixelatedButton variant="outline" className="w-full">Create Flashcards</PixelatedButton></Link>
           <Link href="/ai-generator" passHref><PixelatedButton variant="outline" className="w-full">AI Generate Cards</PixelatedButton></Link>
