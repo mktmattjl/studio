@@ -9,8 +9,19 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "1rem", // Adjusted default container padding
+      screens: {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+        "2xl": "1400px", // Keep 2xl if needed for very wide layouts
+      },
+    },
     fontFamily: {
-      sans: ['var(--font-vt323)', ...defaultTheme.fontFamily.sans],
+      sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans], // Changed to Inter
     },
   	extend: {
   		colors: {
@@ -24,11 +35,11 @@ export default {
   				DEFAULT: 'hsl(var(--popover))',
   				foreground: 'hsl(var(--popover-foreground))'
   			},
-  			primary: {
+  			primary: { // Teal
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
-  			secondary: {
+  			secondary: { // Darker Gray for secondary elements
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
@@ -36,7 +47,7 @@ export default {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
   			},
-  			accent: {
+  			accent: { // Purple
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
@@ -55,21 +66,12 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
-  			sidebar: { // Kept for compatibility if ShadCN Sidebar is used later
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			// Removed sidebar specific colors, will use card/background
   		},
-  		borderRadius: {
+  		borderRadius: { // Ensure these match --radius from globals.css
   			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 0px)', // Ensuring consistency with 0rem radius
-  			sm: 'calc(var(--radius) - 0px)'
+  			md: 'var(--radius)', 
+  			sm: 'calc(var(--radius) - 2px)'
   		},
   		keyframes: {
   			'accordion-down': {

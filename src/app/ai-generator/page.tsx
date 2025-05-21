@@ -1,23 +1,27 @@
-import { PixelatedContainer } from '@/components/PixelatedContainer';
+import { ContentCard } from '@/components/ui/ContentCard';
 import { AiFlashcardGeneratorForm } from '@/components/features/ai-flashcard-generator/AiFlashcardGeneratorForm';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Brain } from 'lucide-react'; // Added Brain icon
 
 export default function AiGeneratorPage() {
   return (
-    <div className="space-y-8">
-      <PixelatedContainer>
-        <div className="flex items-center gap-3">
-          <Sparkles size={36} className="text-accent" />
+    <div className="space-y-6 sm:space-y-8 max-w-3xl mx-auto">
+      <ContentCard>
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-primary/10 rounded-lg">
+            <Brain size={28} className="text-primary" />
+          </div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-primary-foreground">AI Flashcard Generator</h1>
-            <p className="text-muted-foreground mt-1 text-lg">Paste your notes and let Cerebro's AI create flashcards for you!</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-foreground">AI Flashcard Generator</h1>
+            <p className="text-muted-foreground mt-1 text-md">
+              Let Cerebro's AI assist you in creating flashcards from your study notes.
+            </p>
           </div>
         </div>
-      </PixelatedContainer>
+      </ContentCard>
       
-      <PixelatedContainer>
+      <ContentCard>
         <AiFlashcardGeneratorForm />
-      </PixelatedContainer>
+      </ContentCard>
     </div>
   );
 }

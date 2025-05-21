@@ -4,84 +4,74 @@
 
 @layer base {
   :root {
-    /* New Light Theme Fallback Colors */
-    --background: 220 20% 95%; /* Very light cool gray */
-    --foreground: 220 10% 20%; /* Dark cool gray */
+    --background: 220 17% 10%; /* Even darker base background */
+    --foreground: 220 15% 90%; /* Light gray for text */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 220 10% 20%; /* Dark cool gray */
+    --card: 220 17% 15%; /* Dark card background */
+    --card-foreground: 220 15% 90%; /* Light gray text on cards */
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 220 10% 20%; /* Dark cool gray */
+    --popover: 220 17% 12%; /* Darker popover */
+    --popover-foreground: 220 15% 90%; 
 
-    --primary: 220 40% 30%; /* Medium-dark blue (for shadows etc) */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 175 70% 45%; /* Teal - main interactive accent */
+    --primary-foreground: 20 0% 100%; /* White text on primary accent */
+    
+    --secondary: 220 15% 25%; /* Medium dark gray for secondary elements */
+    --secondary-foreground: 220 15% 85%; /* Lighter gray for text on secondary */
 
-    --secondary: 220 15% 90%; /* Light cool gray */
-    --secondary-foreground: 220 10% 30%; /* Slightly lighter dark gray */
+    --muted: 220 15% 20%; /* Dark muted gray */
+    --muted-foreground: 220 15% 60%; /* Medium-light gray for muted text */
 
-    --muted: 220 15% 85%; /* Another light cool gray */
-    --muted-foreground: 220 10% 45%; /* Medium gray */
+    --accent: 260 70% 65%; /* Purple - secondary accent, e.g. for user stats or highlights */
+    --accent-foreground: 20 0% 100%; /* White text on purple accent */
 
-    --accent: 45 90% 60%; /* Pixel Yellow */
-    --accent-foreground: 45 100% 15%; /* Dark Brown/Orange for text on yellow */
-
-    --destructive: 0 70% 60%; /* Clear Red */
+    --destructive: 0 60% 50%; /* Softer Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 220 15% 80%; /* Light gray border */
-    --input: 220 15% 88%; /* Slightly darker light gray for input */
-    --input-foreground: 220 10% 20%; /* Dark cool gray for input text */
-    --ring: 45 90% 60%; /* Pixel Yellow for focus rings */
+    --border: 220 17% 22%; /* Subtle border color, slightly lighter than card */
+    --input: 220 17% 18%; /* Dark input background */
+    --input-foreground: 220 15% 88%; 
+    --ring: 175 70% 55%; /* Teal for focus rings, slightly brighter */
     
-    --radius: 0rem; /* Keeping sharp edges */
+    --radius: 0.5rem; /* Rounded corners */
 
-    /* New Chart Colors for Light Theme */
-    --chart-1: 45 90% 60%; /* Pixel Yellow */
-    --chart-2: 180 70% 50%; /* Pixel Cyan/Teal */
-    --chart-3: 270 70% 65%; /* Pixel Purple */
-    --chart-4: 10 80% 60%;  /* Pixel Orange */
-    --chart-5: 0 80% 60%;   /* Pixel Red */
+    /* Chart Colors for Dark Theme */
+    --chart-1: hsl(var(--primary)); /* Teal */
+    --chart-2: hsl(var(--accent)); /* Purple */
+    --chart-3: 210 70% 60%; /* Blue */
+    --chart-4: 30 80% 60%;  /* Orange */
+    --chart-5: 0 70% 60%;   /* Red */
   }
 
-  .dark { /* This will now be our active Light Theme */
-    --background: 220 20% 95%; /* Very light cool gray */
-    --foreground: 220 10% 20%; /* Dark cool gray */
-
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 220 10% 20%; /* Dark cool gray */
-
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 220 10% 20%; /* Dark cool gray */
-
-    --primary: 220 40% 30%; /* Medium-dark blue (for shadows etc) */
-    --primary-foreground: 0 0% 100%; /* White */
-
-    --secondary: 220 15% 90%; /* Light cool gray */
-    --secondary-foreground: 220 10% 30%; /* Slightly lighter dark gray */
-
-    --muted: 220 15% 85%; /* Another light cool gray */
-    --muted-foreground: 220 10% 45%; /* Medium gray */
-
-    --accent: 45 90% 60%; /* Pixel Yellow */
-    --accent-foreground: 45 100% 15%; /* Dark Brown/Orange for text on yellow */
-
-    --destructive: 0 70% 60%; /* Clear Red */
-    --destructive-foreground: 0 0% 100%; /* White */
-
-    --border: 220 15% 80%; /* Light gray border */
-    --input: 220 15% 88%; /* Slightly darker light gray for input */
-    --input-foreground: 220 10% 20%; /* Dark cool gray for input text */
-    --ring: 45 90% 60%; /* Pixel Yellow for focus rings */
+  .dark { /* This is the active theme */
+    --background: 220 17% 10%; 
+    --foreground: 220 15% 90%; 
+    --card: 220 17% 15%; 
+    --card-foreground: 220 15% 90%; 
+    --popover: 220 17% 12%; 
+    --popover-foreground: 220 15% 90%; 
+    --primary: 175 70% 45%; 
+    --primary-foreground: 20 0% 100%; 
+    --secondary: 220 15% 25%; 
+    --secondary-foreground: 220 15% 85%; 
+    --muted: 220 15% 20%; 
+    --muted-foreground: 220 15% 60%; 
+    --accent: 260 70% 65%; 
+    --accent-foreground: 20 0% 100%; 
+    --destructive: 0 60% 50%; 
+    --destructive-foreground: 0 0% 100%; 
+    --border: 220 17% 22%; 
+    --input: 220 17% 18%; 
+    --input-foreground: 220 15% 88%; 
+    --ring: 175 70% 55%; 
     
-    --radius: 0rem; /* Keeping sharp edges */
+    --radius: 0.5rem;
 
-    /* New Chart Colors for Light Theme */
-    --chart-1: 45 90% 60%; /* Pixel Yellow */
-    --chart-2: 180 70% 50%; /* Pixel Cyan/Teal */
-    --chart-3: 270 70% 65%; /* Pixel Purple */
-    --chart-4: 10 80% 60%;  /* Pixel Orange */
-    --chart-5: 0 80% 60%;   /* Pixel Red */
+    --chart-1: hsl(var(--primary));
+    --chart-2: hsl(var(--accent));
+    --chart-3: 210 70% 60%;
+    --chart-4: 30 80% 60%;
+    --chart-5: 0 70% 60%;
   }
 }
 
@@ -91,6 +81,20 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11"; 
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03"; /* Added some stylistic sets for Inter */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
+
+/* Custom Button Styles to match "sleek, modern dashboard" */
+/* These will be applied via className to ShadCN Button components */
+@layer components {
+  .btn-primary-action { /* For main call-to-action buttons like "Continue Learning" */
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
+  }
+  .btn-secondary-action { /* For other important buttons */
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md transition-all duration-150;
+  }
+  /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables */
 }

@@ -1,8 +1,7 @@
 
 'use client';
 
-import type { ReactNode } from 'react';
-import { PixelatedButton } from '@/components/PixelatedButton';
+import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -28,38 +27,44 @@ export function PlannerControls({
   onViewChange,
 }: PlannerControlsProps) {
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4 sm:mb-6">
       <div className="flex items-center gap-2">
-        <PixelatedButton onClick={onPrev} size="sm" aria-label={`Previous ${viewMode}`}>
+        <Button onClick={onPrev} variant="outline" size="icon" aria-label={`Previous ${viewMode}`} className="rounded-md">
           <ChevronLeft size={18} />
-        </PixelatedButton>
-        <PixelatedButton onClick={onNext} size="sm" aria-label={`Next ${viewMode}`}>
+        </Button>
+        <Button onClick={onNext} variant="outline" size="icon" aria-label={`Next ${viewMode}`} className="rounded-md">
           <ChevronRight size={18} />
-        </PixelatedButton>
-        <PixelatedButton onClick={onToday} variant="outline" size="sm">
+        </Button>
+        <Button onClick={onToday} variant="outline" size="default" className="rounded-md px-4">
           Today
-        </PixelatedButton>
+        </Button>
       </div>
-      <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground order-first sm:order-none text-center flex-grow sm:flex-grow-0">
+      <h2 className="text-xl md:text-2xl font-semibold text-foreground order-first sm:order-none text-center">
         {currentViewLabel}
       </h2>
-      <div className="flex items-center gap-2 sm:min-w-[200px] justify-end">
-        <PixelatedButton 
-            variant={viewMode === 'month' ? 'default' : 'outline'} 
+      <div className="flex items-center gap-2 p-1 bg-muted rounded-lg"> {/* Group buttons in a styled container */}
+        <Button 
+            variant={viewMode === 'month' ? 'default' : 'ghost'} 
             size="sm" 
             onClick={() => onViewChange('month')}
-            className={cn(viewMode === 'month' ? 'bg-accent text-accent-foreground' : '')}
+            className={cn(
+              "px-4 py-1.5 rounded-md",
+              viewMode === 'month' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:bg-background/50 hover:text-foreground'
+            )}
         >
           Month
-        </PixelatedButton>
-        <PixelatedButton 
-            variant={viewMode === 'week' ? 'default' : 'outline'} 
+        </Button>
+        <Button 
+            variant={viewMode === 'week' ? 'default' : 'ghost'} 
             size="sm" 
             onClick={() => onViewChange('week')}
-            className={cn(viewMode === 'week' ? 'bg-accent text-accent-foreground' : '')}
+             className={cn(
+              "px-4 py-1.5 rounded-md",
+              viewMode === 'week' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:bg-background/50 hover:text-foreground'
+            )}
         >
           Week
-        </PixelatedButton>
+        </Button>
       </div>
     </div>
   );

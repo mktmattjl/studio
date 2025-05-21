@@ -20,15 +20,15 @@ import {
 import type { HourSegment } from '@/lib/dateUtils';
 
 interface WeekCalendarGridProps {
-  currentDate: Date; // Any date within the week to display
+  currentDate: Date; 
   events: PlannerEvent[];
-  startHour: number; // e.g., 7 for 7 AM
-  endHour: number;   // e.g., 23 for 11 PM (slots up to 23:59)
+  startHour: number; 
+  endHour: number;   
   onSlotClick?: (dateTime: Date) => void;
   onEventClick?: (event: PlannerEvent) => void;
 }
 
-const HOUR_ROW_HEIGHT_REM = 3.5; // Each hour slot is 3.5rem high (approx 56px with 16px base)
+const HOUR_ROW_HEIGHT_REM = 3; // Kept compact
 
 export function WeekCalendarGrid({ 
   currentDate, 
@@ -46,39 +46,36 @@ export function WeekCalendarGrid({
   };
 
   return (
-    <div className="flex-grow flex flex-col border-t-2 border-l-2 border-accent bg-card text-card-foreground overflow-auto styled-scrollbar-week">
-      {/* Grid container: Time column + 7 Day columns */}
-      <div className="grid grid-cols-[auto_repeat(7,minmax(0,1fr))] min-w-[max-content]"> {/* Time labels + 7 days */}
-        {/* Header Row: Empty Top-Left + Day Names & Dates */}
-        <div className="border-b-2 border-r-2 border-accent p-1 sm:p-2 text-center sticky top-0 bg-card z-20"> {/* Time col header */}
+    <div className="flex-grow flex flex-col border-t border-l border-border rounded-b-lg bg-card text-card-foreground overflow-auto styled-scrollbar-week">
+      <div className="grid grid-cols-[auto_repeat(7,minmax(0,1fr))] min-w-[max-content]">
+        {/* Header Row */}
+        <div className="border-b border-r border-border p-1 sm:p-2 text-center sticky top-0 bg-card z-20 shadow-sm">
           <span className="text-xs text-muted-foreground">Time</span>
         </div>
         {weekDays.map((day, index) => (
           <div
             key={index}
             className={cn(
-              "border-b-2 border-r-2 border-accent p-1 sm:p-2 text-center sticky top-0 bg-card z-20 min-w-[80px] sm:min-w-[100px]",
-              isToday(day) && "bg-accent/30 ring-1 ring-inset ring-accent" // Enhanced today highlight
+              "border-b border-r border-border p-1 sm:p-2 text-center sticky top-0 bg-card z-20 shadow-sm min-w-[80px] sm:min-w-[100px]",
+              isToday(day) && "bg-primary/10" // Today highlight uses primary accent
             )}
           >
             <div className="text-xs sm:text-sm text-muted-foreground">{format(day, 'EEE')}</div>
-            <div className={cn("text-sm sm:text-lg font-semibold", isToday(day) ? "text-accent-foreground" : "text-primary-foreground")}>{format(day, 'd')}</div>
+            <div className={cn("text-sm sm:text-lg font-semibold", isToday(day) ? "text-primary" : "text-foreground")}>{format(day, 'd')}</div>
           </div>
         ))}
 
-        {/* Hour Rows with events */}
+        {/* Hour Rows */}
         {hourSegments.map((segment) => (
           <React.Fragment key={segment.hour}>
-            {/* Time Label Cell for current hour */}
             <div className={cn(
-              "border-b-2 border-r-2 border-accent p-1 pr-2 sm:p-2 text-right text-xs sm:text-sm text-muted-foreground sticky left-0 bg-card z-10",
+              "border-b border-r border-border px-1.5 py-1 text-right text-[0.65rem] sm:text-xs text-muted-foreground sticky left-0 bg-card z-10", // Smaller padding/text
               )}
               style={{ height: `${HOUR_ROW_HEIGHT_REM}rem` }}
             >
               {segment.label}
             </div>
 
-            {/* Day Cells for current hour */}
             {weekDays.map((day, dayIndex) => {
               const slotDateTime = setSeconds(setMinutes(setHours(day, segment.hour), 0),0);
               const dayEvents = getEventsForDay(day);
@@ -91,9 +88,9 @@ export function WeekCalendarGrid({
                 <div
                   key={`${segment.hour}-${dayIndex}`}
                   className={cn(
-                    "border-b-2 border-r-2 border-accent relative cursor-pointer min-w-[80px] sm:min-w-[100px]", 
-                    isToday(day) && segment.hour === getHours(new Date()) && "bg-accent/10",
-                    "hover:bg-accent/10 transition-colors duration-100" // Subtle hover for empty slots
+                    "border-b border-r border-border relative cursor-pointer min-w-[80px] sm:min-w-[100px] group", 
+                    isToday(day) && segment.hour === getHours(new Date()) && "bg-primary/5", // Very subtle current hour highlight
+                    "hover:bg-muted/30 transition-colors duration-100"
                   )}
                   style={{ height: `${HOUR_ROW_HEIGHT_REM}rem` }}
                   onClick={() => onSlotClick?.(slotDateTime)}
@@ -102,7 +99,6 @@ export function WeekCalendarGrid({
                     const eventStartMinutes = getMinutes(event.startTime);
                     const durationMinutes = Math.max(15, differenceInMinutes(event.endTime, event.startTime)); 
                     const topOffsetPercent = (eventStartMinutes / 60) * 100;
-                    // Calculate height ensuring it's at least a quarter of an hour, but not exceeding the remaining space in the day view if event spans overnight (simple version for now)
                     const eventHeightRem = Math.min(
                         (durationMinutes / 60) * HOUR_ROW_HEIGHT_REM,
                         (endHour + 1 - getHours(event.startTime)) * HOUR_ROW_HEIGHT_REM - (getMinutes(event.startTime) / 60) * HOUR_ROW_HEIGHT_REM
@@ -113,10 +109,9 @@ export function WeekCalendarGrid({
                         key={event.id}
                         title={`${event.title} (${format(event.startTime, 'p')} - ${format(event.endTime, 'p')})`}
                         className={cn(
-                          'absolute left-0.5 right-0.5 rounded-none p-1 text-[0.6rem] sm:text-xs leading-tight overflow-hidden',
-                          event.color || 'bg-primary/70 border-primary text-primary-foreground', // Event specific color
-                          'shadow-[1px_1px_0px_hsl(var(--primary))]', // Pixel shadow for event
-                          'cursor-pointer hover:opacity-80 transition-opacity'
+                          'absolute left-0.5 right-0.5 rounded-md p-1.5 text-[0.7rem] sm:text-xs leading-tight overflow-hidden shadow-md',
+                          event.color, // Use pre-assigned color
+                          'cursor-pointer hover:brightness-110 transition-all duration-150 group-hover:shadow-lg'
                         )}
                         style={{
                           top: `${topOffsetPercent}%`, 
@@ -124,12 +119,12 @@ export function WeekCalendarGrid({
                           zIndex: 10, 
                         }}
                         onClick={(e) => {
-                            e.stopPropagation(); // Prevent slot click from firing
+                            e.stopPropagation(); 
                             onEventClick?.(event);
                         }}
                       >
                         <p className="font-semibold truncate">{event.title}</p>
-                        <p className="truncate hidden sm:block">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>
+                        <p className="truncate hidden sm:block text-[0.65rem] opacity-90">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>
                       </div>
                     );
                   })}
@@ -145,14 +140,14 @@ export function WeekCalendarGrid({
           height: 6px;
         }
         .styled-scrollbar-week::-webkit-scrollbar-thumb {
-          background: hsl(var(--accent) / 0.6);
-          border-radius: 0px;
+          background: hsl(var(--muted-foreground) / 0.4);
+          border-radius: var(--radius);
         }
         .styled-scrollbar-week::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--accent));
+          background: hsl(var(--muted-foreground) / 0.6);
         }
         .styled-scrollbar-week::-webkit-scrollbar-track {
-          background: hsl(var(--background) / 0.5);
+          background: transparent;
         }
       `}</style>
     </div>

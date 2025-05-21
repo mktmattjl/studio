@@ -1,17 +1,16 @@
 
 'use client';
 
-import { PixelatedContainer } from '@/components/PixelatedContainer';
-import { PixelatedButton } from '@/components/PixelatedButton';
+import { ContentCard } from '@/components/ui/ContentCard';
+import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
-import { format, addMonths, subMonths, setHours, setMinutes, setSeconds, addWeeks, subWeeks, startOfWeek, endOfWeek } from '@/lib/dateUtils'; // Using date-fns directly now
+import { format, addMonths, subMonths, setHours, setMinutes, setSeconds, addWeeks, subWeeks, startOfWeek, endOfWeek } from '@/lib/dateUtils'; 
 import { PlannerControls, type PlannerViewMode } from '@/components/planner/PlannerControls';
 import { MonthCalendarGrid } from '@/components/planner/MonthCalendarGrid';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
 
-// Define a type for our events for clarity
 export interface PlannerEvent {
   id: string;
   title: string;
@@ -19,62 +18,42 @@ export interface PlannerEvent {
   endTime: Date;
   type: 'class' | 'deadline' | 'study_session' | 'exam' | 'meeting' | 'personal';
   description?: string;
-  color: string; // Tailwind classes for event block color, e.g., 'bg-blue-500/70 border-blue-700 text-white'
+  color: string; // Hex or Tailwind class for event block color
 }
 
-// Color mapping for event types
+// Updated color palette for dark theme
 const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-blue-600/80 border-blue-700 text-white',
-  deadline: 'bg-red-600/80 border-red-700 text-white',
-  study_session: 'bg-green-600/80 border-green-700 text-white',
-  exam: 'bg-yellow-500/90 border-yellow-700 text-black', // Yellow needs dark text
-  meeting: 'bg-purple-600/80 border-purple-700 text-white',
-  personal: 'bg-pink-600/80 border-pink-700 text-white',
+  class: 'bg-blue-500/80 border-blue-400 text-blue-50',
+  deadline: 'bg-red-500/80 border-red-400 text-red-50',
+  study_session: 'bg-green-500/80 border-green-400 text-green-50',
+  exam: 'bg-yellow-500/80 border-yellow-400 text-yellow-950', // Darker text for yellow
+  meeting: 'bg-purple-500/80 border-purple-400 text-purple-50',
+  personal: 'bg-pink-500/80 border-pink-400 text-pink-50',
 };
 
 
-// Sample events - in a real app, these would be fetched or managed globally
 const todayDate = new Date();
 const sampleEventsData: Omit<PlannerEvent, 'id' | 'color'>[] = [
   {
-    title: 'CS Lecture',
+    title: 'CS Lecture: Advanced Algorithms',
     startTime: setSeconds(setMinutes(setHours(todayDate, 9), 0), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 10), 50), 0),
     type: 'class',
-    description: 'Room 301 / Prof. Ada',
+    description: 'Room 301 / Prof. Ada Lovelace',
   },
   {
-    title: 'Study Algo',
+    title: 'Study Session: Data Structures',
     startTime: setSeconds(setMinutes(setHours(todayDate, 14), 0), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 15), 30), 0),
     type: 'study_session',
-    description: 'Library, Group Room B',
+    description: 'Library, Group Room B - Focus on Trees & Graphs',
   },
   {
-    title: 'Physics Lab DUE',
+    title: 'Physics Lab Report DUE',
     startTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     type: 'deadline',
-    description: 'Online Portal',
-  },
-  {
-    title: 'Project Meeting',
-    startTime: setSeconds(setMinutes(setHours(new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() + 1), 11), 0), 0),
-    endTime: setSeconds(setMinutes(setHours(new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() + 1), 12), 30), 0),
-    type: 'meeting',
-    description: 'Discuss project milestones',
-  },
-   {
-    title: 'History Exam Prep Long Session',
-    startTime: setSeconds(setMinutes(setHours(new Date(2024, 7, 15), 10), 0), 0), // Note: JS months are 0-indexed, so 7 is August
-    endTime: setSeconds(setMinutes(setHours(new Date(2024, 7, 15), 13), 0), 0),
-    type: 'study_session',
-  },
-  {
-    title: 'Math Midterm',
-    startTime: setHours(setMinutes(new Date(2024, 7, 16), 0), 14),
-    endTime: setHours(setMinutes(new Date(2024, 7, 16), 0), 16),
-    type: 'exam',
+    description: 'Submit via Online Portal - Experiment #5',
   },
 ];
 
@@ -98,7 +77,7 @@ export default function PlannerPage() {
   const handlePrev = () => {
     if (viewMode === 'month') {
       setCurrentDate(prevDate => subMonths(prevDate, 1));
-    } else { // week view
+    } else { 
       setCurrentDate(prevDate => subWeeks(prevDate, 1));
     }
   };
@@ -106,7 +85,7 @@ export default function PlannerPage() {
   const handleNext = () => {
     if (viewMode === 'month') {
       setCurrentDate(prevDate => addMonths(prevDate, 1));
-    } else { // week view
+    } else { 
       setCurrentDate(prevDate => addWeeks(prevDate, 1));
     }
   };
@@ -122,8 +101,8 @@ export default function PlannerPage() {
   const getCurrentViewLabel = () => {
     if (viewMode === 'month') {
       return format(currentDate, 'MMMM yyyy');
-    } else { // week view
-      const weekStart = startOfWeek(currentDate, { weekStartsOn: 0 }); // Assuming week starts on Sunday for label consistency
+    } else { 
+      const weekStart = startOfWeek(currentDate, { weekStartsOn: 0 }); 
       const weekEnd = endOfWeek(currentDate, { weekStartsOn: 0 });
       if (format(weekStart, 'MMMM') === format(weekEnd, 'MMMM')) {
         return `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'd, yyyy')}`;
@@ -151,13 +130,13 @@ export default function PlannerPage() {
   };
   
   const handleSaveEvent = (eventData: Omit<PlannerEvent, 'id' | 'color'> & { id?: string }) => {
-    if (eventData.id) { // Existing event
+    if (eventData.id) { 
       setEvents(prevEvents => 
         prevEvents.map(e => 
           e.id === eventData.id ? { ...e, ...eventData, color: eventTypeColors[eventData.type] } : e
         )
       );
-    } else { // New event
+    } else { 
       const newEvent: PlannerEvent = {
         ...eventData,
         id: `event-${Date.now()}`,
@@ -179,21 +158,23 @@ export default function PlannerPage() {
 
 
   return (
-    <div className="flex flex-col h-full space-y-6">
-      <PixelatedContainer padding="p-4">
+    // Ensure this div allows its children to take up height, e.g. by setting a min-height or being a flex item
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,8rem)-2rem)] space-y-6"> {/* Approx header height + page padding */}
+      <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-primary-foreground">Study Planner</h1>
-            <p className="text-muted-foreground mt-1 text-lg">Organize your schedule.</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-foreground">Study Planner</h1>
+            <p className="text-muted-foreground mt-1">Organize your classes, deadlines, and study sessions.</p>
           </div>
-          <PixelatedButton onClick={() => openNewEventDialog()}>
-            <PlusCircle size={20} className="mr-2" />
-            Add New Event
-          </PixelatedButton>
+          <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
+            <PlusCircle size={18} className="mr-2" />
+            New Event
+          </Button>
         </div>
-      </PixelatedContainer>
+      </ContentCard>
 
-      <PixelatedContainer className="flex-grow flex flex-col" padding="p-3 md:p-4">
+      {/* The main calendar area needs to be flexible */}
+      <ContentCard className="flex-grow flex flex-col overflow-hidden" padding="p-3 md:p-4">
         <PlannerControls
           currentDate={currentDate}
           onPrev={handlePrev}
@@ -203,28 +184,30 @@ export default function PlannerPage() {
           viewMode={viewMode}
           onViewChange={handleViewChange}
         />
-        {viewMode === 'month' && (
-          <MonthCalendarGrid 
-              currentDate={currentDate} 
-              events={events}
-              onDateClick={(date) => { 
-                setViewMode('week');
-                setCurrentDate(date);
-              }}
-              onEventClick={handleEventClick}
-          />
-        )}
-        {viewMode === 'week' && (
-          <WeekCalendarGrid
-            currentDate={currentDate}
-            events={events}
-            startHour={7} 
-            endHour={23}  
-            onSlotClick={handleSlotClick}
-            onEventClick={handleEventClick}
-          />
-        )}
-      </PixelatedContainer>
+        <div className="flex-grow overflow-auto"> {/* This div will scroll if content overflows */}
+            {viewMode === 'month' && (
+            <MonthCalendarGrid 
+                currentDate={currentDate} 
+                events={events}
+                onDateClick={(date) => { 
+                    setViewMode('week');
+                    setCurrentDate(date);
+                }}
+                onEventClick={handleEventClick}
+            />
+            )}
+            {viewMode === 'week' && (
+            <WeekCalendarGrid
+                currentDate={currentDate}
+                events={events}
+                startHour={7} 
+                endHour={23}  
+                onSlotClick={handleSlotClick}
+                onEventClick={handleEventClick}
+            />
+            )}
+        </div>
+      </ContentCard>
 
       <EventFormDialog
         isOpen={isEventDialogOpen}
@@ -241,3 +224,7 @@ export default function PlannerPage() {
     </div>
   );
 }
+
+// Add a CSS variable for header height if it's fixed, or adjust the h-[] calc
+// For example, in your globals.css or layout:
+// :root { --header-height: 4rem; /* Or your actual header height */ }

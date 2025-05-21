@@ -20,22 +20,20 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
   };
 
   return (
-    <div className="flex-grow flex flex-col border-t-2 border-l-2 border-accent">
-      {/* Day Headers */}
-      <div className="grid grid-cols-7">
+    <div className="flex-grow flex flex-col border-t border-l border-border rounded-b-lg overflow-hidden">
+      <div className="grid grid-cols-7 bg-card"> {/* Header row background */}
         {dayNames.map((dayName) => (
           <div
             key={dayName}
-            className="py-2 px-1 text-center font-semibold text-primary-foreground border-b-2 border-r-2 border-accent bg-card"
+            className="py-2.5 px-1 text-center text-xs font-medium text-muted-foreground border-b border-r border-border"
           >
             <span className="hidden sm:inline">{dayName}</span>
-            <span className="sm:hidden">{dayName.charAt(0)}</span>
+            <span className="sm:hidden">{dayName.substring(0,1)}</span> {/* Monogram for small screens */}
           </div>
         ))}
       </div>
 
-      {/* Days Grid */}
-      <div className="grid grid-cols-7 grid-rows-6 flex-grow">
+      <div className="grid grid-cols-7 grid-rows-6 flex-grow bg-card"> {/* Grid background */}
         {days.map((day, index) => {
           const isCurrentMonth = day ? isSameMonth(day, currentDate) : false;
           const isCurrentDay = day ? isToday(day) : false;
@@ -45,10 +43,10 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
             <div
               key={day ? day.toISOString() : `empty-${index}`}
               className={cn(
-                'min-h-[6rem] sm:min-h-[8rem] md:min-h-[10rem] border-b-2 border-r-2 border-accent p-1 sm:p-2 flex flex-col overflow-hidden', // Added overflow-hidden
-                isCurrentMonth ? 'bg-background/30' : 'bg-muted/20 opacity-80', // Slightly adjusted non-current month
-                isCurrentDay && 'bg-accent/30 ring-2 ring-accent inset-0', // Enhanced today highlight
-                day && onDateClick && 'cursor-pointer hover:bg-accent/20 transition-colors'
+                'min-h-[6rem] sm:min-h-[7rem] md:min-h-[8rem] border-b border-r border-border p-1.5 sm:p-2 flex flex-col overflow-hidden relative group', 
+                isCurrentMonth ? 'bg-card hover:bg-muted/30' : 'bg-muted/20 opacity-70 hover:bg-muted/40', // Slightly darker for non-current month
+                isCurrentDay && 'bg-primary/10 ring-1 ring-inset ring-primary', // Highlight today
+                day && onDateClick && 'cursor-pointer transition-colors duration-150'
               )}
               onClick={() => day && onDateClick?.(day)}
             >
@@ -56,33 +54,32 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
                 <>
                   <span
                     className={cn(
-                      'text-xs sm:text-sm font-semibold self-start mb-1',
-                      isCurrentDay ? 'text-accent-foreground bg-accent px-1.5 py-0.5 rounded-sm' : 'text-primary-foreground' // rounded-sm for pixel
+                      'text-xs sm:text-sm font-medium self-start mb-1',
+                      isCurrentDay ? 'text-primary-foreground bg-primary px-1.5 py-0.5 rounded-md shadow-sm' : isCurrentMonth ? 'text-foreground' : 'text-muted-foreground/70'
                     )}
                   >
                     {format(day, 'd')}
                   </span>
-                  <div className="space-y-0.5 overflow-y-auto text-xs max-h-[calc(100%-1.75rem)] styled-scrollbar flex-grow"> {/* Adjusted max-height, added flex-grow */}
-                    {dayEvents.slice(0, 3).map(event => ( 
+                  <div className="space-y-1 overflow-y-auto text-xs max-h-[calc(100%-1.75rem)] styled-scrollbar flex-grow pr-1">
+                    {dayEvents.slice(0, 2).map(event => (
                       <div
                         key={event.id}
                         title={`${event.title} (${format(event.startTime, 'p')})`}
                         className={cn(
-                            'p-1 rounded-none border-l-2 text-[0.6rem] sm:text-xs leading-tight truncate cursor-pointer hover:opacity-80',
-                            event.color || 'bg-primary/70 border-primary text-primary-foreground', // Event specific color
-                            'shadow-[1px_1px_0px_hsl(var(--primary))]' // Pixel shadow for event
+                            'px-1.5 py-0.5 rounded-sm border-l-2 text-[0.6rem] sm:text-[0.7rem] leading-snug truncate cursor-pointer group-hover:opacity-80 shadow-sm',
+                            event.color // Use the pre-assigned color from PlannerEvent
                            )}
                         onClick={(e) => {
-                            e.stopPropagation(); // Prevent date click
+                            e.stopPropagation(); 
                             onEventClick?.(event);
                         }}
                       >
                         {event.title}
                       </div>
                     ))}
-                    {dayEvents.length > 3 && (
+                    {dayEvents.length > 2 && (
                         <div className="text-muted-foreground text-[0.6rem] sm:text-xs mt-0.5 px-1">
-                            + {dayEvents.length - 3} more
+                            + {dayEvents.length - 2} more
                         </div>
                     )}
                   </div>
@@ -92,21 +89,20 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
           );
         })}
       </div>
-      {/* Custom scrollbar style for webkit browsers */}
       <style jsx>{`
         .styled-scrollbar::-webkit-scrollbar {
-          width: 4px;
-          height: 4px;
+          width: 5px; /* Slightly thicker scrollbar */
+          height: 5px;
         }
         .styled-scrollbar::-webkit-scrollbar-thumb {
-          background: hsl(var(--accent) / 0.5);
-          border-radius: 0px; /* Sharp edges for pixel style */
+          background: hsl(var(--muted-foreground) / 0.4); /* More subtle thumb */
+          border-radius: var(--radius);
         }
         .styled-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--accent));
+          background: hsl(var(--muted-foreground) / 0.6);
         }
         .styled-scrollbar::-webkit-scrollbar-track {
-          background: transparent; /* Or hsl(var(--background) / 0.5) for a subtle track */
+          background: transparent; /* Or hsl(var(--card)) if want track visible */
         }
       `}</style>
     </div>

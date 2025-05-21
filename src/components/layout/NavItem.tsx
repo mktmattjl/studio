@@ -19,14 +19,14 @@ export function NavItem({ href, children, icon }: NavItemProps) {
     <Link
       href={href}
       className={cn(
-        'flex items-center gap-2 px-3 py-2 text-sm sm:text-base font-medium transition-all duration-150 ease-in-out',
-        'border-2 border-transparent hover:border-accent hover:text-accent-foreground hover:bg-accent',
-        'focus:outline-none focus:ring-2 focus:ring-ring focus:border-accent',
-        isActive ? 'bg-accent text-accent-foreground border-accent shadow-[2px_2px_0px_hsl(var(--primary))]' : 'text-foreground hover:shadow-[2px_2px_0px_hsl(var(--primary))]', // Changed text-primary-foreground to text-foreground
-        'rounded-none' // Ensure sharp corners for pixel look
+        'flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out rounded-md',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring', // Added focus visibility
+        isActive 
+          ? 'bg-primary/10 text-primary font-semibold' 
+          : 'text-muted-foreground hover:bg-muted hover:text-foreground',
       )}
     >
-      {icon}
+      {icon && <span className={cn(isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")}>{icon}</span>}
       <span>{children}</span>
     </Link>
   );
