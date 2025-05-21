@@ -51,15 +51,15 @@ export function RightSidebar({
   return (
     <aside className="w-full lg:w-[320px] xl:w-[360px] space-y-6 shrink-0">
       {/* User Profile Card */}
-      <ContentCard className="!p-0">
-        <div className="p-4 bg-gradient-to-br from-primary/20 to-accent/20 rounded-t-lg">
+      <ContentCard className="!p-0 overflow-hidden"> {/* Added overflow-hidden */}
+        <div className="p-4 bg-card rounded-t-lg"> {/* Use card bg, remove gradient */}
             <div className="flex items-center gap-3 ">
-              <div className="w-16 h-16 bg-gradient-to-tr from-primary to-accent rounded-full flex items-center justify-center text-background text-2xl font-bold ring-4 ring-background/50 border-2 border-primary/30"> {/* Added border and bold to initial */}
+              <div className="w-16 h-16 bg-muted border-2 border-border rounded-full flex items-center justify-center text-foreground text-2xl font-bold">
                 {userName.charAt(0).toUpperCase()}
               </div>
               <div>
                 <h3 className="font-semibold text-lg text-foreground">{userName}</h3>
-                <p className="text-sm text-muted-foreground">Level {userLevel}</p> {/* Increased from xs to sm */}
+                <p className="text-sm text-muted-foreground">Level {userLevel}</p>
               </div>
             </div>
             <div className="mt-3">
@@ -67,13 +67,13 @@ export function RightSidebar({
                 <span>XP</span>
                 <span>{userXP}% to Level {userLevel+1}</span>
               </div>
-              <Progress value={userXP} className="h-2 bg-background/30 [&>div]:bg-gradient-to-r [&>div]:from-primary [&>div]:to-accent" />
+              <Progress value={userXP} className="h-2 bg-muted/50 [&>div]:bg-primary" /> {/* Primary for progress bar */}
             </div>
         </div>
-        <div className="p-4 space-y-3">
+        <div className="p-4 space-y-3 border-t border-border"> {/* Added border */}
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-orange-500" />
+                    <PixelFlameIcon className="mx-auto mb-1 h-6 w-6 text-[#38B2AC]" /> {/* Vivid Teal for Streak */}
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
@@ -83,16 +83,16 @@ export function RightSidebar({
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-yellow-500" />
+                    <PixelCoinIcon className="mx-auto mb-1 h-6 w-6 text-[#ECC94B]" /> {/* Golden Yellow for Coins */}
                     <p className="text-sm font-medium text-foreground">125</p> 
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
             </div>
             <div className="flex gap-2 pt-2 border-t border-border">
-                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:bg-muted hover:text-foreground">
                     <PixelUserIcon className="mr-1.5 h-4 w-4" /> Profile
                 </Button>
-                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" size="sm" className="flex-1 text-muted-foreground hover:bg-muted hover:text-foreground">
                     <PixelGearIcon className="mr-1.5 h-4 w-4" /> Settings
                 </Button>
             </div>
@@ -103,11 +103,11 @@ export function RightSidebar({
       {/* Companion Module */}
       <ContentCard>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2"> {/* Increased font size */}
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <PixelPetIcon className="h-5 w-5 text-primary" />
             Companion
           </h3>
-          <Link href="/companion" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View All</Link> {/* Increased weight and size */}
+          <Link href="/companion" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View All</Link>
         </div>
         <div className="flex items-center gap-3">
           <div className={cn(
@@ -134,19 +134,19 @@ export function RightSidebar({
       {/* Upcoming Events List */}
       <ContentCard>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2"> {/* Increased font size */}
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
              <PixelCalendarIcon className="h-5 w-5 text-primary" />
              Upcoming
           </h3>
-          <Link href="/planner" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View Planner</Link> {/* Increased weight and size */}
+          <Link href="/planner" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View Planner</Link>
         </div>
         {upcomingEvents.length > 0 ? (
           <ul className="space-y-2.5">
             {upcomingEvents.slice(0, 3).map((event) => (
-              <li key={event.id} className="flex items-center gap-3 p-2.5 bg-muted/50 hover:bg-muted rounded-md transition-colors cursor-pointer border-b border-border last:border-b-0"> {/* Added border */}
+              <li key={event.id} className="flex items-center gap-3 p-2.5 bg-muted/30 hover:bg-muted rounded-md transition-colors cursor-pointer border-b border-border last:border-b-0">
                 <div className={cn("w-1.5 h-8 rounded-full", event.type === 'Exam' ? 'bg-red-500' : event.type === 'Deadline' ? 'bg-orange-500' : 'bg-blue-500' )}></div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-foreground truncate">{event.title}</p> {/* Ensured font-medium */}
+                  <p className="text-sm font-medium text-foreground truncate">{event.title}</p>
                   <p className="text-xs text-muted-foreground">{format(new Date(event.date), 'EEE, MMM d')} - {event.type}</p>
                 </div>
                 <PixelChevronRightIcon className="h-4 w-4 text-muted-foreground" />
