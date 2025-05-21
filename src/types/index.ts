@@ -1,3 +1,4 @@
+
 export interface FlashcardCore {
   question: string;
   answer: string;
