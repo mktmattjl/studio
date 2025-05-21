@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    /* Cyberpunk Neon Palette - Electric Cyan Primary */
+    /* Cyberpunk Neon Palette - Electric Cyan Primary (Updated to Magenta Primary) */
     --background: 228 16% 6%; /* #0F0F18 Near-Black cool */
     --foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
 
@@ -15,31 +15,31 @@
     --popover: 227 25% 11%; /* #1A1D2B */
     --popover-foreground: 213 100% 94%; /* #E0EFFF */
 
-    --primary: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --primary-foreground: 228 16% 6%; /* #0F0F18 Near-Black for contrast on Cyan */
+    --primary: 326 100% 48%; /* #F50087 Vibrant Magenta (Main CTA, Active Nav) */
+    --primary-foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue for contrast on Magenta */
     
-    --secondary: 326 100% 48%; /* #F50087 Vibrant Magenta */
-    --secondary-foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue for contrast on Magenta */
+    --secondary: 187 100% 50%; /* #00E5FF Electric Cyan (Secondary Buttons, Stat Highlights) */
+    --secondary-foreground: 228 16% 6%; /* #0F0F18 Near-Black for contrast on Cyan */
 
     --muted: 229 15% 18%; /* Darker muted for less emphasis */
     --muted-foreground: 223 23% 50%; /* #707890 Cool Medium Gray */
 
-    --accent: 326 100% 48%; /* #F50087 Vibrant Magenta (for hovers, secondary interactions) */
-    --accent-foreground: 213 100% 94%; /* Icy Light Blue for contrast on Magenta */
+    --accent: 187 100% 50%; /* #00E5FF Electric Cyan (used for hovers on some components) */
+    --accent-foreground: 228 16% 6%; /* Near-Black for contrast on Cyan accent */
 
-    --destructive: 0 85% 50%; /* #F23D3D Strong Red (toned down from pure #FF0000) */
+    --destructive: 0 70% 45%; /* #D43A3A Darker, less saturated Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
     --border: 229 15% 22%; /* Subtle border, slightly lighter than card */
     --input: 229 25% 10%; /* Slightly darker than card for input fields */
     --input-foreground: 213 100% 94%; /* #E0EFFF */
-    --ring: 187 100% 50%; /* #00E5FF Electric Cyan for focus rings */
+    --ring: 326 100% 48%; /* #F50087 Vibrant Magenta for focus rings */
     
     --radius: 0.5rem; /* Rounded corners */
 
     /* Cyberpunk Neon Chart Colors */
-    --chart-1: hsl(var(--primary)); /* Electric Cyan */
-    --chart-2: hsl(var(--secondary)); /* Vibrant Magenta */
+    --chart-1: hsl(var(--primary)); /* Vibrant Magenta */
+    --chart-2: hsl(var(--secondary)); /* Electric Cyan */
     --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
     --chart-4: 39 100% 50%;  /* #FFA500 Neon Orange */
     --chart-5: 60 100% 50%; /* #FFFF00 Bright Yellow */
@@ -52,20 +52,20 @@
     --card-foreground: 213 100% 94%; /* #E0EFFF */
     --popover: 227 25% 11%; 
     --popover-foreground: 213 100% 94%; /* #E0EFFF */
-    --primary: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --primary-foreground: 228 16% 6%; /* #0F0F18 */
-    --secondary: 326 100% 48%; /* #F50087 Vibrant Magenta */
-    --secondary-foreground: 213 100% 94%; 
+    --primary: 326 100% 48%; /* #F50087 Vibrant Magenta */
+    --primary-foreground: 213 100% 94%; /* #E0EFFF */
+    --secondary: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --secondary-foreground: 228 16% 6%; 
     --muted: 229 15% 18%; 
     --muted-foreground: 223 23% 50%; /* #707890 */
-    --accent: 326 100% 48%; /* #F50087 Vibrant Magenta */
-    --accent-foreground: 213 100% 94%; 
-    --destructive: 0 85% 50%; /* #F23D3D Strong Red (toned down) */
+    --accent: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --accent-foreground: 228 16% 6%; 
+    --destructive: 0 70% 45%; /* #D43A3A Darker, less saturated Red */
     --destructive-foreground: 0 0% 100%; 
     --border: 229 15% 22%; 
     --input: 229 25% 10%; 
     --input-foreground: 213 100% 94%; /* #E0EFFF */
-    --ring: 187 100% 50%; /* #00E5FF Electric Cyan */
+    --ring: 326 100% 48%; /* #F50087 Vibrant Magenta */
     
     --radius: 0.5rem;
 
@@ -91,10 +91,10 @@
 
 /* Custom Button Styles for Cyberpunk Neon */
 @layer components {
-  .btn-primary-action { /* For main call-to-action buttons, uses --primary (Electric Cyan) */
+  .btn-primary-action { /* For main call-to-action buttons, uses --primary (Vibrant Magenta) */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
   }
-  .btn-secondary-action { /* For other important buttons, uses --secondary (Vibrant Magenta) */
+  .btn-secondary-action { /* For other important buttons, uses --secondary (Electric Cyan) */
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md transition-all duration-150;
   }
   /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
