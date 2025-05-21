@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { ContentCard } from '@/components/ui/ContentCard';
 import type { ElementType } from 'react'; 
-import { ArrowRight } from 'lucide-react'; // Will be replaced if pixel version needed
+import { PixelChevronRightIcon } from '@/components/icons/PixelChevronRightIcon'; // Changed from ArrowRight
 import { cn } from '@/lib/utils';
 
 interface QuickActionCardProps {
@@ -27,20 +27,20 @@ export function QuickActionCard({
   return (
     <Link href={href} passHref className="flex">
       <ContentCard 
-        className="h-full w-full flex flex-col group transition-all duration-150 ease-in-out hover:shadow-xl hover:-translate-y-1" 
+        className="h-full w-full flex flex-col group transition-all duration-150 ease-in-out hover:shadow-xl hover:-translate-y-0.5" // Reduced hover translate
         interactive
-        padding="p-5"
+        padding="p-3" // Reduced padding from p-5
       >
-        <div className="flex items-center gap-3 mb-3">
-          <div className={cn("p-2.5 rounded-lg", iconBgClass)}>
-             <Icon className={cn('w-6 h-6 transition-transform group-hover:scale-110', iconTextClass)} />
+        <div className="flex items-center gap-2.5 mb-2"> {/* Reduced gap and mb */}
+          <div className={cn("p-2 rounded-md", iconBgClass)}> {/* Reduced padding, consistent rounded-md */}
+             <Icon className={cn('w-5 h-5 transition-transform group-hover:scale-110', iconTextClass)} /> {/* Reduced icon size */}
           </div>
-           <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">{title}</h3> {/* text-md to text-base */}
+           <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{title}</h3> {/* Reduced font size from text-base */}
         </div>
-        <p className="text-sm text-muted-foreground flex-grow mb-3 leading-relaxed">{description}</p>
+        <p className="text-xs text-muted-foreground flex-grow mb-2 leading-snug">{description}</p> {/* Reduced font size and leading */}
         <div className="mt-auto">
-          <span className="text-sm text-primary font-medium flex items-center"> {/* text-xs to text-sm */}
-            Go to {title.split(' ')[0]} <ArrowRight size={14} className="ml-1 transition-transform group-hover:translate-x-1" />
+          <span className="text-xs text-primary font-medium flex items-center"> {/* Reduced font size */}
+            Go to {title.split(' ')[0]} <PixelChevronRightIcon className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-0.5" /> {/* Changed icon and size */}
           </span>
         </div>
       </ContentCard>
