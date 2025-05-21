@@ -46,7 +46,7 @@ export function WeekCalendarGrid({
   };
 
   return (
-    <div className="flex-grow flex flex-col border-t border-l border-border rounded-b-lg bg-card text-card-foreground overflow-auto styled-scrollbar-week">
+    <div className="flex-grow flex flex-col border-t border-l border-border rounded-b-lg bg-card text-card-foreground overflow-auto styled-scrollbar">
       <div className="grid grid-cols-[auto_repeat(7,minmax(0,1fr))] min-w-[max-content]">
         {/* Header Row */}
         <div className="border-b border-r border-border p-1 sm:p-2 text-center sticky top-0 bg-card z-20 shadow-sm">
@@ -134,22 +134,6 @@ export function WeekCalendarGrid({
           </React.Fragment>
         ))}
       </div>
-      <style jsx>{`
-        .styled-scrollbar-week::-webkit-scrollbar {
-          width: 6px;
-          height: 6px;
-        }
-        .styled-scrollbar-week::-webkit-scrollbar-thumb {
-          background: hsl(var(--muted-foreground) / 0.4);
-          border-radius: var(--radius);
-        }
-        .styled-scrollbar-week::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--muted-foreground) / 0.6);
-        }
-        .styled-scrollbar-week::-webkit-scrollbar-track {
-          background: transparent;
-        }
-      `}</style>
     </div>
   );
 }

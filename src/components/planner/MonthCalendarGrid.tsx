@@ -89,22 +89,6 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
           );
         })}
       </div>
-      <style jsx>{`
-        .styled-scrollbar::-webkit-scrollbar {
-          width: 5px; /* Slightly thicker scrollbar */
-          height: 5px;
-        }
-        .styled-scrollbar::-webkit-scrollbar-thumb {
-          background: hsl(var(--muted-foreground) / 0.4); /* More subtle thumb */
-          border-radius: var(--radius);
-        }
-        .styled-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--muted-foreground) / 0.6);
-        }
-        .styled-scrollbar::-webkit-scrollbar-track {
-          background: transparent; /* Or hsl(var(--card)) if want track visible */
-        }
-      `}</style>
     </div>
   );
 }

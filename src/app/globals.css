@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,4 +98,22 @@
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md transition-all duration-150;
   }
   /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables */
+}
+
+@layer utilities {
+  .styled-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .styled-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+    border-radius: var(--radius);
+  }
+  .styled-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.6);
+  }
+  .styled-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--card) / 0.5); /* Slightly visible track on card background */
+    border-radius: var(--radius);
+  }
 }

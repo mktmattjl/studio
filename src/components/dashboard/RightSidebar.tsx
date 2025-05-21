@@ -132,7 +132,7 @@ export function RightSidebar({
       {/* Quick Actions Module */}
       <ContentCard>
         <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 gap-3"> {/* Changed to 1 column for sidebar */}
+        <div className="grid grid-cols-1 gap-3 max-h-32 overflow-y-auto styled-scrollbar pr-1">
           {quickActions.map(action => (
             <QuickActionCard 
               key={action.title}
