@@ -21,6 +21,9 @@ import {
   setMinutes,
   setSeconds,
   setMilliseconds,
+  parseISO as dateFnsParseISO,
+  differenceInDays as dateFnsDifferenceInDays,
+  addDays as dateFnsAddDays,
 } from 'date-fns';
 
 export const getDaysInMonthGrid = (date: Date): (Date | null)[] => {
@@ -60,6 +63,12 @@ export const getHourSegments = (startHour: number, endHour: number): HourSegment
   return segments;
 };
 
+export const isTomorrow = (date: Date): boolean => {
+  const today = new Date();
+  const tomorrowDate = dateFnsAddDays(today, 1);
+  return isSameDay(date, tomorrowDate);
+};
+
 // Export format function with a new name to avoid conflicts if format is used as a variable
 export {
   addMonths,
@@ -82,5 +91,7 @@ export {
   setSeconds,
   setMilliseconds,
   eachDayOfInterval,
+  dateFnsParseISO as parseISO,
+  dateFnsDifferenceInDays as differenceInDays,
+  dateFnsAddDays as addDays,
 };
-
