@@ -4,11 +4,19 @@
 import { PixelatedContainer } from '@/components/PixelatedContainer';
 import { PixelatedButton } from '@/components/PixelatedButton';
 import Image from 'next/image';
-import { Heart, Drumstick, Coins, ShoppingBag, RefreshCw } from 'lucide-react';
+import { Heart, Drumstick, ShoppingBag, RefreshCw } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 
 const DEFAULT_PET_IMAGE = "https://placehold.co/250x250.png?bg=333333&fc=FFFFFF";
+
+// Pixel Art Gem Icon
+const PixelGemIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-6 h-6">
+    <path d="M8 1L7 2H9L8 1ZM6 2L5 3H7L6 2ZM10 2L9 3H11L10 2ZM5 3L4 4H6L5 3ZM11 3L10 4H12L11 3ZM4 4L3 5H5L4 4ZM12 4L11 5H13L12 4ZM3 5L2 6H4L3 5ZM13 5L12 6H14L13 5ZM2 6L3 7H1V6H2ZM14 6L13 7H15V6H14ZM3 7L4 8H2V7H3ZM13 7L12 8H14V7H13ZM4 8L5 9H3V8H4ZM12 8L11 9H13V8H12ZM5 9L6 10H4V9H5ZM11 9L10 10H12V9H11ZM6 10L7 11H5V10H6ZM10 10L9 11H11V10H10ZM7 11L8 12H6V11H7ZM9 11L8 12H10V11H9ZM8 12L7 13H9L8 12ZM7 13L6 14H8L7 13ZM9 13L8 14H10L9 13ZM6 14L8 15H4L6 14ZM10 14L8 15H12L10 14Z"/>
+  </svg>
+);
+
 
 export default function CompanionPage() {
   const petName = "PixelPup";
@@ -26,7 +34,6 @@ export default function CompanionPage() {
       if (result?.imageDataUri) {
         setPetImageUrl(result.imageDataUri);
       } else {
-        // Keep placeholder if generation fails or returns null
         setPetImageUrl(DEFAULT_PET_IMAGE);
         console.warn("Failed to generate pet image, using placeholder.");
       }
@@ -44,7 +51,6 @@ export default function CompanionPage() {
 
   const handleFeed = () => {
     if (coins >= 10) {
-      // setCoins(prev => prev - 10); // This would be managed by a global state or backend
       setHunger(prev => Math.max(0, prev - 20));
       setHappiness(prev => Math.min(100, prev + 5));
       alert(`Feeding ${petName}! Costs 10 Coins.`);
@@ -91,7 +97,7 @@ export default function CompanionPage() {
               height={250}
               className={cn("object-contain", isGeneratingImage && petImageUrl !== DEFAULT_PET_IMAGE ? "opacity-50" : "")}
               data-ai-hint="pixel creature"
-              unoptimized={petImageUrl.startsWith('data:')} // Important for data URIs
+              unoptimized={petImageUrl.startsWith('data:')} 
               priority
             />
           </div>
@@ -110,8 +116,8 @@ export default function CompanionPage() {
         <div className="space-y-6">
           <PixelatedContainer className="bg-card p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Coins size={24} className="text-accent" />
-              <h3 className="text-xl font-semibold text-primary-foreground">Your Coins: <span className="text-accent">{coins}</span></h3>
+              <PixelGemIcon />
+              <h3 className="text-xl font-semibold text-primary-foreground">Your Coins: <span className="text-accent font-bold">{coins}</span></h3>
             </div>
             <p className="text-sm text-muted-foreground">Earn coins by completing study tasks and reviewing flashcards.</p>
           </PixelatedContainer>
@@ -141,7 +147,6 @@ export default function CompanionPage() {
   );
 }
 
-// Helper for conditional class names
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }

@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* These are fallback light mode colors, not actively used with current 'dark' class on html */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -15,21 +16,22 @@
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%; /* Consider if this needs adjustment too */
-    --accent: 210 15% 30%; /* Muted and darker blue accent */
-    --accent-foreground: 240 5.9% 10%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 101 100% 52%; /* Neon Green (was muted blue) */
+    --accent-foreground: 0 0% 0%; /* Black for text on neon green */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0rem; /* Updated for pixelated style */
+    --border: 0 0% 25%; /* Was 240 5.9% 90% */
+    --input: 0 0% 15%; /* Was 240 5.9% 90% */
+    --input-foreground: 0 0% 95%;
+    --ring: 101 100% 52%; /* Neon Green for focus rings */
+    --radius: 0rem;
 
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 101 70% 60%; 
+    --chart-2: 180 70% 50%; 
+    --chart-3: 270 70% 65%; 
+    --chart-4: 45 90% 60%;  
+    --chart-5: 0 80% 60%;   
   }
 
   .dark {
@@ -43,33 +45,32 @@
     --popover-foreground: 0 0% 95%;
 
     --primary: 0 0% 0%; /* Black #000000 */
-    --primary-foreground: 0 0% 90%; /* Light Gray - Was Neon Green */
+    --primary-foreground: 0 0% 90%; /* Light Gray */
 
     --secondary: 0 0% 25%; /* A bit lighter than background */
-    --secondary-foreground: 0 0% 90%; /* Light Gray - Was Neon Green */
+    --secondary-foreground: 0 0% 90%; /* Light Gray */
 
     --muted: 0 0% 30%; /* Muted background tones */
     --muted-foreground: 0 0% 65%; /* Muted text */
 
-    --accent: 210 20% 40%; /* Muted and darker blue accent in dark mode */
+    --accent: 101 100% 52%; /* Neon Green #39FF14 */
     --accent-foreground: 0 0% 0%; /* Black - text on accent */
 
     --destructive: 0 70% 55%; /* Brighter retro red */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 25%; /* Subtle border, components can override */
+    --border: 0 0% 35%; /* Darker border, distinct from primary for shadows. Was 0 0% 25% */
     --input: 0 0% 15%; /* Darker input background */
     --input-foreground: 0 0% 95%;
-    --ring: 210 20% 40%; /* Muted and darker blue for focus rings in dark mode */
+    --ring: 101 100% 52%; /* Neon Green for focus rings */
     
-    --radius: 0rem; /* Updated for pixelated style */
+    --radius: 0rem;
 
-    /* Pixel-art friendly chart colors */
-    --chart-1: 210 80% 60%; /* Retro Blue */
-    --chart-2: 30 90% 60%;  /* Pixel Orange */
+    --chart-1: 101 70% 60%; /* Lighter Neon Green */
+    --chart-2: 180 70% 50%; /* Pixel Cyan/Teal */
     --chart-3: 270 70% 65%; /* Pixel Purple */
-    --chart-4: 50 90% 60%;  /* Pixel Yellow */
-    --chart-5: 170 70% 50%; /* Pixel Teal */
+    --chart-4: 45 90% 60%;  /* Pixel Yellow */
+    --chart-5: 0 80% 60%;   /* Pixel Red */
   }
 }
 
@@ -79,6 +80,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11"; /* For Geist, but will be overridden by VT323 */
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11"; 
   }
 }
