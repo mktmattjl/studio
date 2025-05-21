@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { NavItem } from './NavItem';
-import { NotebookText, CalendarDays, LayoutDashboard, Sparkles, Cat } from 'lucide-react';
-import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon'; // Updated import
+import { NotebookText, CalendarDays, LayoutDashboard, Sparkles } from 'lucide-react'; // Cat removed
+import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
+import { PixelPupIcon } from '@/components/icons/PixelPupIcon'; // New import
 
 export function Header() {
   // Placeholder values
@@ -20,16 +21,16 @@ export function Header() {
           <NavItem href="/flashcards" icon={<NotebookText size={18} />}>Flashcards</NavItem>
           <NavItem href="/planner" icon={<CalendarDays size={18} />}>Planner</NavItem>
           <NavItem href="/ai-generator" icon={<Sparkles size={18} />}>AI Gen</NavItem>
-          <NavItem href="/companion" icon={<Cat size={18} />}>Pet</NavItem>
+          <NavItem href="/companion" icon={<PixelPupIcon className="w-[18px] h-[18px]" />}>Pet</NavItem> {/* Updated Icon */}
         </nav>
 
         <div className="mt-2 sm:mt-0 flex items-center gap-3 text-sm sm:text-base text-primary-foreground">
           <div className="flex items-center gap-1">
-            <PixelCoinIcon className="w-5 h-5 text-yellow-400" /> {/* Using the new icon */}
+            <PixelCoinIcon className="w-5 h-5" />
             <span className="text-accent font-semibold">{coins}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Cat size={20} className="text-accent" />
+            <PixelPupIcon className="w-5 h-5" /> {/* Updated Icon */}
             <span>{petName}</span>
           </div>
         </div>

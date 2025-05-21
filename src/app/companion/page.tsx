@@ -4,10 +4,13 @@
 import { PixelatedContainer } from '@/components/PixelatedContainer';
 import { PixelatedButton } from '@/components/PixelatedButton';
 import Image from 'next/image';
-import { Heart, Drumstick, ShoppingBag, RefreshCw } from 'lucide-react';
+import { ShoppingBag, RefreshCw } from 'lucide-react'; // Heart and Drumstick removed
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
-import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon'; // Updated import
+import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
+import { PixelHeartIcon } from '@/components/icons/PixelHeartIcon'; // New import
+import { PixelDrumstickIcon } from '@/components/icons/PixelDrumstickIcon'; // New import
+import { cn } from '@/lib/utils';
 
 const DEFAULT_PET_IMAGE = "https://placehold.co/250x250.png?bg=333333&fc=FFFFFF";
 
@@ -96,11 +99,11 @@ export default function CompanionPage() {
           </div>
           <div className="w-full space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-primary-foreground flex items-center"><Heart size={18} className="mr-2 text-destructive" /> Happiness:</span>
+              <span className="text-primary-foreground flex items-center"><PixelHeartIcon className="w-[18px] h-[18px] mr-2" /> Happiness:</span>
               <div className="w-1/2 bg-muted h-4 border-2 border-primary"><div className="bg-destructive h-full" style={{ width: `${happiness}%`}}></div></div>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-primary-foreground flex items-center"><Drumstick size={18} className="mr-2 text-accent" /> Hunger:</span>
+              <span className="text-primary-foreground flex items-center"><PixelDrumstickIcon className="w-[18px] h-[18px] mr-2" /> Hunger:</span>
               <div className="w-1/2 bg-muted h-4 border-2 border-primary"><div className="bg-accent h-full" style={{ width: `${hunger}%`}}></div></div>
             </div>
           </div>
@@ -109,7 +112,7 @@ export default function CompanionPage() {
         <div className="space-y-6">
           <PixelatedContainer className="bg-card p-4">
             <div className="flex items-center gap-2 mb-2">
-              <PixelCoinIcon className="w-6 h-6 text-yellow-400" /> {/* Using the new icon */}
+              <PixelCoinIcon className="w-6 h-6" /> 
               <h3 className="text-xl font-semibold text-primary-foreground">Your Coins: <span className="text-accent font-bold">{coins}</span></h3>
             </div>
             <p className="text-sm text-muted-foreground">Earn coins by completing study tasks and reviewing flashcards.</p>
@@ -119,10 +122,10 @@ export default function CompanionPage() {
             <h3 className="text-xl font-semibold text-primary-foreground mb-3">Actions</h3>
             <div className="space-y-3">
               <PixelatedButton className="w-full" onClick={handleFeed} disabled={isGeneratingImage}>
-                <Drumstick size={18} className="mr-2"/> Feed {petName} (10 Coins)
+                <PixelDrumstickIcon className="w-[18px] h-[18px] mr-2"/> Feed {petName} (10 Coins)
               </PixelatedButton>
               <PixelatedButton className="w-full" onClick={handlePlay} disabled={isGeneratingImage}>
-                <Heart size={18} className="mr-2"/> Play with {petName}
+                <PixelHeartIcon className="w-[18px] h-[18px] mr-2"/> Play with {petName}
               </PixelatedButton>
             </div>
           </PixelatedContainer>
@@ -138,8 +141,4 @@ export default function CompanionPage() {
       </div>
     </div>
   );
-}
-
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
 }
