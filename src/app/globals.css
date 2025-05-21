@@ -43,15 +43,15 @@
     --popover-foreground: 0 0% 95%;
 
     --primary: 0 0% 0%; /* Black #000000 */
-    --primary-foreground: 110 100% 53%; /* Neon Green #39FF14 */
+    --primary-foreground: 0 0% 90%; /* Light Gray - Was Neon Green */
 
     --secondary: 0 0% 25%; /* A bit lighter than background */
-    --secondary-foreground: 110 100% 53%; /* Neon Green */
+    --secondary-foreground: 0 0% 90%; /* Light Gray - Was Neon Green */
 
     --muted: 0 0% 30%; /* Muted background tones */
     --muted-foreground: 0 0% 65%; /* Muted text */
 
-    --accent: 110 100% 53%; /* Neon Green #39FF14 */
+    --accent: 210 80% 60%; /* Retro Blue - Was Neon Green */
     --accent-foreground: 0 0% 0%; /* Black - text on accent */
 
     --destructive: 0 70% 55%; /* Brighter retro red */
@@ -60,15 +60,16 @@
     --border: 0 0% 25%; /* Subtle border, components can override */
     --input: 0 0% 15%; /* Darker input background */
     --input-foreground: 0 0% 95%;
-    --ring: 110 100% 53%; /* Neon Green for focus rings */
+    --ring: 210 80% 60%; /* Retro Blue for focus rings - Was Neon Green */
     
     --radius: 0rem; /* Updated for pixelated style */
 
-    --chart-1: 110 100% 53%;
-    --chart-2: 130 100% 53%;
-    --chart-3: 150 100% 53%;
-    --chart-4: 90 100% 53%;
-    --chart-5: 170 100% 53%;
+    /* Pixel-art friendly chart colors */
+    --chart-1: 210 80% 60%; /* Retro Blue */
+    --chart-2: 30 90% 60%;  /* Pixel Orange */
+    --chart-3: 270 70% 65%; /* Pixel Purple */
+    --chart-4: 50 90% 60%;  /* Pixel Yellow */
+    --chart-5: 170 70% 50%; /* Pixel Teal */
   }
 }
 

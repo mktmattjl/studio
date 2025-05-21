@@ -20,7 +20,7 @@ export default function CompanionPage() {
         <PixelatedContainer className="md:col-span-2 bg-card flex flex-col items-center p-6">
           <h2 className="text-2xl font-semibold text-primary-foreground mb-4">{petName}</h2>
           <Image
-            src="https://placehold.co/250x250.png?bg=333333&fc=39FF14" // Larger placeholder for main view
+            src="https://placehold.co/250x250.png?bg=333333&fc=FFFFFF" 
             alt={`${petName} - Virtual Pet`}
             width={250}
             height={250}

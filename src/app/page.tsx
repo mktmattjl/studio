@@ -1,25 +1,16 @@
 import { PixelatedContainer } from '@/components/PixelatedContainer';
 import { PixelatedButton } from '@/components/PixelatedButton';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ListChecks, Users, Activity, CalendarClock, Coins } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
   const userName = "PlayerOne"; // Placeholder
-  const coins = 100; // Placeholder
   const petName = "PixelPup"; // Placeholder
 
   const upcomingEvents = [
     { id: '1', title: 'Math Exam', date: '2024-08-15', type: 'Exam' },
     { id: '2', title: 'History Project Due', date: '2024-08-20', type: 'Deadline' },
-  ];
-
-  const quickStats = [
-    { title: "Flashcards Created", value: "42", icon: <ListChecks className="text-accent" />, color: "text-accent" },
-    { title: "Study Sessions", value: "12", icon: <Activity className="text-accent" />, color: "text-accent" },
-    { title: "Upcoming Deadlines", value: upcomingEvents.length, icon: <CalendarClock className="text-accent" />, color: "text-accent" },
-    { title: "Coins Earned", value: coins, icon: <Coins className="text-accent" />, color: "text-accent" },
+    { id: '3', title: 'Study CS Chapter 5', date: '2024-08-10', type: 'Study Session' },
   ];
 
   return (
@@ -28,18 +19,6 @@ export default function DashboardPage() {
         <h1 className="text-3xl md:text-4xl font-bold text-primary-foreground">Welcome back, <span className="text-accent">{userName}</span>!</h1>
         <p className="text-muted-foreground mt-2 text-lg">Ready to supercharge your studies? Let's get to it!</p>
       </PixelatedContainer>
-
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {quickStats.map((stat) => (
-          <PixelatedContainer key={stat.title} className="bg-card" padding="p-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium text-muted-foreground">{stat.title}</h3>
-              {stat.icon}
-            </div>
-            <div className={`text-2xl font-bold mt-1 ${stat.color}`}>{stat.value}</div>
-          </PixelatedContainer>
-        ))}
-      </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <PixelatedContainer className="bg-card">
@@ -54,7 +33,7 @@ export default function DashboardPage() {
               ))}
             </ul>
           ) : (
-            <p className="text-muted-foreground">No upcoming deadlines. Great job staying on top of things!</p>
+            <p className="text-muted-foreground">No upcoming deadlines or events. Time to plan or relax!</p>
           )}
           <Link href="/planner" passHref>
             <PixelatedButton className="mt-4 w-full">View Full Planner</PixelatedButton>
@@ -64,14 +43,14 @@ export default function DashboardPage() {
         <PixelatedContainer className="bg-card flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold text-primary-foreground mb-2">Your Companion: {petName}</h2>
           <Image
-            src="https://placehold.co/150x150.png?bg=333333&fc=39FF14"
+            src="https://placehold.co/150x150.png?bg=333333&fc=FFFFFF"
             alt="Virtual Pet Placeholder"
             width={150}
             height={150}
             className="border-4 border-accent shadow-[4px_4px_0px_hsl(var(--primary))]"
             data-ai-hint="pixel pet"
           />
-          <p className="text-muted-foreground mt-2">Keep studying to earn coins and care for {petName}!</p>
+          <p className="text-muted-foreground mt-2 text-center">Keep studying to earn coins and care for {petName}!</p>
           <Link href="/companion" passHref>
             <PixelatedButton className="mt-4">Visit {petName}</PixelatedButton>
           </Link>
