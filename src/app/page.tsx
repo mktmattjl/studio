@@ -1,17 +1,51 @@
+
+'use client';
+
 import { PixelatedContainer } from '@/components/PixelatedContainer';
 import { PixelatedButton } from '@/components/PixelatedButton';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
+import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
+import { RefreshCw } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150.png?bg=333333&fc=FFFFFF";
 
 export default function DashboardPage() {
-  const userName = "PlayerOne"; // Placeholder
-  const petName = "PixelPup"; // Placeholder
+  const userName = "PlayerOne"; 
+  const petName = "PixelPup"; 
+
+  const [dashboardPetImageUrl, setDashboardPetImageUrl] = useState(DEFAULT_DASHBOARD_PET_IMAGE);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(true);
 
   const upcomingEvents = [
     { id: '1', title: 'Math Exam', date: '2024-08-15', type: 'Exam' },
     { id: '2', title: 'History Project Due', date: '2024-08-20', type: 'Deadline' },
     { id: '3', title: 'Study CS Chapter 5', date: '2024-08-10', type: 'Study Session' },
   ];
+
+  const fetchDashboardPetImage = useCallback(async () => {
+    setIsGeneratingImage(true);
+    setDashboardPetImageUrl(DEFAULT_DASHBOARD_PET_IMAGE);
+    try {
+      const result = await generatePetImage({ petType: "small cute pixel pet icon" });
+      if (result?.imageDataUri) {
+        setDashboardPetImageUrl(result.imageDataUri);
+      } else {
+        setDashboardPetImageUrl(DEFAULT_DASHBOARD_PET_IMAGE);
+      }
+    } catch (error) {
+      console.error("Error fetching dashboard pet image:", error);
+      setDashboardPetImageUrl(DEFAULT_DASHBOARD_PET_IMAGE);
+    } finally {
+      setIsGeneratingImage(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchDashboardPetImage();
+  }, [fetchDashboardPetImage]);
 
   return (
     <div className="space-y-8">
@@ -41,18 +75,37 @@ export default function DashboardPage() {
         </PixelatedContainer>
 
         <PixelatedContainer className="bg-card flex flex-col items-center justify-center">
-          <h2 className="text-2xl font-semibold text-primary-foreground mb-2">Your Companion: {petName}</h2>
-          <Image
-            src="https://placehold.co/150x150.png?bg=333333&fc=FFFFFF"
-            alt="Virtual Pet Placeholder"
-            width={150}
-            height={150}
-            className="border-4 border-accent shadow-[4px_4px_0px_hsl(var(--primary))]"
-            data-ai-hint="pixel pet"
-          />
+          <div className="flex justify-between items-center w-full mb-2 px-2">
+            <h2 className="text-2xl font-semibold text-primary-foreground">Your Companion: {petName}</h2>
+            <PixelatedButton
+              size="sm"
+              variant="ghost"
+              onClick={fetchDashboardPetImage}
+              disabled={isGeneratingImage}
+              className="p-1 h-auto"
+              title="Generate new image"
+            >
+              <RefreshCw size={16} className={isGeneratingImage ? "animate-spin text-accent" : "text-accent"} />
+            </PixelatedButton>
+          </div>
+          <div className="relative w-[150px] h-[150px] border-4 border-accent shadow-[4px_4px_0px_hsl(var(--primary))] bg-muted/50 flex items-center justify-center">
+            {isGeneratingImage && dashboardPetImageUrl === DEFAULT_DASHBOARD_PET_IMAGE && (
+              <p className="text-xs text-muted-foreground">Art loading...</p>
+            )}
+            <Image
+              src={dashboardPetImageUrl}
+              alt="Virtual Pet Thumbnail"
+              width={150}
+              height={150}
+              className={cn("object-contain", isGeneratingImage && dashboardPetImageUrl !== DEFAULT_DASHBOARD_PET_IMAGE ? "opacity-50" : "")}
+              data-ai-hint="pixel pet"
+              unoptimized={dashboardPetImageUrl.startsWith('data:')} // Important for data URIs
+              priority
+            />
+          </div>
           <p className="text-muted-foreground mt-2 text-center">Keep studying to earn coins and care for {petName}!</p>
           <Link href="/companion" passHref>
-            <PixelatedButton className="mt-4">Visit {petName}</PixelatedButton>
+            <PixelatedButton className="mt-4" disabled={isGeneratingImage}>Visit {petName}</PixelatedButton>
           </Link>
         </PixelatedContainer>
       </div>
