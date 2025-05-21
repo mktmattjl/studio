@@ -26,12 +26,12 @@ export interface PlannerEvent {
 
 // Updated color palette for dark theme
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/80 border-primary text-primary-foreground', // Electric Cyan
-  deadline: 'bg-destructive/80 border-destructive text-destructive-foreground', // Red
-  study_session: 'bg-chart-3/80 border-chart-3 text-chart-3-foreground', // Glitch Lime Green, assuming a chart-3-foreground or use primary-foreground
-  exam: 'bg-chart-4/80 border-chart-4 text-chart-4-foreground', // Neon Orange, assuming a chart-4-foreground or use primary-foreground
-  meeting: 'bg-secondary/80 border-secondary text-secondary-foreground', // Vibrant Magenta
-  personal: 'bg-purple-600/80 border-purple-500 text-purple-50', // Keep a distinct purple if needed
+  class: 'bg-primary/80 border-primary text-primary-foreground', 
+  deadline: 'bg-destructive/80 border-destructive text-destructive-foreground', 
+  study_session: 'bg-chart-3/80 border-chart-3 text-primary-foreground', 
+  exam: 'bg-chart-4/80 border-chart-4 text-primary-foreground', 
+  meeting: 'bg-secondary/80 border-secondary text-secondary-foreground', 
+  personal: 'bg-purple-600/80 border-purple-500 text-purple-50', 
 };
 
 

@@ -9,14 +9,13 @@ import type { ReactNode } from 'react';
 import type { PlannerEvent } from '@/app/planner/page'; // Import PlannerEvent
 
 // Cyberpunk Neon Theme color mapping for event types using CSS variables
-const eventTypeColorMap: Record<string, string> = {
-    'Deadline': 'border-l-[hsl(var(--destructive))]', // Red
-    'Meeting': 'border-l-[hsl(var(--secondary))]', // Magenta
-    'Class': 'border-l-[hsl(var(--secondary))]', // Magenta
-    'Study Session': 'border-l-[hsl(var(--chart-3))]', // Glitch Lime Green
-    'Exam': 'border-l-[hsl(var(--chart-4))]', // Neon Orange
-    'Personal': 'border-l-purple-500', // Keep custom if needed
-    'Default': 'border-l-[hsl(var(--primary))]', // Electric Cyan
+const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
+    'deadline': 'border-l-[hsl(var(--destructive))]', 
+    'meeting': 'border-l-[hsl(var(--secondary))]', 
+    'class': 'border-l-[hsl(var(--secondary))]', 
+    'study_session': 'border-l-[hsl(var(--chart-3))]', 
+    'exam': 'border-l-[hsl(var(--chart-4))]', 
+    'personal': 'border-l-purple-500', 
 };
 
 
@@ -89,8 +88,8 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
               {groupEvents.length > 0 ? (
                 <ul className="space-y-3">
                   {groupEvents.map((event) => {
-                    const eventColorClass = eventTypeColorMap[event.type] || eventTypeColorMap.Default;
-                    const displayTime = event.type.toLowerCase() === 'deadline' || differenceInDays(event.startTime, event.endTime) >=1 || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
+                    const eventColorClass = eventTypeColorMap[event.type] || 'border-l-[hsl(var(--primary))]';
+                    const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && differenceInDays(event.endTime, event.startTime) >=1) || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
                         ? format(event.startTime, 'EEE, MMM d') // Only show date for deadlines or multi-day events
                         : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`; // Show time range for others
 
