@@ -19,14 +19,15 @@ import { useRouter } from 'next/navigation';
 // Fantasy Pixel Art Icons
 import {
   PixelCompassIcon,
-  // PixelStackedDocumentsIcon, // No longer using this SVG for flashcards
   PixelMapIcon,
   PixelMagicOrbIcon,
   PixelGoldCoinIcon,
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon,
 } from '@/components/icons/fantasy';
-import { PixelBellIcon } from '@/components/icons/PixelBellIcon'; // Still using this custom SVG
+import { PixelBellIcon } from '@/components/icons/PixelBellIcon'; 
+import { PixelStackedDocumentsIcon } from '@/components/icons/fantasy/PixelStackedDocumentsIcon';
+
 
 // Lucide icons for dropdown actions
 import { LogOut, LogIn, UserPlus } from 'lucide-react';
@@ -54,13 +55,11 @@ export function Header() {
             <NavItem
               href="/flashcards"
               icon={
-                <Image
-                  src="/icons/flashcard-icon.png" // Path to your image in the public folder
-                  alt="Flashcards Icon"
-                  width={20} // Adjust as needed
-                  height={20} // Adjust as needed
-                  className="object-contain" // Ensures image scales nicely
-                />
+                currentUser ? (
+                  <Image src="/icons/flashcard-icon.png" alt="Flashcards" width={20} height={20} />
+                ) : (
+                  <PixelStackedDocumentsIcon className="w-5 h-5" />
+                )
               }
             >
               Flashcards
@@ -73,12 +72,11 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              {/* PixelGoldCoinIcon uses its internal fills for gold color */}
               <PixelGoldCoinIcon className="w-5 h-5" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-8 h-8">
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-9 h-9">
             <PixelBellIcon className="w-6 h-6" />
             <span className="sr-only">Notifications</span>
           </Button>
@@ -110,10 +108,13 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-[hsl(var(--text-accent-thematic))]">
+              <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-[hsl(var(--text-accent-thematic))] font-pixel">
                 <LogIn className="mr-1.5 h-4 w-4" /> Log In
               </Button>
-              <Button onClick={() => router.push('/signup')} className="btn-primary-action text-sm">
+              <Button 
+                onClick={() => router.push('/signup')} 
+                className="font-pixel text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md border-2 border-primary-foreground/40 shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.6)] hover:shadow-[1px_1px_0px_hsl(var(--primary-foreground)/0.6)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>
             </>
