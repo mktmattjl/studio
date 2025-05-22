@@ -9,11 +9,11 @@
     --background: 40 55% 88%; /* Warm Cream/Beige (approx #EDE6D5) */
     --foreground: 30 25% 25%; /* Dark Sepia/Brown (approx #594D43) */
 
-    --card: 40 65% 94%; /* Lighter Parchment/Cream for cards (approx #F7F2E9) */
-    --card-foreground: 30 25% 25%; /* Dark Sepia/Brown */
+    --card: 35 30% 80%; /* Very Light Brown (approx #D9CEC7) - Updated */
+    --card-foreground: 30 25% 20%; /* Darker Sepia/Brown for contrast on light brown - Adjusted */
 
-    --popover: 40 65% 92%; /* Slightly richer cream for popovers (approx #F6F0E4) */
-    --popover-foreground: 30 25% 25%; /* Dark Sepia/Brown */
+    --popover: 35 30% 78%; /* Slightly darker Very Light Brown for popovers - Updated */
+    --popover-foreground: 30 25% 20%; /* Darker Sepia/Brown - Adjusted */
 
     --primary: 210 70% 50%; /* Sapphire Blue (for CTAs, active nav) */
     --primary-foreground: 40 55% 95%; /* Very Light Cream (for text on blue) */
@@ -44,23 +44,23 @@
     --parchment-bg: 40 45% 82%; /* Aged Parchment for event blocks (approx #E0D5C0) */
     --parchment-text: 30 30% 20%;   /* Darkest Brown (approx #4D4139) */
 
-    /* Chart Colors - Neon Palette (Can be adjusted later if they clash) */
-    --chart-1: 190 95% 50%;  /* Electric Cyan */
-    --chart-2: 300 90% 60%;  /* Vibrant Magenta */
-    --chart-3: 90 100% 50%;  /* Glitch Lime Green */
-    --chart-4: 30 100% 50%;  /* Neon Orange */
-    --chart-5: 45 100% 55%;  /* Bright Yellow */
+    /* Chart Colors - Can be adjusted for thematic consistency */
+    --chart-1: 210 70% 50%;  /* Sapphire Blue */
+    --chart-2: 145 60% 40%;  /* Emerald Green */
+    --chart-3: 270 50% 55%;  /* Amethyst Purple */
+    --chart-4: 0 65% 50%;    /* Ruby Red */
+    --chart-5: 45 70% 50%;   /* Gold/Bronze */
   }
 
-  .dark { /* Active theme definition - Now a Light Heroic Fantasy Theme */
-    --background: 40 55% 88%;
-    --foreground: 30 25% 25%;
+  .dark { /* Using .dark as the active class, but defining light theme colors */
+    --background: 40 55% 88%; 
+    --foreground: 30 25% 25%; 
 
-    --card: 40 65% 94%;
-    --card-foreground: 30 25% 25%;
+    --card: 35 30% 80%; 
+    --card-foreground: 30 25% 20%;
 
-    --popover: 40 65% 92%;
-    --popover-foreground: 30 25% 25%;
+    --popover: 35 30% 78%; 
+    --popover-foreground: 30 25% 20%;
 
     --primary: 210 70% 50%;
     --primary-foreground: 40 55% 95%;
@@ -91,11 +91,11 @@
     --parchment-text: 30 30% 20%;
 
     /* Chart Colors */
-    --chart-1: 190 95% 50%;
-    --chart-2: 300 90% 60%;
-    --chart-3: 90 100% 50%;
-    --chart-4: 30 100% 50%;
-    --chart-5: 45 100% 55%;
+    --chart-1: 210 70% 50%;  
+    --chart-2: 145 60% 40%;  
+    --chart-3: 270 50% 55%;  
+    --chart-4: 0 65% 50%;    
+    --chart-5: 45 70% 50%;  
   }
 }
 
