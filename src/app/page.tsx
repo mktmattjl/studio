@@ -12,25 +12,30 @@ import type { PlannerEvent } from '@/app/planner/page';
 import { eventTypeColors } from '@/app/planner/page'; 
 
 // Fantasy Pixel Art Icons
-import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon'; 
-import { PixelMagicOrbIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon'; 
-import { PixelQuillIcon } from '@/components/icons/fantasy/PixelQuillIcon'; 
-import { PixelChestIcon } from '@/components/icons/fantasy/PixelChestIcon'; 
+import {
+  PixelScrollIcon,
+  PixelMagicOrbIcon,
+  PixelQuillIcon,
+  PixelChestIcon,
+  PixelMapIcon, // Added for potential future use
+  PixelTrophyIcon // Added for potential future use
+} from '@/components/icons/fantasy';
 
 import type { ElementType } from 'react';
 import { format, addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
 
-const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/A07050/F3EADA.png"; // Brown bg, parchment fg for placeholder
+const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/1A1D2B/E0EFFF.png"; 
 
 interface QuickActionItem {
   title: string;
-  description: string; // No longer displayed, but kept for tooltip data
+  description: string; 
   href: string;
   Icon: ElementType;
   iconBgClass?: string; 
   iconTextClass?: string;
 }
 
+// Ensure types are lowercase to match PlannerEvent type and eventTypeColors keys
 const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
     { title: 'Submit History Scroll (Essay Outline)', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline', description: 'The final runes must be etched and submitted to the Grand Loremaster by midnight.'}, 
     { title: 'Lecture: Ancient Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class', description: 'Attend Professor Eldrin\'s lecture on forgotten computational spells.'}, 
@@ -67,32 +72,32 @@ export default function DashboardPage() {
       description: "Craft new lore for your adventures.", 
       href: "/flashcards/new", 
       Icon: PixelScrollIcon,
-      iconBgClass: "bg-accent/20", 
-      iconTextClass: "text-accent" 
+      iconBgClass: "bg-accent/40", 
+      iconTextClass: "text-accent-foreground" 
     },
     { 
       title: "Summon Knowledge", 
       description: "Let the Oracle conjure insights from notes.", 
       href: "/ai-generator", 
       Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/20", 
-      iconTextClass: "text-primary"
+      iconBgClass: "bg-primary/40", 
+      iconTextClass: "text-primary-foreground"
     },
     { 
       title: "Chart Your Path", 
       description: "Record quests, trials, and study rituals.", 
       href: "/planner",
-      Icon: PixelQuillIcon, 
-      iconBgClass: "bg-secondary/20", 
-      iconTextClass: "text-secondary"
+      Icon: PixelMapIcon, // Kept PixelMapIcon based on RightSidebar's definition
+      iconBgClass: "bg-secondary/40", 
+      iconTextClass: "text-secondary-foreground" 
     },
      { 
       title: "Seek Challenges", 
       description: "Test your mettle with ancient trials.", 
       href: "/challenges", 
-      Icon: PixelChestIcon, 
-      iconBgClass: "bg-gold-accent/20",
-      iconTextClass: "text-gold-accent"
+      Icon: PixelTrophyIcon, // Kept PixelTrophyIcon based on RightSidebar's definition
+      iconBgClass: "bg-gold-accent/40",
+      iconTextClass: "text-primary-foreground"
     },
   ];
 
@@ -128,7 +133,7 @@ export default function DashboardPage() {
 
   const pageTitle = (
     <>
-      {currentTimeGreeting}, <span className="text-foreground">{userName}!</span>
+      {currentTimeGreeting}, <span className="text-foreground">{userName}!</span> {/* Changed from text-primary */}
     </>
   );
   const pageSubtitle = "Ready to conquer your studies today?";
@@ -184,8 +189,11 @@ export default function DashboardPage() {
           <DashboardAgendaView events={dashboardEvents} title={pageTitle} subtitle={pageSubtitle} />
 
           <ContentCard className="flex flex-col">
-            <h2 className="text-xl font-pixel text-primary mb-3 p-4 sm:p-6 pb-0">This Week's Portents</h2>
-            <div className="flex-grow overflow-hidden">
+             <h2 className="text-xl font-pixel text-[hsl(var(--text-accent-thematic))] p-4 sm:p-6 pb-3 flex items-center gap-2">
+                <PixelMagicOrbIcon className="w-5 h-5" /> {/* Added icon */}
+                This Week's Portents
+            </h2>
+            <div className="flex-grow overflow-hidden p-1 sm:p-2 pt-0">
               <WeekCalendarGrid
                 currentDate={new Date()}
                 daysToDisplay={displayDays}
@@ -224,3 +232,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

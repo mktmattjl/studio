@@ -9,32 +9,21 @@ import type { PlannerEvent } from '@/app/planner/page';
 import {
     PixelScrollIcon,
     PixelQuillIcon,
-    PixelMapIcon,
+    // PixelMapIcon, // Removed as empty state icon is changing
     PixelHeartIcon,
+    PixelFlamingSwordIcon 
 } from '@/components/icons/fantasy';
-import { PixelFlamingSwordIcon } from '@/components/icons/fantasy/PixelFlamingSwordIcon';
 
 
 // Color mapping for event types (left border) using Heroic Fantasy Theme
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', // Ruby Red
-    'meeting': 'border-l-primary', // Neon Blue
-    'class': 'border-l-primary', // Neon Blue
-    'study_session': 'border-l-secondary', // Emerald Green
+    'meeting': 'border-l-primary', // Neon Blue (Primary Accent)
+    'class': 'border-l-primary', // Neon Blue (Primary Accent)
+    'study_session': 'border-l-secondary', // Emerald Green (Secondary Accent)
     'exam': 'border-l-destructive', // Ruby Red
-    'personal': 'border-l-secondary', // Emerald Green
+    'personal': 'border-l-secondary', // Emerald Green (Secondary Accent)
 };
-
-// No longer needed as icons are removed from list items, but keeping for potential future use or reference
-const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
-    'deadline': PixelQuillIcon,
-    'meeting': PixelScrollIcon,
-    'class': PixelScrollIcon,
-    'study_session': PixelQuillIcon,
-    'exam': PixelFlamingSwordIcon,
-    'personal': PixelHeartIcon,
-};
-
 
 interface DashboardAgendaViewProps {
   events: PlannerEvent[];
@@ -70,7 +59,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
 
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
-      <div className="p-4 sm:p-6 mb-0 border-b border-border">
+      <div className="p-4 sm:p-6 mb-0 border-b-2 border-border">
         <h1 className="text-2xl sm:text-3xl font-pixel text-foreground">
           {title}
         </h1>
@@ -79,7 +68,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
       <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[32rem]">
         {!hasAnyEvents && (
              <div className="text-center py-10 flex-grow flex flex-col justify-center items-center h-full">
-                <PixelMapIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" />
+                <PixelScrollIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" /> {/* Changed from PixelMapIcon */}
                 <h3 className="text-xl font-pixel text-[hsl(var(--text-accent-thematic))] mb-2">Thy Quest Log is Empty!</h3>
                 <p className="text-muted-foreground font-pixel">No pressing tasks. Perhaps a moment of respite or plan new adventures?</p>
             </div>
@@ -94,7 +83,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             <div key={groupName}>
               <h3 className={cn(
                 "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
-                 groupName === "Today" ? "text-[hsl(var(--text-accent-thematic))]" : "text-foreground"
+                 groupName === "Today" ? "text-primary" : "text-[hsl(var(--text-accent-thematic))]"
                 )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
@@ -102,8 +91,6 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
               <ul className="space-y-3">
                 {groupEvents.map((event, eventIndex) => {
                   const eventColorClass = eventTypeColorMap[event.type] || eventTypeColorMap.personal;
-                  // const EventIcon = eventTypeIcons[event.type] || PixelHeartIcon; // Icon no longer used here
-
                   const displayTime = (event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime)))
                       ? format(event.startTime, 'EEE, MMM d')
                       : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`;
@@ -115,14 +102,14 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                       key={event.id}
                       className={cn(
                         "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm focus-within:ring-2 focus-within:ring-ring focus-visible:outline-none",
-                        "bg-black/[.05] hover:bg-muted/30",
+                        "bg-black/[.05] hover:bg-muted/30", // Background for task items
                         eventColorClass,
                         isKeyTask && "border-primary ring-1 ring-primary/50", 
-                        "border-2 border-transparent hover:border-accent/30"
+                        "border-2 border-transparent hover:border-accent/30",
+                         "focus-visible:border-accent focus-visible:bg-accent/10"
                       )}
                       tabIndex={0}
                     >
-                      {/* <EventIcon className="w-6 h-6 mt-0.5 text-muted-foreground shrink-0" /> Removed icon rendering */}
                       <div className="flex-grow">
                         <p className="font-semibold text-foreground text-md font-pixel">{event.title}</p>
                         <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">

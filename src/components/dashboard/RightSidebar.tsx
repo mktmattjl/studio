@@ -19,7 +19,9 @@ import {
   PixelScrollIcon, 
   PixelMagicOrbIcon, 
   PixelQuillIcon, 
-  PixelChestIcon 
+  PixelChestIcon,
+  PixelMapIcon, // Added for new quick spell icon
+  PixelTrophyIcon // Added for new quick spell icon
 } from '@/components/icons/fantasy';
 import { cn } from '@/lib/utils';
 
@@ -44,7 +46,7 @@ export function RightSidebar({
   petName,
   petImageUrl,
   isGeneratingPetImage,
-  quickActions,
+  quickActions: passedQuickActions, // Renamed to avoid conflict
 }: RightSidebarProps) {
   const router = useRouter();
   const userLevel = 5;
@@ -54,34 +56,35 @@ export function RightSidebar({
   const dayStreak = 7;
   const currentCoins = 125; 
 
-  const updatedQuickActions: QuickActionItem[] = [
+  // Use the updated quickActions array if it's different from the passed one or define it here
+  const quickActions: QuickActionItem[] = [
     { 
       title: "Scribe Scrolls", 
       href: "/flashcards/new", 
       Icon: PixelScrollIcon,
-      iconBgClass: "bg-secondary/40", // Uses secondary accent (neutral grey)
-      iconTextClass: "text-secondary-foreground" 
+      iconBgClass: "bg-accent/40",
+      iconTextClass: "text-accent-foreground" 
     },
     { 
       title: "Summon Knowledge", 
       href: "/ai-generator", 
       Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/40", // Uses primary accent (new light beige/brown)
+      iconBgClass: "bg-primary/40",
       iconTextClass: "text-primary-foreground"
     },
     { 
       title: "Chart Your Path", 
       href: "/planner",
-      Icon: PixelQuillIcon, 
+      Icon: PixelMapIcon, // Changed from PixelQuillIcon
       iconBgClass: "bg-secondary/40", 
       iconTextClass: "text-secondary-foreground" 
     },
      { 
       title: "Seek Challenges", 
       href: "/challenges", 
-      Icon: PixelChestIcon, 
+      Icon: PixelTrophyIcon, // Changed from PixelChestIcon
       iconBgClass: "bg-gold-accent/40",
-      iconTextClass: "text-primary-foreground" // Assuming primary-foreground works on gold
+      iconTextClass: "text-primary-foreground"
     },
   ];
 
@@ -110,18 +113,17 @@ export function RightSidebar({
         <div className="p-4 space-y-3">
             <div className="flex items-center justify-around text-center">
                 <div>
-                    {/* Streak icon now uses primary color (new light beige/brown) */}
                     <PixelFlamingSwordIcon className="mx-auto mb-1 h-7 w-7 text-primary" /> 
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
                 <div>
-                    <PixelOrnateShieldIcon className="mx-auto mb-1 h-7 w-7 text-muted-foreground" /> 
+                    <PixelOrnateShieldIcon className="mx-auto mb-1 h-7 w-7 text-secondary" /> 
                     <p className="text-sm font-medium text-foreground">{badges.length}</p>
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelGoldCoinIcon className="mx-auto mb-1 h-7 w-7" />
+                    <PixelGoldCoinIcon className="mx-auto mb-1 h-7 w-7 text-gold-accent" />
                     <p className="text-sm font-medium text-foreground">{currentCoins}</p>
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
@@ -178,7 +180,7 @@ export function RightSidebar({
       <ContentCard>
         <h2 className="text-lg font-pixel text-foreground mb-4">Quick Spells</h2>
         <div className="flex flex-row flex-wrap gap-2.5 justify-start items-center">
-          {updatedQuickActions.map(action => (
+          {quickActions.map(action => (
             <QuickActionCard
               key={action.title}
               title={action.title}
