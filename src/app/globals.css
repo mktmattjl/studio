@@ -16,44 +16,44 @@
     --popover-foreground: 216 100% 94%; /* #E0EFFF */
 
     /* Primary Accent: Light Grey */
-    --primary: 210 15% 80%; /* #C4C9D1 - Light Grey */
-    --primary-foreground: 210 15% 10%; /* #141517 - Very Dark Grey/Near-Black for text on Light Grey */
+    --primary: 0 0% 80%; /* #CCCCCC - Light Grey */
+    --primary-foreground: 0 0% 10%; /* #1A1A1A - Very Dark Grey/Near-Black for text on Light Grey */
     
     /* Secondary Accent: Medium Grey */
-    --secondary: 210 10% 45%; /* #696E77 - Medium Grey */
-    --secondary-foreground: 216 100% 94%; /* #E0EFFF - Icy Light Blue for text on Medium Grey */
+    --secondary: 0 0% 45%; /* #737373 - Medium Grey */
+    --secondary-foreground: 0 0% 94%; /* #F0F0F0 - Icy Light Blue for text on Medium Grey */
 
     --muted: 220 15% 28%; /* #3B4354 - Muted Dark Grey */
     --muted-foreground: 220 13% 50%; /* #707890 - Cool Medium Gray (Secondary Text) */
 
     /* Accent (for hovers on neutral elements, etc.) uses Secondary Accent */
-    --accent: 210 10% 45%; /* #696E77 - Medium Grey */
-    --accent-foreground: 216 100% 94%; /* #E0EFFF - Icy Light Blue */
+    --accent: 0 0% 45%; /* #737373 - Medium Grey */
+    --accent-foreground: 0 0% 94%; /* #F0F0F0 - Icy Light Blue */
 
     --destructive: 0 70% 45%; /* Muted Red - Kept for standard destructive actions */
-    --destructive-foreground: 216 100% 94%; /* #E0EFFF */
+    --destructive-foreground: 0 0% 94%; /* #F0F0F0 */
 
     --border: 220 15% 30%; /* #3F4A5F - Subtle Lighter Grey Border */
     --input: 220 20% 18%; /* #242A36 - Darker Input Background */
     --input-foreground: 216 100% 94%; /* #E0EFFF */
-    --ring: 210 15% 88%; /* #D9DDE3 - Brighter Light Grey for Focus Ring */
+    --ring: 0 0% 88%; /* #E0E0E0 - Brighter Light Grey for Focus Ring */
     
     --radius: 0.375rem; /* Slightly rounded corners */
 
     /* Custom Thematic Colors (Pixel Art Icons might have their own fills) */
     /* Gold accent is kept for coin icon as it's thematic */
     --gold-accent: 40 80% 60%; /* #EAC468 - Muted Gold for Coins etc. */
-    --xp-bar-color: 210 15% 80%; /* #C4C9D1 - Light Grey for XP Bar Fill (matches new primary) */
+    --xp-bar-color: 0 0% 80%; /* #CCCCCC - Light Grey for XP Bar Fill (matches new primary) */
     
     --parchment-bg: 220 20% 20%; /* Darker shade for event blocks on dark card */
     --parchment-text: 216 100% 85%; /* Lighter text for on dark parchment */
 
     /* Chart Colors - Grayscale Palette */
-    --chart-1: 210 15% 80%;  /* Light Grey (Primary) */
-    --chart-2: 210 10% 45%;  /* Medium Grey (Secondary) */
-    --chart-3: 210 15% 65%;  /* Mid-Light Grey */
-    --chart-4: 210 10% 30%;   /* Darker Grey */
-    --chart-5: 210 10% 90%;   /* Very Light Grey/Off-White */
+    --chart-1: 0 0% 80%;  /* Light Grey (Primary) */
+    --chart-2: 0 0% 45%;  /* Medium Grey (Secondary) */
+    --chart-3: 0 0% 65%;  /* Mid-Light Grey */
+    --chart-4: 0 0% 30%;   /* Darker Grey */
+    --chart-5: 0 0% 90%;   /* Very Light Grey/Off-White */
   }
 
   .dark { /* Ensure .dark class applies these as the primary theme */
@@ -63,35 +63,35 @@
     --card-foreground: 216 100% 94%;
     --popover: 220 20% 23%;
     --popover-foreground: 216 100% 94%;
-    --primary: 210 15% 80%;
-    --primary-foreground: 210 15% 10%;
-    --secondary: 210 10% 45%;
-    --secondary-foreground: 216 100% 94%;
+    --primary: 0 0% 80%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 45%;
+    --secondary-foreground: 0 0% 94%;
     --muted: 220 15% 28%;
     --muted-foreground: 220 13% 50%;
-    --accent: 210 10% 45%;
-    --accent-foreground: 216 100% 94%;
+    --accent: 0 0% 45%;
+    --accent-foreground: 0 0% 94%;
     --destructive: 0 70% 45%; 
-    --destructive-foreground: 216 100% 94%;
+    --destructive-foreground: 0 0% 94%;
     --border: 220 15% 30%;
     --input: 220 20% 18%;
     --input-foreground: 216 100% 94%;
-    --ring: 210 15% 88%;
+    --ring: 0 0% 88%;
     
     --radius: 0.375rem;
 
     /* Custom Thematic Colors */
     --gold-accent: 40 80% 60%; /* Gold remains for coins */
-    --xp-bar-color: 210 15% 80%; /* Light Grey for XP bar */
+    --xp-bar-color: 0 0% 80%; /* Light Grey for XP bar */
     --parchment-bg: 220 20% 20%; 
     --parchment-text: 216 100% 85%;
 
     /* Chart Colors */
-    --chart-1: 210 15% 80%;  
-    --chart-2: 210 10% 45%;  
-    --chart-3: 210 15% 65%;  
-    --chart-4: 210 10% 30%;    
-    --chart-5: 210 10% 90%;  
+    --chart-1: 0 0% 80%;  
+    --chart-2: 0 0% 45%;  
+    --chart-3: 0 0% 65%;  
+    --chart-4: 0 0% 30%;    
+    --chart-5: 0 0% 90%;  
   }
 }
 

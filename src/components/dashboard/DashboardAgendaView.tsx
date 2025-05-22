@@ -17,11 +17,11 @@ import {
 // Grayscale color mapping for event types (left border)
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', // Kept red for high importance
-    'meeting': 'border-l-[hsl(var(--primary))]',      // Light Grey
-    'class': 'border-l-[hsl(var(--primary))]',          // Light Grey
-    'study_session': 'border-l-[hsl(var(--secondary))]',  // Medium Grey
+    'meeting': 'border-l-primary',      // Light Grey
+    'class': 'border-l-primary',          // Light Grey
+    'study_session': 'border-l-secondary',  // Medium Grey
     'exam': 'border-l-destructive', // Kept red for high importance
-    'personal': 'border-l-[hsl(var(--muted))]',        // Muted Dark Grey
+    'personal': 'border-l-muted',        // Muted Dark Grey
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -96,7 +96,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
               </h3>
               <ul className="space-y-3">
                 {groupEvents.map((event) => {
-                  const eventColorClass = eventTypeColorMap[event.type] || 'border-l-[hsl(var(--muted))]';
+                  const eventColorClass = eventTypeColorMap[event.type] || 'border-l-muted';
                   const EventIcon = eventTypeIcons[event.type] || PixelScrollIcon;
 
                   const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
