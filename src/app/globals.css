@@ -5,94 +5,93 @@
 
 @layer base {
   :root {
-    /* High-Contrast Dark Theme: Near-Black (#101820) & Bright Yellow (#FEE715) */
-    --background: 213 33% 10%; /* Near-Black */
-    --foreground: 210 100% 95%; /* Very Light Cool Tone (almost white) */
+    --background: 195 7% 18%; /* #2A3132 */
+    --foreground: 208 27% 64%; /* #90AFC5 */
 
-    --card: 213 25% 15%; /* Slightly Lighter Dark Grey for Cards */
-    --card-foreground: 210 100% 95%; /* Very Light Cool Tone */
-    --card-border-highlight: 213 25% 20%; /* Slightly lighter than card for top border */
+    --card: 195 7% 22%; /* Slightly Lighter Dark Cool Grey for Cards */
+    --card-foreground: 208 27% 64%; /* #90AFC5 */
+    --card-border-highlight: 195 7% 25%; /* Slightly lighter than card for top border */
 
-    --popover: 213 25% 15%; /* Similar to Card */
-    --popover-foreground: 210 100% 95%; /* Very Light Cool Tone */
+    --popover: 195 7% 22%; /* Similar to Card */
+    --popover-foreground: 208 27% 64%; /* #90AFC5 */
 
-    /* Primary Accent: Bright Yellow */
-    --primary: 54 99% 54%; /* #FEE715 */
-    --primary-foreground: 213 33% 8%; /* Very Dark (Near-Black for text on Yellow) */
+    /* Primary Accent: Earthy Red/Brown */
+    --primary: 12 51% 30%; /* #763626 */
+    --primary-foreground: 208 27% 85%; /* Lighter version of #90AFC5 for contrast */
     
-    /* Secondary Accent: Neutral Dark Grey */
-    --secondary: 0 0% 30%; 
-    --secondary-foreground: 0 0% 95%; /* Light text for Dark Grey */
+    /* Secondary Accent: Neutral Medium-Dark Grey */
+    --secondary: 195 7% 35%; 
+    --secondary-foreground: 208 27% 64%; /* #90AFC5 */
 
-    --muted: 213 20% 22%; /* Darker Muted Shade */
-    --muted-foreground: 0 0% 60%; /* Medium Gray for sub-text */
+    --muted: 195 7% 25%; /* Darker Muted Shade */
+    --muted-foreground: 208 20% 50%; /* Darker version of #90AFC5 */
 
-    /* Accent (for hovers on neutral elements, etc.) uses Secondary Accent (Dark Grey) */
-    --accent: 0 0% 30%; 
-    --accent-foreground: 0 0% 95%; 
+    /* Accent (for hovers on neutral elements, etc.) uses Secondary Accent */
+    --accent: 195 7% 35%; 
+    --accent-foreground: 208 27% 64%; 
 
     --destructive: 0 70% 45%; /* Muted Red */
     --destructive-foreground: 0 0% 100%; /* White for destructive text */
 
-    --border: 213 20% 20%; /* Subtle Border, slightly lighter than card */
-    --input: 213 25% 12%; /* Very Dark Input Background */
-    --input-foreground: 210 100% 95%; /* Light text */
-    --ring: 54 99% 54%; /* Bright Yellow for Focus Ring */
+    --border: 195 7% 25%; /* Subtle Border */
+    --input: 195 7% 15%; /* Very Dark Input Background */
+    --input-foreground: 208 27% 64%; /* #90AFC5 */
+    --ring: 12 51% 30%; /* Earthy Red/Brown for Focus Ring */
     
     --radius: 0.5rem; /* Rounded corners */
 
     /* Custom Thematic Colors */
-    --gold-accent: 54 99% 50%; /* Slightly deeper yellow for gold if needed, similar to primary */
-    --xp-bar-color: 54 99% 54%; /* Bright Yellow for XP Bar Fill (matches new primary) */
+    --gold-accent: 45 80% 55%; /* Gold for coins - keeping this distinct */
+    --xp-bar-color: 12 51% 30%; /* Earthy Red/Brown for XP Bar Fill */
     
-    --parchment-bg: 35 30% 75%; /* Kept for calendar events, a light brown */
-    --parchment-text: 30 25% 12%; /* Dark Sepia/Brown for text on parchment */
-
-    /* Chart Colors - Yellow, Greys, and other complementary accents */
-    --chart-1: 54 99% 54%;   /* Bright Yellow (Primary) */
-    --chart-2: 0 0% 50%;  /* Medium Grey */
-    --chart-3: 0 0% 75%;  /* Light Grey */
-    --chart-4: 210 10% 40%;   /* Dark Cool Grey */
-    --chart-5: 45 85% 60%;   /* Gold (alternative yellow/orange) */
-  }
-
-  .dark { 
-    --background: 213 33% 10%;
-    --foreground: 210 100% 95%;
-    --card: 213 25% 15%;
-    --card-foreground: 210 100% 95%;
-    --card-border-highlight: 213 25% 20%;
-    --popover: 213 25% 15%;
-    --popover-foreground: 210 100% 95%;
-    --primary: 54 99% 54%; 
-    --primary-foreground: 213 33% 8%; 
-    --secondary: 0 0% 30%; 
-    --secondary-foreground: 0 0% 95%; 
-    --muted: 213 20% 22%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 0% 30%; 
-    --accent-foreground: 0 0% 95%; 
-    --destructive: 0 70% 45%; 
-    --destructive-foreground: 0 0% 100%;
-    --border: 213 20% 20%;
-    --input: 213 25% 12%;
-    --input-foreground: 210 100% 95%;
-    --ring: 54 99% 54%;
-    
-    --radius: 0.5rem;
-
-    /* Custom Thematic Colors */
-    --gold-accent: 54 99% 50%; 
-    --xp-bar-color: 54 99% 54%; 
     --parchment-bg: 35 30% 75%; 
     --parchment-text: 30 25% 12%;
 
     /* Chart Colors */
-    --chart-1: 54 99% 54%;  
-    --chart-2: 0 0% 50%;  
-    --chart-3: 0 0% 75%;  
-    --chart-4: 210 10% 40%;    
-    --chart-5: 45 85% 60%;  
+    --chart-1: 12 51% 30%;   /* Earthy Red/Brown (Primary) */
+    --chart-2: 208 27% 64%;  /* Light Blue/Grey (Secondary/Text) */
+    --chart-3: 195 7% 50%;  /* Mid Grey */
+    --chart-4: 195 7% 30%;   /* Darker Grey */
+    --chart-5: 45 80% 55%;   /* Gold */
+  }
+
+  .dark { 
+    --background: 195 7% 18%;
+    --foreground: 208 27% 64%;
+    --card: 195 7% 22%;
+    --card-foreground: 208 27% 64%;
+    --card-border-highlight: 195 7% 25%;
+    --popover: 195 7% 22%;
+    --popover-foreground: 208 27% 64%;
+    --primary: 12 51% 30%; 
+    --primary-foreground: 208 27% 85%; 
+    --secondary: 195 7% 35%; 
+    --secondary-foreground: 208 27% 64%; 
+    --muted: 195 7% 25%;
+    --muted-foreground: 208 20% 50%;
+    --accent: 195 7% 35%; 
+    --accent-foreground: 208 27% 64%; 
+    --destructive: 0 70% 45%; 
+    --destructive-foreground: 0 0% 100%;
+    --border: 195 7% 25%;
+    --input: 195 7% 15%;
+    --input-foreground: 208 27% 64%;
+    --ring: 12 51% 30%;
+    
+    --radius: 0.5rem;
+
+    /* Custom Thematic Colors */
+    --gold-accent: 45 80% 55%; 
+    --xp-bar-color: 12 51% 30%; 
+    --parchment-bg: 35 30% 75%; 
+    --parchment-text: 30 25% 12%;
+
+    /* Chart Colors */
+    --chart-1: 12 51% 30%;  
+    --chart-2: 208 27% 64%;  
+    --chart-3: 195 7% 50%;  
+    --chart-4: 195 7% 30%;    
+    --chart-5: 45 80% 55%;  
   }
 }
 

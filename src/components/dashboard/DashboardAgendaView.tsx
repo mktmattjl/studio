@@ -14,14 +14,14 @@ import {
     PixelFlamingSwordIcon 
 } from '@/components/icons/fantasy'; 
 
-// Color mapping for event types (left border)
+// Color mapping for event types (left border) - Uses new theme colors
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', 
-    'meeting': 'border-l-primary',      // Yellow
-    'class': 'border-l-primary',          // Yellow
-    'study_session': 'border-l-secondary',  // Dark Grey
+    'meeting': 'border-l-primary',      // Earthy Red/Brown
+    'class': 'border-l-primary',          // Earthy Red/Brown
+    'study_session': 'border-l-secondary',  // Medium-Dark Grey
     'exam': 'border-l-destructive', 
-    'personal': 'border-l-secondary',        // Dark Grey
+    'personal': 'border-l-secondary',        // Medium-Dark Grey
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -92,7 +92,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             <div key={groupName}>
               <h3 className={cn(
                 "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
-                groupName === "Today" ? "text-primary" : "text-foreground" // Today header uses Yellow
+                groupName === "Today" ? "text-primary" : "text-foreground" // Today header uses Earthy Red/Brown
                 )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}

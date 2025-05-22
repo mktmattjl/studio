@@ -16,10 +16,10 @@ import {
   PixelFlamingSwordIcon, 
   PixelFantasyAvatarIcon, 
   PixelFantasySettingsIcon,
-  PixelScrollIcon, // For "Create Flashcards"
-  PixelMagicOrbIcon, // For "AI Card Generator"
-  PixelQuillIcon, // For "Plan Your Week"
-  PixelChestIcon // For "Explore Challenges"
+  PixelScrollIcon, 
+  PixelMagicOrbIcon, 
+  PixelQuillIcon, 
+  PixelChestIcon 
 } from '@/components/icons/fantasy';
 import { cn } from '@/lib/utils';
 
@@ -60,31 +60,31 @@ export function RightSidebar({
       description: "Craft new lore for your adventures.", 
       href: "/flashcards/new", 
       Icon: PixelScrollIcon,
-      iconBgClass: "bg-accent/40", // was secondary, now dark grey tint
-      iconTextClass: "text-accent-foreground" // light text on dark grey
+      iconBgClass: "bg-secondary/40", 
+      iconTextClass: "text-secondary-foreground" 
     },
     { 
       title: "Summon Knowledge", 
       description: "Let the Oracle conjure insights from notes.", 
       href: "/ai-generator", 
       Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/40", // yellow tint
-      iconTextClass: "text-primary-foreground" // dark text on yellow
+      iconBgClass: "bg-primary/40", 
+      iconTextClass: "text-primary-foreground"
     },
     { 
       title: "Chart Your Path", 
       description: "Record quests, trials, and study rituals.", 
       href: "/planner",
       Icon: PixelQuillIcon, 
-      iconBgClass: "bg-accent/40", // dark grey tint
-      iconTextClass: "text-accent-foreground" 
+      iconBgClass: "bg-secondary/40", 
+      iconTextClass: "text-secondary-foreground" 
     },
      { 
       title: "Seek Challenges", 
       description: "Test your mettle with ancient trials.", 
       href: "/challenges", 
       Icon: PixelChestIcon, 
-      iconBgClass: "bg-gold-accent/40", // yellow tint
+      iconBgClass: "bg-gold-accent/40",
       iconTextClass: "text-primary-foreground" 
     },
   ];

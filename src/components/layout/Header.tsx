@@ -43,12 +43,12 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Cerebro title text color now uses --primary (Bright Yellow) */}
+          {/* Cerebro title text color now uses --primary (Earthy Red/Brown) */}
           <Link href="/" className="font-pixel text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            {/* NavItem active state uses new primary (Bright Yellow) */}
+            {/* NavItem active state uses new primary (Earthy Red/Brown) */}
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
             <NavItem href="/flashcards" icon={<PixelScrollIcon className="w-5 h-5" />}>Flashcards</NavItem>
             <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
@@ -99,7 +99,7 @@ export function Header() {
               <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-primary">
                 <LogIn className="mr-1.5 h-4 w-4" /> Log In
               </Button>
-              {/* Sign Up button uses .btn-primary-action (Bright Yellow bg) */}
+              {/* Sign Up button uses .btn-primary-action (Earthy Red/Brown bg) */}
               <Button onClick={() => router.push('/signup')} className="btn-primary-action text-sm">
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>

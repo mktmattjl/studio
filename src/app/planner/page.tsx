@@ -21,14 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using new Bright Yellow primary and Dark Grey secondary accents
+// Event Type Colors using new theme: Primary (Earthy Red/Brown), Secondary (Medium-Dark Grey)
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Yellow with dark text
-  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
-  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Dark Grey with light text
-  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
-  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Yellow with dark text
-  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Dark Grey with light text
+  class: 'bg-primary/20 border-l-primary text-primary-foreground', 
+  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', 
+  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', 
+  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', 
+  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', 
+  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', 
 };
 
 
