@@ -21,14 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using Heroic Fantasy Theme: Thematic Accent (Light Beige/Brown), Secondary (Neutral Grey)
+// Event Type Colors using Heroic Fantasy Theme
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-parchment-bg border-l-[hsl(var(--text-accent-thematic))] text-parchment-text', 
+  class: 'bg-parchment-bg border-l-primary text-parchment-text', // Use primary accent (Amethyst Purple)
   deadline: 'bg-parchment-bg border-l-destructive text-parchment-text', 
-  study_session: 'bg-parchment-bg border-l-secondary text-parchment-text', 
+  study_session: 'bg-parchment-bg border-l-secondary text-parchment-text', // Use secondary accent (Neutral Medium-Dark Grey)
   exam: 'bg-parchment-bg border-l-destructive text-parchment-text', 
-  meeting: 'bg-parchment-bg border-l-[hsl(var(--text-accent-thematic))] text-parchment-text', 
-  personal: 'bg-parchment-bg border-l-secondary text-parchment-text', 
+  meeting: 'bg-parchment-bg border-l-primary text-parchment-text', // Use primary accent (Amethyst Purple)
+  personal: 'bg-parchment-bg border-l-secondary text-parchment-text', // Use secondary accent (Neutral Medium-Dark Grey)
 };
 
 

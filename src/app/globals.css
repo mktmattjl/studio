@@ -20,13 +20,13 @@
     --text-accent-thematic: 25 31% 67%; /* #C5A690 - Light Beige/Brown (for thematic text and some borders) */
 
     /* Accent Colors (Backgrounds for interactive elements if text on them is white) */
-    --primary: 0 90% 55%; /* #FF1A1A - Neon Red (NEW) */
+    --primary: 270 40% 55%; /* #8C66B3 - Amethyst Purple (NEW PRIMARY) */
     --primary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on primary buttons) */
     
     --secondary: 195 7% 35%; /* #4F5B5C - Neutral Medium-Dark Grey (for secondary button BGs) */
     --secondary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on secondary buttons) */
 
-    --accent: 270 40% 55%; /* #8C66B3 - Amethyst Purple (for general hovers) */
+    --accent: 270 40% 55%; /* #8C66B3 - Amethyst Purple (for general hovers, matches new primary) */
     --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on purple hovers) */
 
     /* Destructive Actions */
@@ -37,21 +37,21 @@
     --border: 195 7% 25%; /* #3A4243 - Subtle Border */
     --input: 195 7% 15%; /* #232829 - Very Dark Input Background */
     --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --ring: 0 90% 60%; /* Neon Red variant for focus ring (NEW) */
+    --ring: 270 40% 55%; /* Amethyst Purple for focus ring (NEW) */
     
     --radius: 0.375rem; /* Slightly less rounded for a more "solid" feel */
 
     /* Custom Thematic Colors */
     --gold-accent: 40 70% 55%; /* #E0A040 - Gold for coins, slightly desaturated */
-    --xp-bar-color: var(--primary); /* #FF1A1A - Neon Red (NEW) */
+    --xp-bar-color: var(--primary); /* Now Amethyst Purple */
     
     --parchment-bg: 40 35% 85%; /* #E2DECF - Aged Parchment for calendar events */
     --parchment-text: 30 20% 25%; /* #4D423A - Dark Sepia/Brown text on parchment */
 
     /* Chart Colors */
-    --chart-1: var(--primary);   /* Neon Red (NEW) */
+    --chart-1: var(--primary);   /* Amethyst Purple */
     --chart-2: 195 7% 35%;  /* Neutral Medium-Dark Grey */
-    --chart-3: 270 40% 55%;   /* Amethyst Purple */
+    --chart-3: 25 31% 67%;   /* Light Beige/Brown (Thematic Text Accent) */
     --chart-4: 195 7% 50%;  /* Mid Grey */
     --chart-5: 40 70% 55%;   /* Gold */
   }
@@ -66,7 +66,7 @@
     --popover: 195 7% 22%;
     --popover-foreground: 0 0% 95%; 
     
-    --primary: 0 90% 55%; 
+    --primary: 270 40% 55%; 
     --primary-foreground: 0 0% 95%; 
     
     --secondary: 195 7% 35%; 
@@ -84,11 +84,11 @@
     --border: 195 7% 25%;
     --input: 195 7% 15%;
     --input-foreground: 0 0% 95%; 
-    --ring: 0 90% 60%;
+    --ring: 270 40% 55%;
     
     --radius: 0.375rem;
 
-    --text-accent-thematic: 25 31% 67%; /* #C5A690 */
+    --text-accent-thematic: 25 31% 67%; 
     --gold-accent: 40 70% 55%; 
     --xp-bar-color: var(--primary); 
     --parchment-bg: 40 35% 85%; 
@@ -96,7 +96,7 @@
 
     --chart-1: var(--primary);  
     --chart-2: 195 7% 35%;  
-    --chart-3: 270 40% 55%;  
+    --chart-3: 25 31% 67%;  
     --chart-4: 195 7% 50%;    
     --chart-5: 40 70% 55%;  
   }
@@ -124,18 +124,18 @@
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
-  /* Links now use thematic text accent color for better visibility on dark background */
-  a:not(.button):not([class*="no-underline"]) { 
+  
+  a:not(.button):not([class*="no-underline"]):not([class*="text-primary"]):not([class*="text-destructive"]):not([class*="text-foreground"]):not([class*="text-muted-foreground"]) { 
     @apply text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] hover:underline; 
   }
 }
 
 @layer components {
-  /* Primary buttons now use neon red bg, off-white text */
+  /* Primary buttons now use primary accent bg, primary-foreground text */
   .btn-primary-action { 
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
-  /* Secondary buttons use neutral grey bg, off-white text */
+  /* Secondary buttons use secondary accent bg, secondary-foreground text */
   .btn-secondary-action { 
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
