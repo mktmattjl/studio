@@ -6,7 +6,7 @@ import { format, isToday, isTomorrow, differenceInDays, parseISO, isSameDay } fr
 import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 import type { PlannerEvent } from '@/app/planner/page';
-import { PixelScrollIcon, PixelQuillIcon } from '@/components/icons/fantasy'; // Example icons
+import { PixelScrollIcon, PixelQuillIcon, PixelMapIcon, PixelHeartIcon, PixelFlamingSwordIcon } from '@/components/icons/fantasy'; // Example icons
 
 // Jewel tone color mapping for event types (left border)
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
@@ -135,5 +135,3 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
     </ContentCard>
   );
 }
-
-    
