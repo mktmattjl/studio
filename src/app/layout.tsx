@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter, Pixelify_Sans } from 'next/font/google'; // Import Pixelify_Sans
+import { Inter, Pixelify_Sans } from 'next/font/google'; // Correctly import Pixelify_Sans
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Toaster } from "@/components/ui/toaster";
@@ -10,14 +10,14 @@ import { AuthProvider } from '@/contexts/AuthContext';
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-inter', // CSS variable for Inter
   display: 'swap',
 });
 
-const pixelifySans = Pixelify_Sans({ // Initialize Pixelify_Sans
+const pixelifySans = Pixelify_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'], // Available weights
-  variable: '--font-pixelify-sans', // New variable name
+  weight: ['400', '500', '600', '700'], // Specify desired weights
+  variable: '--font-pixelify-sans', // CSS variable for Pixelify Sans
   display: 'swap',
 });
 
@@ -32,6 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // Apply both font variables to the html tag
     <html lang="en" className={cn(inter.variable, pixelifySans.variable, "dark h-full")}>
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
         <AuthProvider>

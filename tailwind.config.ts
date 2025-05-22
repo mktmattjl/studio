@@ -12,18 +12,19 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1rem", 
+      padding: "1rem",
       screens: {
         "sm": "640px",
         "md": "768px",
         "lg": "1024px",
         "xl": "1280px",
-        "2xl": "1400px", 
+        "2xl": "1400px",
       },
     },
     fontFamily: {
       sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-      pixel: ['var(--font-pixelify-sans)', ...defaultTheme.fontFamily.mono], // Updated to use Pixelify Sans variable
+      // Ensure .font-pixel uses the --font-pixelify-sans CSS variable
+      pixel: ['var(--font-pixelify-sans)', ...defaultTheme.fontFamily.mono],
     },
   	extend: {
   		colors: {
@@ -32,7 +33,7 @@ export default {
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))',
-          'border-highlight': 'hsl(var(--card-border-highlight))' 
+          'border-highlight': 'hsl(var(--card-border-highlight))'
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
@@ -75,9 +76,9 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			},
   		},
-  		borderRadius: { 
+  		borderRadius: {
   			lg: 'var(--radius)',
-  			md: 'var(--radius)', 
+  			md: 'var(--radius)',
   			sm: 'calc(var(--radius) - 2px)'
   		},
   		keyframes: {
@@ -97,13 +98,13 @@ export default {
   					height: '0'
   				}
   			},
-        'pulse-correct': { 
-          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0px hsl(var(--secondary) / 0.4)' }, 
+        'pulse-correct': {
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0px hsl(var(--secondary) / 0.4)' },
           '50%': { transform: 'scale(1.03)', boxShadow: '0 0 10px 2px hsl(var(--secondary) / 0.5)' },
         },
-        'glow-card-correct': { 
+        'glow-card-correct': {
           '0%, 100%': { borderColor: 'hsl(var(--border))', boxShadow: 'none' },
-          '50%': { borderColor: 'hsl(var(--secondary))', boxShadow: '0 0 15px hsl(var(--secondary) / 0.3)' },  
+          '50%': { borderColor: 'hsl(var(--secondary))', boxShadow: '0 0 15px hsl(var(--secondary) / 0.3)' },
         },
         'coin-bonus-animation': {
           '0%': { opacity: '0', transform: 'translateY(20px) scale(0.8)' },
