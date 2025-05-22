@@ -5,14 +5,14 @@
 
 @layer base {
   :root {
-    /* Heroic Fantasy Light Palette - #F3F3D3 Background */
-    --background: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (User Requested for Background) */
+    /* Heroic Fantasy Light Palette - User Requested Darker Cream Background */
+    --background: hsl(50, 40%, 80%); /* #DCD6C6 - Muted, Darker Cream */
     --foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown (for text on light bg) */
 
-    --card: hsl(40, 35%, 85%); /* #E3D9C9 - Darker, richer Parchment (for cards on light bg) */
+    --card: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment for cards on darker cream bg */
     --card-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
 
-    --popover: hsl(40, 35%, 80%); /* #DACBB7 - Slightly lighter Parchment for popovers */
+    --popover: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment for popovers */
     --popover-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
 
     --primary: hsl(220, 60%, 55%); /* #527ED9 - Sapphire Blue (Main CTAs, Active Nav) */
@@ -21,13 +21,13 @@
     --secondary: hsl(145, 50%, 45%); /* #3BA668 - Emerald Green (Secondary Buttons, Key Stat Highlights) */
     --secondary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Emerald) */
 
-    --muted: hsl(40, 30%, 90%); /* #EBE8E1 - Very light off-white/cream for subtle backgrounds */
-    --muted-foreground: hsl(30, 15%, 45%); /* #8C7B6F - Medium Muted Brown/Gray */
+    --muted: hsl(50, 25%, 88%); /* #E6E2DA - Very light muted cream for subtle backgrounds/dividers */
+    --muted-foreground: hsl(40, 18%, 50%); /* #8F8678 - Medium Muted Brown/Gray */
 
     --accent: hsl(270, 40%, 60%); /* #A480CC - Amethyst Purple (Hovers, tertiary accents) */
     --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Amethyst) */
 
-    --destructive: hsl(0, 70%, 45%); /* Darker, less flashy Ruby Red */
+    --destructive: hsl(0, 70%, 45%); /* #C32626 - Darker, less flashy Ruby Red */
     --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
 
     --border: hsl(30, 10%, 60%); /* #B0A194 - Medium Wood Brown / Stone Outline (for light theme) */
@@ -41,26 +41,26 @@
     --gold-accent: hsl(40, 70%, 60%); /* #E0AA66 - Gold/Bronze */
     --xp-bar-color: hsl(var(--secondary)); /* #3BA668 - Emerald Green (for XP bar) */
     
-    /* Parchment for specific elements like event blocks in calendar - already darker */
+    /* Parchment for specific elements like event blocks in calendar */
     --parchment-bg: hsl(40, 35%, 85%); /* #E3D9C9 - Darker, richer Parchment for event blocks */
     --parchment-text: hsl(30, 20%, 25%); /* #4D423A - Dark Brown text for on-parchment */
 
     /* Chart Colors - Jewel Tones */
     --chart-1: hsl(var(--primary)); /* Sapphire Blue */
     --chart-2: hsl(var(--secondary)); /* Emerald Green */
-    --chart-3: hsl(0, 55%, 50%);  /* Ruby Red */
+    --chart-3: hsl(0, 55%, 50%);  /* #D43A3A Ruby Red */
     --chart-4: hsl(var(--gold-accent)); /* Gold */
     --chart-5: hsl(var(--accent)); /* Amethyst Purple */
   }
 
   .dark { /* This will now be the active light theme definition */
-    --background: hsl(60, 56%, 90%); /* #F3F3D3 */
+    --background: hsl(50, 40%, 80%); /* #DCD6C6 - Muted, Darker Cream */
     --foreground: hsl(30, 20%, 25%); /* #4D423A */
 
-    --card: hsl(40, 35%, 85%); /* #E3D9C9 */
+    --card: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment */
     --card-foreground: hsl(30, 20%, 25%); /* #4D423A */
 
-    --popover: hsl(40, 35%, 80%); /* #DACBB7 */
+    --popover: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment */
     --popover-foreground: hsl(30, 20%, 25%); /* #4D423A */
 
     --primary: hsl(220, 60%, 55%);
@@ -69,8 +69,8 @@
     --secondary: hsl(145, 50%, 45%);
     --secondary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
 
-    --muted: hsl(40, 30%, 90%); /* #EBE8E1 */
-    --muted-foreground: hsl(30, 15%, 45%); /* #8C7B6F */
+    --muted: hsl(50, 25%, 88%); /* #E6E2DA */
+    --muted-foreground: hsl(40, 18%, 50%); /* #8F8678 */
 
     --accent: hsl(270, 40%, 60%);
     --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
