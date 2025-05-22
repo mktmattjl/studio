@@ -17,8 +17,8 @@ import {
 // Color mapping for event types (left border) using Heroic Fantasy Theme
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', // Ruby Red
-    'meeting': 'border-l-primary', // Amethyst Purple
-    'class': 'border-l-primary', // Amethyst Purple
+    'meeting': 'border-l-primary', // Neon Blue (NEW)
+    'class': 'border-l-primary', // Neon Blue (NEW)
     'study_session': 'border-l-secondary', // Emerald Green
     'exam': 'border-l-destructive', // Ruby Red
     'personal': 'border-l-secondary', // Emerald Green
@@ -74,7 +74,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
       </div>
-      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[32rem]"> {/* Re-added max-h */}
+      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[32rem]">
         {!hasAnyEvents && (
              <div className="text-center py-10 flex-grow flex flex-col justify-center items-center h-full">
                 <PixelMapIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" />
@@ -115,7 +115,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                         "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm focus-within:ring-2 focus-within:ring-ring focus-visible:outline-none",
                         "bg-black/[.05] hover:bg-muted/30",
                         eventColorClass,
-                        isKeyTask && "border-primary ring-1 ring-primary/50",
+                        isKeyTask && "border-primary ring-1 ring-primary/50", // Uses primary (Neon Blue) for key task highlight
                         "border-2 border-transparent hover:border-accent/30"
                       )}
                       tabIndex={0}
