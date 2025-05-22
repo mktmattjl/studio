@@ -8,25 +8,25 @@
     /* Heroic Fantasy Dark Theme - Base: Deep Stone Grays, Dark Wood Browns, Parchment Creams for Text */
     /* Main Backgrounds */
     --background: 195 7% 18%; /* #2A3132 - Dark Cool Grey */
-    --card: 35 35% 70%; /* #C6B8A9 - Darker Brown for cards/popovers */
-    --card-border-highlight: 35 35% 65%; /* Slightly darker for card top border */
-    --popover: 35 35% 70%; /* Matches Card */
+    --card: 195 7% 22%; /* #313839 - Slightly Lighter Dark Cool Grey for cards/popovers */
+    --card-border-highlight: 195 7% 25%; /* Slightly darker for card top border */
+    --popover: 195 7% 22%; /* Matches Card */
 
     /* Text Colors */
     --foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --card-foreground: 30 25% 12%; /* #26211E - Dark Sepia/Brown for text on light brown cards */
-    --popover-foreground: 30 25% 12%; /* Matches Card Foreground */
-    --muted-foreground: 0 0% 70%; /* #B3B3B3 - Light Grey */
+    --card-foreground: 0 0% 95%;
+    --popover-foreground: 0 0% 95%;
+    --muted-foreground: 0 0% 70%; /* #B3B3B3 - Light Grey for less emphasized text */
     --text-accent-thematic: 25 31% 67%; /* #C5A690 - Light Beige/Brown (for thematic text and some borders) */
 
     /* Accent Colors (Backgrounds for interactive elements if text on them is white) */
-    --primary: 270 40% 55%; /* #8C66B3 - Amethyst Purple (NEW PRIMARY) */
+    --primary: 270 40% 55%; /* #8C66B3 - Amethyst Purple (PRIMARY ACCENT) */
     --primary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on primary buttons) */
-    
-    --secondary: 195 7% 35%; /* #4F5B5C - Neutral Medium-Dark Grey (for secondary button BGs) */
+
+    --secondary: 145 50% 50%; /* #40BF80 - Emerald Green (SECONDARY ACCENT) */
     --secondary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on secondary buttons) */
 
-    --accent: 270 40% 55%; /* #8C66B3 - Amethyst Purple (for general hovers, matches new primary) */
+    --accent: 270 40% 55%; /* #8C66B3 - Amethyst Purple (for general hovers, matches primary) */
     --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on purple hovers) */
 
     /* Destructive Actions */
@@ -34,71 +34,71 @@
     --destructive-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
 
     /* Borders & Inputs */
-    --border: 195 7% 25%; /* #3A4243 - Subtle Border */
+    --border: 195 7% 25%; /* #3A4243 - Subtle Border for general use */
     --input: 195 7% 15%; /* #232829 - Very Dark Input Background */
     --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
     --ring: 270 40% 55%; /* Amethyst Purple for focus ring */
-    
+
     --radius: 0.375rem; /* Slightly less rounded for a more "solid" feel */
 
     /* Custom Thematic Colors */
     --gold-accent: 40 70% 55%; /* #E0A040 - Gold for coins, slightly desaturated */
-    --xp-bar-color: var(--primary); /* Now Amethyst Purple */
-    
+    --xp-bar-color: var(--primary); /* Amethyst Purple for XP bar */
+
     --parchment-bg: 40 35% 85%; /* #E2DECF - Aged Parchment for calendar events */
     --parchment-text: 30 20% 25%; /* #4D423A - Dark Sepia/Brown text on parchment */
 
     /* Chart Colors */
     --chart-1: var(--primary);   /* Amethyst Purple */
-    --chart-2: 195 7% 35%;  /* Neutral Medium-Dark Grey */
-    --chart-3: 25 31% 67%;   /* Light Beige/Brown (Thematic Text Accent) */
+    --chart-2: var(--secondary); /* Emerald Green */
+    --chart-3: var(--text-accent-thematic); /* Light Beige/Brown */
     --chart-4: 195 7% 50%;  /* Mid Grey */
-    --chart-5: 40 70% 55%;   /* Gold */
+    --chart-5: var(--gold-accent);   /* Gold */
   }
 
-  .dark { 
+  .dark {
     /* All :root variables define the dark theme directly now */
     --background: 195 7% 18%;
-    --foreground: 0 0% 95%; 
-    --card: 35 35% 70%;
-    --card-foreground: 30 25% 12%; 
-    --card-border-highlight: 35 35% 65%;
-    --popover: 35 35% 70%;
-    --popover-foreground: 30 25% 12%; 
-    
-    --primary: 270 40% 55%; 
-    --primary-foreground: 0 0% 95%; 
-    
-    --secondary: 195 7% 35%; 
-    --secondary-foreground: 0 0% 95%; 
-    
+    --foreground: 0 0% 95%;
+    --card: 195 7% 22%;
+    --card-foreground: 0 0% 95%;
+    --card-border-highlight: 195 7% 25%;
+    --popover: 195 7% 22%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 270 40% 55%;
+    --primary-foreground: 0 0% 95%;
+
+    --secondary: 145 50% 50%;
+    --secondary-foreground: 0 0% 95%;
+
     --muted: 195 7% 25%;
-    --muted-foreground: 0 0% 70%; 
-    
-    --accent: 270 40% 55%; 
-    --accent-foreground: 0 0% 95%; 
-    
-    --destructive: 0 70% 45%; 
-    --destructive-foreground: 0 0% 95%; 
-    
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 270 40% 55%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 95%;
+
     --border: 195 7% 25%;
     --input: 195 7% 15%;
-    --input-foreground: 0 0% 95%; 
+    --input-foreground: 0 0% 95%;
     --ring: 270 40% 55%;
-    
+
     --radius: 0.375rem;
 
-    --text-accent-thematic: 25 31% 67%; 
-    --gold-accent: 40 70% 55%; 
-    --xp-bar-color: var(--primary); 
-    --parchment-bg: 40 35% 85%; 
+    --text-accent-thematic: 25 31% 67%;
+    --gold-accent: 40 70% 55%;
+    --xp-bar-color: var(--primary);
+    --parchment-bg: 40 35% 85%;
     --parchment-text: 30 20% 25%;
 
-    --chart-1: var(--primary);  
-    --chart-2: 195 7% 35%;  
-    --chart-3: 25 31% 67%;  
-    --chart-4: 195 7% 50%;    
-    --chart-5: 40 70% 55%;
+    --chart-1: var(--primary);
+    --chart-2: var(--secondary);
+    --chart-3: var(--text-accent-thematic);
+    --chart-4: 195 7% 50%;
+    --chart-5: var(--gold-accent);
   }
 }
 
@@ -108,75 +108,76 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03"; 
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.7; 
+    line-height: 1.7; /* Increased base line-height */
   }
   /* Ensure font-pixel uses the correct CSS variable from layout.tsx */
   .font-pixel {
-    font-family: var(--font-pixelify-sans), theme('fontFamily.mono'); 
-    text-rendering: optimizeSpeed; 
-    image-rendering: pixelated; 
-    image-rendering: -moz-crisp-edges; 
-    image-rendering: crisp-edges; 
-    -ms-interpolation-mode: nearest-neighbor; 
+    font-family: var(--font-pixelify-sans), theme('fontFamily.mono');
+    text-rendering: optimizeSpeed;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
   }
 
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
-  
-  a:not(.button):not([class*="no-underline"]):not([class*="text-primary"]):not([class*="text-destructive"]):not([class*="text-foreground"]):not([class*="text-muted-foreground"]) { 
-    @apply text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] hover:underline; 
+
+  /* General link styling, not overriding component-specific link styles */
+  a:not(.button):not([class*="no-underline"]):not([class*="text-primary"]):not([class*="text-destructive"]):not([class*="text-foreground"]):not([class*="text-muted-foreground"]) {
+    @apply text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] hover:underline;
   }
 }
 
 @layer components {
   /* Primary buttons now use primary accent bg, primary-foreground text */
-  .btn-primary-action { 
+  .btn-primary-action {
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
   /* Secondary buttons use secondary accent bg, secondary-foreground text */
-  .btn-secondary-action { 
+  .btn-secondary-action {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
   /* Destructive buttons use their own destructive colors */
-  .button[data-variant="destructive"] { 
+  .button[data-variant="destructive"] {
      @apply focus-visible:ring-destructive;
   }
 }
 
 @layer utilities {
   .styled-scrollbar::-webkit-scrollbar {
-    width: 10px; 
+    width: 10px;
     height: 10px;
   }
   .styled-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.6); 
-    border-radius: var(--radius); 
-    border: 2px solid hsl(var(--card)); 
+    background: hsl(var(--muted-foreground) / 0.6);
+    border-radius: var(--radius);
+    border: 2px solid hsl(var(--card));
   }
   .styled-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--muted-foreground) / 0.8);
   }
   .styled-scrollbar::-webkit-scrollbar-track {
-    background: hsl(var(--background) / 0.7); 
+    background: hsl(var(--background) / 0.7);
     border-radius: var(--radius);
   }
 
   /* Quiz Animations */
-  @keyframes pulse-correct { 
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } 
+  @keyframes pulse-correct {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } /* Secondary is Emerald Green */
     50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
   }
   .animate-button-correct-pulse {
     animation: pulse-correct 0.6s ease-in-out;
   }
 
-  @keyframes glow-card-correct { 
+  @keyframes glow-card-correct {
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }  
+    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); } /* Secondary is Emerald Green */
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;
@@ -192,6 +193,3 @@
     animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
-    
-
-    
