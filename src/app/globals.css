@@ -7,10 +7,10 @@
   :root {
     /* Heroic Fantasy Dark Theme - Base: Deep Stone Grays, Dark Wood Browns, Parchment Creams for Text */
     /* Main Backgrounds */
-    --background: 195 7% 18%; /* #2A3132 - Dark Cool Grey */
-    --card: 195 7% 22%; /* #313839 - Slightly Lighter Dark Cool Grey for cards/popovers */
-    --card-border-highlight: 195 7% 25%; /* Slightly darker for card top border */
-    --popover: 195 7% 22%; /* Matches Card */
+    --background: 220 35% 12%; /* #161B26 - Dark Navy Blue */
+    --card: 220 30% 17%; /* #1E2636 - Slightly Lighter Dark Navy Blue for cards/popovers */
+    --card-border-highlight: 220 30% 20%; /* #242D40 - Slightly lighter for card top border */
+    --popover: 220 30% 17%; /* Matches Card */
 
     /* Text Colors */
     --foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
@@ -34,8 +34,8 @@
     --destructive-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
 
     /* Borders & Inputs */
-    --border: 195 7% 25%; /* #3A4243 - Subtle Border for general use */
-    --input: 195 7% 15%; /* #232829 - Very Dark Input Background */
+    --border: 220 25% 22%; /* #293347 - Subtle Border for general use */
+    --input: 220 35% 10%; /* #121620 - Very Dark Input Background */
     --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
     --ring: 270 40% 55%; /* Amethyst Purple for focus ring */
 
@@ -54,16 +54,19 @@
     --chart-3: var(--text-accent-thematic); /* Light Beige/Brown */
     --chart-4: 195 7% 50%;  /* Mid Grey */
     --chart-5: var(--gold-accent);   /* Gold */
+
+    /* Header height variable for calculations */
+    /* --header-height: 4rem; /* 64px to match h-16 in Header */
   }
 
   .dark {
     /* All :root variables define the dark theme directly now */
-    --background: 195 7% 18%;
+    --background: 220 35% 12%; /* #161B26 - Dark Navy Blue */
     --foreground: 0 0% 95%;
-    --card: 195 7% 22%;
+    --card: 220 30% 17%; /* #1E2636 - Slightly Lighter Dark Navy Blue */
     --card-foreground: 0 0% 95%;
-    --card-border-highlight: 195 7% 25%;
-    --popover: 195 7% 22%;
+    --card-border-highlight: 220 30% 20%;
+    --popover: 220 30% 17%;
     --popover-foreground: 0 0% 95%;
 
     --primary: 270 40% 55%;
@@ -72,7 +75,7 @@
     --secondary: 145 50% 50%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 195 7% 25%;
+    --muted: 220 30% 20%; /* Adjusted for navy theme */
     --muted-foreground: 0 0% 70%;
 
     --accent: 270 40% 55%;
@@ -81,8 +84,8 @@
     --destructive: 0 70% 45%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 195 7% 25%;
-    --input: 195 7% 15%;
+    --border: 220 25% 22%; /* #293347 */
+    --input: 220 35% 10%; /* #121620 */
     --input-foreground: 0 0% 95%;
     --ring: 270 40% 55%;
 
@@ -99,6 +102,8 @@
     --chart-3: var(--text-accent-thematic);
     --chart-4: 195 7% 50%;
     --chart-5: var(--gold-accent);
+
+     /* --header-height: 4rem; */
   }
 }
 
@@ -193,3 +198,4 @@
     animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
+
