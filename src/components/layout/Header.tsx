@@ -15,13 +15,13 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Preserving existing Pixel Art Fantasy Icons
+// Fantasy Pixel Art Icons
 import { 
   PixelCompassIcon,
   PixelScrollIcon,
   PixelMapIcon,
   PixelMagicOrbIcon,
-  PixelGoldCoinIcon, // Gold color is hardcoded in SVG, will stand out
+  PixelGoldCoinIcon,
   PixelBellIcon, 
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon
@@ -43,12 +43,12 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Cerebro title text color now uses --foreground (Icy Light Blue) for better contrast */}
-          <Link href="/" className="font-pixel text-2xl font-bold text-foreground hover:text-foreground/80 transition-colors">
+          {/* Cerebro title text color now uses --primary (Bright Yellow) */}
+          <Link href="/" className="font-pixel text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            {/* NavItem active state uses new primary (Light Grey) */}
+            {/* NavItem active state uses new primary (Bright Yellow) */}
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
             <NavItem href="/flashcards" icon={<PixelScrollIcon className="w-5 h-5" />}>Flashcards</NavItem>
             <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
@@ -58,8 +58,8 @@ export function Header() {
         
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
-            // Coin display text uses gold accent for thematic color
-            <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-gold-accent px-3 py-1.5 rounded-md border border-gold-accent/50">
+            // Coin display uses its internal gold/yellow fill
+            <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
               <PixelGoldCoinIcon className="w-5 h-5" /> 
               <span className="font-pixel text-base">{coins}</span>
             </div>
@@ -99,7 +99,7 @@ export function Header() {
               <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-primary">
                 <LogIn className="mr-1.5 h-4 w-4" /> Log In
               </Button>
-              {/* Sign Up button uses .btn-primary-action (Light Grey bg) */}
+              {/* Sign Up button uses .btn-primary-action (Bright Yellow bg) */}
               <Button onClick={() => router.push('/signup')} className="btn-primary-action text-sm">
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>

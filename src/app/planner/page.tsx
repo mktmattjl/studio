@@ -21,15 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using new vibrant accents
-// Primary: Electric Blue, Secondary: Vibrant Purple
+// Event Type Colors using new Bright Yellow primary and Dark Grey secondary accents
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Electric Blue
+  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Yellow with dark text
   deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
-  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Vibrant Purple
+  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Dark Grey with light text
   exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
-  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Electric Blue
-  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Vibrant Purple
+  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Yellow with dark text
+  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Dark Grey with light text
 };
 
 

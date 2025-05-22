@@ -15,14 +15,13 @@ import {
 } from '@/components/icons/fantasy'; 
 
 // Color mapping for event types (left border)
-// Using new Primary (Electric Blue) and Secondary (Vibrant Purple) accents
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
-    'deadline': 'border-l-destructive', // Kept red for high importance
-    'meeting': 'border-l-primary',      // Electric Blue
-    'class': 'border-l-primary',          // Electric Blue
-    'study_session': 'border-l-secondary',  // Vibrant Purple
-    'exam': 'border-l-destructive', // Kept red for high importance
-    'personal': 'border-l-secondary',        // Vibrant Purple
+    'deadline': 'border-l-destructive', 
+    'meeting': 'border-l-primary',      // Yellow
+    'class': 'border-l-primary',          // Yellow
+    'study_session': 'border-l-secondary',  // Dark Grey
+    'exam': 'border-l-destructive', 
+    'personal': 'border-l-secondary',        // Dark Grey
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -70,7 +69,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
       <div className="p-4 sm:p-6 mb-0 border-b border-border">
-        <h1 className="text-2xl sm:text-3xl font-pixel text-primary"> 
+        <h1 className="text-2xl sm:text-3xl font-pixel text-foreground"> 
           {title}
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
@@ -93,7 +92,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             <div key={groupName}>
               <h3 className={cn(
                 "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
-                groupName === "Today" ? "text-primary" : "text-foreground" 
+                groupName === "Today" ? "text-primary" : "text-foreground" // Today header uses Yellow
                 )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
@@ -114,7 +113,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                       key={event.id}
                       className={cn(
                         "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm focus-within:ring-2 focus-within:ring-ring focus-visible:outline-none", 
-                        "bg-black/[.05] hover:bg-card/70", 
+                        "bg-black/[.05] hover:bg-muted/30", 
                         eventColorClass, 
                         isKeyTask && "border-primary ring-1 ring-primary/50", 
                         "border-2 border-transparent hover:border-accent/30" 
