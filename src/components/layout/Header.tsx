@@ -15,7 +15,7 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Fantasy Pixel Art Icons - Primary color will affect some of these if they use currentColor
+// Fantasy Pixel Art Icons
 import { 
   PixelCompassIcon,
   PixelScrollIcon,
@@ -43,12 +43,12 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Cerebro title text color now uses --primary (new light beige/brown) */}
-          <Link href="/" className="font-pixel text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
+          {/* Cerebro title text color now uses thematic text accent */}
+          <Link href="/" className="font-pixel text-2xl font-bold text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] transition-colors">
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            {/* NavItem active state uses new primary (new light beige/brown) */}
+            {/* NavItem active state uses new primary (dark brown) bg, off-white text */}
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
             <NavItem href="/flashcards" icon={<PixelScrollIcon className="w-5 h-5" />}>Flashcards</NavItem>
             <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
@@ -60,8 +60,8 @@ export function Header() {
           {currentUser && (
             // Coin display uses its internal gold/yellow fill
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              <PixelGoldCoinIcon className="w-5 h-5" /> 
-              <span className="font-pixel text-base">{coins}</span>
+              <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" /> 
+              <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
@@ -78,14 +78,14 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-popover border-border text-popover-foreground rounded-md shadow-lg w-48">
-                <DropdownMenuLabel className="text-sm font-medium font-pixel">
+                <DropdownMenuLabel className="text-sm font-medium font-pixel text-popover-foreground">
                   {currentUser.email}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-border/50" />
-                <DropdownMenuItem onClick={() => router.push('/profile')} className="cursor-pointer hover:bg-muted/50">
+                <DropdownMenuItem onClick={() => router.push('/profile')} className="cursor-pointer hover:bg-muted/50 text-popover-foreground">
                   <PixelFantasyAvatarIcon className="mr-2 h-4 w-4" /> Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer hover:bg-muted/50">
+                <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer hover:bg-muted/50 text-popover-foreground">
                   <PixelFantasySettingsIcon className="mr-2 h-4 w-4" /> Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-border/50"/>
@@ -96,10 +96,10 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-primary">
+              <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-[hsl(var(--text-accent-thematic))]">
                 <LogIn className="mr-1.5 h-4 w-4" /> Log In
               </Button>
-              {/* Sign Up button uses .btn-primary-action (new light beige/brown bg) */}
+              {/* Sign Up button uses .btn-primary-action (dark brown bg, off-white text) */}
               <Button onClick={() => router.push('/signup')} className="btn-primary-action text-sm">
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>

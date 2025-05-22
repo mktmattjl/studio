@@ -5,92 +5,100 @@
 
 @layer base {
   :root {
-    --background: 195 7% 18%; /* #2A3132 - Dark Cool Grey */
-    --foreground: 208 27% 64%; /* #90AFC5 - Light Blue/Grey Text */
-
-    --card: 195 7% 22%; /* #313839 - Slightly Lighter Dark Cool Grey for Cards */
-    --card-foreground: 208 27% 64%; /* #90AFC5 */
+    /* Heroic Fantasy Dark Theme - Base: Deep Stone Grays, Dark Wood Browns, Parchment Creams for Text */
+    /* Main Backgrounds */
+    --background: 195 7% 18%; /* #2A3132 - Dark Cool Grey (Previously 220 10% 10%) */
+    --card: 195 7% 22%; /* #313839 - Slightly Lighter Dark Cool Grey for Cards (Previously 35 35% 70%) */
     --card-border-highlight: 195 7% 25%; /* Slightly lighter than card for top border */
-
     --popover: 195 7% 22%; /* Similar to Card */
-    --popover-foreground: 208 27% 64%; /* #90AFC5 */
 
-    /* Primary Accent: New Light Beige/Brown */
-    --primary: 25 31% 67%; /* #C5A690 */
-    --primary-foreground: 25 25% 20%; /* Dark Brown for text on light beige/brown */
+    /* Text Colors */
+    --foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW) */
+    --card-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW) */
+    --popover-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW) */
+    --muted-foreground: 0 0% 70%; /* #B3B3B3 - Light Grey (NEW) */
+    --text-accent-thematic: 25 31% 67%; /* #C5A690 - Light Beige/Brown (NEW - for thematic text) */
+
+    /* Accent Colors (Backgrounds for interactive elements if text on them is white) */
+    --primary: 30 30% 30%; /* #665240 - Dark Brown (Reverted - for primary button BGs) */
+    --primary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW - for text on primary buttons) */
     
-    /* Secondary Accent: Neutral Medium-Dark Grey */
-    --secondary: 195 7% 35%; 
-    --secondary-foreground: 208 27% 64%; /* #90AFC5 */
+    --secondary: 195 7% 35%; /* #4F5B5C - Neutral Medium-Dark Grey (for secondary button BGs) */
+    --secondary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW - for text on secondary buttons) */
 
-    --muted: 195 7% 25%; /* Darker Muted Shade */
-    --muted-foreground: 208 20% 50%; /* Darker version of #90AFC5 */
+    --accent: 270 40% 55%; /* #8C66B3 - Amethyst Purple (for general hovers) */
+    --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW - for text on purple hovers) */
 
-    /* Accent (for hovers on neutral elements, etc.) uses Secondary Accent */
-    --accent: 195 7% 35%; 
-    --accent-foreground: 208 27% 64%; 
+    /* Destructive Actions */
+    --destructive: 0 70% 45%; /* #CC3D3D - Muted Red */
+    --destructive-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW) */
 
-    --destructive: 0 70% 45%; /* Muted Red */
-    --destructive-foreground: 0 0% 100%; /* White for destructive text */
-
-    --border: 195 7% 25%; /* Subtle Border */
-    --input: 195 7% 15%; /* Very Dark Input Background */
-    --input-foreground: 208 27% 64%; /* #90AFC5 */
-    --ring: 25 31% 67%; /* New Light Beige/Brown for Focus Ring */
+    /* Borders & Inputs */
+    --border: 195 7% 25%; /* #3A4243 - Subtle Border */
+    --input: 195 7% 15%; /* #232829 - Very Dark Input Background */
+    --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (NEW) */
+    --ring: 30 30% 40%; /* #806652 - Focus Ring, Dark Brown variant */
     
-    --radius: 0.5rem; /* Rounded corners */
+    --radius: 0.375rem; /* Slightly less rounded for a more "solid" feel */
 
     /* Custom Thematic Colors */
-    --gold-accent: 45 80% 55%; /* Gold for coins - keeping this distinct */
-    --xp-bar-color: 25 31% 67%; /* New Light Beige/Brown for XP Bar Fill */
+    --gold-accent: 40 70% 55%; /* #E0A040 - Gold for coins, slightly desaturated */
+    --xp-bar-color: 30 30% 30%; /* #665240 - Dark Brown (matches primary) */
     
-    --parchment-bg: 35 30% 75%; /* #CDBAAB - For calendar event blocks */
-    --parchment-text: 30 25% 12%; /* #2D231D - Dark brown text on parchment */
+    --parchment-bg: 40 35% 85%; /* #E2DECF - Aged Parchment for calendar events */
+    --parchment-text: 30 20% 25%; /* #4D423A - Dark Sepia/Brown text on parchment */
 
     /* Chart Colors */
-    --chart-1: 25 31% 67%;   /* New Light Beige/Brown (Primary) */
-    --chart-2: 208 27% 64%;  /* Light Blue/Grey (Secondary/Text) */
-    --chart-3: 195 7% 50%;  /* Mid Grey */
-    --chart-4: 195 7% 30%;   /* Darker Grey */
-    --chart-5: 45 80% 55%;   /* Gold */
+    --chart-1: 30 30% 30%;   /* Dark Brown */
+    --chart-2: 195 7% 35%;  /* Neutral Medium-Dark Grey */
+    --chart-3: 270 40% 55%;   /* Amethyst Purple */
+    --chart-4: 195 7% 50%;  /* Mid Grey */
+    --chart-5: 40 70% 55%;   /* Gold */
   }
 
   .dark { 
     /* All :root variables define the dark theme directly now */
     --background: 195 7% 18%;
-    --foreground: 208 27% 64%;
+    --foreground: 0 0% 95%; /* #F2F2F2 */
     --card: 195 7% 22%;
-    --card-foreground: 208 27% 64%;
+    --card-foreground: 0 0% 95%; /* #F2F2F2 */
     --card-border-highlight: 195 7% 25%;
     --popover: 195 7% 22%;
-    --popover-foreground: 208 27% 64%;
-    --primary: 25 31% 67%; 
-    --primary-foreground: 25 25% 20%; 
+    --popover-foreground: 0 0% 95%; /* #F2F2F2 */
+    
+    --primary: 30 30% 30%; 
+    --primary-foreground: 0 0% 95%; /* #F2F2F2 */
+    
     --secondary: 195 7% 35%; 
-    --secondary-foreground: 208 27% 64%; 
+    --secondary-foreground: 0 0% 95%; /* #F2F2F2 */
+    
     --muted: 195 7% 25%;
-    --muted-foreground: 208 20% 50%;
-    --accent: 195 7% 35%; 
-    --accent-foreground: 208 27% 64%; 
+    --muted-foreground: 0 0% 70%; /* #B3B3B3 */
+    
+    --accent: 270 40% 55%; 
+    --accent-foreground: 0 0% 95%; /* #F2F2F2 */
+    
     --destructive: 0 70% 45%; 
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 95%; /* #F2F2F2 */
+    
     --border: 195 7% 25%;
     --input: 195 7% 15%;
-    --input-foreground: 208 27% 64%;
-    --ring: 25 31% 67%;
+    --input-foreground: 0 0% 95%; /* #F2F2F2 */
+    --ring: 30 30% 40%;
     
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
-    --gold-accent: 45 80% 55%; 
-    --xp-bar-color: 25 31% 67%; 
-    --parchment-bg: 35 30% 75%; 
-    --parchment-text: 30 25% 12%;
+    --text-accent-thematic: 25 31% 67%; /* #C5A690 */
+    --gold-accent: 40 70% 55%; 
+    --xp-bar-color: 30 30% 30%; 
+    --parchment-bg: 40 35% 85%; 
+    --parchment-text: 30 20% 25%;
 
-    --chart-1: 25 31% 67%;  
-    --chart-2: 208 27% 64%;  
-    --chart-3: 195 7% 50%;  
-    --chart-4: 195 7% 30%;    
-    --chart-5: 45 80% 55%;  
+    --chart-1: 30 30% 30%;  
+    --chart-2: 195 7% 35%;  
+    --chart-3: 270 40% 55%;  
+    --chart-4: 195 7% 50%;    
+    --chart-5: 40 70% 55%;  
   }
 }
 
@@ -116,18 +124,18 @@
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
-  /* Links should now use the new primary color if they were using the old one */
+  /* Links now use thematic text accent color for better visibility on dark background */
   a:not(.button):not([class*="no-underline"]) { 
-    @apply text-primary hover:text-primary/80 hover:underline; 
+    @apply text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] hover:underline; 
   }
 }
 
 @layer components {
-  /* Primary buttons now use the new light beige/brown, with dark text */
+  /* Primary buttons now use dark brown bg, off-white text */
   .btn-primary-action { 
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
-  /* Secondary buttons remain neutral grey */
+  /* Secondary buttons use neutral grey bg, off-white text */
   .btn-secondary-action { 
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
@@ -157,7 +165,7 @@
 
   /* Quiz Animations */
   @keyframes pulse-correct { 
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } /* Uses secondary accent for quiz correct */
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } 
     50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
   }
   .animate-button-correct-pulse {
@@ -166,7 +174,7 @@
 
   @keyframes glow-card-correct { 
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }  /* Uses secondary accent for quiz correct */
+    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }  
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;

@@ -21,14 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using new theme: Primary (New Light Beige/Brown), Secondary (Medium-Dark Grey)
+// Event Type Colors using Heroic Fantasy Theme: Thematic Accent (Light Beige/Brown), Secondary (Neutral Grey)
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground', 
-  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', 
-  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', 
-  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', 
-  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', 
-  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', 
+  class: 'bg-parchment-bg border-l-[hsl(var(--text-accent-thematic))] text-parchment-text', 
+  deadline: 'bg-parchment-bg border-l-destructive text-parchment-text', 
+  study_session: 'bg-parchment-bg border-l-secondary text-parchment-text', 
+  exam: 'bg-parchment-bg border-l-destructive text-parchment-text', 
+  meeting: 'bg-parchment-bg border-l-[hsl(var(--text-accent-thematic))] text-parchment-text', 
+  personal: 'bg-parchment-bg border-l-secondary text-parchment-text', 
 };
 
 
@@ -162,7 +162,7 @@ export default function PlannerPage() {
       <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-pixel text-foreground">The Grand Almanac</h1>
+            <h1 className="text-2xl md:text-3xl font-pixel text-[hsl(var(--text-accent-thematic))]">The Grand Almanac</h1>
             <p className="text-muted-foreground mt-1">Chart thy quests, trials, and scholarly pursuits.</p>
           </div>
           <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
