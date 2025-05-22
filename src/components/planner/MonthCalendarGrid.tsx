@@ -16,7 +16,7 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
   const days = getDaysInMonthGrid(currentDate);
 
   const getEventsForDay = (day: Date) => {
-    return events.filter(event => isSameDay(event.startTime, day)).sort((a,b) => a.startTime.getTime() - b.startTime.getTime());
+    return events.filter(event => event.startTime && isSameDay(event.startTime, day)).sort((a,b) => a.startTime.getTime() - b.startTime.getTime());
   };
 
   return (
@@ -38,18 +38,18 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
           const isCurrentMonth = day ? isSameMonth(day, currentDate) : false;
           const isCurrentDay = day ? isToday(day) : false;
           const dayEvents = day ? getEventsForDay(day) : [];
-
+          
           return (
             <div
               key={day ? day.toISOString() : `empty-${index}`}
               className={cn(
-                'min-h-[6rem] sm:min-h-[7rem] md:min-h-[8rem] border-b border-r border-border p-1.5 sm:p-2 flex flex-col overflow-hidden relative group', 
-                isCurrentMonth ? 'bg-card hover:bg-muted/30' : 'bg-muted/20 opacity-70 hover:bg-muted/40',
-                isCurrentDay && 'bg-primary/10 ring-2 ring-inset ring-primary/50', // Enhanced current day highlight
+                'min-h-[5rem] sm:min-h-[6rem] md:min-h-[7rem] border-b border-r border-border p-1.5 sm:p-2 flex flex-col overflow-hidden relative group', 
+                isCurrentMonth ? 'bg-card hover:bg-card/80' : 'bg-background/50 opacity-70 hover:bg-background/70',
+                isCurrentDay && 'bg-primary/20 ring-2 ring-inset ring-primary', // Primary Accent for today highlight
                 day && onDateClick && 'cursor-pointer transition-colors duration-150 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none'
               )}
               onClick={() => day && onDateClick?.(day)}
-              tabIndex={day && onDateClick ? 0 : undefined} // Make day cell focusable
+              tabIndex={day && onDateClick ? 0 : undefined} 
             >
               {day && (
                 <>
@@ -62,29 +62,29 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
                     {format(day, 'd')}
                   </span>
                   <div className="space-y-1 overflow-y-auto text-xs max-h-[calc(100%-2rem)] styled-scrollbar flex-grow pr-1"> 
-                    {dayEvents.slice(0, 3).map(event => (  // Show up to 3 events initially
+                    {dayEvents.slice(0, 2).map(event => {
+                       const eventStyleClasses = event.color || 'bg-muted/30 border-l-muted';
+                      return (
                       <div
                         key={event.id}
                         title={`${event.title} (${format(event.startTime, 'p')})`}
                         className={cn(
-                            'px-1.5 py-1 rounded-sm border-l-2 text-[0.7rem] sm:text-[0.75rem] leading-tight truncate shadow-sm',
-                            'bg-parchment-bg text-parchment-text border-border', // Parchment style with consistent border
-                            event.color.replace('bg-', 'border-l-'), // Use event color for left border
-                            onEventClick ? 'cursor-pointer group-hover:opacity-80 hover:brightness-110 hover:shadow-lg focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : '',
-                            "shadow-[1px_1px_3px_rgba(0,0,0,0.2)]" // Subtle thematic shadow
+                            'px-1.5 py-1 rounded-sm border-l-2 text-[0.7rem] sm:text-[0.75rem] leading-tight truncate shadow-sm text-foreground',
+                            eventStyleClasses, 
+                            onEventClick ? 'cursor-pointer group-hover:opacity-80 hover:brightness-125 hover:shadow-lg focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : ''
                            )}
                         onClick={(e) => {
                             e.stopPropagation(); 
                             onEventClick?.(event);
                         }}
-                        tabIndex={onEventClick ? 0 : undefined} // Make event focusable
+                        tabIndex={onEventClick ? 0 : undefined} 
                       >
                         {event.title}
                       </div>
-                    ))}
-                    {dayEvents.length > 3 && (
+                    )})}
+                    {dayEvents.length > 2 && (
                         <div className="text-muted-foreground text-[0.65rem] sm:text-[0.7rem] mt-1 px-0.5"> 
-                            + {dayEvents.length - 3} more
+                            + {dayEvents.length - 2} more
                         </div>
                     )}
                   </div>
@@ -97,3 +97,4 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
     </div>
   );
 }
+    

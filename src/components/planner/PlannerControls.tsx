@@ -28,13 +28,14 @@ export function PlannerControls({
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4 sm:mb-6">
       <div className="flex items-center gap-2">
-        <Button onClick={onPrev} variant="outline" size="icon" aria-label={`Previous ${viewMode}`} className="rounded-md p-2 hover:bg-accent/20 hover:border-accent">
+        {/* Navigation buttons use outline style with accent hover */}
+        <Button onClick={onPrev} variant="outline" size="icon" aria-label={`Previous ${viewMode}`} className="rounded-md p-2 hover:bg-accent/20 hover:border-accent border-secondary">
           <PixelChevronLeftIcon className="w-5 h-5" />
         </Button>
-        <Button onClick={onNext} variant="outline" size="icon" aria-label={`Next ${viewMode}`} className="rounded-md p-2 hover:bg-accent/20 hover:border-accent">
+        <Button onClick={onNext} variant="outline" size="icon" aria-label={`Next ${viewMode}`} className="rounded-md p-2 hover:bg-accent/20 hover:border-accent border-secondary">
           <PixelChevronRightIcon className="w-5 h-5" />
         </Button>
-        <Button onClick={onToday} variant="outline" size="default" className="rounded-md px-4 font-pixel hover:bg-accent/20 hover:border-accent">
+        <Button onClick={onToday} variant="outline" size="default" className="rounded-md px-4 font-pixel hover:bg-accent/20 hover:border-accent border-secondary">
           Today's Scroll
         </Button>
       </div>
@@ -68,3 +69,4 @@ export function PlannerControls({
     </div>
   );
 }
+    

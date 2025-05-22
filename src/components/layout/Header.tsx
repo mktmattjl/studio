@@ -15,17 +15,20 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Fantasy Pixel Art Icons
-import { PixelCompassIcon } from '@/components/icons/fantasy/PixelCompassIcon';
-import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon'; // For Flashcards
-import { PixelMapIcon } from '@/components/icons/fantasy/PixelMapIcon'; // For Planner
-import { PixelMagicOrbIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon'; // For AI Gen
-import { PixelGoldCoinIcon } from '@/components/icons/fantasy/PixelGoldCoinIcon';
-import { PixelBellIcon } from '@/components/icons/PixelBellIcon'; // Keep or replace with fantasy bell
-import { PixelFantasyAvatarIcon } from '@/components/icons/fantasy/PixelFantasyAvatarIcon';
-import { PixelFantasySettingsIcon } from '@/components/icons/fantasy/PixelFantasySettingsIcon';
+// Preserving existing Pixel Art Fantasy Icons
+import { 
+  PixelCompassIcon,
+  PixelScrollIcon,
+  PixelMapIcon,
+  PixelMagicOrbIcon,
+  PixelGoldCoinIcon,
+  PixelBellIcon, 
+  PixelFantasyAvatarIcon,
+  PixelFantasySettingsIcon
+} from '@/components/icons/fantasy';
 
-import { LogOut, LogIn, UserPlus } from 'lucide-react'; // Keep for dropdown for now
+// Lucide icons for dropdown actions 
+import { LogOut, LogIn, UserPlus } from 'lucide-react'; 
 
 export function Header() {
   const { currentUser, logout } = useAuth();
@@ -40,6 +43,7 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
+          {/* Cerebro title text color from --primary (Bright Blue) */}
           <Link href="/" className="font-pixel text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             Cerebro
           </Link>
@@ -53,13 +57,14 @@ export function Header() {
         
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
+            // Coin display uses --gold-accent for text color
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-gold-accent px-3 py-1.5 rounded-md border border-gold-accent/50">
-              <PixelGoldCoinIcon className="w-5 h-5" />
+              <PixelGoldCoinIcon className="w-5 h-5" /> 
               <span className="font-pixel text-base">{coins}</span>
             </div>
           )}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
-            <PixelBellIcon className="w-5 h-5" /> {/* Consider a fantasy bell icon */}
+            <PixelBellIcon className="w-5 h-5" /> 
             <span className="sr-only">Notifications</span>
           </Button>
 
@@ -84,15 +89,16 @@ export function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-border/50"/>
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:bg-destructive/20 focus:text-destructive-foreground cursor-pointer hover:bg-destructive/10">
-                  <LogOut className="mr-2 h-4 w-4" /> Log Out
+                  <LogOut className="mr-2 h-4 w-4" /> Log Out 
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium">
+              <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-primary">
                 <LogIn className="mr-1.5 h-4 w-4" /> Log In
               </Button>
+              {/* Sign Up button uses .btn-primary-action (Bright Blue) */}
               <Button onClick={() => router.push('/signup')} className="btn-primary-action text-sm">
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>
@@ -103,5 +109,4 @@ export function Header() {
     </header>
   );
 }
-
     

@@ -15,15 +15,15 @@ interface QuickActionCardProps {
   title: string;
   href: string;
   Icon: ElementType;
-  iconBgClass?: string;
-  iconTextClass?: string;
+  iconBgClass?: string; // e.g., "bg-primary/10" (Primary Accent Blue tint)
+  iconTextClass?: string; // e.g., "text-primary" (Primary Accent Blue)
 }
 
 export function QuickActionCard({
   title,
   href,
   Icon,
-  iconBgClass = 'bg-primary/10',
+  iconBgClass = 'bg-primary/10', 
   iconTextClass = 'text-primary',
 }: QuickActionCardProps) {
   return (
@@ -37,18 +37,21 @@ export function QuickActionCard({
           <ContentCard
             className={cn(
               "group transition-all duration-150 ease-in-out hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center",
-              "hover:border-accent/70 border-2 border-transparent" 
+              "hover:border-accent/70 border-2 border-transparent" // Hover border uses Teal
             )}
             interactive 
             padding="p-2.5" 
             style={{ 
               width: '48px', 
               height: '48px',
-              boxShadow: "inset 2px 2px 0px hsl(var(--card) / 0.7), inset -2px -2px 0px hsl(var(--background) / 0.5), 1px 1px 2px hsl(var(--border))"
+              // Subtle shadow for dark theme
+              boxShadow: "0px 2px 4px hsl(var(--background) / 0.5)"
             }}
             elementType="div" 
           >
+            {/* Icon background uses low opacity primary or secondary accent */}
             <div className={cn("p-1 rounded-sm flex items-center justify-center", iconBgClass)}>
+              {/* Icon color uses primary or secondary accent */}
               <Icon className={cn('w-6 h-6 transition-transform group-hover:scale-110', iconTextClass)} />
             </div>
           </ContentCard>
@@ -57,10 +60,12 @@ export function QuickActionCard({
       <TooltipContent 
         side="top" 
         align="center" 
-        className="font-pixel bg-popover text-popover-foreground border-border shadow-lg rounded-sm" // Thematic tooltip
+        // Tooltip styled for dark theme
+        className="font-pixel bg-popover text-popover-foreground border-border shadow-lg rounded-sm"
       >
         <p>{title}</p>
       </TooltipContent>
     </Tooltip>
   );
 }
+    

@@ -9,7 +9,7 @@ import { PlannerControls, type PlannerViewMode } from '@/components/planner/Plan
 import { MonthCalendarGrid } from '@/components/planner/MonthCalendarGrid';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
-import { PixelQuillIcon } from '@/components/icons/fantasy/PixelQuillIcon';
+import { PixelQuillIcon } from '@/components/icons/fantasy'; 
 
 export interface PlannerEvent {
   id: string;
@@ -21,16 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Heroic Fantasy Jewel Tone event type colors
-// These classes will be used for borders on parchment backgrounds in the calendar grids.
-// The DashboardAgendaView uses its own direct hsl() mapping for its left borders.
+// Dark Theme Event Type Colors (Tailwind classes for event blocks)
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'border-primary bg-primary/10 text-primary-foreground', // Sapphire Blue
-  deadline: 'border-destructive bg-destructive/10 text-destructive-foreground', // Ruby Red
-  study_session: 'border-secondary bg-secondary/10 text-secondary-foreground', // Emerald Green
-  exam: 'border-gold-accent bg-gold-accent/10 text-gold-accent', // Gold
-  meeting: 'border-accent bg-accent/10 text-accent-foreground', // Amethyst Purple
-  personal: 'border-orange-500 bg-orange-500/10 text-orange-100', // A warm, distinct color
+  class: 'bg-primary/20 border-l-primary text-primary-foreground',              // Blue
+  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
+  study_session: 'bg-green-500/20 border-l-green-500 text-green-100',        // Distinct Green
+  exam: 'bg-orange-500/20 border-l-orange-500 text-orange-100',                // Orange
+  meeting: 'bg-secondary/20 border-l-secondary text-secondary-foreground',        // Teal
+  personal: 'bg-purple-600/20 border-l-purple-600 text-purple-100',          // Purple
 };
 
 
@@ -224,5 +222,4 @@ export default function PlannerPage() {
     </div>
   );
 }
-
     
