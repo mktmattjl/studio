@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Next.js Image component
 import { NavItem } from './NavItem';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,12 +19,12 @@ import { useRouter } from 'next/navigation';
 // Fantasy Pixel Art Icons
 import {
   PixelCompassIcon,
+  // PixelStackedDocumentsIcon, // No longer using this SVG for flashcards
   PixelMapIcon,
   PixelMagicOrbIcon,
   PixelGoldCoinIcon,
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon,
-  PixelStackedDocumentsIcon // Changed from PixelScrollIcon
 } from '@/components/icons/fantasy';
 import { PixelBellIcon } from '@/components/icons/PixelBellIcon';
 
@@ -44,13 +45,25 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Cerebro title text color now uses thematic text accent */}
           <Link href="/" className="font-pixel text-2xl font-bold text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] transition-colors">
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
-            <NavItem href="/flashcards" icon={<PixelStackedDocumentsIcon className="w-5 h-5" />}>Flashcards</NavItem> {/* Updated Icon */}
+            <NavItem 
+              href="/flashcards" 
+              icon={
+                <Image 
+                  src="/icons/flashcard-icon.png" // **ACTION REQUIRED: Update this path if your image is different**
+                  alt="Flashcards Icon" 
+                  width={20} // Adjust width as needed (w-5 equivalent)
+                  height={20} // Adjust height as needed (h-5 equivalent)
+                  className="object-contain" // Ensures image scales nicely
+                />
+              }
+            >
+              Flashcards
+            </NavItem>
             <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
             <NavItem href="/ai-generator" icon={<PixelMagicOrbIcon className="w-5 h-5" />}>AI Wizard</NavItem>
           </nav>
