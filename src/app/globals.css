@@ -7,10 +7,10 @@
   :root {
     /* Heroic Fantasy Dark Theme - Base: Deep Stone Grays, Dark Wood Browns, Parchment Creams for Text */
     /* Main Backgrounds */
-    --background: 220 35% 12%; /* #161B26 - Dark Navy Blue */
-    --card: 220 30% 17%; /* #1E2636 - Slightly Lighter Dark Navy Blue for cards/popovers */
-    --card-border-highlight: 220 30% 20%; /* #242D40 - Slightly lighter for card top border */
-    --popover: 220 30% 17%; /* Matches Card */
+    --background: 220 35% 9%; /* #0E131C - Even Darker Navy Blue */
+    --card: 220 30% 14%; /* #161C29 - Slightly Lighter Dark Navy Blue for cards/popovers */
+    --card-border-highlight: 220 30% 17%; /* #1E2636 - Slightly lighter for card top border */
+    --popover: 220 30% 14%; /* Matches Card */
 
     /* Text Colors */
     --foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
@@ -34,8 +34,8 @@
     --destructive-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
 
     /* Borders & Inputs */
-    --border: 220 25% 22%; /* #293347 - Subtle Border for general use */
-    --input: 220 35% 10%; /* #121620 - Very Dark Input Background */
+    --border: 220 25% 18%; /* #202838 - Subtle Border for general use */
+    --input: 220 35% 7%; /* #0A0F15 - Very Dark Input Background */
     --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
     --ring: 270 40% 55%; /* Amethyst Purple for focus ring */
 
@@ -61,12 +61,12 @@
 
   .dark {
     /* All :root variables define the dark theme directly now */
-    --background: 220 35% 12%; /* #161B26 - Dark Navy Blue */
+    --background: 220 35% 9%; /* #0E131C - Even Darker Navy Blue */
     --foreground: 0 0% 95%;
-    --card: 220 30% 17%; /* #1E2636 - Slightly Lighter Dark Navy Blue */
+    --card: 220 30% 14%; /* #161C29 - Slightly Lighter Dark Navy Blue */
     --card-foreground: 0 0% 95%;
-    --card-border-highlight: 220 30% 20%;
-    --popover: 220 30% 17%;
+    --card-border-highlight: 220 30% 17%;
+    --popover: 220 30% 14%;
     --popover-foreground: 0 0% 95%;
 
     --primary: 270 40% 55%;
@@ -75,7 +75,7 @@
     --secondary: 145 50% 50%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 220 30% 20%; /* Adjusted for navy theme */
+    --muted: 220 30% 17%; /* Adjusted for navy theme, slightly lighter than card */
     --muted-foreground: 0 0% 70%;
 
     --accent: 270 40% 55%;
@@ -84,8 +84,8 @@
     --destructive: 0 70% 45%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 220 25% 22%; /* #293347 */
-    --input: 220 35% 10%; /* #121620 */
+    --border: 220 25% 18%; /* #202838 */
+    --input: 220 35% 7%; /* #0A0F15 */
     --input-foreground: 0 0% 95%;
     --ring: 270 40% 55%;
 
