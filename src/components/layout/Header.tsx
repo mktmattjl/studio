@@ -1,3 +1,4 @@
+
 // src/components/layout/Header.tsx
 'use client';
 
@@ -19,7 +20,6 @@ import { useRouter } from 'next/navigation';
 // Fantasy Pixel Art Icons
 import {
   PixelCompassIcon,
-  // PixelScrollIcon, // Replaced by PixelStackedDocumentsIcon for Flashcards
   PixelMapIcon,
   PixelMagicOrbIcon,
   PixelGoldCoinIcon,
@@ -47,7 +47,6 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Cerebro title text color now uses thematic text accent */}
           <Link href="/" className="font-pixel text-2xl font-bold text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] transition-colors">
             Cerebro
           </Link>
@@ -114,7 +113,7 @@ export function Header() {
               </Button>
               <Button 
                 onClick={() => router.push('/signup')} 
-                className="font-pixel text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-2 rounded-xl border-2 border-primary-foreground/40 shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.6)] hover:shadow-[1px_1px_0px_hsl(var(--primary-foreground)/0.6)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="font-pixel text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-2 rounded-md border-2 border-primary-foreground/40 shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.6)] hover:shadow-[1px_1px_0px_hsl(var(--primary-foreground)/0.6)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>
