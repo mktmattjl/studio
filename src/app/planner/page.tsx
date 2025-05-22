@@ -21,7 +21,7 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using new theme: Primary (Earthy Red/Brown), Secondary (Medium-Dark Grey)
+// Event Type Colors using new theme: Primary (New Light Beige/Brown), Secondary (Medium-Dark Grey)
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
   class: 'bg-primary/20 border-l-primary text-primary-foreground', 
   deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', 

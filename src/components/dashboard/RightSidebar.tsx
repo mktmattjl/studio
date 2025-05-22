@@ -54,26 +54,23 @@ export function RightSidebar({
   const dayStreak = 7;
   const currentCoins = 125; 
 
-  const updatedQuickActions = [
+  const updatedQuickActions: QuickActionItem[] = [
     { 
       title: "Scribe Scrolls", 
-      description: "Craft new lore for your adventures.", 
       href: "/flashcards/new", 
       Icon: PixelScrollIcon,
-      iconBgClass: "bg-secondary/40", 
+      iconBgClass: "bg-secondary/40", // Uses secondary accent (neutral grey)
       iconTextClass: "text-secondary-foreground" 
     },
     { 
       title: "Summon Knowledge", 
-      description: "Let the Oracle conjure insights from notes.", 
       href: "/ai-generator", 
       Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/40", 
+      iconBgClass: "bg-primary/40", // Uses primary accent (new light beige/brown)
       iconTextClass: "text-primary-foreground"
     },
     { 
       title: "Chart Your Path", 
-      description: "Record quests, trials, and study rituals.", 
       href: "/planner",
       Icon: PixelQuillIcon, 
       iconBgClass: "bg-secondary/40", 
@@ -81,11 +78,10 @@ export function RightSidebar({
     },
      { 
       title: "Seek Challenges", 
-      description: "Test your mettle with ancient trials.", 
       href: "/challenges", 
       Icon: PixelChestIcon, 
       iconBgClass: "bg-gold-accent/40",
-      iconTextClass: "text-primary-foreground" 
+      iconTextClass: "text-primary-foreground" // Assuming primary-foreground works on gold
     },
   ];
 
@@ -114,6 +110,7 @@ export function RightSidebar({
         <div className="p-4 space-y-3">
             <div className="flex items-center justify-around text-center">
                 <div>
+                    {/* Streak icon now uses primary color (new light beige/brown) */}
                     <PixelFlamingSwordIcon className="mx-auto mb-1 h-7 w-7 text-primary" /> 
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>

@@ -5,19 +5,19 @@
 
 @layer base {
   :root {
-    --background: 195 7% 18%; /* #2A3132 */
-    --foreground: 208 27% 64%; /* #90AFC5 */
+    --background: 195 7% 18%; /* #2A3132 - Dark Cool Grey */
+    --foreground: 208 27% 64%; /* #90AFC5 - Light Blue/Grey Text */
 
-    --card: 195 7% 22%; /* Slightly Lighter Dark Cool Grey for Cards */
+    --card: 195 7% 22%; /* #313839 - Slightly Lighter Dark Cool Grey for Cards */
     --card-foreground: 208 27% 64%; /* #90AFC5 */
     --card-border-highlight: 195 7% 25%; /* Slightly lighter than card for top border */
 
     --popover: 195 7% 22%; /* Similar to Card */
     --popover-foreground: 208 27% 64%; /* #90AFC5 */
 
-    /* Primary Accent: Earthy Red/Brown */
-    --primary: 12 51% 30%; /* #763626 */
-    --primary-foreground: 208 27% 85%; /* Lighter version of #90AFC5 for contrast */
+    /* Primary Accent: New Light Beige/Brown */
+    --primary: 25 31% 67%; /* #C5A690 */
+    --primary-foreground: 25 25% 20%; /* Dark Brown for text on light beige/brown */
     
     /* Secondary Accent: Neutral Medium-Dark Grey */
     --secondary: 195 7% 35%; 
@@ -36,19 +36,19 @@
     --border: 195 7% 25%; /* Subtle Border */
     --input: 195 7% 15%; /* Very Dark Input Background */
     --input-foreground: 208 27% 64%; /* #90AFC5 */
-    --ring: 12 51% 30%; /* Earthy Red/Brown for Focus Ring */
+    --ring: 25 31% 67%; /* New Light Beige/Brown for Focus Ring */
     
     --radius: 0.5rem; /* Rounded corners */
 
     /* Custom Thematic Colors */
     --gold-accent: 45 80% 55%; /* Gold for coins - keeping this distinct */
-    --xp-bar-color: 12 51% 30%; /* Earthy Red/Brown for XP Bar Fill */
+    --xp-bar-color: 25 31% 67%; /* New Light Beige/Brown for XP Bar Fill */
     
-    --parchment-bg: 35 30% 75%; 
-    --parchment-text: 30 25% 12%;
+    --parchment-bg: 35 30% 75%; /* #CDBAAB - For calendar event blocks */
+    --parchment-text: 30 25% 12%; /* #2D231D - Dark brown text on parchment */
 
     /* Chart Colors */
-    --chart-1: 12 51% 30%;   /* Earthy Red/Brown (Primary) */
+    --chart-1: 25 31% 67%;   /* New Light Beige/Brown (Primary) */
     --chart-2: 208 27% 64%;  /* Light Blue/Grey (Secondary/Text) */
     --chart-3: 195 7% 50%;  /* Mid Grey */
     --chart-4: 195 7% 30%;   /* Darker Grey */
@@ -56,6 +56,7 @@
   }
 
   .dark { 
+    /* All :root variables define the dark theme directly now */
     --background: 195 7% 18%;
     --foreground: 208 27% 64%;
     --card: 195 7% 22%;
@@ -63,8 +64,8 @@
     --card-border-highlight: 195 7% 25%;
     --popover: 195 7% 22%;
     --popover-foreground: 208 27% 64%;
-    --primary: 12 51% 30%; 
-    --primary-foreground: 208 27% 85%; 
+    --primary: 25 31% 67%; 
+    --primary-foreground: 25 25% 20%; 
     --secondary: 195 7% 35%; 
     --secondary-foreground: 208 27% 64%; 
     --muted: 195 7% 25%;
@@ -76,18 +77,16 @@
     --border: 195 7% 25%;
     --input: 195 7% 15%;
     --input-foreground: 208 27% 64%;
-    --ring: 12 51% 30%;
+    --ring: 25 31% 67%;
     
     --radius: 0.5rem;
 
-    /* Custom Thematic Colors */
     --gold-accent: 45 80% 55%; 
-    --xp-bar-color: 12 51% 30%; 
+    --xp-bar-color: 25 31% 67%; 
     --parchment-bg: 35 30% 75%; 
     --parchment-text: 30 25% 12%;
 
-    /* Chart Colors */
-    --chart-1: 12 51% 30%;  
+    --chart-1: 25 31% 67%;  
     --chart-2: 208 27% 64%;  
     --chart-3: 195 7% 50%;  
     --chart-4: 195 7% 30%;    
@@ -117,18 +116,22 @@
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
+  /* Links should now use the new primary color if they were using the old one */
   a:not(.button):not([class*="no-underline"]) { 
     @apply text-primary hover:text-primary/80 hover:underline; 
   }
 }
 
 @layer components {
+  /* Primary buttons now use the new light beige/brown, with dark text */
   .btn-primary-action { 
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
+  /* Secondary buttons remain neutral grey */
   .btn-secondary-action { 
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
+  /* Destructive buttons use their own destructive colors */
   .button[data-variant="destructive"] { 
      @apply focus-visible:ring-destructive;
   }
@@ -154,7 +157,7 @@
 
   /* Quiz Animations */
   @keyframes pulse-correct { 
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } 
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } /* Uses secondary accent for quiz correct */
     50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
   }
   .animate-button-correct-pulse {
@@ -163,7 +166,7 @@
 
   @keyframes glow-card-correct { 
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }  
+    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }  /* Uses secondary accent for quiz correct */
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;

@@ -17,11 +17,11 @@ import {
 // Color mapping for event types (left border) - Uses new theme colors
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', 
-    'meeting': 'border-l-primary',      // Earthy Red/Brown
-    'class': 'border-l-primary',          // Earthy Red/Brown
-    'study_session': 'border-l-secondary',  // Medium-Dark Grey
+    'meeting': 'border-l-primary',      // New Light Beige/Brown
+    'class': 'border-l-primary',          // New Light Beige/Brown
+    'study_session': 'border-l-secondary',  // Neutral Medium-Dark Grey
     'exam': 'border-l-destructive', 
-    'personal': 'border-l-secondary',        // Medium-Dark Grey
+    'personal': 'border-l-secondary',        // Neutral Medium-Dark Grey
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -69,6 +69,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
       <div className="p-4 sm:p-6 mb-0 border-b border-border">
+        {/* Title now uses text-foreground (Light Blue/Grey) */}
         <h1 className="text-2xl sm:text-3xl font-pixel text-foreground"> 
           {title}
         </h1>
@@ -92,7 +93,8 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             <div key={groupName}>
               <h3 className={cn(
                 "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
-                groupName === "Today" ? "text-primary" : "text-foreground" // Today header uses Earthy Red/Brown
+                 // Today header now uses primary color (new light beige/brown)
+                groupName === "Today" ? "text-primary" : "text-foreground" 
                 )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
