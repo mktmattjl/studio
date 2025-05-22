@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation';
 // Fantasy Pixel Art Icons
 import {
   PixelCompassIcon,
+  // PixelScrollIcon, // Replaced by PixelStackedDocumentsIcon for Flashcards
   PixelMapIcon,
   PixelMagicOrbIcon,
   PixelGoldCoinIcon,
@@ -72,7 +73,7 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              <PixelGoldCoinIcon className="w-5 h-5" />
+              <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
@@ -113,7 +114,7 @@ export function Header() {
               </Button>
               <Button 
                 onClick={() => router.push('/signup')} 
-                className="font-pixel text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md border-2 border-primary-foreground/40 shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.6)] hover:shadow-[1px_1px_0px_hsl(var(--primary-foreground)/0.6)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="font-pixel text-sm bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-2 rounded-xl border-2 border-primary-foreground/40 shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.6)] hover:shadow-[1px_1px_0px_hsl(var(--primary-foreground)/0.6)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>

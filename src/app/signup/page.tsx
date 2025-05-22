@@ -11,7 +11,7 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
-import { PixelUserIcon } from '@/components/icons/fantasy/PixelFantasyAvatarIcon'; // Updated to fantasy icon
+import { PixelFantasyAvatarIcon as PixelUserIcon } from '@/components/icons/fantasy';
 
 const signupSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -93,7 +93,7 @@ export default function SignupPage() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-pixel text-base py-2.5 px-6 rounded-md border-2 border-primary-foreground/40 shadow-[3px_3px_0px_hsl(var(--primary-foreground)/0.7)] hover:shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.7)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-pixel text-base py-2.5 px-6 rounded-xl border-2 border-primary-foreground/40 shadow-[3px_3px_0px_hsl(var(--primary-foreground)/0.7)] hover:shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.7)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             disabled={isLoading}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
