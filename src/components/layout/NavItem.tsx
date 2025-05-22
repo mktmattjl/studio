@@ -23,8 +23,8 @@ export function NavItem({ href, children, icon }: NavItemProps) {
         'group flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out rounded-md font-pixel', 
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background',
         isActive
-          ? 'bg-primary text-primary-foreground shadow-sm' // Active: Primary Accent (Blue) bg, Light text
-          : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground', // Inactive: Muted Grey text, Hover: Teal bg & Dark text
+          ? 'bg-primary text-primary-foreground shadow-sm' // Active: Light Grey bg, Dark Grey text
+          : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground', // Inactive: Muted Grey text, Hover: Medium Grey bg & Light text
       )}
     >
       {icon && <span className={cn(
@@ -32,6 +32,7 @@ export function NavItem({ href, children, icon }: NavItemProps) {
         isActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-accent-foreground"
         )}>{icon}</span>}
       <span className={cn(
+        "transition-colors", // Added transition for smoother color change
         isActive 
           ? 'text-primary-foreground' 
           : 'text-muted-foreground group-hover:text-accent-foreground'

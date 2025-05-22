@@ -14,14 +14,14 @@ import {
     PixelFlamingSwordIcon 
 } from '@/components/icons/fantasy'; 
 
-// Dark Theme Color Mapping for event types (left border)
+// Grayscale color mapping for event types (left border)
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
-    'deadline': 'border-l-[hsl(var(--destructive))]',       // Muted Red
-    'meeting': 'border-l-[hsl(var(--secondary))]',         // Vivid Teal
-    'class': 'border-l-[hsl(var(--primary))]',             // Bright Blue
-    'study_session': 'border-l-green-500',                 // A distinct green (e.g., from chart palette if suitable, or direct hex)
-    'exam': 'border-l-[hsl(var(--chart-4))]',              // Sophisticated Orange
-    'personal': 'border-l-[hsl(var(--chart-3))]',          // Cool Purple
+    'deadline': 'border-l-destructive', // Kept red for high importance
+    'meeting': 'border-l-[hsl(var(--primary))]',      // Light Grey
+    'class': 'border-l-[hsl(var(--primary))]',          // Light Grey
+    'study_session': 'border-l-[hsl(var(--secondary))]',  // Medium Grey
+    'exam': 'border-l-destructive', // Kept red for high importance
+    'personal': 'border-l-[hsl(var(--muted))]',        // Muted Dark Grey
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -69,6 +69,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
       <div className="p-4 sm:p-6 mb-0 border-b border-border">
+        {/* Title uses .font-pixel and --foreground color */}
         <h1 className="text-2xl sm:text-3xl font-pixel text-foreground"> 
           {title}
         </h1>
@@ -88,7 +89,8 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
 
           return (
             <div key={groupName}>
-              <h3 className="text-lg font-pixel text-primary mb-3 border-b border-border/50 pb-2">
+              {/* Group Name uses .font-pixel and --foreground color */}
+              <h3 className="text-lg font-pixel text-foreground mb-3 border-b border-border/50 pb-2">
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
               </h3>
@@ -97,7 +99,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                   const eventColorClass = eventTypeColorMap[event.type] || 'border-l-[hsl(var(--muted))]';
                   const EventIcon = eventTypeIcons[event.type] || PixelScrollIcon;
 
-                  const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && differenceInDays(event.endTime, event.startTime) >=1) || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
+                  const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
                       ? format(event.startTime, 'EEE, MMM d') 
                       : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`;
 
@@ -106,13 +108,12 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                       key={event.id}
                       className={cn(
                         "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm", 
-                        "bg-background hover:bg-background/80", // Use main background for items, slightly lighter on hover
+                        "bg-black/[.05] hover:bg-black/[.10]", // Subtle dark background for items
                         eventColorClass,
                         "border-2 border-transparent hover:border-accent/30 focus-within:ring-2 focus-within:ring-ring" 
                       )}
                       tabIndex={0} 
                     >
-                      {/* Icon color adapts to theme */}
                       <EventIcon className="w-6 h-6 mt-0.5 text-muted-foreground shrink-0" /> 
                       <div className="flex-grow">
                         <p className="font-semibold text-foreground text-md">{event.title}</p>

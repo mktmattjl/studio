@@ -21,14 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Dark Theme Event Type Colors (Tailwind classes for event blocks)
+// Grayscale Event Type Colors (Tailwind classes for event blocks)
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground',              // Blue
-  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
-  study_session: 'bg-green-500/20 border-l-green-500 text-green-100',        // Distinct Green
-  exam: 'bg-orange-500/20 border-l-orange-500 text-orange-100',                // Orange
-  meeting: 'bg-secondary/20 border-l-secondary text-secondary-foreground',        // Teal
-  personal: 'bg-purple-600/20 border-l-purple-600 text-purple-100',          // Purple
+  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Light Grey bg, Dark Grey border/text
+  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red bg, Red border, Light text
+  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Medium Grey bg, Medium Grey border, Light text
+  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red bg, Red border, Light text
+  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Light Grey bg, Dark Grey border/text
+  personal: 'bg-muted/30 border-l-muted text-muted-foreground', // Darker Muted Grey bg, Muted Grey border/text
 };
 
 
@@ -162,9 +162,11 @@ export default function PlannerPage() {
       <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-pixel text-primary">The Grand Almanac</h1>
+            {/* Title uses .font-pixel and --foreground for new theme */}
+            <h1 className="text-2xl md:text-3xl font-pixel text-foreground">The Grand Almanac</h1>
             <p className="text-muted-foreground mt-1">Chart thy quests, trials, and scholarly pursuits.</p>
           </div>
+          {/* Button uses .btn-primary-action (Light Grey bg) */}
           <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
             <PixelQuillIcon className="w-4 h-4 mr-2" />
             Decree New Entry

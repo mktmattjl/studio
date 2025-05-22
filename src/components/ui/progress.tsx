@@ -13,13 +13,13 @@ const Progress = React.forwardRef<
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
-      "relative h-2.5 w-full overflow-hidden rounded-full bg-muted/50", // Darker track for dark theme
+      "relative h-2.5 w-full overflow-hidden rounded-full bg-muted/50", 
       className
     )}
     {...props}
   >
     <ProgressPrimitive.Indicator
-      // Fill uses --xp-bar-color which is set to Primary Accent (Blue)
+      // Fill uses --xp-bar-color which is now Light Grey (Primary Accent)
       className="h-full w-full flex-1 bg-xp-bar-color transition-all rounded-full" 
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
     />
