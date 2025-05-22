@@ -11,17 +11,17 @@ import {
     PixelQuillIcon, 
     PixelMapIcon, 
     PixelHeartIcon, 
-    PixelFlamingSwordIcon 
+    PixelFlamingSwordIcon // Ensure this is imported if used, or a default.
 } from '@/components/icons/fantasy'; 
 
-// Color mapping for event types (left border) - Uses new theme colors
+// Color mapping for event types (left border)
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
-    'deadline': 'border-l-destructive', 
-    'meeting': 'border-l-primary', // Use primary accent (Amethyst Purple)
-    'class': 'border-l-primary', // Use primary accent (Amethyst Purple)
-    'study_session': 'border-l-secondary',  // Use secondary accent (Neutral Medium-Dark Grey)
-    'exam': 'border-l-destructive', 
-    'personal': 'border-l-secondary',        // Use secondary accent (Neutral Medium-Dark Grey)
+    'deadline': 'border-l-destructive', // Ruby Red
+    'meeting': 'border-l-primary', // Amethyst Purple
+    'class': 'border-l-primary', // Amethyst Purple
+    'study_session': 'border-l-secondary', // Emerald Green
+    'exam': 'border-l-destructive', // Ruby Red
+    'personal': 'border-l-secondary', // Emerald Green
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -74,12 +74,12 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
       </div>
-      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[calc(100vh-20rem)] sm:max-h-[calc(100vh-22rem)] md:max-h-[60vh] lg:max-h-[calc(100vh-var(--header-height,4rem)-18rem)] xl:max-h-[calc(100vh-var(--header-height,4rem)-20rem)]">
+      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[calc(100vh-var(--header-height,4rem)-18rem)] md:max-h-[calc(70vh-var(--header-height,4rem)-10rem)]">
         {!hasAnyEvents && (
              <div className="text-center py-10 flex-grow flex flex-col justify-center items-center">
                 <PixelMapIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" />
                 <h3 className="text-xl font-pixel text-foreground mb-2">Thy Quest Log is Empty!</h3>
-                <p className="text-muted-foreground">No pressing tasks. Perhaps a moment of respite or plan new adventures?</p>
+                <p className="text-muted-foreground font-pixel">No pressing tasks. Perhaps a moment of respite or plan new adventures?</p>
             </div>
         )}
 
@@ -115,14 +115,14 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                         "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm focus-within:ring-2 focus-within:ring-ring focus-visible:outline-none", 
                         "bg-black/[.05] hover:bg-muted/30", 
                         eventColorClass, 
-                        isKeyTask && "border-primary ring-1 ring-primary/50", // Use primary accent for key task highlight
+                        isKeyTask && "border-primary ring-1 ring-primary/50",
                         "border-2 border-transparent hover:border-accent/30" 
                       )}
                       tabIndex={0} 
                     >
                       <EventIcon className="w-6 h-6 mt-0.5 text-muted-foreground shrink-0" /> 
                       <div className="flex-grow">
-                        <p className="font-semibold text-foreground text-md">{event.title}</p>
+                        <p className="font-semibold text-foreground text-md font-pixel">{event.title}</p> {/* Added font-pixel */}
                         <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed"> 
                           {displayTime} - <span className="capitalize">{event.type.replace('_', ' ')}</span>
                         </p>

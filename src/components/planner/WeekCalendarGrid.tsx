@@ -22,6 +22,17 @@ import type { HourSegment } from '@/lib/dateUtils';
 const DEFAULT_HOUR_ROW_HEIGHT_REM = 3;
 const CONDENSED_HOUR_ROW_HEIGHT_REM = 2.75; 
 
+interface WeekCalendarGridProps {
+  currentDate: Date;
+  events: PlannerEvent[];
+  startHour: number;
+  endHour: number;
+  onSlotClick?: (dateTime: Date) => void;
+  onEventClick?: (event: PlannerEvent) => void;
+  condensedMode?: boolean;
+  daysToDisplay?: Date[];
+}
+
 export function WeekCalendarGrid({
   currentDate,
   events,
@@ -73,7 +84,7 @@ export function WeekCalendarGrid({
             className={cn(
               "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
               condensedMode ? "p-1 min-w-[50px] sm:min-w-[60px]" : "p-1 sm:p-2 min-w-[70px] sm:min-w-[90px]", 
-              isToday(day) && "bg-primary/20 ring-1 ring-inset ring-primary" 
+              isToday(day) && "bg-primary/10 ring-1 ring-inset ring-primary/50" 
             )}
           >
             <div className={cn(
@@ -115,7 +126,6 @@ export function WeekCalendarGrid({
                   className={cn(
                     "border-b border-r border-border relative group",
                     condensedMode ? "min-w-[50px] sm:min-w-[60px]" : "min-w-[70px] sm:min-w-[90px]",
-                    // Highlight current hour on today with primary accent
                     isToday(day) && clientCurrentHour !== null && segment.hour === clientCurrentHour && "bg-primary/10",
                     onSlotClick ? "cursor-pointer hover:bg-card/80 transition-colors duration-100 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none" : "hover:bg-card/90"
                   )}
@@ -134,14 +144,14 @@ export function WeekCalendarGrid({
                         (endHour + 1 - getHours(event.startTime)) * hourRowHeightRem - (getMinutes(event.startTime) / 60) * hourRowHeightRem
                     );
 
-                    const eventStyleClasses = event.color || 'bg-muted/30 border-l-muted'; // Event.color has bg and border
+                    const eventStyleClasses = event.color || 'bg-muted/30 border-l-muted';
 
                     return (
                       <div
                         key={event.id}
                         title={!condensedMode ? `${event.title} (${format(event.startTime, 'p')} - ${event.endTime ? format(event.endTime, 'p'): ''})` : event.title}
                         className={cn(
-                          'absolute left-0.5 right-0.5 rounded-sm overflow-hidden shadow-md text-foreground border-l-4', 
+                          'absolute left-0.5 right-0.5 rounded-sm overflow-hidden shadow-[1px_1px_3px_rgba(0,0,0,0.2)] text-foreground border-l-4 border-border', // Added thematic border
                            eventStyleClasses, 
                            onEventClick ? 'cursor-pointer hover:brightness-125 hover:shadow-lg transition-all duration-150 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : '',
                            condensedMode ? "p-0.5 text-[0.6rem] sm:text-[0.65rem] leading-tight" : "p-1.5 text-[0.7rem] sm:text-xs leading-tight"
@@ -157,7 +167,10 @@ export function WeekCalendarGrid({
                         }}
                         tabIndex={onEventClick ? 0 : undefined} 
                       >
-                        <p className={cn("font-semibold truncate", condensedMode && "text-[0.55rem] sm:text-[0.6rem]")}>{event.title}</p>
+                        <p className={cn(
+                          "font-semibold truncate font-pixel", // Added font-pixel
+                          condensedMode && "text-[0.55rem] sm:text-[0.6rem]"
+                          )}>{event.title}</p>
                         {!condensedMode && event.endTime && <p className="truncate hidden sm:block text-[0.65rem] opacity-80">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>}
                       </div>
                     );
