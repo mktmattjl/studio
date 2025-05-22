@@ -74,8 +74,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
       </div>
-      {/* Removed max-h classes from the div below to allow it to grow */}
-      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar">
+      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[32rem]"> {/* Re-added max-h */}
         {!hasAnyEvents && (
              <div className="text-center py-10 flex-grow flex flex-col justify-center items-center h-full">
                 <PixelMapIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" />
@@ -93,7 +92,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             <div key={groupName}>
               <h3 className={cn(
                 "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
-                groupName === "Today" ? "text-[hsl(var(--text-accent-thematic))]" : "text-foreground"
+                 groupName === "Today" ? "text-[hsl(var(--text-accent-thematic))]" : "text-foreground"
                 )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
