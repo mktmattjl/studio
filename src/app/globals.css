@@ -5,98 +5,97 @@
 
 @layer base {
   :root {
-    /* #FF5733 Theme - High Energy Retro/Cyberpunk */
-    --background: 11 80% 60%; /* #FF5733 */
-    --foreground: 0 0% 100%; /* White */
+    /* Heroic Fantasy - Light Cream/Beige Theme */
+    --background: 40 55% 88%; /* Warm Cream/Beige (approx #EDE6D5) */
+    --foreground: 30 25% 25%; /* Dark Sepia/Brown (approx #594D43) */
 
-    --card: 220 20% 12%; /* Very Dark Cool Gray/Blue #1A1E24 */
-    --card-foreground: 0 0% 100%; /* White */
+    --card: 40 65% 94%; /* Lighter Parchment/Cream for cards (approx #F7F2E9) */
+    --card-foreground: 30 25% 25%; /* Dark Sepia/Brown */
 
-    --popover: 220 20% 12%; /* Very Dark Cool Gray/Blue */
-    --popover-foreground: 0 0% 100%; /* White */
+    --popover: 40 65% 92%; /* Slightly richer cream for popovers (approx #F6F0E4) */
+    --popover-foreground: 30 25% 25%; /* Dark Sepia/Brown */
 
-    --primary: 190 95% 50%; /* Electric Cyan #00E5FF */
-    --primary-foreground: 220 20% 8%; /* Near Black for text on Cyan */
+    --primary: 210 70% 50%; /* Sapphire Blue (for CTAs, active nav) */
+    --primary-foreground: 40 55% 95%; /* Very Light Cream (for text on blue) */
     
-    --secondary: 300 90% 60%; /* Vibrant Magenta #F538F5 */
-    --secondary-foreground: 0 0% 100%; /* White for text on Magenta */
+    --secondary: 145 60% 40%; /* Emerald Green (secondary buttons, highlights) */
+    --secondary-foreground: 40 55% 95%; /* Very Light Cream (for text on green) */
 
-    --muted: 11 70% 55%; /* Darker/desaturated version of background #E64229 */
-    --muted-foreground: 0 0% 85%; /* Light Gray for less important text on #FF5733 */
+    --muted: 40 40% 80%; /* Darker shade of background cream (approx #DCD3BF) */
+    --muted-foreground: 30 20% 45%; /* Muted Brown/Gray (approx #8A7E73) */
 
-    --accent: 300 90% 60%; /* Vibrant Magenta (same as secondary for now) */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 270 50% 55%; /* Amethyst Purple (for hovers, some accents) */
+    --accent-foreground: 40 55% 95%; /* Very Light Cream (for text on purple) */
 
-    --destructive: 0 90% 65%; /* Bright Red #FF4D4D */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 65% 50%; /* Ruby Red */
+    --destructive-foreground: 40 55% 95%; /* Very Light Cream */
 
-    --border: 11 70% 50%; /* Darker Orange-Red #CC3722 */
-    --input: 220 20% 10%; /* Very Dark Gray/Blue for input bg #15181F */
-    --input-foreground: 0 0% 95%; /* Very Light Gray/White for input text */
-    --ring: 190 95% 50%; /* Electric Cyan for focus */
+    --border: 35 25% 65%; /* Muted Wood Brown (approx #BFB0A4) */
+    --input: 40 60% 96%; /* Very Light Cream for input fields (approx #F9F5EF) */
+    --input-foreground: 30 25% 25%; /* Dark Sepia/Brown */
+    --ring: 210 80% 60%; /* Brighter Sapphire Blue (for focus) */
     
     --radius: 0.375rem; /* Maintained from previous theme */
 
-    /* Custom Thematic Colors - review if these semantic names are still appropriate */
-    --gold-accent: 45 100% 55%; /* Bright Yellow #FFD54D (was gold) */
-    --xp-bar-color: 190 95% 50%; /* Electric Cyan (was emerald) */
+    /* Custom Thematic Colors - Heroic Fantasy */
+    --gold-accent: 45 70% 50%; /* Gold/Bronze (approx #D9A626) */
+    --xp-bar-color: 145 60% 40%; /* Emerald Green (same as secondary) */
     
-    /* Parchment for specific elements like event blocks in calendar - might need significant rethink */
-    --parchment-bg: 220 20% 15%; /* Dark Gray for "parchment" on bright BG #202630 */
-    --parchment-text: 0 0% 90%;   /* Light Gray/White text on dark parchment */
+    --parchment-bg: 40 45% 82%; /* Aged Parchment for event blocks (approx #E0D5C0) */
+    --parchment-text: 30 30% 20%;   /* Darkest Brown (approx #4D4139) */
 
-    /* Chart Colors - Neon Palette */
+    /* Chart Colors - Neon Palette (Can be adjusted later if they clash) */
     --chart-1: 190 95% 50%;  /* Electric Cyan */
     --chart-2: 300 90% 60%;  /* Vibrant Magenta */
-    --chart-3: 90 100% 50%;  /* Glitch Lime Green #39FF14 */
-    --chart-4: 45 100% 55%;  /* Bright Yellow #FFD54D */
-    --chart-5: 270 100% 70%; /* Bright Purple #BB66FF */
+    --chart-3: 90 100% 50%;  /* Glitch Lime Green */
+    --chart-4: 30 100% 50%;  /* Neon Orange */
+    --chart-5: 45 100% 55%;  /* Bright Yellow */
   }
 
-  .dark { /* Active theme definition */
-    --background: 11 80% 60%;
-    --foreground: 0 0% 100%;
+  .dark { /* Active theme definition - Now a Light Heroic Fantasy Theme */
+    --background: 40 55% 88%;
+    --foreground: 30 25% 25%;
 
-    --card: 220 20% 12%;
-    --card-foreground: 0 0% 100%;
+    --card: 40 65% 94%;
+    --card-foreground: 30 25% 25%;
 
-    --popover: 220 20% 12%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 40 65% 92%;
+    --popover-foreground: 30 25% 25%;
 
-    --primary: 190 95% 50%;
-    --primary-foreground: 220 20% 8%;
+    --primary: 210 70% 50%;
+    --primary-foreground: 40 55% 95%;
     
-    --secondary: 300 90% 60%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 145 60% 40%;
+    --secondary-foreground: 40 55% 95%;
 
-    --muted: 11 70% 55%;
-    --muted-foreground: 0 0% 85%;
+    --muted: 40 40% 80%;
+    --muted-foreground: 30 20% 45%;
 
-    --accent: 300 90% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 270 50% 55%;
+    --accent-foreground: 40 55% 95%;
 
-    --destructive: 0 90% 65%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 40 55% 95%;
 
-    --border: 11 70% 50%;
-    --input: 220 20% 10%;
-    --input-foreground: 0 0% 95%;
-    --ring: 190 95% 50%;
+    --border: 35 25% 65%;
+    --input: 40 60% 96%;
+    --input-foreground: 30 25% 25%;
+    --ring: 210 80% 60%;
     
     --radius: 0.375rem;
 
     /* Custom Thematic Colors */
-    --gold-accent: 45 100% 55%;
-    --xp-bar-color: 190 95% 50%;
-    --parchment-bg: 220 20% 15%;
-    --parchment-text: 0 0% 90%;
+    --gold-accent: 45 70% 50%;
+    --xp-bar-color: 145 60% 40%;
+    --parchment-bg: 40 45% 82%;
+    --parchment-text: 30 30% 20%;
 
-    /* Chart Colors - Neon Palette */
+    /* Chart Colors */
     --chart-1: 190 95% 50%;
     --chart-2: 300 90% 60%;
     --chart-3: 90 100% 50%;
-    --chart-4: 45 100% 55%;
-    --chart-5: 270 100% 70%;
+    --chart-4: 30 100% 50%;
+    --chart-5: 45 100% 55%;
   }
 }
 
@@ -120,14 +119,13 @@
   }
 }
 
-/* Custom Button Styles for Heroic Fantasy -> now Retro Neon */
+/* Custom Button Styles for Heroic Fantasy - Light Theme */
 @layer components {
-  .btn-primary-action { /* Main Call to Action - Electric Cyan */
+  .btn-primary-action { /* Main Call to Action - Sapphire Blue */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
-    /* Consider a neon glow effect for buttons if desired later */
-    /* box-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary) / 0.8), 0 0 15px hsl(var(--primary) / 0.6); */
+    /* Consider a subtle inner shadow for a chiseled look */
   }
-  .btn-secondary-action { /* Secondary Action - Vibrant Magenta */
+  .btn-secondary-action { /* Secondary Action - Emerald Green */
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150;
   }
   /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
@@ -135,34 +133,34 @@
 
 @layer utilities {
   .styled-scrollbar::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px; /* Slightly wider for pixel theme */
+    height: 10px;
   }
   .styled-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.5);
-    border-radius: 2px; 
-    border: 1px solid hsl(var(--card) / 0.8);
+    background: hsl(var(--muted-foreground) / 0.6); /* Muted brown scrollbar thumb */
+    border-radius: 0px; /* Sharp edges for pixel theme */
+    border: 2px solid hsl(var(--card)); /* Card background as border for thumb */
   }
   .styled-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground) / 0.7);
+    background: hsl(var(--muted-foreground) / 0.8);
   }
   .styled-scrollbar::-webkit-scrollbar-track {
-    background: hsl(var(--background) / 0.5); 
-    border-radius: 2px;
+    background: hsl(var(--background) / 0.7); /* Main background for track */
+    border-radius: 0px;
   }
 
   /* Quiz Animations - Review if these fit the new theme */
-  @keyframes pulse-correct { /* Use --chart-3 (Lime Green) for correct answer pulse */
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-3) / 0.4); }
-    50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--chart-3) / 0.5); }
+  @keyframes pulse-correct { /* Use --secondary (Emerald Green) for correct answer pulse */
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
   }
   .animate-button-correct-pulse {
     animation: pulse-correct 0.6s ease-in-out;
   }
 
-  @keyframes glow-card-correct { /* Use --chart-3 (Lime Green) for card glow */
+  @keyframes glow-card-correct { /* Use --secondary (Emerald Green) for card glow */
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--chart-3)); box-shadow: 0 0 15px hsl(var(--chart-3) / 0.3); }
+    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;
