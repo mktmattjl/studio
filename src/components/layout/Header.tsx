@@ -25,7 +25,7 @@ import {
   PixelScrollIcon,
   PixelMapIcon,
   PixelMagicOrbIcon,
-  PixelGoldCoinIcon, // Ensured this is correctly part of the import list
+  PixelGoldCoinIcon,
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon
 } from '@/components/icons/fantasy';
@@ -47,6 +47,7 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
+          {/* Cerebro title text color now uses thematic text accent */}
           <Link href="/" className="font-pixel text-2xl font-bold text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] transition-colors">
             Cerebro
           </Link>
@@ -61,13 +62,14 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
+              {/* Gold coin icon */}
               <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
           {/* Ensure Bellcon.png is in src/components/icons/ or public folder and path is correct */}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-8 h-8">
-            <img src={Bellcon.src} alt="Notifications" className="w-5 h-5" />
+            <img src={Bellcon.src} alt="Notifications" className="w-6 h-6" /> {/* Changed from w-5 h-5 */}
             <span className="sr-only">Notifications</span>
           </Button>
 
@@ -111,4 +113,3 @@ export function Header() {
     </header>
   );
 }
-    
