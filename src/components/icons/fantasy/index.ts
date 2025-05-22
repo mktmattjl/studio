@@ -1,4 +1,3 @@
-
 // src/components/icons/fantasy/index.ts
 export * from './PixelCompassIcon';
 export * from './PixelScrollIcon';
@@ -18,17 +17,17 @@ export * from './PixelSoupBowlIcon';
 export * from './PixelLightningIcon';
 export * from './PixelTrashIcon';
 export * from './PixelTrophyIcon';
+export * from './PixelFloppyDiskIcon'; // Added local export
+
 // Add other fantasy icons as they are created
 export * from '@/components/icons/PixelBellIcon'; // Keep for now, or create fantasy version
 export * from '@/components/icons/PixelMagnifyingGlassIcon';
 export * from '@/components/icons/PixelWandIcon';
-export * from '@/components/icons/PixelFloppyDiskIcon';
-export * from '@/components/icons/PixelGameControllerIcon';
-export * from '@/components/icons/PixelShopBagIcon';
+// Removed generic floppy disk, game controller, shop bag as they now have fantasy versions or are less relevant
+// export * from '@/components/icons/PixelGameControllerIcon';
+// export * from '@/components/icons/PixelShopBagIcon';
 export * from '@/components/icons/PixelRefreshIcon';
 export * from '@/components/icons/PixelChevronLeftIcon';
 export * from '@/components/icons/PixelChevronRightIcon';
 // Note: Some generic icons like Eye, Brain were removed from this direct export
 // as they are less thematic and might be replaced contextually.
-
-    
