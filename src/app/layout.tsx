@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, vt323.variable, "dark h-full")}> {/* Add vt323 variable */}
+    <html lang="en" className={cn(inter.variable, vt323.variable, "dark h-full")}>
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
         <AuthProvider>
           <TooltipProvider delayDuration={0}>
@@ -47,6 +47,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
-    
