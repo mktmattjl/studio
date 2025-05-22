@@ -16,9 +16,9 @@
     --popover: 220 20% 23%; /* #2D3748 */
     --popover-foreground: 216 100% 94%; /* #E0EFFF */
 
-    /* Primary Accent: Rich Orange */
-    --primary: 30 85% 55%; /* #F28C1F - Vibrant Orange/Amber */
-    --primary-foreground: 30 10% 10%; /* #211B14 - Very Dark Grey/Near-Black for text on Orange */
+    /* Primary Accent: Electric Blue */
+    --primary: 210 80% 60%; /* #66B2FF - Electric Blue */
+    --primary-foreground: 216 100% 94%; /* #E0EFFF - Icy Light Blue for text on Blue */
     
     /* Secondary Accent: Vibrant Purple */
     --secondary: 270 70% 65%; /* #A569E6 - Vibrant Purple */
@@ -37,22 +37,22 @@
     --border: 220 15% 30%; /* #3F4A5F - Subtle Lighter Grey Border */
     --input: 220 20% 18%; /* #242A36 - Darker Input Background */
     --input-foreground: 216 100% 94%; /* #E0EFFF */
-    --ring: 30 85% 55%; /* Rich Orange for Focus Ring */
+    --ring: 210 80% 60%; /* Electric Blue for Focus Ring */
     
     --radius: 0.5rem; /* Rounded corners */
 
     /* Custom Thematic Colors */
-    --gold-accent: 40 80% 60%; /* #EAC468 - Muted Gold for Coins etc. */
-    --xp-bar-color: 30 85% 55%; /* Rich Orange for XP Bar Fill (matches new primary) */
+    --gold-accent: 45 85% 60%; /* #FAD961 - Gold for Coins etc. */
+    --xp-bar-color: 210 80% 60%; /* Electric Blue for XP Bar Fill (matches new primary) */
     
     --parchment-bg: 35 40% 80%; /* #DCD6C6 - Darker cream for event blocks on dark card */
     --parchment-text: 30 25% 12%; /* #2B241E - Dark Sepia/Brown for text on parchment */
 
     /* Chart Colors - Updated Palette */
-    --chart-1: 30 85% 55%;   /* Rich Orange (Primary) */
+    --chart-1: 210 80% 60%;   /* Electric Blue (Primary) */
     --chart-2: 270 70% 65%;  /* Vibrant Purple (Secondary) */
-    --chart-3: 100 70% 55%;  /* Bright Lime Green (was 150 70% 55%) */
-    --chart-4: 180 60% 50%;  /* Cyan/Teal */
+    --chart-3: 100 70% 55%;  /* Bright Lime Green */
+    --chart-4: 30 90% 60%;   /* Neon Orange */
     --chart-5: 50 85% 60%;   /* Bright Yellow */
   }
 
@@ -64,8 +64,8 @@
     --card-border-highlight: 220 20% 28%;
     --popover: 220 20% 23%;
     --popover-foreground: 216 100% 94%;
-    --primary: 30 85% 55%; 
-    --primary-foreground: 30 10% 10%; 
+    --primary: 210 80% 60%; 
+    --primary-foreground: 216 100% 94%; 
     --secondary: 270 70% 65%; 
     --secondary-foreground: 216 100% 94%; 
     --muted: 220 15% 28%;
@@ -77,21 +77,21 @@
     --border: 220 15% 30%;
     --input: 220 20% 18%;
     --input-foreground: 216 100% 94%;
-    --ring: 30 85% 55%;
+    --ring: 210 80% 60%;
     
     --radius: 0.5rem;
 
     /* Custom Thematic Colors */
-    --gold-accent: 40 80% 60%; 
-    --xp-bar-color: 30 85% 55%; 
+    --gold-accent: 45 85% 60%; 
+    --xp-bar-color: 210 80% 60%; 
     --parchment-bg: 35 40% 80%; 
     --parchment-text: 30 25% 12%;
 
     /* Chart Colors */
-    --chart-1: 30 85% 55%;  
+    --chart-1: 210 80% 60%;  
     --chart-2: 270 70% 65%;  
     --chart-3: 100 70% 55%;  
-    --chart-4: 180 60% 50%;    
+    --chart-4: 30 90% 60%;    
     --chart-5: 50 85% 60%;  
   }
 }

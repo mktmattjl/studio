@@ -22,13 +22,13 @@ export interface PlannerEvent {
 }
 
 // Event Type Colors using new vibrant accents
-// Primary: Rich Orange, Secondary: Vibrant Purple
+// Primary: Electric Blue, Secondary: Vibrant Purple
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Rich Orange
+  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Electric Blue
   deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
   study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Vibrant Purple
   exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
-  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Rich Orange
+  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Electric Blue
   personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Vibrant Purple
 };
 
