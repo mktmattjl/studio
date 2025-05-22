@@ -7,22 +7,22 @@
   :root {
     /* Heroic Fantasy - Light Cream/Beige Theme */
     --background: 40 55% 88%; /* Warm Cream/Beige (approx #EDE6D5) */
-    --foreground: 30 25% 25%; /* Dark Sepia/Brown (approx #594D43) */
+    --foreground: 30 25% 20%; /* Darker Sepia/Brown (approx #4D423A) - Darkened for contrast */
 
     --card: 35 35% 75%; /* Light Brown - Slightly darker and more saturated (approx #CFC5B6) */
-    --card-foreground: 30 25% 20%; /* Darker Sepia/Brown for contrast on light brown */
+    --card-foreground: 30 25% 15%; /* Even Darker Sepia/Brown for contrast on cards - Darkened */
 
-    --popover: 35 35% 75%; /* Light Brown - Slightly darker and more saturated */
-    --popover-foreground: 30 25% 20%; /* Darker Sepia/Brown */
+    --popover: 35 35% 72%; /* Slightly darker popover bg for tooltips - Thematic: Dark Wood appearance */
+    --popover-foreground: 40 55% 95%; /* Very Light Cream for text on dark popover - Thematic: Parchment text */
 
-    --primary: 30 30% 30%; /* Dark Brown (replaces Sapphire Blue) */
+    --primary: 30 30% 30%; /* Dark Brown (replaces Sapphire Blue) - Main CTA, Active Nav */
     --primary-foreground: 40 55% 95%; /* Very Light Cream (for text on dark brown) */
     
     --secondary: 145 60% 40%; /* Emerald Green (secondary buttons, highlights) */
     --secondary-foreground: 40 55% 95%; /* Very Light Cream (for text on green) */
 
     --muted: 40 40% 80%; /* Darker shade of background cream (approx #DCD3BF) */
-    --muted-foreground: 30 20% 45%; /* Muted Brown/Gray (approx #8A7E73) */
+    --muted-foreground: 30 20% 40%; /* Muted Brown/Gray (approx #7E7065) - Darkened */
 
     --accent: 270 50% 55%; /* Amethyst Purple (for hovers, some accents) */
     --accent-foreground: 40 55% 95%; /* Very Light Cream (for text on purple) */
@@ -30,9 +30,9 @@
     --destructive: 0 70% 45%; /* Darker, less saturated Ruby Red */
     --destructive-foreground: 40 55% 95%; /* Very Light Cream */
 
-    --border: 35 25% 65%; /* Muted Wood Brown (approx #BFB0A4) */
+    --border: 35 25% 60%; /* Muted Wood Brown (approx #B2A194) - Slightly Darker for definition */
     --input: 40 60% 96%; /* Very Light Cream for input fields (approx #F9F5EF) */
-    --input-foreground: 30 25% 25%; /* Dark Sepia/Brown */
+    --input-foreground: 30 25% 20%; /* Dark Sepia/Brown - Darkened */
     --ring: 30 30% 40%; /* Dark Brown - slightly lighter for focus (replaces Brighter Sapphire Blue) */
     
     --radius: 0.375rem; 
@@ -45,22 +45,22 @@
     --parchment-text: 30 30% 20%;   /* Darkest Brown (approx #4D4139) */
 
     /* Chart Colors - Can be adjusted for thematic consistency */
-    --chart-1: 30 30% 30%;  /* Dark Brown (replaces Sapphire Blue) */
-    --chart-2: 145 60% 40%;  /* Emerald Green */
-    --chart-3: 270 50% 55%;  /* Amethyst Purple */
-    --chart-4: 0 65% 50%;    /* Ruby Red (slightly brighter than destructive for charts) */
+    --chart-1: 30 30% 30%;  /* Dark Brown (Primary) */
+    --chart-2: 145 60% 40%;  /* Emerald Green (Secondary) */
+    --chart-3: 270 50% 55%;  /* Amethyst Purple (Accent) */
+    --chart-4: 0 65% 50%;    /* Ruby Red (Destructive-like for charts) */
     --chart-5: 45 70% 50%;   /* Gold/Bronze */
   }
 
   .dark { /* Using .dark as the active class, but defining light theme colors */
     --background: 40 55% 88%; 
-    --foreground: 30 25% 25%; 
+    --foreground: 30 25% 20%; 
 
     --card: 35 35% 75%; 
-    --card-foreground: 30 25% 20%;
+    --card-foreground: 30 25% 15%;
 
-    --popover: 35 35% 75%; 
-    --popover-foreground: 30 25% 20%;
+    --popover: 35 35% 72%; 
+    --popover-foreground: 40 55% 95%;
 
     --primary: 30 30% 30%; 
     --primary-foreground: 40 55% 95%;
@@ -69,7 +69,7 @@
     --secondary-foreground: 40 55% 95%;
 
     --muted: 40 40% 80%;
-    --muted-foreground: 30 20% 45%;
+    --muted-foreground: 30 20% 40%;
 
     --accent: 270 50% 55%;
     --accent-foreground: 40 55% 95%;
@@ -77,9 +77,9 @@
     --destructive: 0 70% 45%;
     --destructive-foreground: 40 55% 95%;
 
-    --border: 35 25% 65%;
+    --border: 35 25% 60%;
     --input: 40 60% 96%;
-    --input-foreground: 30 25% 25%;
+    --input-foreground: 30 25% 20%;
     --ring: 30 30% 40%;
     
     --radius: 0.375rem;
@@ -108,6 +108,7 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03"; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7; /* Increased base line-height for readability */
   }
   .font-pixel {
     font-family: var(--font-vt323), theme('fontFamily.mono');
@@ -117,18 +118,29 @@
     image-rendering: crisp-edges; 
     -ms-interpolation-mode: nearest-neighbor; 
   }
+  /* Enhanced general link hover/focus states */
+  a {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
+  }
+  a:not(.button):not([class*="no-underline"]) { /* Avoid affecting buttons or specifically styled links */
+    @apply text-primary hover:text-primary/80 hover:underline;
+  }
 }
 
 /* Custom Button Styles for Heroic Fantasy - Light Theme */
 @layer components {
-  .btn-primary-action { /* Main Call to Action - Now Dark Brown */
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
+  .btn-primary-action { /* Main Call to Action - Dark Brown */
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
     /* Consider a subtle inner shadow for a chiseled look */
   }
   .btn-secondary-action { /* Secondary Action - Emerald Green */
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
   /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
+  /* Ensure destructive buttons have clear focus */
+  .button[data-variant="destructive"] {
+     @apply focus-visible:ring-destructive;
+  }
 }
 
 @layer utilities {
@@ -150,7 +162,7 @@
   }
 
   /* Quiz Animations */
-  @keyframes pulse-correct { /* Use --secondary (Emerald Green) for correct answer pulse */
+  @keyframes pulse-correct { 
     0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); }
     50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
   }
@@ -158,7 +170,7 @@
     animation: pulse-correct 0.6s ease-in-out;
   }
 
-  @keyframes glow-card-correct { /* Use --secondary (Emerald Green) for card glow */
+  @keyframes glow-card-correct { 
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
     50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); }
   }

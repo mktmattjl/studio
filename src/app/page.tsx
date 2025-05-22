@@ -12,19 +12,19 @@ import type { PlannerEvent } from '@/app/planner/page';
 import { eventTypeColors } from '@/app/planner/page'; 
 
 // Fantasy Pixel Art Icons
-import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon'; // For Create Flashcards
-import { PixelMagicOrbIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon'; // For AI Card Gen
-import { PixelQuillIcon } from '@/components/icons/fantasy/PixelQuillIcon'; // For Plan Your Week / Add Event
-import { PixelChestIcon } from '@/components/icons/fantasy/PixelChestIcon'; // For Explore Challenges / Rewards
+import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon'; 
+import { PixelMagicOrbIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon'; 
+import { PixelQuillIcon } from '@/components/icons/fantasy/PixelQuillIcon'; 
+import { PixelChestIcon } from '@/components/icons/fantasy/PixelChestIcon'; 
 
 import type { ElementType } from 'react';
 import { format, addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
 
-const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/3D3630/F3EADA.png"; // Dark wood bg, parchment fg
+const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/A07050/F3EADA.png"; // Brown bg, parchment fg for placeholder
 
 interface QuickActionItem {
   title: string;
-  description: string;
+  description: string; // No longer displayed, but kept for tooltip data
   href: string;
   Icon: ElementType;
   iconBgClass?: string; 
@@ -32,13 +32,13 @@ interface QuickActionItem {
 }
 
 const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
-    { title: 'Submit History Scroll (Essay Outline)', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline'}, 
-    { title: 'Lecture: Ancient Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class'}, 
-    { title: 'Council Meeting (Team Sync)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting'}, 
-    { title: 'Decipher Chapter 3 Tomes (Biology)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'study_session'},
-    { title: 'Trial of Physics II (Exam)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'exam'},
-    { title: 'Morning Scry (Daily Scrum)', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'meeting' },
-    { title: 'Forge Project Cerebro (Study)', startTime: setSeconds(setMinutes(setHours(new Date(), 14),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 16),0),0), type: 'study_session' }
+    { title: 'Submit History Scroll (Essay Outline)', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline', description: 'The final runes must be etched and submitted to the Grand Loremaster by midnight.'}, 
+    { title: 'Lecture: Ancient Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class', description: 'Attend Professor Eldrin\'s lecture on forgotten computational spells.'}, 
+    { title: 'Council Meeting (Team Sync)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting', description: 'Gather with the Guild to discuss progress on Project Cerebro.'}, 
+    { title: 'Decipher Chapter 3 Tomes (Biology)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'study_session', description: 'Unravel the mysteries of mystical flora and fauna.'},
+    { title: 'Trial of Physics II (Exam)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'exam', description: 'Face the challenging examination on the elemental laws of physics.'},
+    { title: 'Morning Scry (Daily Scrum)', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'meeting', description: 'A quick alignment with fellow adventurers on today\'s objectives.' },
+    { title: 'Forge Project Cerebro (Study)', startTime: setSeconds(setMinutes(setHours(new Date(), 14),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 16),0),0), type: 'study_session', description: 'Dedicated time to imbue knowledge into Project Cerebro.' }
   ];
 
 
@@ -128,10 +128,10 @@ export default function DashboardPage() {
 
   const pageTitle = (
     <>
-      {currentTimeGreeting}, <span className="text-foreground">{userName}!</span> {/* Changed text-primary to text-foreground */}
+      {currentTimeGreeting}, <span className="text-foreground">{userName}!</span>
     </>
   );
-  const pageSubtitle = "What quests await thee today, brave scholar?";
+  const pageSubtitle = "Ready to conquer your studies today?";
 
   const today = new Date();
   const displayDays = [today, addDays(today, 1), addDays(today, 2)];

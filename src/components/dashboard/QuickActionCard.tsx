@@ -13,7 +13,6 @@ import {
 
 interface QuickActionCardProps {
   title: string;
-  description: string; 
   href: string;
   Icon: ElementType;
   iconBgClass?: string;
@@ -38,15 +37,14 @@ export function QuickActionCard({
           <ContentCard
             className={cn(
               "group transition-all duration-150 ease-in-out hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center",
-              "hover:border-accent/70 border-2 border-transparent" // Thematic hover border
+              "hover:border-accent/70 border-2 border-transparent" 
             )}
             interactive 
-            padding="p-2.5" // Keep padding for icon visibility
+            padding="p-2.5" 
             style={{ 
               width: '48px', 
               height: '48px',
-              // Example of a chiseled look - adjust colors from palette
-              // boxShadow: "inset 2px 2px 0px hsl(var(--card) / 0.7), inset -2px -2px 0px hsl(var(--background) / 0.5)"
+              boxShadow: "inset 2px 2px 0px hsl(var(--card) / 0.7), inset -2px -2px 0px hsl(var(--background) / 0.5), 1px 1px 2px hsl(var(--border))"
             }}
             elementType="div" 
           >
@@ -56,11 +54,13 @@ export function QuickActionCard({
           </ContentCard>
         </Link>
       </TooltipTrigger>
-      <TooltipContent side="top" align="center" className="font-pixel bg-popover text-popover-foreground border-border shadow-lg">
+      <TooltipContent 
+        side="top" 
+        align="center" 
+        className="font-pixel bg-popover text-popover-foreground border-border shadow-lg rounded-sm" // Thematic tooltip
+      >
         <p>{title}</p>
       </TooltipContent>
     </Tooltip>
   );
 }
-
-    

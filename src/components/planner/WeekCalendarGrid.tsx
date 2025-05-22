@@ -71,11 +71,11 @@ export function WeekCalendarGrid({
         {/* Header Row */}
         <div className={cn(
             "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
-            condensedMode ? "p-1" : "p-1 sm:p-2" // Adjusted padding
+            condensedMode ? "p-1" : "p-1 sm:p-2" 
           )}>
           <span className={cn(
-              "text-muted-foreground font-pixel", // Thematic font
-              condensedMode ? "text-[0.6rem] sm:text-[0.65rem]" : "text-xs sm:text-sm"
+              "text-muted-foreground font-pixel", 
+              condensedMode ? "text-[0.65rem] sm:text-[0.7rem]" : "text-xs sm:text-sm"
             )}>Time</span>
         </div>
         {daysToUse.map((day, index) => (
@@ -83,18 +83,18 @@ export function WeekCalendarGrid({
             key={index}
             className={cn(
               "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
-              condensedMode ? "p-1 min-w-[45px] sm:min-w-[55px]" : "p-1 sm:p-2 min-w-[70px] sm:min-w-[90px]", // Adjusted padding
-              isToday(day) && "bg-primary/10"
+              condensedMode ? "p-1 min-w-[55px] sm:min-w-[65px]" : "p-1 sm:p-2 min-w-[70px] sm:min-w-[90px]", 
+              isToday(day) && "bg-primary/10 ring-1 ring-inset ring-primary/50" // Enhanced current day highlight
             )}
           >
             <div className={cn(
-                "text-muted-foreground font-pixel", // Thematic font
-                condensedMode ? "text-[0.6rem] sm:text-[0.65rem]" : "text-xs sm:text-sm"
+                "text-muted-foreground font-pixel", 
+                condensedMode ? "text-[0.65rem] sm:text-[0.7rem]" : "text-xs sm:text-sm"
               )}>{format(day, 'EEE')}</div>
             <div className={cn(
-                "font-semibold font-pixel", // Thematic font
-                isToday(day) ? "text-primary" : "text-foreground",
-                condensedMode ? "text-[0.7rem] sm:text-[0.8rem]" : "text-sm sm:text-lg"
+                "font-pixel", // Thematic font
+                isToday(day) ? "text-primary font-semibold" : "text-foreground font-medium",
+                condensedMode ? "text-[0.75rem] sm:text-[0.85rem]" : "text-sm sm:text-lg"
               )}>{format(day, 'd')}</div>
           </div>
         ))}
@@ -103,8 +103,8 @@ export function WeekCalendarGrid({
         {hourSegments.map((segment) => (
           <React.Fragment key={segment.hour}>
             <div className={cn(
-              "border-b border-r border-border text-right text-muted-foreground sticky left-0 bg-card z-10 font-pixel", // Thematic font
-              condensedMode ? "px-1 py-0.5 text-[0.6rem] sm:text-[0.65rem]" : "px-1.5 py-1 text-[0.7rem] sm:text-xs" // Adjusted padding
+              "border-b border-r border-border text-right text-muted-foreground sticky left-0 bg-card z-10 font-pixel", 
+              condensedMode ? "px-1 py-0.5 text-[0.65rem] sm:text-[0.7rem]" : "px-1.5 py-1 text-[0.7rem] sm:text-xs" 
               )}
               style={{ height: `${hourRowHeightRem}rem` }}
             >
@@ -123,13 +123,14 @@ export function WeekCalendarGrid({
                 <div
                   key={`${segment.hour}-${dayIndex}`}
                   className={cn(
-                    "border-b border-r border-border relative cursor-pointer group",
-                    condensedMode ? "min-w-[45px] sm:min-w-[55px]" : "min-w-[70px] sm:min-w-[90px]",
+                    "border-b border-r border-border relative group",
+                    condensedMode ? "min-w-[55px] sm:min-w-[65px]" : "min-w-[70px] sm:min-w-[90px]",
                     isToday(day) && clientCurrentHour !== null && segment.hour === clientCurrentHour && "bg-primary/5",
-                    onSlotClick ? "hover:bg-muted/30 transition-colors duration-100" : ""
+                    onSlotClick ? "cursor-pointer hover:bg-muted/40 transition-colors duration-100 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none" : "" // Enhanced hover/focus
                   )}
                   style={{ height: `${hourRowHeightRem}rem` }}
                   onClick={() => onSlotClick?.(slotDateTime)}
+                  tabIndex={onSlotClick ? 0 : undefined} // Make slot focusable if clickable
                 >
                   {eventsInThisHourSlot.map(event => {
                     const eventStartMinutes = getMinutes(event.startTime);
@@ -145,10 +146,12 @@ export function WeekCalendarGrid({
                         key={event.id}
                         title={!condensedMode ? `${event.title} (${format(event.startTime, 'p')} - ${format(event.endTime, 'p')})` : event.title}
                         className={cn(
-                          'absolute left-0.5 right-0.5 rounded-sm overflow-hidden shadow-md bg-parchment-bg text-parchment-text border-l-4', // Parchment style
-                           event.color.replace('bg-', 'border-'), // Use event color for border
-                          onEventClick ? 'cursor-pointer hover:brightness-110 transition-all duration-150 group-hover:shadow-lg' : '',
-                           condensedMode ? "p-0.5 text-[0.6rem] sm:text-[0.65rem] leading-tight" : "p-1.5 text-[0.7rem] sm:text-xs leading-tight" 
+                          'absolute left-0.5 right-0.5 rounded-sm overflow-hidden shadow-md text-parchment-text border-l-4',
+                           'bg-parchment-bg border-border', // Parchment style with consistent border
+                           event.color.replace('bg-', 'border-l-'), // Use event color for left border
+                          onEventClick ? 'cursor-pointer hover:brightness-110 hover:shadow-lg transition-all duration-150 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : '',
+                           condensedMode ? "p-0.5 text-[0.6rem] sm:text-[0.65rem] leading-tight" : "p-1.5 text-[0.7rem] sm:text-xs leading-tight",
+                           "shadow-[1px_1px_3px_rgba(0,0,0,0.2)]" // Subtle thematic shadow
                         )}
                         style={{
                           top: `${topOffsetPercent}%`,
@@ -159,6 +162,7 @@ export function WeekCalendarGrid({
                             e.stopPropagation();
                             onEventClick?.(event);
                         }}
+                        tabIndex={onEventClick ? 0 : undefined} // Make event focusable if clickable
                       >
                         <p className={cn("font-semibold truncate", condensedMode && "text-[0.55rem] sm:text-[0.6rem]")}>{event.title}</p>
                         {!condensedMode && <p className="truncate hidden sm:block text-[0.65rem] opacity-80">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>}
@@ -174,5 +178,3 @@ export function WeekCalendarGrid({
     </div>
   );
 }
-
-    
