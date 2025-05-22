@@ -5,15 +5,15 @@
 
 @layer base {
   :root {
-    /* Heroic Fantasy Pixel Art Palette - Updated Cream Foreground & #333333 Background */
-    --background: hsl(0, 0%, 20%); /* #333333 - Dark Gray (From original PRD) */
-    --foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (User Requested) */
+    /* Heroic Fantasy Light Palette - #F3F3D3 Background */
+    --background: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (User Requested for Background) */
+    --foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown (for text on light bg) */
 
-    --card: hsl(30, 15%, 20%); /* #3D3630 - Dark Wood Brown */
-    --card-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
+    --card: hsl(40, 35%, 85%); /* #E3D9C9 - Darker, richer Parchment (for cards on light bg) */
+    --card-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
 
-    --popover: hsl(30, 15%, 15%); /* #2E2924 - Darker Wood Brown */
-    --popover-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
+    --popover: hsl(40, 35%, 80%); /* #DACBB7 - Slightly lighter Parchment for popovers */
+    --popover-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
 
     --primary: hsl(220, 60%, 55%); /* #527ED9 - Sapphire Blue (Main CTAs, Active Nav) */
     --primary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Sapphire) */
@@ -21,8 +21,8 @@
     --secondary: hsl(145, 50%, 45%); /* #3BA668 - Emerald Green (Secondary Buttons, Key Stat Highlights) */
     --secondary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Emerald) */
 
-    --muted: hsl(30, 10%, 30%); /* #5C5147 - Muted Brown (for less emphasis bg) */
-    --muted-foreground: hsl(50, 25%, 70%); /* #C8C3A1 - Warmer Muted Cream/Gray (Harmonized) */
+    --muted: hsl(40, 30%, 90%); /* #EBE8E1 - Very light off-white/cream for subtle backgrounds */
+    --muted-foreground: hsl(30, 15%, 45%); /* #8C7B6F - Medium Muted Brown/Gray */
 
     --accent: hsl(270, 40%, 60%); /* #A480CC - Amethyst Purple (Hovers, tertiary accents) */
     --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Amethyst) */
@@ -30,9 +30,9 @@
     --destructive: hsl(0, 70%, 45%); /* Darker, less flashy Ruby Red */
     --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
 
-    --border: hsl(30, 10%, 40%); /* #7A6C5F - Medium Wood Brown / Stone Outline */
-    --input: hsl(220, 10%, 15%); /* #20242B - Dark Stone/Input Background */
-    --input-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
+    --border: hsl(30, 10%, 60%); /* #B0A194 - Medium Wood Brown / Stone Outline (for light theme) */
+    --input: hsl(40, 40%, 92%); /* #EDEBE3 - Light Parchment/Input Background */
+    --input-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
     --ring: hsl(220, 60%, 65%); /* #7399E6 - Lighter Sapphire Blue for focus rings */
     
     --radius: 0.375rem; /* Slightly less rounded for a more "chiseled" feel, but not sharp */
@@ -40,6 +40,8 @@
     /* Custom Thematic Colors */
     --gold-accent: hsl(40, 70%, 60%); /* #E0AA66 - Gold/Bronze */
     --xp-bar-color: hsl(var(--secondary)); /* #3BA668 - Emerald Green (for XP bar) */
+    
+    /* Parchment for specific elements like event blocks in calendar - already darker */
     --parchment-bg: hsl(40, 35%, 85%); /* #E3D9C9 - Darker, richer Parchment for event blocks */
     --parchment-text: hsl(30, 20%, 25%); /* #4D423A - Dark Brown text for on-parchment */
 
@@ -51,26 +53,34 @@
     --chart-5: hsl(var(--accent)); /* Amethyst Purple */
   }
 
-  .dark { /* This is the active theme */
-    --background: hsl(0, 0%, 20%); /* #333333 - Dark Gray (From original PRD) */
-    --foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
-    --card: hsl(30, 15%, 20%);
-    --card-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
-    --popover: hsl(30, 15%, 15%);
-    --popover-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+  .dark { /* This will now be the active light theme definition */
+    --background: hsl(60, 56%, 90%); /* #F3F3D3 */
+    --foreground: hsl(30, 20%, 25%); /* #4D423A */
+
+    --card: hsl(40, 35%, 85%); /* #E3D9C9 */
+    --card-foreground: hsl(30, 20%, 25%); /* #4D423A */
+
+    --popover: hsl(40, 35%, 80%); /* #DACBB7 */
+    --popover-foreground: hsl(30, 20%, 25%); /* #4D423A */
+
     --primary: hsl(220, 60%, 55%);
     --primary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+    
     --secondary: hsl(145, 50%, 45%);
     --secondary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
-    --muted: hsl(30, 10%, 30%);
-    --muted-foreground: hsl(50, 25%, 70%); /* #C8C3A1 */
+
+    --muted: hsl(40, 30%, 90%); /* #EBE8E1 */
+    --muted-foreground: hsl(30, 15%, 45%); /* #8C7B6F */
+
     --accent: hsl(270, 40%, 60%);
     --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+
     --destructive: hsl(0, 70%, 45%);
     --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
-    --border: hsl(30, 10%, 40%);
-    --input: hsl(220, 10%, 15%);
-    --input-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+
+    --border: hsl(30, 10%, 60%); /* #B0A194 */
+    --input: hsl(40, 40%, 92%); /* #EDEBE3 */
+    --input-foreground: hsl(30, 20%, 25%); /* #4D423A */
     --ring: hsl(220, 60%, 65%);
     
     --radius: 0.375rem;
