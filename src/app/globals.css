@@ -15,8 +15,8 @@
     --popover: 35 35% 75%; /* Light Brown - Slightly darker and more saturated */
     --popover-foreground: 30 25% 20%; /* Darker Sepia/Brown */
 
-    --primary: 210 70% 50%; /* Sapphire Blue (for CTAs, active nav) */
-    --primary-foreground: 40 55% 95%; /* Very Light Cream (for text on blue) */
+    --primary: 30 30% 30%; /* Dark Brown (replaces Sapphire Blue) */
+    --primary-foreground: 40 55% 95%; /* Very Light Cream (for text on dark brown) */
     
     --secondary: 145 60% 40%; /* Emerald Green (secondary buttons, highlights) */
     --secondary-foreground: 40 55% 95%; /* Very Light Cream (for text on green) */
@@ -27,13 +27,13 @@
     --accent: 270 50% 55%; /* Amethyst Purple (for hovers, some accents) */
     --accent-foreground: 40 55% 95%; /* Very Light Cream (for text on purple) */
 
-    --destructive: 0 65% 50%; /* Ruby Red */
+    --destructive: 0 70% 45%; /* Darker, less saturated Ruby Red */
     --destructive-foreground: 40 55% 95%; /* Very Light Cream */
 
     --border: 35 25% 65%; /* Muted Wood Brown (approx #BFB0A4) */
     --input: 40 60% 96%; /* Very Light Cream for input fields (approx #F9F5EF) */
     --input-foreground: 30 25% 25%; /* Dark Sepia/Brown */
-    --ring: 210 80% 60%; /* Brighter Sapphire Blue (for focus) */
+    --ring: 30 30% 40%; /* Dark Brown - slightly lighter for focus (replaces Brighter Sapphire Blue) */
     
     --radius: 0.375rem; 
 
@@ -45,10 +45,10 @@
     --parchment-text: 30 30% 20%;   /* Darkest Brown (approx #4D4139) */
 
     /* Chart Colors - Can be adjusted for thematic consistency */
-    --chart-1: 210 70% 50%;  /* Sapphire Blue */
+    --chart-1: 30 30% 30%;  /* Dark Brown (replaces Sapphire Blue) */
     --chart-2: 145 60% 40%;  /* Emerald Green */
     --chart-3: 270 50% 55%;  /* Amethyst Purple */
-    --chart-4: 0 65% 50%;    /* Ruby Red */
+    --chart-4: 0 65% 50%;    /* Ruby Red (slightly brighter than destructive for charts) */
     --chart-5: 45 70% 50%;   /* Gold/Bronze */
   }
 
@@ -62,7 +62,7 @@
     --popover: 35 35% 75%; 
     --popover-foreground: 30 25% 20%;
 
-    --primary: 210 70% 50%;
+    --primary: 30 30% 30%; 
     --primary-foreground: 40 55% 95%;
     
     --secondary: 145 60% 40%;
@@ -74,13 +74,13 @@
     --accent: 270 50% 55%;
     --accent-foreground: 40 55% 95%;
 
-    --destructive: 0 65% 50%;
+    --destructive: 0 70% 45%;
     --destructive-foreground: 40 55% 95%;
 
     --border: 35 25% 65%;
     --input: 40 60% 96%;
     --input-foreground: 30 25% 25%;
-    --ring: 210 80% 60%;
+    --ring: 30 30% 40%;
     
     --radius: 0.375rem;
 
@@ -91,7 +91,7 @@
     --parchment-text: 30 30% 20%;
 
     /* Chart Colors */
-    --chart-1: 210 70% 50%;  
+    --chart-1: 30 30% 30%;  
     --chart-2: 145 60% 40%;  
     --chart-3: 270 50% 55%;  
     --chart-4: 0 65% 50%;    
@@ -121,7 +121,7 @@
 
 /* Custom Button Styles for Heroic Fantasy - Light Theme */
 @layer components {
-  .btn-primary-action { /* Main Call to Action - Sapphire Blue */
+  .btn-primary-action { /* Main Call to Action - Now Dark Brown */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
     /* Consider a subtle inner shadow for a chiseled look */
   }
@@ -133,23 +133,23 @@
 
 @layer utilities {
   .styled-scrollbar::-webkit-scrollbar {
-    width: 10px; /* Slightly wider for pixel theme */
+    width: 10px; 
     height: 10px;
   }
   .styled-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.6); /* Muted brown scrollbar thumb */
-    border-radius: 0px; /* Sharp edges for pixel theme */
-    border: 2px solid hsl(var(--card)); /* Card background as border for thumb */
+    background: hsl(var(--muted-foreground) / 0.6); 
+    border-radius: 0px; 
+    border: 2px solid hsl(var(--card)); 
   }
   .styled-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--muted-foreground) / 0.8);
   }
   .styled-scrollbar::-webkit-scrollbar-track {
-    background: hsl(var(--background) / 0.7); /* Main background for track */
+    background: hsl(var(--background) / 0.7); 
     border-radius: 0px;
   }
 
-  /* Quiz Animations - Review if these fit the new theme */
+  /* Quiz Animations */
   @keyframes pulse-correct { /* Use --secondary (Emerald Green) for correct answer pulse */
     0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); }
     50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
