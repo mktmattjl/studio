@@ -5,98 +5,98 @@
 
 @layer base {
   :root {
-    /* Heroic Fantasy Light Palette - User Requested Darker Cream Background */
-    --background: hsl(50, 40%, 80%); /* #DCD6C6 - Muted, Darker Cream */
-    --foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown (for text on light bg) */
+    /* #FF5733 Theme - High Energy Retro/Cyberpunk */
+    --background: 11 80% 60%; /* #FF5733 */
+    --foreground: 0 0% 100%; /* White */
 
-    --card: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment for cards on darker cream bg */
-    --card-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
+    --card: 220 20% 12%; /* Very Dark Cool Gray/Blue #1A1E24 */
+    --card-foreground: 0 0% 100%; /* White */
 
-    --popover: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment for popovers */
-    --popover-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
+    --popover: 220 20% 12%; /* Very Dark Cool Gray/Blue */
+    --popover-foreground: 0 0% 100%; /* White */
 
-    --primary: hsl(220, 60%, 55%); /* #527ED9 - Sapphire Blue (Main CTAs, Active Nav) */
-    --primary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Sapphire) */
+    --primary: 190 95% 50%; /* Electric Cyan #00E5FF */
+    --primary-foreground: 220 20% 8%; /* Near Black for text on Cyan */
     
-    --secondary: hsl(145, 50%, 45%); /* #3BA668 - Emerald Green (Secondary Buttons, Key Stat Highlights) */
-    --secondary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Emerald) */
+    --secondary: 300 90% 60%; /* Vibrant Magenta #F538F5 */
+    --secondary-foreground: 0 0% 100%; /* White for text on Magenta */
 
-    --muted: hsl(50, 25%, 88%); /* #E6E2DA - Very light muted cream for subtle backgrounds/dividers */
-    --muted-foreground: hsl(40, 18%, 50%); /* #8F8678 - Medium Muted Brown/Gray */
+    --muted: 11 70% 55%; /* Darker/desaturated version of background #E64229 */
+    --muted-foreground: 0 0% 85%; /* Light Gray for less important text on #FF5733 */
 
-    --accent: hsl(270, 40%, 60%); /* #A480CC - Amethyst Purple (Hovers, tertiary accents) */
-    --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Amethyst) */
+    --accent: 300 90% 60%; /* Vibrant Magenta (same as secondary for now) */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --destructive: hsl(0, 70%, 45%); /* #C32626 - Darker, less flashy Ruby Red */
-    --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
+    --destructive: 0 90% 65%; /* Bright Red #FF4D4D */
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: hsl(30, 10%, 60%); /* #B0A194 - Medium Wood Brown / Stone Outline (for light theme) */
-    --input: hsl(40, 40%, 92%); /* #EDEBE3 - Light Parchment/Input Background */
-    --input-foreground: hsl(30, 20%, 25%); /* #4D423A - Dark Brown */
-    --ring: hsl(220, 60%, 65%); /* #7399E6 - Lighter Sapphire Blue for focus rings */
+    --border: 11 70% 50%; /* Darker Orange-Red #CC3722 */
+    --input: 220 20% 10%; /* Very Dark Gray/Blue for input bg #15181F */
+    --input-foreground: 0 0% 95%; /* Very Light Gray/White for input text */
+    --ring: 190 95% 50%; /* Electric Cyan for focus */
     
-    --radius: 0.375rem; /* Slightly less rounded for a more "chiseled" feel, but not sharp */
+    --radius: 0.375rem; /* Maintained from previous theme */
 
-    /* Custom Thematic Colors */
-    --gold-accent: hsl(40, 70%, 60%); /* #E0AA66 - Gold/Bronze */
-    --xp-bar-color: hsl(var(--secondary)); /* #3BA668 - Emerald Green (for XP bar) */
+    /* Custom Thematic Colors - review if these semantic names are still appropriate */
+    --gold-accent: 45 100% 55%; /* Bright Yellow #FFD54D (was gold) */
+    --xp-bar-color: 190 95% 50%; /* Electric Cyan (was emerald) */
     
-    /* Parchment for specific elements like event blocks in calendar */
-    --parchment-bg: hsl(40, 35%, 85%); /* #E3D9C9 - Darker, richer Parchment for event blocks */
-    --parchment-text: hsl(30, 20%, 25%); /* #4D423A - Dark Brown text for on-parchment */
+    /* Parchment for specific elements like event blocks in calendar - might need significant rethink */
+    --parchment-bg: 220 20% 15%; /* Dark Gray for "parchment" on bright BG #202630 */
+    --parchment-text: 0 0% 90%;   /* Light Gray/White text on dark parchment */
 
-    /* Chart Colors - Jewel Tones */
-    --chart-1: hsl(var(--primary)); /* Sapphire Blue */
-    --chart-2: hsl(var(--secondary)); /* Emerald Green */
-    --chart-3: hsl(0, 55%, 50%);  /* #D43A3A Ruby Red */
-    --chart-4: hsl(var(--gold-accent)); /* Gold */
-    --chart-5: hsl(var(--accent)); /* Amethyst Purple */
+    /* Chart Colors - Neon Palette */
+    --chart-1: 190 95% 50%;  /* Electric Cyan */
+    --chart-2: 300 90% 60%;  /* Vibrant Magenta */
+    --chart-3: 90 100% 50%;  /* Glitch Lime Green #39FF14 */
+    --chart-4: 45 100% 55%;  /* Bright Yellow #FFD54D */
+    --chart-5: 270 100% 70%; /* Bright Purple #BB66FF */
   }
 
-  .dark { /* This will now be the active light theme definition */
-    --background: hsl(50, 40%, 80%); /* #DCD6C6 - Muted, Darker Cream */
-    --foreground: hsl(30, 20%, 25%); /* #4D423A */
+  .dark { /* Active theme definition */
+    --background: 11 80% 60%;
+    --foreground: 0 0% 100%;
 
-    --card: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment */
-    --card-foreground: hsl(30, 20%, 25%); /* #4D423A */
+    --card: 220 20% 12%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: hsl(45, 45%, 85%); /* #E2DECF - Lighter Parchment */
-    --popover-foreground: hsl(30, 20%, 25%); /* #4D423A */
+    --popover: 220 20% 12%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: hsl(220, 60%, 55%);
-    --primary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+    --primary: 190 95% 50%;
+    --primary-foreground: 220 20% 8%;
     
-    --secondary: hsl(145, 50%, 45%);
-    --secondary-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+    --secondary: 300 90% 60%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: hsl(50, 25%, 88%); /* #E6E2DA */
-    --muted-foreground: hsl(40, 18%, 50%); /* #8F8678 */
+    --muted: 11 70% 55%;
+    --muted-foreground: 0 0% 85%;
 
-    --accent: hsl(270, 40%, 60%);
-    --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+    --accent: 300 90% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: hsl(0, 70%, 45%);
-    --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
+    --destructive: 0 90% 65%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: hsl(30, 10%, 60%); /* #B0A194 */
-    --input: hsl(40, 40%, 92%); /* #EDEBE3 */
-    --input-foreground: hsl(30, 20%, 25%); /* #4D423A */
-    --ring: hsl(220, 60%, 65%);
+    --border: 11 70% 50%;
+    --input: 220 20% 10%;
+    --input-foreground: 0 0% 95%;
+    --ring: 190 95% 50%;
     
     --radius: 0.375rem;
 
     /* Custom Thematic Colors */
-    --gold-accent: hsl(40, 70%, 60%);
-    --xp-bar-color: hsl(var(--secondary));
-    --parchment-bg: hsl(40, 35%, 85%);
-    --parchment-text: hsl(30, 20%, 25%);
+    --gold-accent: 45 100% 55%;
+    --xp-bar-color: 190 95% 50%;
+    --parchment-bg: 220 20% 15%;
+    --parchment-text: 0 0% 90%;
 
-    /* Chart Colors - Jewel Tones */
-    --chart-1: hsl(var(--primary));
-    --chart-2: hsl(var(--secondary));
-    --chart-3: hsl(0, 55%, 50%);
-    --chart-4: hsl(var(--gold-accent));
-    --chart-5: hsl(var(--accent));
+    /* Chart Colors - Neon Palette */
+    --chart-1: 190 95% 50%;
+    --chart-2: 300 90% 60%;
+    --chart-3: 90 100% 50%;
+    --chart-4: 45 100% 55%;
+    --chart-5: 270 100% 70%;
   }
 }
 
@@ -110,36 +110,37 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  .font-pixel { /* For thematic headers */
-    font-family: var(--font-vt323), theme('fontFamily.mono'); /* Fallback to mono */
-    text-rendering: optimizeSpeed; /* Helps with pixel font rendering */
-    image-rendering: pixelated; /* Modern property for pixel art scaling */
-    image-rendering: -moz-crisp-edges; /* Firefox */
-    image-rendering: crisp-edges; /* Older spec */
-    -ms-interpolation-mode: nearest-neighbor; /* IE */
+  .font-pixel {
+    font-family: var(--font-vt323), theme('fontFamily.mono');
+    text-rendering: optimizeSpeed; 
+    image-rendering: pixelated; 
+    image-rendering: -moz-crisp-edges; 
+    image-rendering: crisp-edges; 
+    -ms-interpolation-mode: nearest-neighbor; 
   }
 }
 
-/* Custom Button Styles for Heroic Fantasy */
+/* Custom Button Styles for Heroic Fantasy -> now Retro Neon */
 @layer components {
-  .btn-primary-action { /* Main Call to Action - Sapphire Blue */
+  .btn-primary-action { /* Main Call to Action - Electric Cyan */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
-    /* Example: box-shadow: 2px 2px 0px 0px hsl(var(--primary) / 0.4), 4px 4px 0px 0px hsl(var(--primary) / 0.2); */
+    /* Consider a neon glow effect for buttons if desired later */
+    /* box-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary) / 0.8), 0 0 15px hsl(var(--primary) / 0.6); */
   }
-  .btn-secondary-action { /* Secondary Action - Emerald Green */
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md transition-all duration-150;
+  .btn-secondary-action { /* Secondary Action - Vibrant Magenta */
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150;
   }
   /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
 }
 
 @layer utilities {
   .styled-scrollbar::-webkit-scrollbar {
-    width: 8px; /* More blocky */
+    width: 8px;
     height: 8px;
   }
   .styled-scrollbar::-webkit-scrollbar-thumb {
     background: hsl(var(--muted-foreground) / 0.5);
-    border-radius: 2px; /* More blocky for pixel theme */
+    border-radius: 2px; 
     border: 1px solid hsl(var(--card) / 0.8);
   }
   .styled-scrollbar::-webkit-scrollbar-thumb:hover {
@@ -151,17 +152,17 @@
   }
 
   /* Quiz Animations - Review if these fit the new theme */
-  @keyframes pulse-correct {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-2) / 0.4); } /* chart-2 is Emerald Green */
-    50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--chart-2) / 0.5); }
+  @keyframes pulse-correct { /* Use --chart-3 (Lime Green) for correct answer pulse */
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-3) / 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--chart-3) / 0.5); }
   }
   .animate-button-correct-pulse {
     animation: pulse-correct 0.6s ease-in-out;
   }
 
-  @keyframes glow-card-correct {
+  @keyframes glow-card-correct { /* Use --chart-3 (Lime Green) for card glow */
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--chart-2)); box-shadow: 0 0 15px hsl(var(--chart-2) / 0.3); } /* Emerald Green */
+    50% { border-color: hsl(var(--chart-3)); box-shadow: 0 0 15px hsl(var(--chart-3) / 0.3); }
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;
