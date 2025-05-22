@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, pixelifySans.variable, "dark h-full")}> {/* Use pixelifySans.variable */}
+    <html lang="en" className={cn(inter.variable, pixelifySans.variable, "dark h-full")}>
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
         <AuthProvider>
           <TooltipProvider delayDuration={0}>
