@@ -15,20 +15,23 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
+// Bell icon image - Ensure Bellcon.png exists at this path or adjust
+// For client components, next/image is preferred for optimization, but this import pattern can work.
+import Bellcon from '@/components/icons/Bellcon.png';
+
 // Fantasy Pixel Art Icons
-import { 
+import {
   PixelCompassIcon,
   PixelScrollIcon,
   PixelMapIcon,
   PixelMagicOrbIcon,
-  PixelGoldCoinIcon,
-  PixelBellIcon, 
+  PixelGoldCoinIcon, // Ensured this is correctly part of the import list
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon
 } from '@/components/icons/fantasy';
 
-// Lucide icons for dropdown actions (kept for clarity within dropdown)
-import { LogOut, LogIn, UserPlus } from 'lucide-react'; 
+// Lucide icons for dropdown actions
+import { LogOut, LogIn, UserPlus } from 'lucide-react';
 
 export function Header() {
   const { currentUser, logout } = useAuth();
@@ -37,35 +40,34 @@ export function Header() {
 
   const handleLogout = async () => {
     await logout();
+    // router.push('/login'); // AuthContext already handles redirect
   };
 
   return (
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Cerebro title text color now uses thematic text accent */}
           <Link href="/" className="font-pixel text-2xl font-bold text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] transition-colors">
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            {/* NavItem active state uses new primary (dark brown) bg, off-white text */}
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
             <NavItem href="/flashcards" icon={<PixelScrollIcon className="w-5 h-5" />}>Flashcards</NavItem>
             <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
             <NavItem href="/ai-generator" icon={<PixelMagicOrbIcon className="w-5 h-5" />}>AI Wizard</NavItem>
           </nav>
         </div>
-        
+
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
-            // Coin display uses its internal gold/yellow fill
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" /> 
+              <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
-            <PixelBellIcon className="w-5 h-5" /> 
+          {/* Ensure Bellcon.png is in src/components/icons/ or public folder and path is correct */}
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-8 h-8">
+            <img src={Bellcon.src} alt="Notifications" className="w-5 h-5" />
             <span className="sr-only">Notifications</span>
           </Button>
 
@@ -90,7 +92,7 @@ export function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-border/50"/>
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:bg-destructive/20 focus:text-destructive-foreground cursor-pointer hover:bg-destructive/10">
-                  <LogOut className="mr-2 h-4 w-4" /> Log Out 
+                  <LogOut className="mr-2 h-4 w-4" /> Log Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -99,7 +101,6 @@ export function Header() {
               <Button variant="ghost" onClick={() => router.push('/login')} className="text-sm font-medium text-foreground hover:text-[hsl(var(--text-accent-thematic))]">
                 <LogIn className="mr-1.5 h-4 w-4" /> Log In
               </Button>
-              {/* Sign Up button uses .btn-primary-action (dark brown bg, off-white text) */}
               <Button onClick={() => router.push('/signup')} className="btn-primary-action text-sm">
                 <UserPlus className="mr-1.5 h-4 w-4" /> Sign Up
               </Button>
