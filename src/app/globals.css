@@ -7,22 +7,22 @@
   :root {
     /* Heroic Fantasy - Light Cream/Beige Theme */
     --background: 40 55% 88%; /* Warm Cream/Beige (approx #EDE6D5) */
-    --foreground: 30 25% 20%; /* Darker Sepia/Brown (approx #4D423A) - Darkened for contrast */
+    --foreground: 30 25% 18%; /* Darker Sepia/Brown (approx #423B36) - Enhanced Contrast */
 
-    --card: 35 35% 75%; /* Light Brown - Slightly darker and more saturated (approx #CFC5B6) */
-    --card-foreground: 30 25% 15%; /* Even Darker Sepia/Brown for contrast on cards - Darkened */
+    --card: 35 35% 70%; /* Darker Light Brown (approx #C7BBAF) - for Content Cards */
+    --card-foreground: 30 25% 12%; /* Even Darker Sepia/Brown for contrast on cards (approx #312B26) */
 
-    --popover: 35 35% 72%; /* Slightly darker popover bg for tooltips - Thematic: Dark Wood appearance */
-    --popover-foreground: 40 55% 95%; /* Very Light Cream for text on dark popover - Thematic: Parchment text */
+    --popover: 35 35% 70%; /* Consistent with card - Dark Wood appearance for tooltips */
+    --popover-foreground: 40 55% 95%; /* Very Light Cream for text on dark popover - Parchment text */
 
-    --primary: 30 30% 30%; /* Dark Brown (replaces Sapphire Blue) - Main CTA, Active Nav */
+    --primary: 30 30% 30%; /* Dark Brown (Main CTA, Active Nav) */
     --primary-foreground: 40 55% 95%; /* Very Light Cream (for text on dark brown) */
     
     --secondary: 145 60% 40%; /* Emerald Green (secondary buttons, highlights) */
     --secondary-foreground: 40 55% 95%; /* Very Light Cream (for text on green) */
 
     --muted: 40 40% 80%; /* Darker shade of background cream (approx #DCD3BF) */
-    --muted-foreground: 30 20% 40%; /* Muted Brown/Gray (approx #7E7065) - Darkened */
+    --muted-foreground: 30 20% 35%; /* Muted Brown/Gray (approx #73675F) - Enhanced Contrast */
 
     --accent: 270 50% 55%; /* Amethyst Purple (for hovers, some accents) */
     --accent-foreground: 40 55% 95%; /* Very Light Cream (for text on purple) */
@@ -32,8 +32,8 @@
 
     --border: 35 25% 60%; /* Muted Wood Brown (approx #B2A194) - Slightly Darker for definition */
     --input: 40 60% 96%; /* Very Light Cream for input fields (approx #F9F5EF) */
-    --input-foreground: 30 25% 20%; /* Dark Sepia/Brown - Darkened */
-    --ring: 30 30% 40%; /* Dark Brown - slightly lighter for focus (replaces Brighter Sapphire Blue) */
+    --input-foreground: 30 25% 20%; /* Dark Sepia/Brown */
+    --ring: 30 30% 40%; /* Dark Brown - slightly lighter for focus */
     
     --radius: 0.375rem; 
 
@@ -44,7 +44,7 @@
     --parchment-bg: 40 45% 82%; /* Aged Parchment for event blocks (approx #E0D5C0) */
     --parchment-text: 30 30% 20%;   /* Darkest Brown (approx #4D4139) */
 
-    /* Chart Colors - Can be adjusted for thematic consistency */
+    /* Chart Colors - Adjusted for Heroic Fantasy Light Theme */
     --chart-1: 30 30% 30%;  /* Dark Brown (Primary) */
     --chart-2: 145 60% 40%;  /* Emerald Green (Secondary) */
     --chart-3: 270 50% 55%;  /* Amethyst Purple (Accent) */
@@ -54,12 +54,12 @@
 
   .dark { /* Using .dark as the active class, but defining light theme colors */
     --background: 40 55% 88%; 
-    --foreground: 30 25% 20%; 
+    --foreground: 30 25% 18%; 
 
-    --card: 35 35% 75%; 
-    --card-foreground: 30 25% 15%;
+    --card: 35 35% 70%; 
+    --card-foreground: 30 25% 12%;
 
-    --popover: 35 35% 72%; 
+    --popover: 35 35% 70%; 
     --popover-foreground: 40 55% 95%;
 
     --primary: 30 30% 30%; 
@@ -69,7 +69,7 @@
     --secondary-foreground: 40 55% 95%;
 
     --muted: 40 40% 80%;
-    --muted-foreground: 30 20% 40%;
+    --muted-foreground: 30 20% 35%;
 
     --accent: 270 50% 55%;
     --accent-foreground: 40 55% 95%;
@@ -122,7 +122,7 @@
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
-  a:not(.button):not([class*="no-underline"]) { /* Avoid affecting buttons or specifically styled links */
+  a:not(.button):not([class*="no-underline"]) { 
     @apply text-primary hover:text-primary/80 hover:underline;
   }
 }
@@ -131,13 +131,10 @@
 @layer components {
   .btn-primary-action { /* Main Call to Action - Dark Brown */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-    /* Consider a subtle inner shadow for a chiseled look */
   }
   .btn-secondary-action { /* Secondary Action - Emerald Green */
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
-  /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
-  /* Ensure destructive buttons have clear focus */
   .button[data-variant="destructive"] {
      @apply focus-visible:ring-destructive;
   }
@@ -188,4 +185,5 @@
     animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
+    
     

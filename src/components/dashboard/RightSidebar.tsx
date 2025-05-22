@@ -95,7 +95,7 @@ export function RightSidebar({
             <div className="flex gap-2 pt-2 border-t border-border/50">
                 <Button 
                   variant="outline" 
-                  size="sm" 
+                  size="default" // Changed from sm for more prominence
                   className="flex-1 text-muted-foreground hover:bg-accent/20 hover:text-accent-foreground hover:border-accent py-2.5 px-3" 
                   onClick={() => router.push('/profile')}
                 >
@@ -103,7 +103,7 @@ export function RightSidebar({
                 </Button>
                 <Button 
                   variant="outline" 
-                  size="sm" 
+                  size="default" // Changed from sm for more prominence
                   className="flex-1 text-muted-foreground hover:bg-accent/20 hover:text-accent-foreground hover:border-accent py-2.5 px-3" 
                   onClick={() => router.push('/settings')}
                 >
@@ -120,7 +120,7 @@ export function RightSidebar({
             <PixelPetIcon className="h-5 w-5" />
             Companion
           </h3>
-          <Link href="/companion" className="text-sm font-medium text-accent hover:text-accent/80 hover:underline">View All</Link>
+          <Link href="/companion" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View All</Link>
         </div>
         <div className="flex items-center gap-3">
           <div className={cn("relative w-16 h-16 rounded-md overflow-hidden bg-muted flex items-center justify-center border-2 ", isGeneratingPetImage ? "border-dashed border-primary/50 animate-pulse" : "border-border")}>
@@ -129,7 +129,7 @@ export function RightSidebar({
               alt={petName}
               width={64}
               height={64}
-              className={cn("object-contain transition-opacity duration-300 ", isGeneratingPetImage && petImageUrl !== 'https://placehold.co/150x150/3D3630/F3EADA.png' ? 'opacity-30' : 'opacity-100')}
+              className={cn("object-contain transition-opacity duration-300 ", isGeneratingPetImage && petImageUrl !== 'https://placehold.co/150x150/A07050/F3EADA.png' ? 'opacity-30' : 'opacity-100')}
               unoptimized={petImageUrl.startsWith('data:')}
               priority
               data-ai-hint="heroic fantasy pixel art creature companion, detailed, friendly, vibrant jewel tones"
@@ -161,3 +161,6 @@ export function RightSidebar({
     </aside>
   );
 }
+
+
+    
