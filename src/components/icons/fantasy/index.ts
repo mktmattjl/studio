@@ -17,7 +17,8 @@ export * from './PixelSoupBowlIcon';
 export * from './PixelLightningIcon';
 export * from './PixelTrashIcon';
 export * from './PixelTrophyIcon';
-export * from './PixelFloppyDiskIcon'; // Added local export
+export * from './PixelFloppyDiskIcon';
+export * from './PixelStackedDocumentsIcon'; // Added new icon export
 
 // Add other fantasy icons as they are created
 export * from '@/components/icons/PixelBellIcon'; // Keep for now, or create fantasy version

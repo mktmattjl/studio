@@ -1,4 +1,4 @@
-
+// src/components/layout/Header.tsx
 'use client';
 
 import Link from 'next/link';
@@ -15,20 +15,17 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Bell icon image - Ensure Bellcon.png exists at this path or adjust
-// For client components, next/image is preferred for optimization, but this import pattern can work.
-import Bellcon from '@/components/icons/Bellcon.png';
-
 // Fantasy Pixel Art Icons
 import {
   PixelCompassIcon,
-  PixelScrollIcon,
   PixelMapIcon,
   PixelMagicOrbIcon,
   PixelGoldCoinIcon,
   PixelFantasyAvatarIcon,
-  PixelFantasySettingsIcon
+  PixelFantasySettingsIcon,
+  PixelStackedDocumentsIcon // Changed from PixelScrollIcon
 } from '@/components/icons/fantasy';
+import { PixelBellIcon } from '@/components/icons/PixelBellIcon';
 
 // Lucide icons for dropdown actions
 import { LogOut, LogIn, UserPlus } from 'lucide-react';
@@ -53,7 +50,7 @@ export function Header() {
           </Link>
           <nav className="hidden md:flex items-center gap-1">
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
-            <NavItem href="/flashcards" icon={<PixelScrollIcon className="w-5 h-5" />}>Flashcards</NavItem>
+            <NavItem href="/flashcards" icon={<PixelStackedDocumentsIcon className="w-5 h-5" />}>Flashcards</NavItem> {/* Updated Icon */}
             <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
             <NavItem href="/ai-generator" icon={<PixelMagicOrbIcon className="w-5 h-5" />}>AI Wizard</NavItem>
           </nav>
@@ -62,14 +59,12 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              {/* Gold coin icon */}
               <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
-          {/* Ensure Bellcon.png is in src/components/icons/ or public folder and path is correct */}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-8 h-8">
-            <img src={Bellcon.src} alt="Notifications" className="w-6 h-6" /> {/* Changed from w-5 h-5 */}
+            <PixelBellIcon className="w-6 h-6" />
             <span className="sr-only">Notifications</span>
           </Button>
 
@@ -81,8 +76,8 @@ export function Header() {
                   <span className="sr-only">User Menu</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-popover border-border text-popover-foreground rounded-md shadow-lg w-48">
-                <DropdownMenuLabel className="text-sm font-medium font-pixel text-popover-foreground">
+              <DropdownMenuContent align="end" className="bg-popover border-border text-popover-foreground rounded-md shadow-lg w-48 font-pixel">
+                <DropdownMenuLabel className="text-sm font-medium text-popover-foreground">
                   {currentUser.email}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-border/50" />
