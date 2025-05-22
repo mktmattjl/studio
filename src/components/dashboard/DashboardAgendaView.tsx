@@ -14,14 +14,15 @@ import {
     PixelFlamingSwordIcon 
 } from '@/components/icons/fantasy'; 
 
-// Grayscale color mapping for event types (left border)
+// Color mapping for event types (left border)
+// Using new Primary (Electric Blue) and Secondary (Vibrant Purple) accents
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', // Kept red for high importance
-    'meeting': 'border-l-primary',      // Light Grey
-    'class': 'border-l-primary',          // Light Grey
-    'study_session': 'border-l-secondary',  // Medium Grey
+    'meeting': 'border-l-primary',      // Electric Blue
+    'class': 'border-l-primary',          // Electric Blue
+    'study_session': 'border-l-secondary',  // Vibrant Purple
     'exam': 'border-l-destructive', // Kept red for high importance
-    'personal': 'border-l-muted',        // Muted Dark Grey
+    'personal': 'border-l-secondary',        // Vibrant Purple (instead of muted)
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -69,7 +70,6 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
       <div className="p-4 sm:p-6 mb-0 border-b border-border">
-        {/* Title uses .font-pixel and --foreground color */}
         <h1 className="text-2xl sm:text-3xl font-pixel text-foreground"> 
           {title}
         </h1>
@@ -84,33 +84,39 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             </div>
         )}
 
-        {Object.entries(groupedEvents).map(([groupName, groupEvents]) => {
+        {Object.entries(groupedEvents).map(([groupName, groupEvents], groupIndex) => {
           if (groupEvents.length === 0) return null; 
+          const isFirstTodayTask = groupIndex === 0 && groupName === "Today" && groupEvents.length > 0;
 
           return (
             <div key={groupName}>
-              {/* Group Name uses .font-pixel and --foreground color */}
-              <h3 className="text-lg font-pixel text-foreground mb-3 border-b border-border/50 pb-2">
+              <h3 className={cn(
+                "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
+                groupName === "Today" ? "text-primary" : "text-foreground" // Today header uses primary accent
+                )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
               </h3>
               <ul className="space-y-3">
-                {groupEvents.map((event) => {
-                  const eventColorClass = eventTypeColorMap[event.type] || 'border-l-muted';
-                  const EventIcon = eventTypeIcons[event.type] || PixelScrollIcon;
+                {groupEvents.map((event, eventIndex) => {
+                  const eventColorClass = eventTypeColorMap[event.type] || eventTypeColorMap.personal; // Default to personal if type is unknown
+                  const EventIcon = eventTypeIcons[event.type] || PixelHeartIcon;
 
                   const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
                       ? format(event.startTime, 'EEE, MMM d') 
                       : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`;
+                  
+                  const isKeyTask = isFirstTodayTask && eventIndex === 0;
 
                   return (
                     <li
                       key={event.id}
                       className={cn(
-                        "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm", 
-                        "bg-black/[.05] hover:bg-black/[.10]", // Subtle dark background for items
-                        eventColorClass,
-                        "border-2 border-transparent hover:border-accent/30 focus-within:ring-2 focus-within:ring-ring" 
+                        "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm focus-within:ring-2 focus-within:ring-ring focus-visible:outline-none", 
+                        "bg-black/[.05] hover:bg-card/70", // Subtle dark background for items
+                        eventColorClass, // This applies the border color
+                        isKeyTask && "border-primary", // Override for key "Today" task
+                        "border-2 border-transparent hover:border-accent/30" 
                       )}
                       tabIndex={0} 
                     >

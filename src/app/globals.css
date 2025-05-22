@@ -5,55 +5,55 @@
 
 @layer base {
   :root {
-    /* Simple Dark Theme - Video Game UI Inspired - Monochromatic */
+    /* Simple Dark Theme - Video Game UI Inspired */
     --background: 220 12% 15%; /* #20242B - Dark Grey Base */
     --foreground: 216 100% 94%; /* #E0EFFF - Icy Light Blue/Holographic White Text */
 
     --card: 220 20% 23%; /* #2D3748 - Dark Slate Gray for Cards/Modules */
     --card-foreground: 216 100% 94%; /* #E0EFFF */
+    --card-border-highlight: 220 20% 28%; /* Slightly lighter than card for top border */
 
     --popover: 220 20% 23%; /* #2D3748 */
     --popover-foreground: 216 100% 94%; /* #E0EFFF */
 
-    /* Primary Accent: Light Grey */
-    --primary: 0 0% 80%; /* #CCCCCC - Light Grey */
-    --primary-foreground: 0 0% 10%; /* #1A1A1A - Very Dark Grey/Near-Black for text on Light Grey */
+    /* Primary Accent: Electric Blue */
+    --primary: 210 80% 60%; /* #57A0F0 - Vibrant Electric Blue */
+    --primary-foreground: 216 100% 94%; /* #E0EFFF - Icy Light Blue for text on Blue */
     
-    /* Secondary Accent: Medium Grey */
-    --secondary: 0 0% 45%; /* #737373 - Medium Grey */
-    --secondary-foreground: 0 0% 94%; /* #F0F0F0 - Icy Light Blue for text on Medium Grey */
+    /* Secondary Accent: Vibrant Purple */
+    --secondary: 270 70% 65%; /* #A569E6 - Vibrant Purple */
+    --secondary-foreground: 216 100% 94%; /* #E0EFFF - Icy Light Blue for text on Purple */
 
     --muted: 220 15% 28%; /* #3B4354 - Muted Dark Grey */
-    --muted-foreground: 220 13% 50%; /* #707890 - Cool Medium Gray (Secondary Text) */
+    --muted-foreground: 220 13% 60%; /* #8992A9 - Slightly lighter Cool Medium Gray for sub-text */
 
-    /* Accent (for hovers on neutral elements, etc.) uses Secondary Accent */
-    --accent: 0 0% 45%; /* #737373 - Medium Grey */
-    --accent-foreground: 0 0% 94%; /* #F0F0F0 - Icy Light Blue */
+    /* Accent (for hovers on neutral elements, etc.) uses Secondary Accent (Purple) */
+    --accent: 270 70% 65%; /* #A569E6 - Vibrant Purple */
+    --accent-foreground: 216 100% 94%; /* #E0EFFF */
 
     --destructive: 0 70% 45%; /* Muted Red - Kept for standard destructive actions */
-    --destructive-foreground: 0 0% 94%; /* #F0F0F0 */
+    --destructive-foreground: 0 0% 100%; /* White for destructive text */
 
     --border: 220 15% 30%; /* #3F4A5F - Subtle Lighter Grey Border */
     --input: 220 20% 18%; /* #242A36 - Darker Input Background */
     --input-foreground: 216 100% 94%; /* #E0EFFF */
-    --ring: 0 0% 88%; /* #E0E0E0 - Brighter Light Grey for Focus Ring */
+    --ring: 210 80% 60%; /* Electric Blue for Focus Ring */
     
-    --radius: 0.375rem; /* Slightly rounded corners */
+    --radius: 0.5rem; /* Rounded corners */
 
     /* Custom Thematic Colors (Pixel Art Icons might have their own fills) */
-    /* Gold accent is kept for coin icon as it's thematic */
     --gold-accent: 40 80% 60%; /* #EAC468 - Muted Gold for Coins etc. */
-    --xp-bar-color: 0 0% 80%; /* #CCCCCC - Light Grey for XP Bar Fill (matches new primary) */
+    --xp-bar-color: 210 80% 60%; /* Electric Blue for XP Bar Fill */
     
-    --parchment-bg: 220 20% 20%; /* Darker shade for event blocks on dark card */
-    --parchment-text: 216 100% 85%; /* Lighter text for on dark parchment */
+    --parchment-bg: 35 40% 80%; /* #DCD6C6 - Darker cream for event blocks on dark card */
+    --parchment-text: 30 25% 12%; /* #2B241E - Dark Sepia/Brown for text on parchment */
 
-    /* Chart Colors - Grayscale Palette */
-    --chart-1: 0 0% 80%;  /* Light Grey (Primary) */
-    --chart-2: 0 0% 45%;  /* Medium Grey (Secondary) */
-    --chart-3: 0 0% 65%;  /* Mid-Light Grey */
-    --chart-4: 0 0% 30%;   /* Darker Grey */
-    --chart-5: 0 0% 90%;   /* Very Light Grey/Off-White */
+    /* Chart Colors - Vibrant Palette */
+    --chart-1: 210 80% 60%;  /* Electric Blue (Primary) */
+    --chart-2: 270 70% 65%;  /* Vibrant Purple (Secondary) */
+    --chart-3: 150 70% 55%;  /* Glitch Lime Green (from original cyberpunk palette) */
+    --chart-4: 35 80% 60%;   /* Neon Orange */
+    --chart-5: 50 85% 60%;   /* Bright Yellow */
   }
 
   .dark { /* Ensure .dark class applies these as the primary theme */
@@ -61,37 +61,38 @@
     --foreground: 216 100% 94%;
     --card: 220 20% 23%;
     --card-foreground: 216 100% 94%;
+    --card-border-highlight: 220 20% 28%;
     --popover: 220 20% 23%;
     --popover-foreground: 216 100% 94%;
-    --primary: 0 0% 80%;
-    --primary-foreground: 0 0% 10%;
-    --secondary: 0 0% 45%;
-    --secondary-foreground: 0 0% 94%;
+    --primary: 210 80% 60%;
+    --primary-foreground: 216 100% 94%;
+    --secondary: 270 70% 65%;
+    --secondary-foreground: 216 100% 94%;
     --muted: 220 15% 28%;
-    --muted-foreground: 220 13% 50%;
-    --accent: 0 0% 45%;
-    --accent-foreground: 0 0% 94%;
+    --muted-foreground: 220 13% 60%;
+    --accent: 270 70% 65%;
+    --accent-foreground: 216 100% 94%;
     --destructive: 0 70% 45%; 
-    --destructive-foreground: 0 0% 94%;
+    --destructive-foreground: 0 0% 100%;
     --border: 220 15% 30%;
     --input: 220 20% 18%;
     --input-foreground: 216 100% 94%;
-    --ring: 0 0% 88%;
+    --ring: 210 80% 60%;
     
-    --radius: 0.375rem;
+    --radius: 0.5rem;
 
     /* Custom Thematic Colors */
-    --gold-accent: 40 80% 60%; /* Gold remains for coins */
-    --xp-bar-color: 0 0% 80%; /* Light Grey for XP bar */
-    --parchment-bg: 220 20% 20%; 
-    --parchment-text: 216 100% 85%;
+    --gold-accent: 40 80% 60%; 
+    --xp-bar-color: 210 80% 60%; 
+    --parchment-bg: 35 40% 80%; 
+    --parchment-text: 30 25% 12%;
 
     /* Chart Colors */
-    --chart-1: 0 0% 80%;  
-    --chart-2: 0 0% 45%;  
-    --chart-3: 0 0% 65%;  
-    --chart-4: 0 0% 30%;    
-    --chart-5: 0 0% 90%;  
+    --chart-1: 210 80% 60%;  
+    --chart-2: 270 70% 65%;  
+    --chart-3: 150 70% 55%;  
+    --chart-4: 35 80% 60%;    
+    --chart-5: 50 85% 60%;  
   }
 }
 
@@ -117,23 +118,19 @@
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
-  /* Default link color uses primary (Light Grey) for a subtle but distinct link */
   a:not(.button):not([class*="no-underline"]) { 
     @apply text-primary hover:text-primary/80 hover:underline; 
   }
 }
 
 @layer components {
-  /* Primary action buttons use Light Grey background, Dark Grey text */
   .btn-primary-action { 
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
-  /* Secondary action buttons use Medium Grey background, Light text */
   .btn-secondary-action { 
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
-  /* Ensure destructive buttons also have the focus ring consistent with their variant */
-  .button[data-variant="destructive"] { /* Using attribute selector for specificity */
+  .button[data-variant="destructive"] { 
      @apply focus-visible:ring-destructive;
   }
 }
@@ -156,9 +153,9 @@
     border-radius: var(--radius);
   }
 
-  /* Quiz Animations - Colors now use CSS variables */
+  /* Quiz Animations */
   @keyframes pulse-correct { 
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } /* Medium Grey glow */
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } 
     50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
   }
   .animate-button-correct-pulse {
@@ -167,7 +164,7 @@
 
   @keyframes glow-card-correct { 
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); } /* Medium Grey glow */
+    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); } 
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;

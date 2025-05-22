@@ -21,14 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Grayscale Event Type Colors (Tailwind classes for event blocks)
+// Event Type Colors using new vibrant accents
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Light Grey bg, Dark Grey border/text
-  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red bg, Red border, Light text
-  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Medium Grey bg, Medium Grey border, Light text
-  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red bg, Red border, Light text
-  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Light Grey bg, Dark Grey border/text
-  personal: 'bg-muted/30 border-l-muted text-muted-foreground', // Darker Muted Grey bg, Muted Grey border/text
+  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Electric Blue
+  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
+  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Vibrant Purple
+  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red
+  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Electric Blue
+  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Vibrant Purple
 };
 
 
@@ -158,15 +158,13 @@ export default function PlannerPage() {
 
 
   return (
-    <div className="flex flex-col h-[calc(100vh-var(--header-height,8rem)-2rem)] space-y-6">
+    <div className="flex flex-col h-[calc(100vh-var(--header-height,4rem)-2rem)] space-y-6">
       <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            {/* Title uses .font-pixel and --foreground for new theme */}
             <h1 className="text-2xl md:text-3xl font-pixel text-foreground">The Grand Almanac</h1>
             <p className="text-muted-foreground mt-1">Chart thy quests, trials, and scholarly pursuits.</p>
           </div>
-          {/* Button uses .btn-primary-action (Light Grey bg) */}
           <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
             <PixelQuillIcon className="w-4 h-4 mr-2" />
             Decree New Entry
