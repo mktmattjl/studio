@@ -5,8 +5,8 @@
 
 @layer base {
   :root {
-    /* Heroic Fantasy Pixel Art Palette - Updated Cream Foreground */
-    --background: hsl(220, 10%, 10%); /* #14171C - Very Dark Desaturated Blue (Deep Stone/Night Sky) */
+    /* Heroic Fantasy Pixel Art Palette - Updated Cream Foreground & #333333 Background */
+    --background: hsl(0, 0%, 20%); /* #333333 - Dark Gray (From original PRD) */
     --foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (User Requested) */
 
     --card: hsl(30, 15%, 20%); /* #3D3630 - Dark Wood Brown */
@@ -27,7 +27,7 @@
     --accent: hsl(270, 40%, 60%); /* #A480CC - Amethyst Purple (Hovers, tertiary accents) */
     --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream (for contrast on Amethyst) */
 
-    --destructive: hsl(0, 55%, 50%); /* #C93D3D - Ruby Red */
+    --destructive: hsl(0, 70%, 45%); /* Darker, less flashy Ruby Red */
     --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 - Light Yellowish Cream */
 
     --border: hsl(30, 10%, 40%); /* #7A6C5F - Medium Wood Brown / Stone Outline */
@@ -52,7 +52,7 @@
   }
 
   .dark { /* This is the active theme */
-    --background: hsl(220, 10%, 10%);
+    --background: hsl(0, 0%, 20%); /* #333333 - Dark Gray (From original PRD) */
     --foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
     --card: hsl(30, 15%, 20%);
     --card-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
@@ -66,7 +66,7 @@
     --muted-foreground: hsl(50, 25%, 70%); /* #C8C3A1 */
     --accent: hsl(270, 40%, 60%);
     --accent-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
-    --destructive: hsl(0, 55%, 50%);
+    --destructive: hsl(0, 70%, 45%);
     --destructive-foreground: hsl(60, 56%, 90%); /* #F3F3D3 */
     --border: hsl(30, 10%, 40%);
     --input: hsl(220, 10%, 15%);
