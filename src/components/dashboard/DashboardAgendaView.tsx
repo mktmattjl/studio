@@ -11,19 +11,21 @@ import {
     PixelQuillIcon,
     PixelMapIcon,
     PixelHeartIcon,
-    PixelFlamingSwordIcon,
 } from '@/components/icons/fantasy';
+import { PixelFlamingSwordIcon } from '@/components/icons/fantasy/PixelFlamingSwordIcon';
+
 
 // Color mapping for event types (left border) using Heroic Fantasy Theme
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', // Ruby Red
-    'meeting': 'border-l-primary', // Neon Blue (NEW)
-    'class': 'border-l-primary', // Neon Blue (NEW)
+    'meeting': 'border-l-primary', // Neon Blue
+    'class': 'border-l-primary', // Neon Blue
     'study_session': 'border-l-secondary', // Emerald Green
     'exam': 'border-l-destructive', // Ruby Red
     'personal': 'border-l-secondary', // Emerald Green
 };
 
+// No longer needed as icons are removed from list items, but keeping for potential future use or reference
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
     'deadline': PixelQuillIcon,
     'meeting': PixelScrollIcon,
@@ -100,7 +102,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
               <ul className="space-y-3">
                 {groupEvents.map((event, eventIndex) => {
                   const eventColorClass = eventTypeColorMap[event.type] || eventTypeColorMap.personal;
-                  const EventIcon = eventTypeIcons[event.type] || PixelHeartIcon;
+                  // const EventIcon = eventTypeIcons[event.type] || PixelHeartIcon; // Icon no longer used here
 
                   const displayTime = (event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime)))
                       ? format(event.startTime, 'EEE, MMM d')
@@ -115,12 +117,12 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                         "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors shadow-sm focus-within:ring-2 focus-within:ring-ring focus-visible:outline-none",
                         "bg-black/[.05] hover:bg-muted/30",
                         eventColorClass,
-                        isKeyTask && "border-primary ring-1 ring-primary/50", // Uses primary (Neon Blue) for key task highlight
+                        isKeyTask && "border-primary ring-1 ring-primary/50", 
                         "border-2 border-transparent hover:border-accent/30"
                       )}
                       tabIndex={0}
                     >
-                      <EventIcon className="w-6 h-6 mt-0.5 text-muted-foreground shrink-0" />
+                      {/* <EventIcon className="w-6 h-6 mt-0.5 text-muted-foreground shrink-0" /> Removed icon rendering */}
                       <div className="flex-grow">
                         <p className="font-semibold text-foreground text-md font-pixel">{event.title}</p>
                         <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
