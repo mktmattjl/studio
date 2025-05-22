@@ -26,7 +26,7 @@ import {
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon,
 } from '@/components/icons/fantasy';
-import { PixelBellIcon } from '@/components/icons/PixelBellIcon';
+import { PixelBellIcon } from '@/components/icons/PixelBellIcon'; // Still using this custom SVG
 
 // Lucide icons for dropdown actions
 import { LogOut, LogIn, UserPlus } from 'lucide-react';
@@ -45,19 +45,20 @@ export function Header() {
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
+          {/* Cerebro title text color now uses thematic text accent */}
           <Link href="/" className="font-pixel text-2xl font-bold text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] transition-colors">
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
             <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
-            <NavItem 
-              href="/flashcards" 
+            <NavItem
+              href="/flashcards"
               icon={
-                <Image 
-                  src="/icons/flashcard-icon.png" // **ACTION REQUIRED: Update this path if your image is different**
-                  alt="Flashcards Icon" 
-                  width={20} // Adjust width as needed (w-5 equivalent)
-                  height={20} // Adjust height as needed (h-5 equivalent)
+                <Image
+                  src="/icons/flashcard-icon.png" // Path to your image in the public folder
+                  alt="Flashcards Icon"
+                  width={20} // Adjust as needed
+                  height={20} // Adjust as needed
                   className="object-contain" // Ensures image scales nicely
                 />
               }
@@ -72,7 +73,8 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
+              {/* PixelGoldCoinIcon uses its internal fills for gold color */}
+              <PixelGoldCoinIcon className="w-5 h-5" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
