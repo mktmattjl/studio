@@ -4,7 +4,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
-import { QuickActionCard } from '@/components/dashboard/QuickActionCard'; // This will be themed
 import { ContentCard } from '@/components/ui/ContentCard';
 import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid'; 
@@ -51,7 +50,7 @@ export default function DashboardPage() {
     initialDashboardEvents.map((event, index) => ({
       ...event,
       id: `dash-event-${index + 1}-${Date.now()}`,
-      color: eventTypeColors[event.type], // This will use new jewel tones
+      color: eventTypeColors[event.type], 
     }))
   );
 
@@ -64,34 +63,34 @@ export default function DashboardPage() {
 
   const quickActions: QuickActionItem[] = [
     { 
-      title: "Scribe Scrolls", // Create Flashcards
+      title: "Scribe Scrolls", 
       description: "Craft new lore for your adventures.", 
       href: "/flashcards/new", 
       Icon: PixelScrollIcon,
-      iconBgClass: "bg-accent/20", // Amethyst
+      iconBgClass: "bg-accent/20", 
       iconTextClass: "text-accent" 
     },
     { 
-      title: "Summon Knowledge", // AI Card Generator
+      title: "Summon Knowledge", 
       description: "Let the Oracle conjure insights from notes.", 
       href: "/ai-generator", 
       Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/20", // Sapphire
+      iconBgClass: "bg-primary/20", 
       iconTextClass: "text-primary"
     },
     { 
-      title: "Chart Your Path", // Plan Your Week
+      title: "Chart Your Path", 
       description: "Record quests, trials, and study rituals.", 
       href: "/planner",
       Icon: PixelQuillIcon, 
-      iconBgClass: "bg-secondary/20", // Emerald
+      iconBgClass: "bg-secondary/20", 
       iconTextClass: "text-secondary"
     },
      { 
       title: "Seek Challenges", 
       description: "Test your mettle with ancient trials.", 
       href: "/challenges", 
-      Icon: PixelChestIcon, // Or a trophy icon
+      Icon: PixelChestIcon, 
       iconBgClass: "bg-gold-accent/20",
       iconTextClass: "text-gold-accent"
     },
@@ -101,7 +100,6 @@ export default function DashboardPage() {
     setIsGeneratingPetImage(true);
     setDashboardPetImageUrl(DEFAULT_DASHBOARD_PET_IMAGE);
     try {
-      // Updated prompt for fantasy theme
       const result = await generatePetImage({ petType: "heroic fantasy pixel art creature companion, detailed, friendly, vibrant jewel tones" });
       if (result?.imageDataUri) {
         setDashboardPetImageUrl(result.imageDataUri);
@@ -130,7 +128,7 @@ export default function DashboardPage() {
 
   const pageTitle = (
     <>
-      {currentTimeGreeting}, <span className="text-primary">{userName}!</span>
+      {currentTimeGreeting}, <span className="text-foreground">{userName}!</span> {/* Changed text-primary to text-foreground */}
     </>
   );
   const pageSubtitle = "What quests await thee today, brave scholar?";
@@ -226,5 +224,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-    

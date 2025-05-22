@@ -2,20 +2,20 @@
 'use client';
 
 import { ContentCard } from '@/components/ui/ContentCard';
-import { format, isToday, isTomorrow, differenceInDays, parseISO, isSameDay } from '@/lib/dateUtils';
+import { format, isToday, isTomorrow, differenceInDays, isSameDay } from '@/lib/dateUtils';
 import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 import type { PlannerEvent } from '@/app/planner/page';
 import { PixelScrollIcon, PixelQuillIcon, PixelMapIcon, PixelHeartIcon, PixelFlamingSwordIcon } from '@/components/icons/fantasy'; // Example icons
 
-// Jewel tone color mapping for event types (left border)
+// Jewel tone color mapping for event types (left border) - Keys are lowercase
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-[hsl(var(--destructive))]', // Ruby Red
     'meeting': 'border-l-[hsl(var(--accent))]',      // Amethyst Purple
     'class': 'border-l-[hsl(var(--primary))]',       // Sapphire Blue
     'study_session': 'border-l-[hsl(var(--secondary))]',// Emerald Green
     'exam': 'border-l-[hsl(var(--gold-accent))]',     // Gold
-    'personal': 'border-l-orange-400', // A warm, non-jewel tone for personal
+    'personal': 'border-l-orange-500', // A warm, non-jewel tone for personal
 };
 
 const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
@@ -38,14 +38,14 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   
   const today = new Date();
   const events = rawEvents
-    .filter(event => differenceInDays(event.startTime, today) >= -1) 
+    .filter(event => event.startTime && differenceInDays(event.startTime, today) >= -1) 
     .sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
 
   if (!events || events.length === 0) {
     return (
       <ContentCard className="w-full flex flex-col" padding="p-0">
         <div className="p-4 sm:p-6 mb-0 border-b border-border">
-          <h1 className="text-2xl sm:text-3xl font-pixel text-primary">
+          <h1 className="text-2xl sm:text-3xl font-pixel text-foreground"> {/* Changed text-primary to text-foreground */}
             {title}
           </h1>
           {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
@@ -66,11 +66,11 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   };
 
   events.forEach(event => {
-    if (isToday(event.startTime)) {
+    if (event.startTime && isToday(event.startTime)) {
       groupedEvents.Today.push(event);
-    } else if (isTomorrow(event.startTime)) {
+    } else if (event.startTime && isTomorrow(event.startTime)) {
       groupedEvents.Tomorrow.push(event);
-    } else if (differenceInDays(event.startTime, today) > 0) { 
+    } else if (event.startTime && differenceInDays(event.startTime, today) > 0) { 
       groupedEvents.Upcoming.push(event);
     }
   });
@@ -78,7 +78,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
       <div className="p-4 sm:p-6 mb-0 border-b border-border">
-        <h1 className="text-2xl sm:text-3xl font-pixel text-primary">
+        <h1 className="text-2xl sm:text-3xl font-pixel text-foreground"> {/* Changed text-primary to text-foreground */}
           {title}
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
@@ -96,7 +96,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
               {groupEvents.length > 0 ? (
                 <ul className="space-y-3">
                   {groupEvents.map((event) => {
-                    const eventColorClass = eventTypeColorMap[event.type] || 'border-l-primary'; // Fallback to primary
+                    const eventColorClass = eventTypeColorMap[event.type] || 'border-l-[hsl(var(--primary))]'; // Fallback to primary
                     const EventIcon = eventTypeIcons[event.type] || PixelScrollIcon; // Fallback icon
 
                     const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && differenceInDays(event.endTime, event.startTime) >=1) || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
