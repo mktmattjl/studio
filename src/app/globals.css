@@ -8,14 +8,14 @@
     /* Heroic Fantasy Dark Theme - Base: Deep Stone Grays, Dark Wood Browns, Parchment Creams for Text */
     /* Main Backgrounds */
     --background: 195 7% 18%; /* #2A3132 - Dark Cool Grey */
-    --card: 195 7% 22%; /* #313839 - Slightly Lighter Dark Cool Grey for Cards */
-    --card-border-highlight: 195 7% 25%; /* Slightly lighter than card for top border */
-    --popover: 195 7% 22%; /* Similar to Card */
+    --card: 35 35% 70%; /* #C6B8A9 - Darker Brown for cards/popovers */
+    --card-border-highlight: 35 35% 65%; /* Slightly darker for card top border */
+    --popover: 35 35% 70%; /* Matches Card */
 
     /* Text Colors */
     --foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --card-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --popover-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
+    --card-foreground: 30 25% 12%; /* #26211E - Dark Sepia/Brown for text on light brown cards */
+    --popover-foreground: 30 25% 12%; /* Matches Card Foreground */
     --muted-foreground: 0 0% 70%; /* #B3B3B3 - Light Grey */
     --text-accent-thematic: 25 31% 67%; /* #C5A690 - Light Beige/Brown (for thematic text and some borders) */
 
@@ -37,7 +37,7 @@
     --border: 195 7% 25%; /* #3A4243 - Subtle Border */
     --input: 195 7% 15%; /* #232829 - Very Dark Input Background */
     --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --ring: 270 40% 55%; /* Amethyst Purple for focus ring (NEW) */
+    --ring: 270 40% 55%; /* Amethyst Purple for focus ring */
     
     --radius: 0.375rem; /* Slightly less rounded for a more "solid" feel */
 
@@ -54,17 +54,19 @@
     --chart-3: 25 31% 67%;   /* Light Beige/Brown (Thematic Text Accent) */
     --chart-4: 195 7% 50%;  /* Mid Grey */
     --chart-5: 40 70% 55%;   /* Gold */
+
+    --header-height: 4rem; /* Define header height */
   }
 
   .dark { 
     /* All :root variables define the dark theme directly now */
     --background: 195 7% 18%;
     --foreground: 0 0% 95%; 
-    --card: 195 7% 22%;
-    --card-foreground: 0 0% 95%; 
-    --card-border-highlight: 195 7% 25%;
-    --popover: 195 7% 22%;
-    --popover-foreground: 0 0% 95%; 
+    --card: 35 35% 70%;
+    --card-foreground: 30 25% 12%; 
+    --card-border-highlight: 35 35% 65%;
+    --popover: 35 35% 70%;
+    --popover-foreground: 30 25% 12%; 
     
     --primary: 270 40% 55%; 
     --primary-foreground: 0 0% 95%; 
@@ -98,7 +100,9 @@
     --chart-2: 195 7% 35%;  
     --chart-3: 25 31% 67%;  
     --chart-4: 195 7% 50%;    
-    --chart-5: 40 70% 55%;  
+    --chart-5: 40 70% 55%;
+
+    --header-height: 4rem; /* Define header height */
   }
 }
 
@@ -113,14 +117,20 @@
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.7; 
   }
+  /* Ensure font-pixel uses the correct CSS variable from layout.tsx */
   .font-pixel {
-    font-family: var(--font-vt323), theme('fontFamily.mono'); 
+    font-family: var(--font-pixelify-sans), theme('fontFamily.mono'); 
     text-rendering: optimizeSpeed; 
     image-rendering: pixelated; 
     image-rendering: -moz-crisp-edges; 
     image-rendering: crisp-edges; 
     -ms-interpolation-mode: nearest-neighbor; 
   }
+  /* More specific selector for navigation item text font */
+  nav a span.font-pixel {
+    font-family: var(--font-pixelify-sans), theme('fontFamily.mono');
+  }
+
   a {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
   }
