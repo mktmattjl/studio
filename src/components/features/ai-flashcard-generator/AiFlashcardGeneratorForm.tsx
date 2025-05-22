@@ -11,12 +11,11 @@ import { generateFlashcards, type GenerateFlashcardsOutput, type GenerateFlashca
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react'; // Loader can stay as lucide for now or be replaced later
+import { Loader2 } from 'lucide-react'; 
 
-// Import Pixel Art Icons
-import { PixelWandIcon } from '@/components/icons/PixelWandIcon';
-import { PixelFloppyDiskIcon } from '@/components/icons/PixelFloppyDiskIcon';
-
+// Fantasy Pixel Art Icons
+import { PixelMagicOrbIcon as PixelWandIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon';
+import { PixelFloppyDiskIcon } from '@/components/icons/fantasy/PixelFloppyDiskIcon'; // Or a "Save Scroll" icon
 
 const FormSchema = z.object({
   notes: z.string().min(50, { message: "Notes must be at least 50 characters long." }).max(10000, { message: "Notes must be at most 10,000 characters long." }),
@@ -45,24 +44,24 @@ export function AiFlashcardGeneratorForm() {
         setGeneratedFlashcards(result.flashcards);
         if (result.flashcards.length === 0) {
           toast({
-            title: "No Flashcards Generated",
-            description: "The AI couldn't find key concepts in your notes. Try providing more details or rephrasing.",
+            title: "No Scrolls Conjured",
+            description: "The Oracle found no key incantations in thy notes. Try providing more details or rephrasing.",
             variant: "default",
           });
         } else {
           toast({
-            title: "Flashcards Generated!",
-            description: `Successfully created ${result.flashcards.length} flashcards.`,
+            title: "Scrolls Conjured!",
+            description: `Successfully created ${result.flashcards.length} scrolls.`,
           });
         }
       } else {
-        setError("Failed to generate flashcards. The AI returned an unexpected response.");
-        toast({ title: "Generation Error", description: "The AI returned an unexpected response.", variant: "destructive"});
+        setError("Failed to conjure scrolls. The Oracle returned an unexpected vision.");
+        toast({ title: "Conjuration Error", description: "The Oracle returned an unexpected vision.", variant: "destructive"});
       }
     } catch (e) {
-      console.error("Error generating flashcards:", e);
-      setError("An error occurred while generating flashcards. Please try again.");
-      toast({ title: "Generation Failed", description: "An error occurred. Please try again.", variant: "destructive"});
+      console.error("Error conjuring scrolls:", e);
+      setError("An error occurred while conjuring scrolls. Please try again.");
+      toast({ title: "Conjuration Failed", description: "An error occurred. Please try again.", variant: "destructive"});
     } finally {
       setIsLoading(false);
     }
@@ -72,14 +71,14 @@ export function AiFlashcardGeneratorForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
         <label htmlFor="notes" className="block text-md font-medium text-foreground mb-2">
-          Paste Your Study Notes Here:
+          Inscribe Thy Tomes Here:
         </label>
         <Textarea
           id="notes"
           {...register('notes')}
           rows={12}
           className="bg-input text-input-foreground border-border focus:border-primary focus:ring-primary p-3 rounded-md shadow-sm text-sm"
-          placeholder="e.g., Photosynthesis is a process used by plants, algae, and certain bacteria to convert light energy into chemical energy... Key concepts include chloroplasts, chlorophyll, light-dependent reactions, and the Calvin cycle."
+          placeholder="e.g., Photosynthesis is an ancient ritual used by flora, algae, and certain bacteria to transmute light energy into arcane chemical energy... Key concepts include chloroplasts, chlorophyll, light-dependent reactions, and the Calvin cycle."
         />
         {errors.notes && <p className="text-sm text-destructive mt-1">{errors.notes.message}</p>}
         <p className="text-xs text-muted-foreground mt-1">Min 50 characters, Max 10,000 characters.</p>
@@ -89,26 +88,26 @@ export function AiFlashcardGeneratorForm() {
         {isLoading ? (
           <>
             <Loader2 size={20} className="mr-2 animate-spin" />
-            Generating...
+            Conjuring...
           </>
         ) : (
           <>
             <PixelWandIcon className="w-5 h-5 mr-2" />
-            Generate Flashcards
+            Conjure Scrolls
           </>
         )}
       </Button>
 
       {error && (
-        <ContentCard className="border-destructive bg-destructive/10 text-destructive p-4">
+        <ContentCard className="border-destructive bg-destructive/10 text-destructive-foreground p-4">
           <p className="font-semibold text-sm">Error:</p>
           <p className="text-sm">{error}</p>
         </ContentCard>
       )}
 
       {generatedFlashcards && generatedFlashcards.length > 0 && (
-        <div className="space-y-4 pt-4 border-t border-border">
-          <h2 className="text-xl font-semibold text-foreground">Generated Flashcards ({generatedFlashcards.length})</h2>
+        <div className="space-y-4 pt-4 border-t border-border/50">
+          <h2 className="text-xl font-pixel text-primary">Conjured Scrolls ({generatedFlashcards.length})</h2>
           <Accordion type="single" collapsible className="w-full space-y-3">
             {generatedFlashcards.map((card, index) => (
               <AccordionItem key={index} value={`item-${index}`} 
@@ -122,11 +121,13 @@ export function AiFlashcardGeneratorForm() {
               </AccordionItem>
             ))}
           </Accordion>
-           <Button variant="outline" onClick={() => toast({title: "Save Feature", description: "Save flashcards functionality will be implemented soon."})}>
-            <PixelFloppyDiskIcon className="w-4 h-4 mr-2" /> Save These Flashcards
+           <Button variant="outline" onClick={() => toast({title: "Archive Scrolls", description: "Functionality to archive these scrolls to thy library will be implemented soon."})}>
+            <PixelFloppyDiskIcon className="w-4 h-4 mr-2" /> Archive These Scrolls
           </Button>
         </div>
       )}
     </form>
   );
 }
+
+    

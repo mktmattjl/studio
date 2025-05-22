@@ -9,37 +9,39 @@ import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import type { Flashcard, FlashcardSet } from '@/types';
 import { cn } from '@/lib/utils';
-import { AnimateCoinBonus } from '@/components/ui/AnimateCoinBonus'; // Import the new component
+import { AnimateCoinBonus } from '@/components/ui/AnimateCoinBonus'; 
 
-// Import Pixel Art Icons
-import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
-import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
-import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react';
+// Fantasy Pixel Art Icons
+import { PixelMagicOrbIcon as PixelBrainIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon';
+import { PixelGoldCoinIcon } from '@/components/icons/fantasy/PixelGoldCoinIcon';
+import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon';
+
+import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react'; // Keep for now, or replace with thematic pixel icons
 
 // Sample flashcard sets (ideally this would come from a data store or API)
 const AllFlashcardSets: FlashcardSet[] = [
     { 
       id: '1', 
-      name: 'History - WW2 Dates & Events', 
+      name: 'Ancient Runes: Vol. I', 
       cardCount: 5,
-      lastStudied: '2 days ago', 
+      lastStudied: '2 moons ago', 
       progress: 75,
       cards: [
-        { id: '1-1', question: 'When did World War II begin?', answer: 'World War II began on September 1, 1939, when Germany invaded Poland.', options: ['September 1, 1939', 'December 7, 1941', 'June 6, 1944'], correctOption: 'September 1, 1939' },
-        { id: '1-2', question: 'What event triggered the US entry into WWII?', answer: 'The attack on Pearl Harbor on December 7, 1941, by Japan led to the US officially entering the war.', options: ['D-Day Invasion', 'Battle of Britain', 'Attack on Pearl Harbor'], correctOption: 'Attack on Pearl Harbor' },
-        { id: '1-3', question: 'Which countries were the primary Axis powers?', answer: 'The primary Axis powers were Germany, Italy, and Japan.', options: ['Germany, Italy, Spain', 'Germany, Japan, Russia', 'Germany, Italy, Japan'], correctOption: 'Germany, Italy, Japan' },
-        { id: '1-4', question: 'What was the code name for the Allied invasion of Normandy in 1944?', answer: 'Operation Overlord was the code name for the Allied invasion of Normandy.', options: ['Operation Barbarossa', 'Operation Overlord', 'Operation Market Garden'], correctOption: 'Operation Overlord' },
-        { id: '1-5', question: 'Which battle is considered the turning point on the Eastern Front in WWII?', answer: 'The Battle of Stalingrad is widely considered the turning point on the Eastern Front.', options: ['Battle of Moscow', 'Battle of Kursk', 'Battle of Stalingrad'], correctOption: 'Battle of Stalingrad' },
+        { id: '1-1', question: 'What is the rune for "Strength"?', answer: 'Uruz is the rune representing primal strength and untamed power.', options: ['Uruz', 'Fehu', 'Thurisaz'], correctOption: 'Uruz' },
+        { id: '1-2', question: 'The rune "Ansuz" primarily represents?', answer: 'Ansuz signifies divine breath, communication, inspiration, and wisdom from the gods.', options: ['Wealth', 'Journey', 'Divine breath'], correctOption: 'Divine breath' },
+        { id: '1-3', question: 'Which rune signifies "Journey" or "Travel," both physical and spiritual?', answer: 'Raido is the rune of the chariot, representing travel, rhythm, and right action.', options: ['Kenaz', 'Raido', 'Gebo'], correctOption: 'Raido' },
+        { id: '1-4', question: 'What is the meaning of "Hagalaz," the rune of disruption?', answer: 'Hagalaz represents hail, destructive natural forces, and sudden, uncontrolled change.', options: ['Joy', 'Harvest', 'Hail'], correctOption: 'Hail' },
+        { id: '1-5', question: 'The rune for "Ice" or "Challenge," representing a state of stillness or blockage, is?', answer: 'Isa symbolizes ice, a state of stasis, challenge, or introspection.', options: ['Isa', 'Jera', 'Eihwaz'], correctOption: 'Isa' },
       ]
     },
     { 
       id: '2', 
-      name: 'Biology - Cell Structure', 
+      name: 'Creature Compendium: Goblins', 
       cardCount: 1,
-      lastStudied: '5 days ago', 
+      lastStudied: '5 suns past', 
       progress: 40,
       cards: [
-        { id: '2-1', question: 'What is the powerhouse of the cell?', answer: 'Mitochondria are known as the powerhouses of the cell because they generate most of the cell\'s supply of adenosine triphosphate (ATP), used as a source of chemical energy.', options: ['Nucleus', 'Mitochondria', 'Ribosome'], correctOption: 'Mitochondria' },
+        { id: '2-1', question: 'Typical goblin weapon of choice for ambushes?', answer: 'Goblins favor rusty daggers or crude, often poisoned, short swords for their sneaky tactics.', options: ['Enchanted Longswords', 'Glimmering Magic Staves', 'Rusty daggers'], correctOption: 'Rusty daggers' },
       ]
     },
 ];
@@ -75,7 +77,7 @@ export default function QuizPage() {
       setQuizSet(foundSet);
       setQuizFlashcards(foundSet.cards.filter(card => card.options && card.options.length >= 3 && card.correctOption));
     } else {
-      toast({ title: "Quiz Set Not Found", description: "Could not load the selected flashcard set or it has no quizable cards.", variant: "destructive" });
+      toast({ title: "Scroll Set Not Found", description: "Could not decipher the selected scroll set or it holds no trials.", variant: "destructive" });
       router.push('/flashcards');
     }
   }, [searchParams, router, toast]);
@@ -90,7 +92,6 @@ export default function QuizPage() {
     setShowFullAnswer(false);
     setProgressValue(0);
     setCorrectButtonPulse(false);
-    // setAnimateCardGlowKey(prev => prev +1); // Re-trigger glow on next card if desired, but usually per answer
     if (currentCardIndex < quizFlashcards.length - 1) {
       setCurrentCardIndex(prevIndex => prevIndex + 1);
     } else {
@@ -132,14 +133,14 @@ export default function QuizPage() {
       setAnimateCardGlowKey(prevKey => prevKey + 1);
       setCorrectButtonPulse(true);
       toast({
-        title: "Correct!",
-        description: "+5 Coins!",
+        title: "Victory!",
+        description: "+5 Gold Pieces!",
         duration: 2000,
       });
     } else {
       toast({
-        title: "Incorrect!",
-        description: `The correct answer was: ${currentCard.correctOption}`,
+        title: "Defeated!",
+        description: `The true answer was: ${currentCard.correctOption}`,
         variant: "destructive",
         duration: 3000,
       });
@@ -153,23 +154,20 @@ export default function QuizPage() {
     if (quizSet) {
       setQuizFlashcards(quizSet.cards.filter(card => card.options && card.options.length >= 3 && card.correctOption));
     }
-    // Reset states for the first card by advancing to it (which also resets necessary states)
     setIsAnswered(false);
     setSelectedAnswer(null);
     setIsCorrect(null);
     setShowFullAnswer(false);
     setProgressValue(0);
     setCorrectButtonPulse(false);
-    // Reset animation keys if desired, though next card will naturally clear these effects
-    // setAnimateCardGlowKey(0); 
   };
 
 
   if (!quizSet || quizFlashcards.length === 0) {
     return (
       <div className="text-center py-10">
-        <PixelBrainIcon className="w-16 h-16 mx-auto text-primary mb-4" />
-        <p className="text-xl text-muted-foreground">Loading quiz or no quizable cards in this set...</p>
+        <PixelScrollIcon className="w-16 h-16 mx-auto text-primary mb-4" />
+        <p className="text-xl text-muted-foreground font-pixel">Loading Trial or no challenges in this scroll...</p>
         <Button onClick={() => router.push('/flashcards')} className="mt-4 btn-secondary-action">Back to Library</Button>
       </div>
     );
@@ -179,27 +177,26 @@ export default function QuizPage() {
     return (
       <ContentCard className="text-center p-8 max-w-lg mx-auto">
         <PixelBrainIcon className="w-16 h-16 mx-auto text-primary mb-6" />
-        <h1 className="text-3xl font-semibold text-foreground mb-3">Quiz Complete!</h1>
-        <p className="text-xl text-muted-foreground mb-2">You earned a total of</p>
-        <div className="flex items-center justify-center gap-2 text-4xl font-bold text-chart-3 mb-6">
-          <PixelCoinIcon className="w-10 h-10 text-yellow-400" /> 
+        <h1 className="text-3xl font-pixel text-primary mb-3">Trial Complete!</h1>
+        <p className="text-xl text-muted-foreground mb-2">Thou hast earned a total of</p>
+        <div className="flex items-center justify-center gap-2 text-4xl font-bold text-gold-accent mb-6">
+          <PixelGoldCoinIcon className="w-10 h-10" /> 
           {coins}
         </div>
         <div className="space-y-3 sm:space-y-0 sm:flex sm:gap-3 justify-center">
           <Button onClick={restartQuiz} className="btn-primary-action w-full sm:w-auto">
-            <RotateCcw className="w-4 h-4 mr-2" /> Restart Quiz
+            <RotateCcw className="w-4 h-4 mr-2" /> Face Trial Again
           </Button>
           <Button onClick={() => router.push('/flashcards')} variant="outline" className="w-full sm:w-auto">
-            Back to Flashcard Library
+            Return to Scroll Library
           </Button>
         </div>
       </ContentCard>
     );
   }
 
-
   if (!currentCard) {
-     return <p className="text-center text-muted-foreground">Error: Could not load current card.</p>;
+     return <p className="text-center text-muted-foreground font-pixel">Error: Could not unroll current scroll.</p>;
   }
 
   return (
@@ -208,21 +205,21 @@ export default function QuizPage() {
 
       <ContentCard>
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-semibold text-foreground">{quizSet.name} - Quiz</h1>
-          <div className="flex items-center gap-2 text-lg font-medium text-chart-3">
-            <PixelCoinIcon className="w-5 h-5 text-yellow-400" />
-            <span>{coins}</span>
+          <h1 className="text-2xl font-pixel text-primary">{quizSet.name} - Trial</h1>
+          <div className="flex items-center gap-2 text-lg font-medium text-gold-accent">
+            <PixelGoldCoinIcon className="w-5 h-5" />
+            <span className="font-pixel">{coins}</span>
           </div>
         </div>
-        <p className="text-muted-foreground mb-1 text-sm">Card {currentCardIndex + 1} of {quizFlashcards.length}</p>
+        <p className="text-muted-foreground mb-1 text-sm">Scroll {currentCardIndex + 1} of {quizFlashcards.length}</p>
          <Progress value={(currentCardIndex / quizFlashcards.length) * 100} className="h-2 mb-6 [&>div]:bg-secondary" />
       </ContentCard>
 
       <ContentCard 
         key={`card-glow-${animateCardGlowKey}`}
         className={cn(
-          "transition-all duration-300 ease-in-out",
-          isAnswered && isCorrect === true && "animate-card-correct-glow",
+          "transition-all duration-300 ease-in-out bg-card border-2 border-border", // Thematic card
+          isAnswered && isCorrect === true && "animate-card-correct-glow border-secondary", // Emerald glow
           isAnswered && isCorrect === false && "border-destructive ring-2 ring-destructive/50 shadow-lg shadow-destructive/20"
         )}>
         <div className="p-6 min-h-[120px] flex items-center justify-center">
@@ -237,19 +234,19 @@ export default function QuizPage() {
             variant="outline"
             className={cn(
               "text-left justify-start p-4 h-auto text-base leading-normal w-full transition-all duration-150 ease-in-out",
-              "hover:bg-accent/50 focus:bg-accent/60",
+              "hover:bg-accent/50 focus:bg-accent/60 border-border hover:border-accent", // Thematic hover
               selectedAnswer === option && !isCorrect && "bg-destructive/20 border-destructive text-destructive-foreground hover:bg-destructive/30",
-              selectedAnswer === option && isCorrect && "bg-chart-3/20 border-chart-3 text-foreground hover:bg-chart-3/30",
+              selectedAnswer === option && isCorrect && "bg-secondary/20 border-secondary text-secondary-foreground hover:bg-secondary/30", // Emerald for correct
               selectedAnswer === option && isCorrect && correctButtonPulse && "animate-button-correct-pulse",
               isAnswered && option !== currentCard.correctOption && option !== selectedAnswer && "opacity-60 cursor-not-allowed",
-              isAnswered && option === currentCard.correctOption && selectedAnswer !== option && "bg-chart-3/20 border-chart-3 text-foreground" // Show correct if user chose wrong
+              isAnswered && option === currentCard.correctOption && selectedAnswer !== option && "bg-secondary/20 border-secondary text-secondary-foreground"
             )}
             onClick={() => handleAnswerSelect(option)}
             disabled={isAnswered}
           >
-            <span className="mr-3 font-mono text-muted-foreground">{(index + 1)}.</span>
+            <span className="mr-3 font-pixel text-muted-foreground">{(index + 1)}.</span>
             {option}
-            {selectedAnswer === option && isCorrect === true && <CheckCircle2 className="ml-auto w-5 h-5 text-chart-3" />}
+            {selectedAnswer === option && isCorrect === true && <CheckCircle2 className="ml-auto w-5 h-5 text-secondary" />}
             {selectedAnswer === option && isCorrect === false && <XCircle className="ml-auto w-5 h-5 text-destructive" />}
           </Button>
         ))}
@@ -257,16 +254,18 @@ export default function QuizPage() {
 
       {showFullAnswer && (
         <ContentCard className="mt-6 p-6 bg-muted/30 border-t-2 border-primary">
-          <h3 className="text-lg font-semibold text-primary mb-2">Correct Answer:</h3>
+          <h3 className="text-lg font-pixel text-primary mb-2">The Sage's Wisdom:</h3>
           <p className="text-foreground leading-relaxed">{currentCard.answer}</p>
           {isAnswered && <Progress value={progressValue} className="mt-4 h-1.5 [&>div]:bg-primary transition-all duration-100 ease-linear" />}
         </ContentCard>
       )}
        <div className="text-center mt-8">
-        <Button onClick={() => router.push('/flashcards')} variant="ghost" className="text-muted-foreground">
-          End Quiz & Back to Library
+        <Button onClick={() => router.push('/flashcards')} variant="ghost" className="text-muted-foreground font-pixel">
+          End Trial & Return to Library
         </Button>
       </div>
     </div>
   );
 }
+
+    

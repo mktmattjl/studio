@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelGearIcon.tsx
+// src/components/icons/PixelGearIcon.tsx - DEPRECATED, use PixelFantasySettingsIcon.tsx
+// This file can be deleted if PixelFantasySettingsIcon is used everywhere.
 import type { SVGProps } from 'react';
 
 export const PixelGearIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -14,3 +15,6 @@ export const PixelGearIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#FFFFFF" d="M7 7H9V9H7V7Z" />
   </svg>
 );
+
+
+    

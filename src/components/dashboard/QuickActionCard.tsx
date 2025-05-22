@@ -13,7 +13,7 @@ import {
 
 interface QuickActionCardProps {
   title: string;
-  description: string; // Kept for prop consistency, though not displayed directly
+  description: string; 
   href: string;
   Icon: ElementType;
   iconBgClass?: string;
@@ -22,11 +22,10 @@ interface QuickActionCardProps {
 
 export function QuickActionCard({
   title,
-  // description, // description is not visibly used in the compact icon-only button
   href,
   Icon,
-  iconBgClass = 'bg-primary/10', // Example default, theme might override
-  iconTextClass = 'text-primary', // Example default
+  iconBgClass = 'bg-primary/10',
+  iconTextClass = 'text-primary',
 }: QuickActionCardProps) {
   return (
     <Tooltip>
@@ -34,24 +33,34 @@ export function QuickActionCard({
         <Link
           href={href}
           aria-label={title}
-          className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md" // Ensure Link itself can receive focus styling
+          className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-md"
         >
           <ContentCard
-            className="group transition-all duration-150 ease-in-out hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center"
-            interactive // ContentCard is interactive, adds hover/focus styles
-            padding="p-2.5"
-            style={{ width: '44px', height: '44px' }}
-            elementType="div" // Explicitly a div, receives focus if interactive
+            className={cn(
+              "group transition-all duration-150 ease-in-out hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center",
+              "hover:border-accent/70 border-2 border-transparent" // Thematic hover border
+            )}
+            interactive 
+            padding="p-2.5" // Keep padding for icon visibility
+            style={{ 
+              width: '48px', 
+              height: '48px',
+              // Example of a chiseled look - adjust colors from palette
+              // boxShadow: "inset 2px 2px 0px hsl(var(--card) / 0.7), inset -2px -2px 0px hsl(var(--background) / 0.5)"
+            }}
+            elementType="div" 
           >
-            <div className={cn("p-1.5 rounded-md flex items-center justify-center", iconBgClass)}>
-              <Icon className={cn('w-5 h-5 transition-transform group-hover:scale-110', iconTextClass)} />
+            <div className={cn("p-1 rounded-sm flex items-center justify-center", iconBgClass)}>
+              <Icon className={cn('w-6 h-6 transition-transform group-hover:scale-110', iconTextClass)} />
             </div>
           </ContentCard>
         </Link>
       </TooltipTrigger>
-      <TooltipContent side="top" align="center">
+      <TooltipContent side="top" align="center" className="font-pixel bg-popover text-popover-foreground border-border shadow-lg">
         <p>{title}</p>
       </TooltipContent>
     </Tooltip>
   );
 }
+
+    

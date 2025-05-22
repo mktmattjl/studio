@@ -1,5 +1,6 @@
 
 // src/components/icons/PixelBellIcon.tsx
+// Keeping this one, can be themed with currentcolor or specific fills if needed
 import type { SVGProps } from 'react';
 
 export const PixelBellIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -8,10 +9,13 @@ export const PixelBellIcon = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 16 16"
     shapeRendering="crispEdges"
     {...props}
+    // Example using gold accent from the new palette for the bell body
   >
-    <path fill="#FFD700" d="M4 4h8v7H4z" /> {/* Gold Bell Body */}
-    <path fill="#DAA520" d="M3 3h10v1H3z M5 11h6v1H5z" /> {/* Darker Gold Accents */}
-    <path fill="#A0522D" d="M7 2h2v2H7z" /> {/* Brown Handle */}
-    <path fill="#000000" d="M7 12h2v2H7z" /> {/* Black Clapper */}
+    <path fill="hsl(var(--gold-accent))" d="M4 4h8v7H4z" /> {/* Gold Bell Body */}
+    <path fill="hsl(var(--border))" d="M3 3h10v1H3z M5 11h6v1H5z" /> {/* Darker Accent for outline */}
+    <path fill="hsl(var(--card-foreground))" d="M7 2h2v2H7z" /> {/* Handle - Lighter color for contrast */}
+    <path fill="hsl(var(--foreground))" d="M7 12h2v2H7z" /> {/* Clapper */}
   </svg>
 );
+
+    

@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelBrainIcon.tsx
+// src/components/icons/PixelBrainIcon.tsx - DEPRECATED - Use more thematic icon if needed
+// This file can be deleted if not used.
 import type { SVGProps } from 'react';
 
 export const PixelBrainIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -14,3 +15,5 @@ export const PixelBrainIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#000000" d="M8 7h1v3H8z" /> {/* Center Line */}
   </svg>
 );
+
+    

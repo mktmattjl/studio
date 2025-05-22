@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -19,15 +20,17 @@ export function NavItem({ href, children, icon }: NavItemProps) {
     <Link
       href={href}
       className={cn(
-        'flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out rounded-md',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring', // Added focus visibility
+        'flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out rounded-md font-pixel', // Thematic font for nav items
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring', 
         isActive 
-          ? 'bg-primary/10 text-primary font-semibold' 
-          : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+          ? 'bg-primary/80 text-primary-foreground shadow-sm' // Sapphire Blue, active
+          : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground', // Amethyst Purple for hover
       )}
     >
-      {icon && <span className={cn(isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")}>{icon}</span>}
+      {icon && <span className={cn("transition-colors", isActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-accent-foreground")}>{icon}</span>}
       <span>{children}</span>
     </Link>
   );
 }
+
+    

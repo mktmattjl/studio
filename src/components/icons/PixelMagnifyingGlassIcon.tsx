@@ -1,5 +1,6 @@
 
 // src/components/icons/PixelMagnifyingGlassIcon.tsx
+// Re-theme for fantasy
 import type { SVGProps } from 'react';
 
 export const PixelMagnifyingGlassIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -9,9 +10,16 @@ export const PixelMagnifyingGlassIcon = (props: SVGProps<SVGSVGElement>) => (
     shapeRendering="crispEdges"
     {...props}
   >
-    <path fill="#708090" d="M2 2h8v8H2z" /> {/* Slate Gray Lens Frame */}
-    <path fill="#ADD8E6" d="M3 3h6v6H3z" /> {/* Light Blue Lens */}
-    <path fill="#FFFFFF" d="M4 4h1v1H4z M7 4h1v1H7z" /> {/* Shine */}
-    <path fill="#A9A9A9" d="M9 9h3v1H9z M10 10h3v1h-3z M11 11h3v1h-3z M12 12h2v2h-2z" /> {/* Handle */}
+    {/* Lens Frame - Dark wood/metal */}
+    <path fill="#4D423A" d="M2 2h8v8H2z" />
+    {/* Lens - Light blue/amethyst to simulate glass */}
+    <path fill="#A480CC" d="M3 3h6v6H3z" />
+    {/* Shine/Highlight - Parchment */}
+    <path fill="#F3EADA" d="M4 4h1v1H4z M6 4h1v1H6z" />
+    {/* Handle - Dark wood */}
+    <path fill="#7A6C5F" d="M9 9h3v1H9z M10 10h3v1h-3z M11 11h3v1h-3z M12 12h2v2h-2z" />
   </svg>
 );
+
+
+    

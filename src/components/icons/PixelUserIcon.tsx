@@ -1,5 +1,7 @@
 
-// src/components/icons/PixelUserIcon.tsx
+// src/components/icons/PixelUserIcon.tsx - DEPRECATED, use PixelFantasyAvatarIcon.tsx instead
+// This file can be deleted if PixelFantasyAvatarIcon is used everywhere.
+// For safety, I will leave its content but it's not the primary fantasy avatar.
 import type { SVGProps } from 'react';
 
 export const PixelUserIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -17,3 +19,5 @@ export const PixelUserIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#5F9EA0" d="M3 7h1v2H3z M12 7h1v2h-1z" /> {/* Cadet Blue Shoulders */}
   </svg>
 );
+
+    

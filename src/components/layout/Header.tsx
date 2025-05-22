@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -14,15 +15,17 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Import Pixel Art Icons
-import { PixelJoystickIcon } from '@/components/icons/PixelJoystickIcon';
-import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
-import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
-import { PixelSparkleIcon } from '@/components/icons/PixelSparkleIcon';
-import { PixelUserIcon } from '@/components/icons/PixelUserIcon';
-import { PixelBellIcon } from '@/components/icons/PixelBellIcon';
-import { PixelCoinIcon } from '@/components/icons/PixelCoinIcon';
-import { LogOut, Settings, UserCircle, LogIn, UserPlus } from 'lucide-react'; // For dropdown
+// Fantasy Pixel Art Icons
+import { PixelCompassIcon } from '@/components/icons/fantasy/PixelCompassIcon';
+import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon'; // For Flashcards
+import { PixelMapIcon } from '@/components/icons/fantasy/PixelMapIcon'; // For Planner
+import { PixelMagicOrbIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon'; // For AI Gen
+import { PixelGoldCoinIcon } from '@/components/icons/fantasy/PixelGoldCoinIcon';
+import { PixelBellIcon } from '@/components/icons/PixelBellIcon'; // Keep or replace with fantasy bell
+import { PixelFantasyAvatarIcon } from '@/components/icons/fantasy/PixelFantasyAvatarIcon';
+import { PixelFantasySettingsIcon } from '@/components/icons/fantasy/PixelFantasySettingsIcon';
+
+import { LogOut, LogIn, UserPlus } from 'lucide-react'; // Keep for dropdown for now
 
 export function Header() {
   const { currentUser, logout } = useAuth();
@@ -31,58 +34,56 @@ export function Header() {
 
   const handleLogout = async () => {
     await logout();
-    // router.push('/login'); // Handled by AuthContext now
   };
 
   return (
-    <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-sm">
+    <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-6">
-          <Link href="/" className="text-xl font-bold text-primary hover:text-primary/80 transition-colors">
+          <Link href="/" className="font-pixel text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             Cerebro
           </Link>
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            <NavItem href="/" icon={<PixelJoystickIcon className="w-4 h-4" />}>Dashboard</NavItem>
-            <NavItem href="/flashcards" icon={<PixelBookIcon className="w-4 h-4" />}>Flashcards</NavItem>
-            <NavItem href="/planner" icon={<PixelCalendarIcon className="w-4 h-4" />}>Planner</NavItem>
-            <NavItem href="/ai-generator" icon={<PixelSparkleIcon className="w-4 h-4" />}>AI Gen</NavItem>
+            <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
+            <NavItem href="/flashcards" icon={<PixelScrollIcon className="w-5 h-5" />}>Flashcards</NavItem>
+            <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
+            <NavItem href="/ai-generator" icon={<PixelMagicOrbIcon className="w-5 h-5" />}>AI Wizard</NavItem>
           </nav>
         </div>
         
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
-            <div className="flex items-center gap-1.5 text-sm bg-muted px-3 py-1.5 rounded-full">
-              <PixelCoinIcon className="w-4 h-4 text-[#39FF14]" /> {/* Glitch Lime Green for Coins */}
-              <span className="font-medium text-foreground">{coins}</span>
+            <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-gold-accent px-3 py-1.5 rounded-md border border-gold-accent/50">
+              <PixelGoldCoinIcon className="w-5 h-5" />
+              <span className="font-pixel text-base">{coins}</span>
             </div>
           )}
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-full">
-            <PixelBellIcon className="w-5 h-5" />
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
+            <PixelBellIcon className="w-5 h-5" /> {/* Consider a fantasy bell icon */}
             <span className="sr-only">Notifications</span>
           </Button>
 
           {currentUser ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-full">
-                  <PixelUserIcon className="w-6 h-6" />
+                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
+                  <PixelFantasyAvatarIcon className="w-6 h-6" />
                   <span className="sr-only">User Menu</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-popover border-border text-popover-foreground rounded-md shadow-lg w-48">
-                <DropdownMenuLabel className="text-sm font-medium">
+                <DropdownMenuLabel className="text-sm font-medium font-pixel">
                   {currentUser.email}
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-border" />
+                <DropdownMenuSeparator className="bg-border/50" />
                 <DropdownMenuItem onClick={() => router.push('/profile')} className="cursor-pointer hover:bg-muted/50">
-                  <UserCircle className="mr-2 h-4 w-4" /> Profile
+                  <PixelFantasyAvatarIcon className="mr-2 h-4 w-4" /> Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer hover:bg-muted/50">
-                  <Settings className="mr-2 h-4 w-4" /> Settings
+                  <PixelFantasySettingsIcon className="mr-2 h-4 w-4" /> Settings
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-border"/>
-                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:bg-destructive/20 focus:text-destructive cursor-pointer hover:bg-destructive/10">
+                <DropdownMenuSeparator className="bg-border/50"/>
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:bg-destructive/20 focus:text-destructive-foreground cursor-pointer hover:bg-destructive/10">
                   <LogOut className="mr-2 h-4 w-4" /> Log Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -102,3 +103,5 @@ export function Header() {
     </header>
   );
 }
+
+    

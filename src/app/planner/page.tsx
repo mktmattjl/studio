@@ -9,10 +9,7 @@ import { PlannerControls, type PlannerViewMode } from '@/components/planner/Plan
 import { MonthCalendarGrid } from '@/components/planner/MonthCalendarGrid';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
-
-// Import Pixel Art Icons
-import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
-
+import { PixelQuillIcon } from '@/components/icons/fantasy/PixelQuillIcon';
 
 export interface PlannerEvent {
   id: string;
@@ -21,42 +18,44 @@ export interface PlannerEvent {
   endTime: Date;
   type: 'class' | 'deadline' | 'study_session' | 'exam' | 'meeting' | 'personal';
   description?: string;
-  color: string; // Hex or Tailwind class for event block color
+  color: string; 
 }
 
-// Updated color palette for dark theme
+// Heroic Fantasy Jewel Tone event type colors
+// These classes will be used for borders on parchment backgrounds in the calendar grids.
+// The DashboardAgendaView uses its own direct hsl() mapping for its left borders.
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/80 border-primary text-primary-foreground', 
-  deadline: 'bg-destructive/80 border-destructive text-destructive-foreground', 
-  study_session: 'bg-chart-3/80 border-chart-3 text-primary-foreground', 
-  exam: 'bg-chart-4/80 border-chart-4 text-primary-foreground', 
-  meeting: 'bg-secondary/80 border-secondary text-secondary-foreground', 
-  personal: 'bg-purple-600/80 border-purple-500 text-purple-50', 
+  class: 'border-primary bg-primary/10 text-primary-foreground', // Sapphire Blue
+  deadline: 'border-destructive bg-destructive/10 text-destructive-foreground', // Ruby Red
+  study_session: 'border-secondary bg-secondary/10 text-secondary-foreground', // Emerald Green
+  exam: 'border-gold-accent bg-gold-accent/10 text-gold-accent', // Gold
+  meeting: 'border-accent bg-accent/10 text-accent-foreground', // Amethyst Purple
+  personal: 'border-orange-500 bg-orange-500/10 text-orange-100', // A warm, distinct color
 };
 
 
 const todayDate = new Date();
 const sampleEventsData: Omit<PlannerEvent, 'id' | 'color'>[] = [
   {
-    title: 'CS Lecture: Advanced Algorithms',
+    title: 'Lecture: Advanced Dragonomics',
     startTime: setSeconds(setMinutes(setHours(todayDate, 9), 0), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 10), 50), 0),
     type: 'class',
-    description: 'Room 301 / Prof. Ada Lovelace',
+    description: 'Grand Library, Chamber 3 / Loremaster Elara',
   },
   {
-    title: 'Study Session: Data Structures',
+    title: 'Potion Brewing Practicum',
     startTime: setSeconds(setMinutes(setHours(todayDate, 14), 0), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 15), 30), 0),
     type: 'study_session',
-    description: 'Library, Group Room B - Focus on Trees & Graphs',
+    description: 'Alchemist\'s Guild - Focus on Healing Draughts',
   },
   {
-    title: 'Physics Lab Report DUE',
+    title: 'Ancient Runes Translation DUE',
     startTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     type: 'deadline',
-    description: 'Submit via Online Portal - Experiment #5',
+    description: 'Submit scroll to the Scribe Master - Tablet #V',
   },
 ];
 
@@ -165,12 +164,12 @@ export default function PlannerPage() {
       <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-foreground">Study Planner</h1>
-            <p className="text-muted-foreground mt-1">Organize your classes, deadlines, and study sessions.</p>
+            <h1 className="text-2xl md:text-3xl font-pixel text-primary">The Grand Almanac</h1>
+            <p className="text-muted-foreground mt-1">Chart thy quests, trials, and scholarly pursuits.</p>
           </div>
           <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
-            <PixelPlusIcon className="w-4 h-4 mr-2" />
-            New Event
+            <PixelQuillIcon className="w-4 h-4 mr-2" />
+            Decree New Entry
           </Button>
         </div>
       </ContentCard>
@@ -225,3 +224,5 @@ export default function PlannerPage() {
     </div>
   );
 }
+
+    

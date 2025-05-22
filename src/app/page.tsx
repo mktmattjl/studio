@@ -4,42 +4,42 @@
 import { useState, useEffect, useCallback } from 'react';
 import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
-import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
+import { QuickActionCard } from '@/components/dashboard/QuickActionCard'; // This will be themed
 import { ContentCard } from '@/components/ui/ContentCard';
 import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid'; 
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
-import type { PlannerEvent } from '@/app/planner/page'; // Import PlannerEvent
-import { eventTypeColors } from '@/app/planner/page'; // Import eventTypeColors
+import type { PlannerEvent } from '@/app/planner/page';
+import { eventTypeColors } from '@/app/planner/page'; 
 
-// Import Pixel Art Icons
-import { PixelPlusIcon } from '@/components/icons/PixelPlusIcon';
-import { PixelBrainIcon } from '@/components/icons/PixelBrainIcon';
-import { PixelBookIcon } from '@/components/icons/PixelBookIcon';
-import { PixelTrophyIcon } from '@/components/icons/PixelTrophyIcon';
+// Fantasy Pixel Art Icons
+import { PixelScrollIcon } from '@/components/icons/fantasy/PixelScrollIcon'; // For Create Flashcards
+import { PixelMagicOrbIcon } from '@/components/icons/fantasy/PixelMagicOrbIcon'; // For AI Card Gen
+import { PixelQuillIcon } from '@/components/icons/fantasy/PixelQuillIcon'; // For Plan Your Week / Add Event
+import { PixelChestIcon } from '@/components/icons/fantasy/PixelChestIcon'; // For Explore Challenges / Rewards
+
 import type { ElementType } from 'react';
 import { format, addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
 
-
-const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/1A1D2B/E0EFFF.png"; 
+const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/3D3630/F3EADA.png"; // Dark wood bg, parchment fg
 
 interface QuickActionItem {
   title: string;
   description: string;
   href: string;
   Icon: ElementType;
-  iconBgClass?: string;
+  iconBgClass?: string; 
   iconTextClass?: string;
 }
 
 const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
-    { title: 'Submit History Essay Outline', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline'}, 
-    { title: 'CS101 Lecture - Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class'}, 
-    { title: 'Team Sync Meeting', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting'}, 
-    { title: 'Review Chapter 3 Notes - Biology', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'study_session'},
-    { title: 'Physics Exam II', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'exam'},
-    { title: 'Daily Scrum Meeting', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'meeting' },
-    { title: 'Work on Project Cerebro', startTime: setSeconds(setMinutes(setHours(new Date(), 14),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 16),0),0), type: 'study_session' }
+    { title: 'Submit History Scroll (Essay Outline)', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline'}, 
+    { title: 'Lecture: Ancient Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class'}, 
+    { title: 'Council Meeting (Team Sync)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting'}, 
+    { title: 'Decipher Chapter 3 Tomes (Biology)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'study_session'},
+    { title: 'Trial of Physics II (Exam)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'exam'},
+    { title: 'Morning Scry (Daily Scrum)', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'meeting' },
+    { title: 'Forge Project Cerebro (Study)', startTime: setSeconds(setMinutes(setHours(new Date(), 14),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 16),0),0), type: 'study_session' }
   ];
 
 
@@ -51,7 +51,7 @@ export default function DashboardPage() {
     initialDashboardEvents.map((event, index) => ({
       ...event,
       id: `dash-event-${index + 1}-${Date.now()}`,
-      color: eventTypeColors[event.type],
+      color: eventTypeColors[event.type], // This will use new jewel tones
     }))
   );
 
@@ -59,42 +59,41 @@ export default function DashboardPage() {
   const [selectedEventForDialogDashboard, setSelectedEventForDialogDashboard] = useState<PlannerEvent | null>(null);
   const [newProposedStartTimeDashboard, setNewProposedStartTimeDashboard] = useState<Date | null>(null);
 
-
   const [dashboardPetImageUrl, setDashboardPetImageUrl] = useState(DEFAULT_DASHBOARD_PET_IMAGE);
   const [isGeneratingPetImage, setIsGeneratingPetImage] = useState(true);
 
   const quickActions: QuickActionItem[] = [
     { 
-      title: "Create Flashcards", 
-      description: "Craft new sets for your subjects.", 
+      title: "Scribe Scrolls", // Create Flashcards
+      description: "Craft new lore for your adventures.", 
       href: "/flashcards/new", 
-      Icon: PixelBookIcon,
-      iconBgClass: "bg-purple-500/10", 
-      iconTextClass: "text-purple-400" 
+      Icon: PixelScrollIcon,
+      iconBgClass: "bg-accent/20", // Amethyst
+      iconTextClass: "text-accent" 
     },
     { 
-      title: "AI Card Generator", 
-      description: "Let AI create flashcards from notes.", 
+      title: "Summon Knowledge", // AI Card Generator
+      description: "Let the Oracle conjure insights from notes.", 
       href: "/ai-generator", 
-      Icon: PixelBrainIcon,
-      iconBgClass: "bg-teal-500/10",
-      iconTextClass: "text-teal-400"
+      Icon: PixelMagicOrbIcon,
+      iconBgClass: "bg-primary/20", // Sapphire
+      iconTextClass: "text-primary"
     },
     { 
-      title: "Plan Your Week", 
-      description: "Add tasks, deadlines, and study sessions.", 
+      title: "Chart Your Path", // Plan Your Week
+      description: "Record quests, trials, and study rituals.", 
       href: "/planner",
-      Icon: PixelPlusIcon, 
-      iconBgClass: "bg-blue-500/10",
-      iconTextClass: "text-blue-400"
+      Icon: PixelQuillIcon, 
+      iconBgClass: "bg-secondary/20", // Emerald
+      iconTextClass: "text-secondary"
     },
      { 
-      title: "Explore Challenges", 
-      description: "Test your knowledge with new packs.", 
+      title: "Seek Challenges", 
+      description: "Test your mettle with ancient trials.", 
       href: "/challenges", 
-      Icon: PixelTrophyIcon,
-      iconBgClass: "bg-orange-500/10",
-      iconTextClass: "text-orange-400"
+      Icon: PixelChestIcon, // Or a trophy icon
+      iconBgClass: "bg-gold-accent/20",
+      iconTextClass: "text-gold-accent"
     },
   ];
 
@@ -102,7 +101,8 @@ export default function DashboardPage() {
     setIsGeneratingPetImage(true);
     setDashboardPetImageUrl(DEFAULT_DASHBOARD_PET_IMAGE);
     try {
-      const result = await generatePetImage({ petType: "small, cute, abstract digital creature mascot, cyberpunk neon style" });
+      // Updated prompt for fantasy theme
+      const result = await generatePetImage({ petType: "heroic fantasy pixel art creature companion, detailed, friendly, vibrant jewel tones" });
       if (result?.imageDataUri) {
         setDashboardPetImageUrl(result.imageDataUri);
       } else {
@@ -123,9 +123,9 @@ export default function DashboardPage() {
   const [currentTimeGreeting, setCurrentTimeGreeting] = useState('');
   useEffect(() => {
     const hour = new Date().getHours();
-    if (hour < 12) setCurrentTimeGreeting('Good morning');
-    else if (hour < 18) setCurrentTimeGreeting('Good afternoon');
-    else setCurrentTimeGreeting('Good evening');
+    if (hour < 12) setCurrentTimeGreeting('Good morrow');
+    else if (hour < 18) setCurrentTimeGreeting('Well met this afternoon');
+    else setCurrentTimeGreeting('Greetings of the evening');
   }, []);
 
   const pageTitle = (
@@ -133,7 +133,7 @@ export default function DashboardPage() {
       {currentTimeGreeting}, <span className="text-primary">{userName}!</span>
     </>
   );
-  const pageSubtitle = "Ready to conquer your studies today?";
+  const pageSubtitle = "What quests await thee today, brave scholar?";
 
   const today = new Date();
   const displayDays = [today, addDays(today, 1), addDays(today, 2)];
@@ -183,12 +183,10 @@ export default function DashboardPage() {
       {/* Main Content Area */}
       <div className="flex-grow space-y-6 xl:space-y-8">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
-          {/* Column 1: Agenda View */}
           <DashboardAgendaView events={dashboardEvents} title={pageTitle} subtitle={pageSubtitle} />
 
-          {/* Column 2: Mini Week Calendar */}
           <ContentCard className="flex flex-col">
-            <h2 className="text-xl font-semibold text-foreground mb-3 p-4 sm:p-6 pb-0">This Week</h2>
+            <h2 className="text-xl font-pixel text-primary mb-3 p-4 sm:p-6 pb-0">This Week's Portents</h2>
             <div className="flex-grow overflow-hidden">
               <WeekCalendarGrid
                 currentDate={new Date()}
@@ -205,7 +203,6 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Right Sidebar */}
       <RightSidebar
         userName={userName}
         petName={petName}
@@ -229,3 +226,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    

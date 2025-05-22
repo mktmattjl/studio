@@ -1,4 +1,6 @@
-// src/components/icons/PixelFlameIcon.tsx
+
+// src/components/icons/PixelFlameIcon.tsx - DEPRECATED, use PixelFlamingSwordIcon.tsx
+// This file can be deleted.
 import type { SVGProps } from 'react';
 
 export const PixelFlameIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -16,3 +18,5 @@ export const PixelFlameIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#FFFF00" d="M8 5h1v1H8z M7 6h3v2H7z M8 8h1v2H8z"/>
   </svg>
 );
+
+    

@@ -14,10 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import type { PlannerEvent } from '@/app/planner/page';
-
-// Import Pixel Art Icons
-import { PixelTrashIcon } from '@/components/icons/PixelTrashIcon';
-
+import { PixelTrashIcon } from '@/components/icons/fantasy/PixelTrashIcon'; // Thematic Trash Icon
 
 const eventFormSchema = z.object({
   title: z.string().min(1, 'Title is required').max(100, 'Title is too long'),
@@ -108,8 +105,8 @@ export function EventFormDialog({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="bg-card border border-border shadow-xl rounded-lg p-6 max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-xl text-foreground font-semibold">
-            {eventData ? 'Edit Event' : 'Add New Event'}
+          <DialogTitle className="text-xl text-primary font-pixel"> {/* Thematic font */}
+            {eventData ? 'Amend Decree' : 'New Decree'}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 pt-2">
@@ -146,7 +143,7 @@ export function EventFormDialog({
           </div>
 
           <div>
-            <Label htmlFor="type" className="text-foreground text-sm font-medium">Type</Label>
+            <Label htmlFor="type" className="text-foreground text-sm font-medium">Type of Quest</Label>
             <Controller
               name="type"
               control={control}
@@ -156,12 +153,12 @@ export function EventFormDialog({
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover border-border text-popover-foreground rounded-md shadow-lg">
-                    <SelectItem value="class" className="hover:bg-muted/50">Class</SelectItem>
+                    <SelectItem value="class" className="hover:bg-muted/50">Lecture</SelectItem>
                     <SelectItem value="deadline" className="hover:bg-muted/50">Deadline</SelectItem>
-                    <SelectItem value="study_session" className="hover:bg-muted/50">Study Session</SelectItem>
-                    <SelectItem value="exam" className="hover:bg-muted/50">Exam</SelectItem>
-                    <SelectItem value="meeting" className="hover:bg-muted/50">Meeting</SelectItem>
-                    <SelectItem value="personal" className="hover:bg-muted/50">Personal</SelectItem>
+                    <SelectItem value="study_session" className="hover:bg-muted/50">Study Ritual</SelectItem>
+                    <SelectItem value="exam" className="hover:bg-muted/50">Trial (Exam)</SelectItem>
+                    <SelectItem value="meeting" className="hover:bg-muted/50">Council (Meeting)</SelectItem>
+                    <SelectItem value="personal" className="hover:bg-muted/50">Personal Errand</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -170,7 +167,7 @@ export function EventFormDialog({
           </div>
 
           <div>
-            <Label htmlFor="description" className="text-foreground text-sm font-medium">Description (Optional)</Label>
+            <Label htmlFor="description" className="text-foreground text-sm font-medium">Details (Optional)</Label>
             <Textarea id="description" {...register('description')} className="bg-input text-input-foreground border-border focus:border-primary rounded-md mt-1 shadow-sm" rows={3} />
              {errors.description && <p className="text-xs text-destructive mt-1">{errors.description.message}</p>}
           </div>
@@ -184,7 +181,7 @@ export function EventFormDialog({
                         onClick={() => onDelete(eventData.id)}
                         className="w-full sm:w-auto"
                     >
-                        <PixelTrashIcon className="w-4 h-4 mr-2" /> Delete
+                        <PixelTrashIcon className="w-4 h-4 mr-2" /> Banish
                     </Button>
                 )}
             </div>
@@ -195,7 +192,7 @@ export function EventFormDialog({
                     </Button>
                 </DialogClose>
                 <Button type="submit" className="w-full sm:w-auto btn-primary-action">
-                {eventData ? 'Save Changes' : 'Add Event'}
+                {eventData ? 'Update Decree' : 'Issue Decree'}
                 </Button>
             </div>
           </DialogFooter>
@@ -204,3 +201,5 @@ export function EventFormDialog({
     </Dialog>
   );
 }
+
+    

@@ -1,11 +1,12 @@
+
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { ContentCard } from '@/components/ui/ContentCard';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button'; // Not used currently
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { PixelGearIcon } from '@/components/icons/PixelGearIcon';
+import { PixelFantasySettingsIcon as PixelGearIcon } from '@/components/icons/fantasy/PixelFantasySettingsIcon';
 
 export default function SettingsPage() {
   const { currentUser, loading } = useAuth();
@@ -18,40 +19,35 @@ export default function SettingsPage() {
   }, [currentUser, loading, router]);
 
   if (loading) {
-    return <div className="text-center p-10">Loading settings...</div>;
+    return <div className="text-center p-10 font-pixel text-xl">Loading ancient settings...</div>;
   }
 
   if (!currentUser) {
-    return null; // Or a message encouraging login
+    return null; 
   }
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
       <ContentCard>
         <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-primary/10 rounded-lg">
+            <div className="p-3 bg-primary/10 rounded-lg border border-primary/30">
                 <PixelGearIcon className="w-8 h-8 text-primary" />
             </div>
             <div>
-                <h1 className="text-2xl md:text-3xl font-semibold text-foreground">Settings</h1>
-                <p className="text-muted-foreground mt-1">Configure your application preferences.</p>
+                <h1 className="text-2xl md:text-3xl font-pixel text-primary">Realm Configuration</h1>
+                <p className="text-muted-foreground mt-1">Adjust thy application preferences and arcane settings.</p>
             </div>
         </div>
         
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            User settings, such as changing login information, appearance preferences, and notification settings, will be available here soon.
+            Settings for altering login credentials, visual themes, and notification enchantments are currently under development by the Guild Artificers.
           </p>
-          {/* Placeholder for future settings options */}
-          {/* Example:
-          <div>
-            <Label htmlFor="theme">Theme</Label>
-            <Select> ... </Select>
-          </div>
-          */}
         </div>
-         <p className="text-xs text-muted-foreground text-center pt-6">Advanced settings are under construction.</p>
+         <p className="text-xs text-muted-foreground text-center pt-6">Advanced configurations are being etched into reality.</p>
       </ContentCard>
     </div>
   );
 }
+
+    

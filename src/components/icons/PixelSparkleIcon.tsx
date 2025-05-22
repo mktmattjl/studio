@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelSparkleIcon.tsx
+// src/components/icons/PixelSparkleIcon.tsx - DEPRECATED - Use fantasy/PixelMagicOrbIcon.tsx or similar
+// This file can be deleted.
 import type { SVGProps } from 'react';
 
 export const PixelSparkleIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -14,3 +15,5 @@ export const PixelSparkleIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#FFD700" d="M1 7h2v2H1z M13 7h2v2h-2z M7 1h2v2H7z M7 13h2v2H7z" /> {/* Small sparkles */}
   </svg>
 );
+
+    

@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelBookIcon.tsx
+// src/components/icons/PixelBookIcon.tsx - DEPRECATED - Use fantasy/PixelScrollIcon.tsx or similar
+// This file can be deleted.
 import type { SVGProps } from 'react';
 
 export const PixelBookIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -15,3 +16,5 @@ export const PixelBookIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#000000" d="M8 2v11h1V2z" /> {/* Spine */}
   </svg>
 );
+
+    

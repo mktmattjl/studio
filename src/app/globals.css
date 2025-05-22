@@ -5,76 +5,88 @@
 
 @layer base {
   :root {
-    /* Cyberpunk Neon Palette - Vibrant Magenta Primary */
-    --background: 228 16% 6%; /* #0F0F18 Near-Black cool */
-    --foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue/Holographic White */
+    /* Heroic Fantasy Pixel Art Palette */
+    --background: hsl(220, 10%, 10%); /* #14171C - Very Dark Desaturated Blue (Deep Stone/Night Sky) */
+    --foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream */
 
-    --card: 227 25% 11%; /* #1A1D2B Very Dark Cool Gray */
-    --card-foreground: 213 100% 94%; /* #E0EFFF */
+    --card: hsl(30, 15%, 20%); /* #3D3630 - Dark Wood Brown */
+    --card-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream */
 
-    --popover: 227 25% 11%; /* #1A1D2B */
-    --popover-foreground: 213 100% 94%; /* #E0EFFF */
+    --popover: hsl(30, 15%, 15%); /* #2E2924 - Darker Wood Brown */
+    --popover-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream */
 
-    --primary: 326 100% 48%; /* #F50087 Vibrant Magenta (Main CTA, Active Nav) */
-    --primary-foreground: 213 100% 94%; /* #E0EFFF Icy Light Blue for contrast on Magenta */
+    --primary: hsl(220, 60%, 55%); /* #527ED9 - Sapphire Blue (Main CTAs, Active Nav) */
+    --primary-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream (for contrast on Sapphire) */
     
-    --secondary: 187 100% 50%; /* #00E5FF Electric Cyan (Secondary Buttons, Stat Highlights) */
-    --secondary-foreground: 228 16% 6%; /* #0F0F18 Near-Black for contrast on Cyan */
+    --secondary: hsl(145, 50%, 45%); /* #3BA668 - Emerald Green (Secondary Buttons, Key Stat Highlights) */
+    --secondary-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream (for contrast on Emerald) */
 
-    --muted: 229 15% 18%; /* Darker muted for less emphasis */
-    --muted-foreground: 223 23% 50%; /* #707890 Cool Medium Gray */
+    --muted: hsl(30, 10%, 30%); /* #5C5147 - Muted Brown (for less emphasis bg) */
+    --muted-foreground: hsl(35, 20%, 65%); /* #BEB5A9 - Grayish Parchment (for less emphasized text) */
 
-    --accent: 187 100% 50%; /* #00E5FF Electric Cyan (used for hovers on some components) */
-    --accent-foreground: 228 16% 6%; /* Near-Black for contrast on Cyan accent */
+    --accent: hsl(270, 40%, 60%); /* #A480CC - Amethyst Purple (Hovers, tertiary accents) */
+    --accent-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream (for contrast on Amethyst) */
 
-    --destructive: 0 70% 45%; /* #D43A3A Darker, less saturated Red */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: hsl(0, 55%, 50%); /* #C93D3D - Ruby Red */
+    --destructive-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream */
 
-    --border: 229 15% 22%; /* Subtle border, slightly lighter than card */
-    --input: 229 25% 10%; /* Slightly darker than card for input fields */
-    --input-foreground: 213 100% 94%; /* #E0EFFF */
-    --ring: 326 100% 48%; /* #F50087 Vibrant Magenta for focus rings */
+    --border: hsl(30, 10%, 40%); /* #7A6C5F - Medium Wood Brown / Stone Outline */
+    --input: hsl(220, 10%, 15%); /* #20242B - Dark Stone/Input Background */
+    --input-foreground: hsl(35, 40%, 92%); /* #F3EADA - Parchment Cream */
+    --ring: hsl(220, 60%, 65%); /* #7399E6 - Lighter Sapphire Blue for focus rings */
     
-    --radius: 0.5rem; /* Rounded corners */
+    --radius: 0.375rem; /* Slightly less rounded for a more "chiseled" feel, but not sharp */
 
-    /* Cyberpunk Neon Chart Colors */
-    --chart-1: hsl(var(--primary)); /* Vibrant Magenta */
-    --chart-2: hsl(var(--secondary)); /* Electric Cyan */
-    --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
-    --chart-4: 39 100% 50%;  /* #FFA500 Neon Orange */
-    --chart-5: 60 100% 50%; /* #FFFF00 Bright Yellow */
+    /* Custom Thematic Colors */
+    --gold-accent: hsl(40, 70%, 60%); /* #E0AA66 - Gold/Bronze */
+    --xp-bar-color: hsl(145, 50%, 45%); /* #3BA668 - Emerald Green (for XP bar) */
+    --parchment-bg: hsl(40, 50%, 95%); /* #F9F3E8 - Light Parchment for event blocks */
+    --parchment-text: hsl(30, 20%, 25%); /* #4D423A - Dark Brown text for on-parchment */
+
+    /* Chart Colors - Jewel Tones */
+    --chart-1: hsl(var(--primary)); /* Sapphire Blue */
+    --chart-2: hsl(var(--secondary)); /* Emerald Green */
+    --chart-3: hsl(0, 55%, 50%);  /* Ruby Red */
+    --chart-4: hsl(var(--gold-accent)); /* Gold */
+    --chart-5: hsl(var(--accent)); /* Amethyst Purple */
   }
 
   .dark { /* This is the active theme */
-    --background: 228 16% 6%; /* #0F0F18 */
-    --foreground: 213 100% 94%; /* #E0EFFF */
-    --card: 227 25% 11%; /* #1A1D2B */
-    --card-foreground: 213 100% 94%; /* #E0EFFF */
-    --popover: 227 25% 11%; 
-    --popover-foreground: 213 100% 94%; /* #E0EFFF */
-    --primary: 326 100% 48%; /* #F50087 Vibrant Magenta */
-    --primary-foreground: 213 100% 94%; /* #E0EFFF */
-    --secondary: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --secondary-foreground: 228 16% 6%; 
-    --muted: 229 15% 18%; 
-    --muted-foreground: 223 23% 50%; /* #707890 */
-    --accent: 187 100% 50%; /* #00E5FF Electric Cyan */
-    --accent-foreground: 228 16% 6%; 
-    --destructive: 0 70% 45%; /* #D43A3A Darker, less saturated Red */
-    --destructive-foreground: 0 0% 100%; 
-    --border: 229 15% 22%; 
-    --input: 229 25% 10%; 
-    --input-foreground: 213 100% 94%; /* #E0EFFF */
-    --ring: 326 100% 48%; /* #F50087 Vibrant Magenta */
+    --background: hsl(220, 10%, 10%);
+    --foreground: hsl(35, 40%, 92%);
+    --card: hsl(30, 15%, 20%);
+    --card-foreground: hsl(35, 40%, 92%);
+    --popover: hsl(30, 15%, 15%);
+    --popover-foreground: hsl(35, 40%, 92%);
+    --primary: hsl(220, 60%, 55%);
+    --primary-foreground: hsl(35, 40%, 92%);
+    --secondary: hsl(145, 50%, 45%);
+    --secondary-foreground: hsl(35, 40%, 92%);
+    --muted: hsl(30, 10%, 30%);
+    --muted-foreground: hsl(35, 20%, 65%);
+    --accent: hsl(270, 40%, 60%);
+    --accent-foreground: hsl(35, 40%, 92%);
+    --destructive: hsl(0, 55%, 50%);
+    --destructive-foreground: hsl(35, 40%, 92%);
+    --border: hsl(30, 10%, 40%);
+    --input: hsl(220, 10%, 15%);
+    --input-foreground: hsl(35, 40%, 92%);
+    --ring: hsl(220, 60%, 65%);
     
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
-    /* Cyberpunk Neon Chart Colors */
+    /* Custom Thematic Colors */
+    --gold-accent: hsl(40, 70%, 60%);
+    --xp-bar-color: hsl(145, 50%, 45%);
+    --parchment-bg: hsl(40, 50%, 95%);
+    --parchment-text: hsl(30, 20%, 25%);
+
+    /* Chart Colors - Jewel Tones */
     --chart-1: hsl(var(--primary));
     --chart-2: hsl(var(--secondary));
-    --chart-3: 108 100% 54%; /* #39FF14 Glitch Lime Green */
-    --chart-4: 39 100% 50%;  /* #FFA500 Neon Orange */
-    --chart-5: 60 100% 50%; /* #FFFF00 Bright Yellow */
+    --chart-3: hsl(0, 55%, 50%);
+    --chart-4: hsl(var(--gold-accent));
+    --chart-5: hsl(var(--accent));
   }
 }
 
@@ -88,14 +100,24 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .font-pixel { /* For thematic headers */
+    font-family: var(--font-vt323), theme('fontFamily.mono'); /* Fallback to mono */
+    text-rendering: optimizeSpeed; /* Helps with pixel font rendering */
+    image-rendering: pixelated; /* Modern property for pixel art scaling */
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: crisp-edges; /* Older spec */
+    -ms-interpolation-mode: nearest-neighbor; /* IE */
+  }
 }
 
-/* Custom Button Styles for Cyberpunk Neon */
+/* Custom Button Styles for Heroic Fantasy */
 @layer components {
-  .btn-primary-action { /* For main call-to-action buttons, uses --primary (Vibrant Magenta) */
+  .btn-primary-action { /* Main Call to Action - Sapphire Blue */
     @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150;
+    /* Add pixelated border/shadow effect if desired */
+    /* Example: box-shadow: 2px 2px 0px 0px hsl(var(--primary) / 0.4), 4px 4px 0px 0px hsl(var(--primary) / 0.2); */
   }
-  .btn-secondary-action { /* For other important buttons, uses --secondary (Electric Cyan) */
+  .btn-secondary-action { /* Secondary Action - Emerald Green */
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow-md transition-all duration-150;
   }
   /* ShadCN's default, outline, ghost, destructive variants will use the HSL variables from :root or .dark */
@@ -103,25 +125,26 @@
 
 @layer utilities {
   .styled-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   .styled-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.4);
-    border-radius: var(--radius);
+    background: hsl(var(--muted-foreground) / 0.5);
+    border-radius: 2px; /* More blocky for pixel theme */
+    border: 1px solid hsl(var(--card) / 0.8);
   }
   .styled-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground) / 0.6);
+    background: hsl(var(--muted-foreground) / 0.7);
   }
   .styled-scrollbar::-webkit-scrollbar-track {
-    background: hsl(var(--card) / 0.5); /* Slightly visible track on card background */
-    border-radius: var(--radius);
+    background: hsl(var(--background) / 0.5); 
+    border-radius: 2px;
   }
 
-  /* Quiz Animations */
+  /* Quiz Animations - Review if these fit the new theme */
   @keyframes pulse-correct {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-3) / 0.4); } /* chart-3 is Lime Green */
-    50% { transform: scale(1.03); box-shadow: 0 0 12px 3px hsl(var(--chart-3) / 0.5); }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--chart-2) / 0.4); } /* chart-2 is Emerald Green */
+    50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--chart-2) / 0.5); }
   }
   .animate-button-correct-pulse {
     animation: pulse-correct 0.6s ease-in-out;
@@ -129,7 +152,7 @@
 
   @keyframes glow-card-correct {
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--chart-3)); box-shadow: 0 0 20px hsl(var(--chart-3) / 0.4); } /* chart-3 is Lime Green */
+    50% { border-color: hsl(var(--chart-2)); box-shadow: 0 0 15px hsl(var(--chart-2) / 0.3); } /* Emerald Green */
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;
@@ -145,5 +168,6 @@
     animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
+    
 
     

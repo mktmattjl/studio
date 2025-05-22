@@ -4,18 +4,27 @@
 import { ContentCard } from '@/components/ui/ContentCard';
 import { format, isToday, isTomorrow, differenceInDays, parseISO, isSameDay } from '@/lib/dateUtils';
 import { cn } from '@/lib/utils';
-import { PixelCalendarIcon } from '@/components/icons/PixelCalendarIcon';
 import type { ReactNode } from 'react';
-import type { PlannerEvent } from '@/app/planner/page'; // Import PlannerEvent
+import type { PlannerEvent } from '@/app/planner/page';
+import { PixelScrollIcon, PixelQuillIcon } from '@/components/icons/fantasy'; // Example icons
 
-// Cyberpunk Neon Theme color mapping for event types using CSS variables
+// Jewel tone color mapping for event types (left border)
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
-    'deadline': 'border-l-[hsl(var(--destructive))]', 
-    'meeting': 'border-l-[hsl(var(--secondary))]', 
-    'class': 'border-l-[hsl(var(--secondary))]', 
-    'study_session': 'border-l-[hsl(var(--chart-3))]', 
-    'exam': 'border-l-[hsl(var(--chart-4))]', 
-    'personal': 'border-l-purple-500', 
+    'deadline': 'border-l-[hsl(var(--destructive))]', // Ruby Red
+    'meeting': 'border-l-[hsl(var(--accent))]',      // Amethyst Purple
+    'class': 'border-l-[hsl(var(--primary))]',       // Sapphire Blue
+    'study_session': 'border-l-[hsl(var(--secondary))]',// Emerald Green
+    'exam': 'border-l-[hsl(var(--gold-accent))]',     // Gold
+    'personal': 'border-l-orange-400', // A warm, non-jewel tone for personal
+};
+
+const eventTypeIcons: Record<PlannerEvent['type'], React.ElementType> = {
+    'deadline': PixelQuillIcon, // Or a specific "urgent task" icon
+    'meeting': PixelScrollIcon, // Or a "dialog" icon
+    'class': PixelScrollIcon, // Or a "book" icon
+    'study_session': PixelQuillIcon, // Or a "focus" icon
+    'exam': PixelFlamingSwordIcon, // Or a "challenge" icon
+    'personal': PixelHeartIcon, // Generic personal icon
 };
 
 
@@ -28,7 +37,6 @@ interface DashboardAgendaViewProps {
 export function DashboardAgendaView({ events: rawEvents, title, subtitle }: DashboardAgendaViewProps) {
   
   const today = new Date();
-  // Events are now PlannerEvent[], already having Date objects
   const events = rawEvents
     .filter(event => differenceInDays(event.startTime, today) >= -1) 
     .sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
@@ -37,15 +45,15 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
     return (
       <ContentCard className="w-full flex flex-col" padding="p-0">
         <div className="p-4 sm:p-6 mb-0 border-b border-border">
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground">
+          <h1 className="text-2xl sm:text-3xl font-pixel text-primary">
             {title}
           </h1>
           {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
         </div>
         <div className="text-center py-12 flex-grow flex flex-col justify-center items-center">
-          <PixelCalendarIcon className="w-12 h-12 mx-auto text-muted-foreground/50 mb-6" />
-          <h3 className="text-xl font-semibold text-foreground mb-2">No Upcoming Events</h3>
-          <p className="text-muted-foreground">Your schedule is clear for now! Add some tasks in the planner.</p>
+          <PixelMapIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" /> {/* Thematic Icon */}
+          <h3 className="text-xl font-pixel text-foreground mb-2">Thy Quest Log is Empty!</h3>
+          <p className="text-muted-foreground">No pressing tasks. Perhaps a moment of respite or plan new adventures?</p>
         </div>
       </ContentCard>
     );
@@ -70,7 +78,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
   return (
     <ContentCard className="w-full flex flex-col" padding="p-0">
       <div className="p-4 sm:p-6 mb-0 border-b border-border">
-        <h1 className="text-xl sm:text-2xl font-bold text-foreground">
+        <h1 className="text-2xl sm:text-3xl font-pixel text-primary">
           {title}
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
@@ -81,30 +89,34 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
 
           return (
             <div key={groupName}>
-              <h3 className="text-lg font-medium text-primary mb-3 border-b border-border pb-2">
+              <h3 className="text-lg font-pixel text-secondary mb-3 border-b border-border/50 pb-2">
                 {groupName}
-                {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2">({format(today, 'EEEE, MMM d')})</span>}
+                {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}
               </h3>
               {groupEvents.length > 0 ? (
                 <ul className="space-y-3">
                   {groupEvents.map((event) => {
-                    const eventColorClass = eventTypeColorMap[event.type] || 'border-l-[hsl(var(--primary))]';
+                    const eventColorClass = eventTypeColorMap[event.type] || 'border-l-primary'; // Fallback to primary
+                    const EventIcon = eventTypeIcons[event.type] || PixelScrollIcon; // Fallback icon
+
                     const displayTime = event.type.toLowerCase() === 'deadline' || (event.startTime && event.endTime && differenceInDays(event.endTime, event.startTime) >=1) || (event.startTime && event.endTime && !isSameDay(event.startTime, event.endTime))
-                        ? format(event.startTime, 'EEE, MMM d') // Only show date for deadlines or multi-day events
-                        : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`; // Show time range for others
+                        ? format(event.startTime, 'EEE, MMM d') 
+                        : `${format(event.startTime, 'p')} - ${format(event.endTime, 'p')}`;
 
                     return (
                       <li
                         key={event.id}
                         className={cn(
                           "flex items-start gap-3 p-3.5 bg-card-foreground/[.03] hover:bg-card-foreground/[.07] rounded-md border-l-4 transition-colors shadow-sm",
-                          eventColorClass
+                          eventColorClass,
+                          "border-2 border-transparent hover:border-accent/30" // Subtle hover border
                         )}
                       >
+                        <EventIcon className="w-5 h-5 mt-0.5 text-muted-foreground" />
                         <div className="flex-grow">
                           <p className="font-semibold text-foreground text-md">{event.title}</p>
                           <p className="text-sm text-muted-foreground mt-0.5">
-                            {displayTime} - {event.type}
+                            {displayTime} - <span className="capitalize">{event.type.replace('_', ' ')}</span>
                           </p>
                         </div>
                       </li>
@@ -113,7 +125,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                 </ul>
               ) : (
                  groupName === "Today" && (
-                    <p className="text-muted-foreground text-sm py-2">Nothing scheduled for today. Enjoy your day or plan ahead!</p>
+                    <p className="text-muted-foreground text-sm py-2">Nothing decreed for today. Fortune favors the prepared!</p>
                  )
               )}
             </div>
@@ -123,3 +135,5 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
     </ContentCard>
   );
 }
+
+    

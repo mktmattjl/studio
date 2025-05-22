@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 import defaultTheme from 'tailwindcss/defaultTheme';
 
@@ -11,17 +12,18 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1rem", // Adjusted default container padding
+      padding: "1rem", 
       screens: {
         "sm": "640px",
         "md": "768px",
         "lg": "1024px",
         "xl": "1280px",
-        "2xl": "1400px", // Keep 2xl if needed for very wide layouts
+        "2xl": "1400px", 
       },
     },
     fontFamily: {
-      sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans], // Changed to Inter
+      sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+      pixel: ['var(--font-vt323)', ...defaultTheme.fontFamily.mono], // Thematic pixel font
     },
   	extend: {
   		colors: {
@@ -35,11 +37,11 @@ export default {
   				DEFAULT: 'hsl(var(--popover))',
   				foreground: 'hsl(var(--popover-foreground))'
   			},
-  			primary: { // Teal
+  			primary: {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
-  			secondary: { // Darker Gray for secondary elements
+  			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
@@ -47,7 +49,7 @@ export default {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
   			},
-  			accent: { // Purple
+  			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
@@ -55,6 +57,10 @@ export default {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
+        'gold-accent': 'hsl(var(--gold-accent))',
+        'xp-bar-color': 'hsl(var(--xp-bar-color))',
+        'parchment-bg': 'hsl(var(--parchment-bg))',
+        'parchment-text': 'hsl(var(--parchment-text))',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
         'input-foreground': 'hsl(var(--input-foreground))',
@@ -66,9 +72,8 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
-  			// Removed sidebar specific colors, will use card/background
   		},
-  		borderRadius: { // Ensure these match --radius from globals.css
+  		borderRadius: { 
   			lg: 'var(--radius)',
   			md: 'var(--radius)', 
   			sm: 'calc(var(--radius) - 2px)'
@@ -99,3 +104,6 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+
+    

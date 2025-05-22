@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelEyeIcon.tsx
+// src/components/icons/PixelEyeIcon.tsx - DEPRECATED
+// This file can be deleted if not used.
 import type { SVGProps } from 'react';
 
 export const PixelEyeIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -16,3 +17,5 @@ export const PixelEyeIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#FFFFFF" d="M8 7h1v1H8z" /> {/* White Shine */}
   </svg>
 );
+
+    

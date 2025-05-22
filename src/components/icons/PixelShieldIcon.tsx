@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelShieldIcon.tsx
+// src/components/icons/PixelShieldIcon.tsx - DEPRECATED, use PixelOrnateShieldIcon.tsx
+// This file can be deleted.
 import type { SVGProps } from 'react';
 
 export const PixelShieldIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -14,3 +15,5 @@ export const PixelShieldIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#ADD8E6" d="M6 6h4v4H6z" /> {/* Light Blue emblem */}
   </svg>
 );
+
+    

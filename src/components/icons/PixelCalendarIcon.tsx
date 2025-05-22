@@ -1,5 +1,6 @@
 
-// src/components/icons/PixelCalendarIcon.tsx
+// src/components/icons/PixelCalendarIcon.tsx - DEPRECATED - Use fantasy/PixelMapIcon.tsx or similar
+// This file can be deleted.
 import type { SVGProps } from 'react';
 
 export const PixelCalendarIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -15,3 +16,5 @@ export const PixelCalendarIcon = (props: SVGProps<SVGSVGElement>) => (
     <path fill="#000000" d="M4 7h2v2H4z M7 7h2v2H7z M10 7h2v2h-2z M4 10h2v2H4z M7 10h2v2H7z" /> {/* Black Dots for days */}
   </svg>
 );
+
+    
