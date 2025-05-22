@@ -23,7 +23,7 @@ export default {
     },
     fontFamily: {
       sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-      pixel: ['var(--font-vt323)', ...defaultTheme.fontFamily.mono], // Thematic pixel font
+      pixel: ['var(--font-pixelify-sans)', ...defaultTheme.fontFamily.mono], // Updated to use Pixelify Sans variable
     },
   	extend: {
   		colors: {
@@ -31,7 +31,8 @@ export default {
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
+  				foreground: 'hsl(var(--card-foreground))',
+          'border-highlight': 'hsl(var(--card-border-highlight))' 
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
@@ -61,6 +62,7 @@ export default {
         'xp-bar-color': 'hsl(var(--xp-bar-color))',
         'parchment-bg': 'hsl(var(--parchment-bg))',
         'parchment-text': 'hsl(var(--parchment-text))',
+        'text-accent-thematic': 'hsl(var(--text-accent-thematic))',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
         'input-foreground': 'hsl(var(--input-foreground))',
@@ -94,16 +96,30 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+        'pulse-correct': { 
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0px hsl(var(--secondary) / 0.4)' }, 
+          '50%': { transform: 'scale(1.03)', boxShadow: '0 0 10px 2px hsl(var(--secondary) / 0.5)' },
+        },
+        'glow-card-correct': { 
+          '0%, 100%': { borderColor: 'hsl(var(--border))', boxShadow: 'none' },
+          '50%': { borderColor: 'hsl(var(--secondary))', boxShadow: '0 0 15px hsl(var(--secondary) / 0.3)' },  
+        },
+        'coin-bonus-animation': {
+          '0%': { opacity: '0', transform: 'translateY(20px) scale(0.8)' },
+          '20%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+          '80%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+          '100%': { opacity: '0', transform: 'translateY(-40px) scale(1.1)' },
+        }
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+        'button-correct-pulse': 'pulse-correct 0.6s ease-in-out',
+        'card-correct-glow': 'glow-card-correct 0.8s ease-in-out',
+        'coin-bonus-animate': 'coin-bonus-animation 1.5s ease-out forwards',
   		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
-
-    

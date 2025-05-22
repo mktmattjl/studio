@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter, VT323 } from 'next/font/google'; // Import VT323
+import { Inter, Pixelify_Sans } from 'next/font/google'; // Import Pixelify_Sans
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Toaster } from "@/components/ui/toaster";
@@ -14,10 +14,10 @@ const inter = Inter({
   display: 'swap',
 });
 
-const vt323 = VT323({ // Initialize VT323
+const pixelifySans = Pixelify_Sans({ // Initialize Pixelify_Sans
   subsets: ['latin'],
-  weight: ['400'], // VT323 typically only has a 400 weight
-  variable: '--font-vt323',
+  weight: ['400', '500', '600', '700'], // Available weights
+  variable: '--font-pixelify-sans', // New variable name
   display: 'swap',
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, vt323.variable, "dark h-full")}>
+    <html lang="en" className={cn(inter.variable, pixelifySans.variable, "dark h-full")}> {/* Use pixelifySans.variable */}
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
         <AuthProvider>
           <TooltipProvider delayDuration={0}>
