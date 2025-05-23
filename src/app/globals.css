@@ -5,9 +5,9 @@
 
 @layer base {
   :root {
-    /* Heroic Fantasy Dark Theme - Base: Deep Stone Grays, Dark Wood Browns, Parchment Creams for Text */
+    /* Heroic Fantasy Dark Theme - Base: Deep Navy Blues, Dark Wood Browns, Parchment Creams for Text */
     /* Main Backgrounds */
-    --background: 220 35% 9%; /* #0E131C - Even Darker Navy Blue */
+    --background: 220 35% 9%; /* #10131C - Very Dark Navy Blue */
     --card: 220 30% 14%; /* #161C29 - Slightly Lighter Dark Navy Blue for cards/popovers */
     --card-border-highlight: 220 30% 17%; /* #1E2636 - Slightly lighter for card top border */
     --popover: 220 30% 14%; /* Matches Card */
@@ -26,7 +26,7 @@
     --secondary: 145 50% 50%; /* #40BF80 - Emerald Green (SECONDARY ACCENT) */
     --secondary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on secondary buttons) */
 
-    --accent: 200 80% 50%; /* UPDATED: Blue for NavItem hover - Was Emerald Green (145 50% 50%) */
+    --accent: 210 70% 40%; /* #215D99 - Darker Blue for NavItem hover */
     --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on blue hovers) */
 
     /* Destructive Actions */
@@ -58,7 +58,7 @@
 
   .dark {
     /* All :root variables define the dark theme directly now */
-    --background: 220 35% 9%; /* #0E131C - Even Darker Navy Blue */
+    --background: 220 35% 9%; /* #10131C - Very Dark Navy Blue */
     --foreground: 0 0% 95%;
     --card: 220 30% 14%; /* #161C29 - Slightly Lighter Dark Navy Blue */
     --card-foreground: 0 0% 95%;
@@ -75,7 +75,7 @@
     --muted: 220 30% 17%; /* Adjusted for navy theme, slightly lighter than card */
     --muted-foreground: 0 0% 70%;
 
-    --accent: 200 80% 50%; /* UPDATED: Blue for NavItem hover - Was Emerald Green (145 50% 50%) */
+    --accent: 210 70% 40%; /* Darker Blue for NavItem hover */
     --accent-foreground: 0 0% 95%;
 
     --destructive: 0 70% 45%;
