@@ -7,7 +7,6 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import type { ElementType } from 'react';
-// QuickActionCard import removed as the section is being deleted
 import { useRouter } from 'next/navigation';
 import {
   PixelPetIcon,
@@ -16,18 +15,21 @@ import {
   PixelFlamingSwordIcon,
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon,
-  // Icons for Quick Spells are no longer needed here
+  PixelMapIcon, // For "Chart Your Path"
+  PixelTrophyIcon, // For "Seek Challenges"
+  PixelScrollIcon, // For "Scribe Scrolls"
+  PixelMagicOrbIcon, // For "AI Wizardry"
 } from '@/components/icons/fantasy';
 import { cn } from '@/lib/utils';
-
-// QuickActionItem interface removed as quickActions prop is removed
+import type { QuickActionCardProps } from '@/components/dashboard/QuickActionCard'; // Assuming this type would be defined here or imported if QuickActionCard was separate
 
 interface RightSidebarProps {
   userName: string;
   petName: string;
   petImageUrl: string;
   isGeneratingPetImage: boolean;
-  // quickActions prop removed
+  // quickActions prop removed as per previous request if it was indeed removed.
+  // If QuickActions were to be passed again, this interface would need it.
 }
 
 export function RightSidebar({
@@ -39,12 +41,10 @@ export function RightSidebar({
   const router = useRouter();
   const userLevel = 5;
   const userXP = 65;
-  const thematicLevelTitle = "Novice Scribe";
+  const thematicLevelTitle = "Novice Scribe"; // Example thematic title
   const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}];
   const dayStreak = 7;
   const currentCoins = 125;
-
-  // Locally defined quickActions array removed
 
   return (
     <aside className="w-full lg:w-[320px] xl:w-[360px] space-y-6 shrink-0">
@@ -52,7 +52,6 @@ export function RightSidebar({
         <div className="p-4 bg-card rounded-t-lg border-b border-border">
             <div className="flex items-center gap-3 ">
               <div className="w-16 h-16 bg-muted border-2 border-border rounded-md flex items-center justify-center">
-                {/* Thematic initial display for user */}
                 <span className="font-pixel text-3xl text-foreground">
                   {userName.charAt(0).toUpperCase()}
                 </span>
@@ -83,7 +82,7 @@ export function RightSidebar({
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelGoldCoinIcon className="mx-auto mb-1 h-7 w-7 text-[hsl(var(--gold-accent))]" />
+                    <PixelGoldCoinIcon className="mx-auto mb-1 h-7 w-7 text-gold-accent" />
                     <p className="text-sm font-medium text-foreground">{currentCoins}</p>
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
@@ -112,21 +111,21 @@ export function RightSidebar({
       <ContentCard>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-lg font-pixel text-foreground flex items-center gap-2">
-            <PixelPetIcon className="h-6 w-6" /> {/* Slightly larger icon */}
+            <PixelPetIcon className="h-6 w-6" />
             Companion
           </h3>
           <Link href="/companion" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View All</Link>
         </div>
         <div className="flex flex-col items-center text-center gap-3 mt-2">
           <div className={cn(
-            "relative w-36 h-36 rounded-lg overflow-hidden bg-muted flex items-center justify-center border-2 shadow-md", // Increased size
+            "relative w-48 h-48 rounded-lg overflow-hidden bg-muted flex items-center justify-center border-2 shadow-md",
             isGeneratingPetImage ? "border-dashed border-primary/50 animate-pulse" : "border-border"
           )}>
             <Image
               src={petImageUrl}
               alt={petName}
-              width={144} // Increased size
-              height={144} // Increased size
+              width={192} 
+              height={192}
               className={cn(
                 "object-contain transition-opacity duration-300",
                 isGeneratingPetImage && petImageUrl.startsWith('https://placehold.co') ? "opacity-30" : "opacity-100"
@@ -137,14 +136,13 @@ export function RightSidebar({
             />
           </div>
           <div>
-            <h4 className="text-lg font-pixel text-foreground">{petName}</h4> {/* Increased font size */}
-            <p className="text-sm text-muted-foreground">Your loyal study familiar!</p> {/* Increased font size */}
+            <h4 className="text-lg font-pixel text-foreground">{petName}</h4>
+            {/* Removed "Your loyal study familiar!" paragraph */}
           </div>
         </div>
       </ContentCard>
 
-      {/* Quick Spells section removed */}
+      {/* "Quick Spells" section was removed in a previous step */}
     </aside>
   );
 }
-    
