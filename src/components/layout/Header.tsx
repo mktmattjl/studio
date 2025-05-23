@@ -1,9 +1,8 @@
-
 // src/components/layout/Header.tsx
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image'; // Import the Next.js Image component
+import Image from 'next/image';
 import { NavItem } from './NavItem';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,18 +16,14 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Fantasy Pixel Art Icons
-import {
-  PixelCompassIcon,
-  PixelMapIcon,
-  PixelMagicOrbIcon,
-  PixelGoldCoinIcon,
-  PixelFantasyAvatarIcon,
-  PixelFantasySettingsIcon,
-} from '@/components/icons/fantasy';
-import { PixelBellIcon } from '@/components/icons/PixelBellIcon'; 
-import { PixelStackedDocumentsIcon } from '@/components/icons/fantasy/PixelStackedDocumentsIcon';
-
+// Import your new PNG icons
+import BellIcon from '@/components/icons/ICONS_DASHBOARD/Bell.png';
+import CalendarIcon from '@/components/icons/ICONS_DASHBOARD/Calendar.png';
+import CoinIcon from '@/components/icons/ICONS_DASHBOARD/Coin.png';
+import FlameIcon from '@/components/icons/ICONS_DASHBOARD/Flame.png';
+import MapIcon from '@/components/icons/ICONS_DASHBOARD/Map.png';
+import PetIcon from '@/components/icons/ICONS_DASHBOARD/Pet.png';
+import WizardIcon from '@/components/icons/ICONS_DASHBOARD/Wizard.png';
 
 // Lucide icons for dropdown actions
 import { LogOut, LogIn, UserPlus } from 'lucide-react';
@@ -51,33 +46,27 @@ export function Header() {
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            <NavItem href="/" icon={<PixelCompassIcon className="w-5 h-5" />}>Dashboard</NavItem>
+            <NavItem href="/" icon={<Image src={FlameIcon} alt="Dashboard" width={20} height={20} />}>Dashboard</NavItem>
             <NavItem
               href="/flashcards"
-              icon={
-                currentUser ? (
-                  <Image src="/icons/flashcard-icon.png" alt="Flashcards" width={20} height={20} />
-                ) : (
-                  <PixelStackedDocumentsIcon className="w-5 h-5" />
-                )
-              }
+              icon={<Image src={CalendarIcon} alt="Flashcards" width={20} height={20} />}
             >
               Flashcards
             </NavItem>
-            <NavItem href="/planner" icon={<PixelMapIcon className="w-5 h-5" />}>Planner</NavItem>
-            <NavItem href="/ai-generator" icon={<PixelMagicOrbIcon className="w-5 h-5" />}>AI Wizard</NavItem>
+            <NavItem href="/planner" icon={<Image src={MapIcon} alt="Planner" width={20} height={20} />}>Planner</NavItem>
+            <NavItem href="/ai-generator" icon={<Image src={WizardIcon} alt="AI Wizard" width={20} height={20} />}>AI Wizard</NavItem>
           </nav>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              <PixelGoldCoinIcon className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
+              <Image src={CoinIcon} alt="Coin" width={20} height={20} />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-9 h-9">
-            <PixelBellIcon className="w-6 h-6" />
+            <Image src={BellIcon} alt="Notifications" width={24} height={24} />
             <span className="sr-only">Notifications</span>
           </Button>
 
@@ -85,7 +74,7 @@ export function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
-                  <PixelFantasyAvatarIcon className="w-6 h-6" />
+                  <Image src={PetIcon} alt="User Menu" width={24} height={24} />
                   <span className="sr-only">User Menu</span>
                 </Button>
               </DropdownMenuTrigger>
@@ -95,10 +84,10 @@ export function Header() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-border/50" />
                 <DropdownMenuItem onClick={() => router.push('/profile')} className="cursor-pointer hover:bg-muted/50 text-popover-foreground">
-                  <PixelFantasyAvatarIcon className="mr-2 h-4 w-4" /> Profile
+                  <Image src={PetIcon} alt="Profile" width={16} height={16} className="mr-2" /> Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer hover:bg-muted/50 text-popover-foreground">
-                  <PixelFantasySettingsIcon className="mr-2 h-4 w-4" /> Settings
+                  <Image src={FlameIcon} alt="Settings" width={16} height={16} className="mr-2" /> Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-border/50"/>
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:bg-destructive/20 focus:text-destructive-foreground cursor-pointer hover:bg-destructive/10">

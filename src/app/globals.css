@@ -20,14 +20,14 @@
     --text-accent-thematic: 25 31% 67%; /* #C5A690 - Light Beige/Brown (for thematic text and some borders) */
 
     /* Accent Colors (Backgrounds for interactive elements if text on them is white) */
-    --primary: 200 100% 55%; /* #1AA3FF - Neon Blue (NEW) */
+    --primary: 200 100% 55%; /* #1AA3FF - Neon Blue */
     --primary-foreground: 210 15% 8%; /* #0F1114 - Very Dark Grey/Near-Black (for text on Neon Blue) */
 
     --secondary: 145 50% 50%; /* #40BF80 - Emerald Green (SECONDARY ACCENT) */
     --secondary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on secondary buttons) */
 
-    --accent: 145 50% 50%; /* #40BF80 - Emerald Green (for general hovers, matches secondary) */
-    --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on green hovers) */
+    --accent: 200 80% 50%; /* UPDATED: Blue for NavItem hover - Was Emerald Green (145 50% 50%) */
+    --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on blue hovers) */
 
     /* Destructive Actions */
     --destructive: 0 70% 45%; /* #CC3D3D - Muted Red */
@@ -37,19 +37,19 @@
     --border: 220 25% 18%; /* #202838 - Subtle Border for general use */
     --input: 220 35% 7%; /* #0A0F15 - Very Dark Input Background */
     --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --ring: 200 100% 55%; /* Neon Blue for focus ring (NEW) */
+    --ring: 200 100% 55%; /* Neon Blue for focus ring */
 
     --radius: 0.375rem; /* Slightly less rounded for a more "solid" feel */
 
     /* Custom Thematic Colors */
     --gold-accent: 40 70% 55%; /* #E0A040 - Gold for coins, slightly desaturated */
-    --xp-bar-color: var(--primary); /* Neon Blue for XP bar (NEW) */
+    --xp-bar-color: var(--primary); /* Neon Blue for XP bar */
 
     --parchment-bg: 40 35% 85%; /* #E2DECF - Aged Parchment for calendar events */
     --parchment-text: 30 20% 25%; /* #4D423A - Dark Sepia/Brown text on parchment */
 
     /* Chart Colors */
-    --chart-1: var(--primary);   /* Neon Blue (NEW) */
+    --chart-1: var(--primary);   /* Neon Blue */
     --chart-2: var(--secondary); /* Emerald Green */
     --chart-3: var(--text-accent-thematic); /* Light Beige/Brown */
     --chart-4: 195 7% 50%;  /* Mid Grey */
@@ -66,7 +66,7 @@
     --popover: 220 30% 14%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 200 100% 55%; /* Neon Blue (NEW) */
+    --primary: 200 100% 55%; /* Neon Blue */
     --primary-foreground: 210 15% 8%; /* Very Dark Grey/Near-Black */
 
     --secondary: 145 50% 50%; /* Emerald Green */
@@ -75,7 +75,7 @@
     --muted: 220 30% 17%; /* Adjusted for navy theme, slightly lighter than card */
     --muted-foreground: 0 0% 70%;
 
-    --accent: 145 50% 50%; /* Emerald Green */
+    --accent: 200 80% 50%; /* UPDATED: Blue for NavItem hover - Was Emerald Green (145 50% 50%) */
     --accent-foreground: 0 0% 95%;
 
     --destructive: 0 70% 45%;
@@ -84,13 +84,13 @@
     --border: 220 25% 18%; /* #202838 */
     --input: 220 35% 7%; /* #0A0F15 */
     --input-foreground: 0 0% 95%;
-    --ring: 200 100% 55%; /* Neon Blue (NEW) */
+    --ring: 200 100% 55%; /* Neon Blue */
 
     --radius: 0.375rem;
 
     --text-accent-thematic: 25 31% 67%;
     --gold-accent: 40 70% 55%;
-    --xp-bar-color: var(--primary); /* Neon Blue (NEW) */
+    --xp-bar-color: var(--primary); /* Neon Blue */
     --parchment-bg: 40 35% 85%;
     --parchment-text: 30 20% 25%;
 
