@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import type { ElementType } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   PixelPetIcon,
@@ -15,21 +14,14 @@ import {
   PixelFlamingSwordIcon,
   PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon,
-  PixelMapIcon, // For "Chart Your Path"
-  PixelTrophyIcon, // For "Seek Challenges"
-  PixelScrollIcon, // For "Scribe Scrolls"
-  PixelMagicOrbIcon, // For "AI Wizardry"
 } from '@/components/icons/fantasy';
 import { cn } from '@/lib/utils';
-import type { QuickActionCardProps } from '@/components/dashboard/QuickActionCard'; // Assuming this type would be defined here or imported if QuickActionCard was separate
 
 interface RightSidebarProps {
   userName: string;
   petName: string;
   petImageUrl: string;
   isGeneratingPetImage: boolean;
-  // quickActions prop removed as per previous request if it was indeed removed.
-  // If QuickActions were to be passed again, this interface would need it.
 }
 
 export function RightSidebar({
@@ -41,7 +33,7 @@ export function RightSidebar({
   const router = useRouter();
   const userLevel = 5;
   const userXP = 65;
-  const thematicLevelTitle = "Novice Scribe"; // Example thematic title
+  const thematicLevelTitle = "Novice Scribe";
   const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}];
   const dayStreak = 7;
   const currentCoins = 125;
@@ -118,14 +110,14 @@ export function RightSidebar({
         </div>
         <div className="flex flex-col items-center text-center gap-3 mt-2">
           <div className={cn(
-            "relative w-48 h-48 rounded-lg overflow-hidden bg-muted flex items-center justify-center border-2 shadow-md",
+            "relative w-56 h-56 rounded-lg overflow-hidden bg-muted flex items-center justify-center border-2 shadow-md",
             isGeneratingPetImage ? "border-dashed border-primary/50 animate-pulse" : "border-border"
           )}>
             <Image
               src={petImageUrl}
               alt={petName}
-              width={192} 
-              height={192}
+              width={224} 
+              height={224}
               className={cn(
                 "object-contain transition-opacity duration-300",
                 isGeneratingPetImage && petImageUrl.startsWith('https://placehold.co') ? "opacity-30" : "opacity-100"
@@ -137,12 +129,12 @@ export function RightSidebar({
           </div>
           <div>
             <h4 className="text-lg font-pixel text-foreground">{petName}</h4>
-            {/* Removed "Your loyal study familiar!" paragraph */}
+            {/* Description removed as per previous request */}
           </div>
         </div>
       </ContentCard>
 
-      {/* "Quick Spells" section was removed in a previous step */}
+      {/* Quick Spells section removed as per previous request */}
     </aside>
   );
 }
