@@ -6,40 +6,34 @@ import { generatePetImage } from '@/ai/flows/generate-pet-image-flow';
 import { RightSidebar } from '@/components/dashboard/RightSidebar';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
-import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid'; 
+import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
 import type { PlannerEvent } from '@/app/planner/page';
-import { eventTypeColors } from '@/app/planner/page'; 
+import { eventTypeColors } from '@/app/planner/page';
 
 // Fantasy Pixel Art Icons
 import {
   PixelScrollIcon,
   PixelMagicOrbIcon,
-  PixelQuillIcon,
-  PixelChestIcon,
-  PixelMapIcon, // Added for potential future use
-  PixelTrophyIcon // Added for potential future use
+  // PixelQuillIcon, // No longer needed here for quick actions
+  // PixelChestIcon, // No longer needed here for quick actions
+  PixelMapIcon,
+  PixelTrophyIcon
 } from '@/components/icons/fantasy';
 
 import type { ElementType } from 'react';
 import { format, addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
 
-const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/1A1D2B/E0EFFF.png"; 
+const DEFAULT_DASHBOARD_PET_IMAGE = "https://placehold.co/150x150/10131C/E0EFFF.png"; // Adjusted for new dark bg
 
-interface QuickActionItem {
-  title: string;
-  description: string; 
-  href: string;
-  Icon: ElementType;
-  iconBgClass?: string; 
-  iconTextClass?: string;
-}
+// QuickActionItem interface removed as quickActions are managed within RightSidebar or passed differently if still needed.
+// For this change, quickActions are fully removed from this page's direct responsibility.
 
 // Ensure types are lowercase to match PlannerEvent type and eventTypeColors keys
 const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
-    { title: 'Submit History Scroll (Essay Outline)', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline', description: 'The final runes must be etched and submitted to the Grand Loremaster by midnight.'}, 
-    { title: 'Lecture: Ancient Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class', description: 'Attend Professor Eldrin\'s lecture on forgotten computational spells.'}, 
-    { title: 'Council Meeting (Team Sync)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting', description: 'Gather with the Guild to discuss progress on Project Cerebro.'}, 
+    { title: 'Submit History Scroll (Essay Outline)', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline', description: 'The final runes must be etched and submitted to the Grand Loremaster by midnight.'},
+    { title: 'Lecture: Ancient Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class', description: 'Attend Professor Eldrin\'s lecture on forgotten computational spells.'},
+    { title: 'Council Meeting (Team Sync)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting', description: 'Gather with the Guild to discuss progress on Project Cerebro.'},
     { title: 'Decipher Chapter 3 Tomes (Biology)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'study_session', description: 'Unravel the mysteries of mystical flora and fauna.'},
     { title: 'Trial of Physics II (Exam)', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'exam', description: 'Face the challenging examination on the elemental laws of physics.'},
     { title: 'Morning Scry (Daily Scrum)', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'meeting', description: 'A quick alignment with fellow adventurers on today\'s objectives.' },
@@ -48,14 +42,14 @@ const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
 
 
 export default function DashboardPage() {
-  const userName = "Norta Hwørting"; 
-  const petName = "Vel"; 
+  const userName = "Norta Hwørting";
+  const petName = "Vel";
 
   const [dashboardEvents, setDashboardEvents] = useState<PlannerEvent[]>(
     initialDashboardEvents.map((event, index) => ({
       ...event,
       id: `dash-event-${index + 1}-${Date.now()}`,
-      color: eventTypeColors[event.type], 
+      color: eventTypeColors[event.type],
     }))
   );
 
@@ -66,40 +60,7 @@ export default function DashboardPage() {
   const [dashboardPetImageUrl, setDashboardPetImageUrl] = useState(DEFAULT_DASHBOARD_PET_IMAGE);
   const [isGeneratingPetImage, setIsGeneratingPetImage] = useState(true);
 
-  const quickActions: QuickActionItem[] = [
-    { 
-      title: "Scribe Scrolls", 
-      description: "Craft new lore for your adventures.", 
-      href: "/flashcards/new", 
-      Icon: PixelScrollIcon,
-      iconBgClass: "bg-accent/40", 
-      iconTextClass: "text-accent-foreground" 
-    },
-    { 
-      title: "Summon Knowledge", 
-      description: "Let the Oracle conjure insights from notes.", 
-      href: "/ai-generator", 
-      Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/40", 
-      iconTextClass: "text-primary-foreground"
-    },
-    { 
-      title: "Chart Your Path", 
-      description: "Record quests, trials, and study rituals.", 
-      href: "/planner",
-      Icon: PixelMapIcon, // Kept PixelMapIcon based on RightSidebar's definition
-      iconBgClass: "bg-secondary/40", 
-      iconTextClass: "text-secondary-foreground" 
-    },
-     { 
-      title: "Seek Challenges", 
-      description: "Test your mettle with ancient trials.", 
-      href: "/challenges", 
-      Icon: PixelTrophyIcon, // Kept PixelTrophyIcon based on RightSidebar's definition
-      iconBgClass: "bg-gold-accent/40",
-      iconTextClass: "text-primary-foreground"
-    },
-  ];
+  // quickActions array removed from here, as it's managed/removed in RightSidebar
 
   const fetchDashboardPetImage = useCallback(async () => {
     setIsGeneratingPetImage(true);
@@ -122,7 +83,7 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchDashboardPetImage();
   }, [fetchDashboardPetImage]);
-  
+
   const [currentTimeGreeting, setCurrentTimeGreeting] = useState('');
   useEffect(() => {
     const hour = new Date().getHours();
@@ -133,7 +94,7 @@ export default function DashboardPage() {
 
   const pageTitle = (
     <>
-      {currentTimeGreeting}, <span className="text-foreground">{userName}!</span> {/* Changed from text-primary */}
+      {currentTimeGreeting}, <span className="text-[hsl(var(--text-accent-thematic))]">{userName}!</span>
     </>
   );
   const pageSubtitle = "Ready to conquer your studies today?";
@@ -152,15 +113,15 @@ export default function DashboardPage() {
     setNewProposedStartTimeDashboard(null);
     setIsDashboardEventDialogOpen(true);
   };
-  
+
   const handleSaveEventDashboard = (eventData: Omit<PlannerEvent, 'id' | 'color'> & { id?: string }) => {
-    if (eventData.id) { 
-      setDashboardEvents(prevEvents => 
-        prevEvents.map(e => 
+    if (eventData.id) {
+      setDashboardEvents(prevEvents =>
+        prevEvents.map(e =>
           e.id === eventData.id ? { ...e, ...eventData, color: eventTypeColors[eventData.type] } : e
         )
       );
-    } else { 
+    } else {
       const newEvent: PlannerEvent = {
         ...eventData,
         id: `dash-event-${Date.now()}`,
@@ -190,7 +151,7 @@ export default function DashboardPage() {
 
           <ContentCard className="flex flex-col">
              <h2 className="text-xl font-pixel text-[hsl(var(--text-accent-thematic))] p-4 sm:p-6 pb-3 flex items-center gap-2">
-                <PixelMagicOrbIcon className="w-5 h-5" /> {/* Added icon */}
+                <PixelMagicOrbIcon className="w-5 h-5" />
                 This Week's Portents
             </h2>
             <div className="flex-grow overflow-hidden p-1 sm:p-2 pt-0">
@@ -213,8 +174,8 @@ export default function DashboardPage() {
         userName={userName}
         petName={petName}
         petImageUrl={dashboardPetImageUrl}
-        isGeneratingPetImage={isGeneratingPetImage} 
-        quickActions={quickActions}
+        isGeneratingPetImage={isGeneratingPetImage}
+        // quickActions prop removed
       />
 
       <EventFormDialog
@@ -232,4 +193,4 @@ export default function DashboardPage() {
     </div>
   );
 }
-
+    

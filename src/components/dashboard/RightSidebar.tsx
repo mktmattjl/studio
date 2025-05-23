@@ -7,38 +7,27 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import type { ElementType } from 'react';
-import { QuickActionCard } from '@/components/dashboard/QuickActionCard';
+// QuickActionCard import removed as the section is being deleted
 import { useRouter } from 'next/navigation';
-import { 
-  PixelPetIcon, 
-  PixelGoldCoinIcon, 
-  PixelOrnateShieldIcon, 
-  PixelFlamingSwordIcon, 
-  PixelFantasyAvatarIcon, 
+import {
+  PixelPetIcon,
+  PixelGoldCoinIcon,
+  PixelOrnateShieldIcon,
+  PixelFlamingSwordIcon,
+  PixelFantasyAvatarIcon,
   PixelFantasySettingsIcon,
-  PixelScrollIcon, 
-  PixelMagicOrbIcon, 
-  PixelQuillIcon, 
-  PixelChestIcon,
-  PixelMapIcon, // Added for new quick spell icon
-  PixelTrophyIcon // Added for new quick spell icon
+  // Icons for Quick Spells are no longer needed here
 } from '@/components/icons/fantasy';
 import { cn } from '@/lib/utils';
 
-interface QuickActionItem {
-  title: string;
-  href: string;
-  Icon: ElementType;
-  iconBgClass?: string; 
-  iconTextClass?: string;
-}
+// QuickActionItem interface removed as quickActions prop is removed
 
 interface RightSidebarProps {
   userName: string;
   petName: string;
   petImageUrl: string;
   isGeneratingPetImage: boolean;
-  quickActions: QuickActionItem[];
+  // quickActions prop removed
 }
 
 export function RightSidebar({
@@ -46,56 +35,27 @@ export function RightSidebar({
   petName,
   petImageUrl,
   isGeneratingPetImage,
-  quickActions: passedQuickActions, // Renamed to avoid conflict
 }: RightSidebarProps) {
   const router = useRouter();
   const userLevel = 5;
   const userXP = 65;
-  const thematicLevelTitle = "Novice Scribe"; 
+  const thematicLevelTitle = "Novice Scribe";
   const badges = [{id: '1', name: 'Early Bird'}, {id: '2', name: 'Streak Master'}, {id: '3', name: 'Learner I'}];
   const dayStreak = 7;
-  const currentCoins = 125; 
+  const currentCoins = 125;
 
-  // Use the updated quickActions array if it's different from the passed one or define it here
-  const quickActions: QuickActionItem[] = [
-    { 
-      title: "Scribe Scrolls", 
-      href: "/flashcards/new", 
-      Icon: PixelScrollIcon,
-      iconBgClass: "bg-accent/40",
-      iconTextClass: "text-accent-foreground" 
-    },
-    { 
-      title: "Summon Knowledge", 
-      href: "/ai-generator", 
-      Icon: PixelMagicOrbIcon,
-      iconBgClass: "bg-primary/40",
-      iconTextClass: "text-primary-foreground"
-    },
-    { 
-      title: "Chart Your Path", 
-      href: "/planner",
-      Icon: PixelMapIcon, // Changed from PixelQuillIcon
-      iconBgClass: "bg-secondary/40", 
-      iconTextClass: "text-secondary-foreground" 
-    },
-     { 
-      title: "Seek Challenges", 
-      href: "/challenges", 
-      Icon: PixelTrophyIcon, // Changed from PixelChestIcon
-      iconBgClass: "bg-gold-accent/40",
-      iconTextClass: "text-primary-foreground"
-    },
-  ];
-
+  // Locally defined quickActions array removed
 
   return (
     <aside className="w-full lg:w-[320px] xl:w-[360px] space-y-6 shrink-0">
       <ContentCard className="!p-0 overflow-hidden">
         <div className="p-4 bg-card rounded-t-lg border-b border-border">
             <div className="flex items-center gap-3 ">
-              <div className="w-16 h-16 bg-muted border-2 border-border rounded-md flex items-center justify-center text-foreground text-3xl font-pixel">
-                {userName.charAt(0).toUpperCase()}
+              <div className="w-16 h-16 bg-muted border-2 border-border rounded-md flex items-center justify-center">
+                {/* Thematic initial display for user */}
+                <span className="font-pixel text-3xl text-foreground">
+                  {userName.charAt(0).toUpperCase()}
+                </span>
               </div>
               <div>
                 <h3 className="font-pixel text-xl text-foreground">{userName}</h3>
@@ -113,34 +73,34 @@ export function RightSidebar({
         <div className="p-4 space-y-3">
             <div className="flex items-center justify-around text-center">
                 <div>
-                    <PixelFlamingSwordIcon className="mx-auto mb-1 h-7 w-7 text-primary" /> 
+                    <PixelFlamingSwordIcon className="mx-auto mb-1 h-7 w-7 text-primary" />
                     <p className="text-sm font-medium text-foreground">{dayStreak}</p>
                     <p className="text-xs text-muted-foreground">Streak</p>
                 </div>
                 <div>
-                    <PixelOrnateShieldIcon className="mx-auto mb-1 h-7 w-7 text-secondary" /> 
+                    <PixelOrnateShieldIcon className="mx-auto mb-1 h-7 w-7 text-secondary" />
                     <p className="text-sm font-medium text-foreground">{badges.length}</p>
                     <p className="text-xs text-muted-foreground">Badges</p>
                 </div>
                  <div>
-                    <PixelGoldCoinIcon className="mx-auto mb-1 h-7 w-7 text-gold-accent" />
+                    <PixelGoldCoinIcon className="mx-auto mb-1 h-7 w-7 text-[hsl(var(--gold-accent))]" />
                     <p className="text-sm font-medium text-foreground">{currentCoins}</p>
                     <p className="text-xs text-muted-foreground">Coins</p>
                  </div>
             </div>
             <div className="flex gap-2 pt-2 border-t border-border/50">
-                <Button 
-                  variant="outline" 
-                  size="default" 
-                  className="flex-1 text-muted-foreground hover:bg-accent/20 hover:border-accent hover:text-accent-foreground py-2.5 px-3" 
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="flex-1 text-muted-foreground hover:bg-accent/20 hover:border-accent hover:text-accent-foreground py-2.5 px-3"
                   onClick={() => router.push('/profile')}
                 >
                     <PixelFantasyAvatarIcon className="mr-1.5 h-4 w-4" /> Profile
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="default" 
-                  className="flex-1 text-muted-foreground hover:bg-accent/20 hover:border-accent hover:text-accent-foreground py-2.5 px-3" 
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="flex-1 text-muted-foreground hover:bg-accent/20 hover:border-accent hover:text-accent-foreground py-2.5 px-3"
                   onClick={() => router.push('/settings')}
                 >
                     <PixelFantasySettingsIcon className="mr-1.5 h-4 w-4" /> Settings
@@ -152,46 +112,38 @@ export function RightSidebar({
       <ContentCard>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-lg font-pixel text-foreground flex items-center gap-2">
-            <PixelPetIcon className="h-5 w-5" />
+            <PixelPetIcon className="h-6 w-6" /> {/* Slightly larger icon */}
             Companion
           </h3>
           <Link href="/companion" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline">View All</Link>
         </div>
-        <div className="flex items-center gap-3">
-          <div className={cn("relative w-16 h-16 rounded-md overflow-hidden bg-muted flex items-center justify-center border-2 ", isGeneratingPetImage ? "border-dashed border-primary/50 animate-pulse" : "border-border")}>
+        <div className="flex flex-col items-center text-center gap-3 mt-2">
+          <div className={cn(
+            "relative w-36 h-36 rounded-lg overflow-hidden bg-muted flex items-center justify-center border-2 shadow-md", // Increased size
+            isGeneratingPetImage ? "border-dashed border-primary/50 animate-pulse" : "border-border"
+          )}>
             <Image
               src={petImageUrl}
               alt={petName}
-              width={64}
-              height={64}
-              className={cn("object-contain transition-opacity duration-300 ", isGeneratingPetImage && petImageUrl !== 'https://placehold.co/150x150/2D3748/E0EFFF.png' ? 'opacity-30' : 'opacity-100')}
+              width={144} // Increased size
+              height={144} // Increased size
+              className={cn(
+                "object-contain transition-opacity duration-300",
+                isGeneratingPetImage && petImageUrl.startsWith('https://placehold.co') ? "opacity-30" : "opacity-100"
+              )}
               unoptimized={petImageUrl.startsWith('data:')}
               priority
               data-ai-hint="heroic fantasy pixel art creature companion, detailed, friendly, vibrant jewel tones"
             />
           </div>
-          <div className="flex-1">
-            <h4 className="font-medium text-foreground">{petName}</h4>
-            <p className="text-xs text-muted-foreground">Your loyal study familiar!</p>
+          <div>
+            <h4 className="text-lg font-pixel text-foreground">{petName}</h4> {/* Increased font size */}
+            <p className="text-sm text-muted-foreground">Your loyal study familiar!</p> {/* Increased font size */}
           </div>
         </div>
       </ContentCard>
 
-      <ContentCard>
-        <h2 className="text-lg font-pixel text-foreground mb-4">Quick Spells</h2>
-        <div className="flex flex-row flex-wrap gap-2.5 justify-start items-center">
-          {quickActions.map(action => (
-            <QuickActionCard
-              key={action.title}
-              title={action.title}
-              href={action.href}
-              Icon={action.Icon}
-              iconBgClass={action.iconBgClass} 
-              iconTextClass={action.iconTextClass} 
-            />
-          ))}
-        </div>
-      </ContentCard>
+      {/* Quick Spells section removed */}
     </aside>
   );
 }
