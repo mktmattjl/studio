@@ -9,7 +9,6 @@ import type { PlannerEvent } from '@/app/planner/page';
 import {
     PixelScrollIcon,
     PixelQuillIcon,
-    // PixelMapIcon, // Removed as empty state icon is changing
     PixelHeartIcon,
     PixelFlamingSwordIcon 
 } from '@/components/icons/fantasy';
@@ -18,8 +17,8 @@ import {
 // Color mapping for event types (left border) using Heroic Fantasy Theme
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-destructive', // Ruby Red
-    'meeting': 'border-l-primary', // Neon Blue (Primary Accent)
-    'class': 'border-l-primary', // Neon Blue (Primary Accent)
+    'meeting': 'border-l-secondary', // WAS: border-l-[hsl(var(--text-accent-thematic))] NOW: Emerald Green
+    'class': 'border-l-secondary', // WAS: border-l-[hsl(var(--text-accent-thematic))] NOW: Emerald Green
     'study_session': 'border-l-secondary', // Emerald Green (Secondary Accent)
     'exam': 'border-l-destructive', // Ruby Red
     'personal': 'border-l-secondary', // Emerald Green (Secondary Accent)
@@ -68,8 +67,8 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
       <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[32rem]">
         {!hasAnyEvents && (
              <div className="text-center py-10 flex-grow flex flex-col justify-center items-center h-full">
-                <PixelScrollIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" /> {/* Changed from PixelMapIcon */}
-                <h3 className="text-xl font-pixel text-[hsl(var(--text-accent-thematic))] mb-2">Thy Quest Log is Empty!</h3>
+                <PixelScrollIcon className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6 font-pixel" />
+                <h3 className="text-xl font-pixel text-foreground mb-2">Thy Quest Log is Empty!</h3>
                 <p className="text-muted-foreground font-pixel">No pressing tasks. Perhaps a moment of respite or plan new adventures?</p>
             </div>
         )}
@@ -83,7 +82,7 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
             <div key={groupName}>
               <h3 className={cn(
                 "text-lg font-pixel mb-3 border-b border-border/50 pb-2",
-                 groupName === "Today" ? "text-primary" : "text-[hsl(var(--text-accent-thematic))]"
+                 groupName === "Today" ? "text-[hsl(var(--text-accent-thematic))]" : "text-[hsl(var(--text-accent-thematic))]" // All headers use thematic text accent
                 )}>
                 {groupName}
                 {groupName === "Today" && <span className="text-xs text-muted-foreground ml-2 font-sans">({format(today, 'EEEE, MMM d')})</span>}

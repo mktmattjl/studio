@@ -17,7 +17,7 @@
     --card-foreground: 0 0% 95%;
     --popover-foreground: 0 0% 95%;
     --muted-foreground: 0 0% 70%; /* #B3B3B3 - Light Grey for less emphasized text */
-    --text-accent-thematic: 25 31% 67%; /* #C5A690 - Light Beige/Brown (for thematic text and some borders) */
+    --text-accent-thematic: 0 0% 95%; /* #F2F2F2 - Off-White (WAS #C5A690) */
 
     /* Accent Colors (Backgrounds for interactive elements if text on them is white) */
     --primary: 200 100% 55%; /* #1AA3FF - Neon Blue */
@@ -51,7 +51,7 @@
     /* Chart Colors */
     --chart-1: var(--primary);   /* Neon Blue */
     --chart-2: var(--secondary); /* Emerald Green */
-    --chart-3: var(--text-accent-thematic); /* Light Beige/Brown */
+    --chart-3: var(--text-accent-thematic); /* WAS Light Beige/Brown, NOW Off-White */
     --chart-4: 195 7% 50%;  /* Mid Grey */
     --chart-5: var(--gold-accent);   /* Gold */
   }
@@ -88,7 +88,7 @@
 
     --radius: 0.375rem;
 
-    --text-accent-thematic: 25 31% 67%;
+    --text-accent-thematic: 0 0% 95%; /* #F2F2F2 - Off-White (WAS #C5A690) */
     --gold-accent: 40 70% 55%;
     --xp-bar-color: var(--primary); /* Neon Blue */
     --parchment-bg: 40 35% 85%;

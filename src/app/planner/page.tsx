@@ -21,14 +21,14 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using Heroic Fantasy Theme with Neon Blue primary
+// Event Type Colors using Heroic Fantasy Theme
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-primary/20 border-l-primary text-primary-foreground', // Neon Blue tint & border, Dark text
-  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red tint & border, White text
-  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Emerald Green tint & border, White text
-  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Red tint & border, White text
-  meeting: 'bg-primary/20 border-l-primary text-primary-foreground', // Neon Blue tint & border, Dark text
-  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Emerald Green tint & border, White text
+  class: 'bg-secondary/20 border-l-secondary text-primary-foreground', // WAS: bg-[hsl(var(--text-accent-thematic))]/20 border-l-[hsl(var(--text-accent-thematic))] NOW: Emerald Green tint & border
+  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Ruby Red tint & border
+  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Emerald Green tint & border
+  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Ruby Red tint & border
+  meeting: 'bg-secondary/20 border-l-secondary text-primary-foreground', // WAS: bg-[hsl(var(--text-accent-thematic))]/20 border-l-[hsl(var(--text-accent-thematic))] NOW: Emerald Green tint & border
+  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Emerald Green tint & border
 };
 
 
