@@ -34,7 +34,10 @@ export default function RootLayout({
   return (
     // Apply both font variables to the html tag
     <html lang="en" className={cn(inter.variable, pixelifySans.variable, "dark h-full")}>
-      <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
+      <body 
+        className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen"
+        suppressHydrationWarning={true}
+      >
         <AuthProvider>
           <TooltipProvider delayDuration={0}>
             <Header />
