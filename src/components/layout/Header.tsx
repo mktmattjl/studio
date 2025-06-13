@@ -16,17 +16,19 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-// Import your new PNG icons
-import BellIcon from '@/components/icons/ICONS_DASHBOARD/Bell.png';
-import CalendarIcon from '@/components/icons/ICONS_DASHBOARD/Calendar.png';
-import CoinIcon from '@/components/icons/ICONS_DASHBOARD/Coin.png';
-import FlameIcon from '@/components/icons/ICONS_DASHBOARD/Flame.png';
-import MapIcon from '@/components/icons/ICONS_DASHBOARD/Map.png';
-import PetIcon from '@/components/icons/ICONS_DASHBOARD/Pet.png';
-import WizardIcon from '@/components/icons/ICONS_DASHBOARD/Wizard.png';
+// Default pixel art icons
+import { 
+  PixelMapIcon, 
+  PixelMagicOrbIcon,
+  PixelFantasyAvatarIcon, // For default user avatar
+  PixelFantasySettingsIcon,
+  PixelBellIcon as OriginalPixelBellIcon, // Alias to avoid conflict if you make a fantasy one
+  PixelGoldCoinIcon,
+  PixelScrollIcon // for Flashcards
+} from '@/components/icons/fantasy';
 
 // Lucide icons for dropdown actions
-import { LogOut, LogIn, UserPlus } from 'lucide-react';
+import { LogOut, LogIn, UserPlus, Settings, UserCircle } from 'lucide-react'; // Added UserCircle for profile if no image
 
 export function Header() {
   const { currentUser, logout } = useAuth();
@@ -38,6 +40,23 @@ export function Header() {
     // router.push('/login'); // AuthContext already handles redirect
   };
 
+  const UserAvatar = () => {
+    if (currentUser?.photoURL) {
+      return (
+        <Image 
+          src={currentUser.photoURL} 
+          alt={currentUser.displayName || "User Avatar"} 
+          width={28} 
+          height={28} 
+          className="rounded-full object-cover border-2 border-primary/50"
+        />
+      );
+    }
+    // Fallback to PixelFantasyAvatarIcon or similar
+    return <PixelFantasyAvatarIcon className="w-6 h-6 text-muted-foreground group-hover:text-foreground" />;
+  };
+
+
   return (
     <header className="bg-card border-b border-border text-card-foreground sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -46,48 +65,48 @@ export function Header() {
             Cerebro
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            <NavItem href="/" icon={<Image src={FlameIcon} alt="Dashboard" width={20} height={20} />}>Dashboard</NavItem>
+            <NavItem href="/" icon={<PixelMapIcon />}>Dashboard</NavItem>
             <NavItem
               href="/flashcards"
-              icon={<Image src={CalendarIcon} alt="Flashcards" width={20} height={20} />}
+              icon={<PixelScrollIcon />} 
             >
               Flashcards
             </NavItem>
-            <NavItem href="/planner" icon={<Image src={MapIcon} alt="Planner" width={20} height={20} />}>Planner</NavItem>
-            <NavItem href="/ai-generator" icon={<Image src={WizardIcon} alt="AI Wizard" width={20} height={20} />}>AI Wizard</NavItem>
+            <NavItem href="/planner" icon={<PixelMapIcon />}>Planner</NavItem>
+            <NavItem href="/ai-generator" icon={<PixelMagicOrbIcon />}>AI Wizard</NavItem>
           </nav>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           {currentUser && (
             <div className="flex items-center gap-1.5 text-sm bg-muted/50 text-foreground px-3 py-1.5 rounded-md border border-border">
-              <Image src={CoinIcon} alt="Coin" width={20} height={20} />
+              <PixelGoldCoinIcon className="w-5 h-5 text-gold-accent" />
               <span className="font-pixel text-base text-foreground">{coins}</span>
             </div>
           )}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-9 h-9">
-            <Image src={BellIcon} alt="Notifications" width={24} height={24} />
+            <OriginalPixelBellIcon className="w-6 h-6" />
             <span className="sr-only">Notifications</span>
           </Button>
 
           {currentUser ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md">
-                  <Image src={PetIcon} alt="User Menu" width={24} height={24} />
+                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-md w-9 h-9 p-0.5">
+                  <UserAvatar />
                   <span className="sr-only">User Menu</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-popover border-border text-popover-foreground rounded-md shadow-lg w-48 font-pixel">
-                <DropdownMenuLabel className="text-sm font-medium text-popover-foreground">
-                  {currentUser.email}
+              <DropdownMenuContent align="end" className="bg-popover border-border text-popover-foreground rounded-md shadow-lg w-52 font-pixel">
+                <DropdownMenuLabel className="text-sm font-medium text-popover-foreground px-2 py-1.5">
+                  {currentUser.displayName || currentUser.email}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-border/50" />
                 <DropdownMenuItem onClick={() => router.push('/profile')} className="cursor-pointer hover:bg-muted/50 text-popover-foreground">
-                  <Image src={PetIcon} alt="Profile" width={16} height={16} className="mr-2" /> Profile
+                  <UserCircle className="mr-2 h-4 w-4" /> Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer hover:bg-muted/50 text-popover-foreground">
-                  <Image src={FlameIcon} alt="Settings" width={16} height={16} className="mr-2" /> Settings
+                  <Settings className="mr-2 h-4 w-4" /> Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-border/50"/>
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:bg-destructive/20 focus:text-destructive-foreground cursor-pointer hover:bg-destructive/10">
