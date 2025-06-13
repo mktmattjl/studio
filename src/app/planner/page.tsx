@@ -23,12 +23,12 @@ export interface PlannerEvent {
 
 // Event Type Colors using Heroic Fantasy Theme
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-secondary/20 border-l-secondary text-primary-foreground', // WAS: bg-[hsl(var(--text-accent-thematic))]/20 border-l-[hsl(var(--text-accent-thematic))] NOW: Emerald Green tint & border
-  deadline: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Ruby Red tint & border
-  study_session: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Emerald Green tint & border
-  exam: 'bg-destructive/20 border-l-destructive text-destructive-foreground', // Ruby Red tint & border
-  meeting: 'bg-secondary/20 border-l-secondary text-primary-foreground', // WAS: bg-[hsl(var(--text-accent-thematic))]/20 border-l-[hsl(var(--text-accent-thematic))] NOW: Emerald Green tint & border
-  personal: 'bg-secondary/20 border-l-secondary text-secondary-foreground', // Emerald Green tint & border
+  class: 'bg-secondary/40 border-l-secondary text-primary-foreground', // WAS: bg-secondary/20
+  deadline: 'bg-destructive/40 border-l-destructive text-destructive-foreground', // WAS: bg-destructive/20
+  study_session: 'bg-secondary/40 border-l-secondary text-secondary-foreground', // WAS: bg-secondary/20
+  exam: 'bg-destructive/40 border-l-destructive text-destructive-foreground', // WAS: bg-destructive/20
+  meeting: 'bg-secondary/40 border-l-secondary text-primary-foreground', // WAS: bg-secondary/20
+  personal: 'bg-secondary/40 border-l-secondary text-secondary-foreground', // WAS: bg-secondary/20
 };
 
 
