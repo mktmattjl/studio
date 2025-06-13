@@ -115,7 +115,7 @@
   }
   /* Ensure font-pixel uses the correct CSS variable from layout.tsx */
   .font-pixel {
-    font-family: var(--font-pixelify-sans), theme('fontFamily.mono');
+    font-family: var(--font-pixelify-sans), monospace;
     text-rendering: optimizeSpeed;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
@@ -193,3 +193,5 @@
     animation: coin-bonus-animation 1.5s ease-out forwards;
   }
 }
+
+    
