@@ -12,7 +12,7 @@ import { ContentCard } from '@/components/ui/ContentCard';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
-import { PixelFantasyAvatarIcon as PixelUserIcon } from '@/components/icons/fantasy';
+import { PixelFantasyAvatarIcon } from '@/components/icons/fantasy';
 
 const signupSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -53,7 +53,7 @@ export default function SignupPage() {
       <ContentCard className="w-full max-w-md p-6 sm:p-8">
         <div className="text-center mb-8">
           <div className="inline-block p-3 bg-primary/10 rounded-lg mb-4 border border-primary/30">
-            <PixelUserIcon className="w-10 h-10 text-primary" />
+            <PixelFantasyAvatarIcon className="w-10 h-10 text-primary" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-pixel text-primary">Create Your Account</h1>
           <p className="text-muted-foreground mt-1">Join Cerebro and start your learning journey!</p>
