@@ -23,11 +23,15 @@ export function NavItem({ href, children, icon }: NavItemProps) {
         'group flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-150 ease-in-out rounded-md',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background',
         isActive
-          ? 'bg-secondary text-secondary-foreground'
-          : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+          ? 'bg-secondary text-primary'
+          : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
       )}
     >
-      {icon && <span className="w-5 h-5">{icon}</span>}
+      {icon && <span className={cn(
+        "w-5 h-5 transition-colors",
+        isActive ? "text-primary" : "text-muted-foreground",
+        "group-hover:text-foreground"
+        )}>{icon}</span>}
       <span className="font-medium">
         {children}
       </span>

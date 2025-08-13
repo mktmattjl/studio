@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, "dark h-full")}>
+    <html lang="en" className={cn(inter.variable, "h-full")}>
       <body 
         className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen"
         suppressHydrationWarning={true}

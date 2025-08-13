@@ -7,24 +7,24 @@ import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 import type { PlannerEvent } from '@/app/planner/page';
 import { Progress } from '@/components/ui/progress';
-import { CalendarDays } from 'lucide-react';
+import { CalendarDays, CheckCircle } from 'lucide-react';
 
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
-    'deadline': 'border-l-red-400',
-    'meeting': 'border-l-green-400',
-    'class': 'border-l-blue-400',
-    'study_session': 'border-l-indigo-400',
-    'exam': 'border-l-purple-400',
-    'personal': 'border-l-gray-400',
+    'deadline': 'border-l-red-500',
+    'meeting': 'border-l-green-500',
+    'class': 'border-l-blue-500',
+    'study_session': 'border-l-indigo-500',
+    'exam': 'border-l-purple-500',
+    'personal': 'border-l-gray-500',
 };
 
 const eventTypeProgressBgClass: Record<PlannerEvent['type'], string> = {
-    'deadline': 'bg-red-400',
-    'meeting': 'bg-green-400',
-    'class': 'bg-blue-400',
-    'study_session': 'bg-indigo-400',
-    'exam': 'bg-purple-400',
-    'personal': 'bg-gray-400',
+    'deadline': 'bg-red-500',
+    'meeting': 'bg-green-500',
+    'class': 'bg-blue-500',
+    'study_session': 'bg-indigo-500',
+    'exam': 'bg-purple-500',
+    'personal': 'bg-gray-500',
 };
 
 interface DashboardAgendaViewProps {
@@ -65,12 +65,12 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
         </h1>
         {subtitle && <p className="text-md text-muted-foreground mt-1">{subtitle}</p>}
       </div>
-      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[32rem]">
+      <div className="space-y-6 p-4 sm:p-6 flex-grow overflow-y-auto styled-scrollbar max-h-[42rem]">
         {!hasAnyEvents && (
-             <div className="text-center py-10 flex-grow flex flex-col justify-center items-center h-full">
-                <CalendarDays className="w-16 h-16 mx-auto text-muted-foreground/50 mb-6" />
-                <h3 className="text-xl font-semibold text-foreground mb-2">It's quiet...</h3>
-                <p className="text-muted-foreground">No upcoming events. Time to plan ahead or take a break.</p>
+             <div className="text-center py-16 flex-grow flex flex-col justify-center items-center h-full">
+                <CheckCircle className="w-16 h-16 mx-auto text-green-500/80 mb-6" />
+                <h3 className="text-xl font-semibold text-foreground mb-2">All Clear!</h3>
+                <p className="text-muted-foreground">You have no upcoming events. Enjoy the peace and quiet.</p>
             </div>
         )}
 
@@ -97,8 +97,8 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                     <li
                       key={event.id}
                       className={cn(
-                        "flex items-start gap-3 p-3.5 rounded-md border-l-4 transition-colors",
-                        "bg-muted/30 hover:bg-muted/60", 
+                        "flex items-start gap-3 p-3.5 rounded-lg border-l-4 transition-all duration-150 ease-in-out",
+                        "bg-secondary/50 hover:bg-secondary", 
                         eventColorClass
                       )}
                       tabIndex={0}
@@ -108,9 +108,9 @@ export function DashboardAgendaView({ events: rawEvents, title, subtitle }: Dash
                         <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
                           {displayTime} - <span className="capitalize">{event.type.replace('_', ' ')}</span>
                         </p>
-                        {event.description && <p className="text-xs text-muted-foreground/80 mt-1 leading-normal line-clamp-2">{event.description}</p>}
+                        {event.description && <p className="text-sm text-muted-foreground/80 mt-1 leading-normal line-clamp-2">{event.description}</p>}
                         <div className="mt-2.5">
-                          <Progress value={mockProgress} className={cn("h-1", `[&>div]:${eventProgressColor}`)} />
+                          <Progress value={mockProgress} className={cn("h-1.5", `[&>div]:${eventProgressColor}`)} />
                         </div>
                       </div>
                     </li>

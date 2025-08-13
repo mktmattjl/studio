@@ -26,8 +26,8 @@ export function ContentCard({
   return (
     <ActualComponent
       className={cn(
-        'bg-card text-card-foreground border border-border shadow-sm', // Uses new dark theme CSS vars
-        'rounded-lg', // Uses --radius from globals
+        'bg-card text-card-foreground border border-border shadow-sm',
+        'rounded-lg', 
         interactive && 'transition-all duration-150 hover:shadow-lg hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         padding,
         className
@@ -39,4 +39,3 @@ export function ContentCard({
     </ActualComponent>
   );
 }
-    

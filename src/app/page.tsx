@@ -2,15 +2,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ContentCard } from '@/components/ui/ContentCard';
 import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
-import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
-import { EventFormDialog } from '@/components/planner/EventFormDialog';
 import type { PlannerEvent } from '@/app/planner/page';
 import { eventTypeColors } from '@/app/planner/page';
-import { Calendar } from 'lucide-react';
 import { addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
-import { JumpBackInCard } from '@/components/dashboard/JumpBackInCard';
+import { useAuth } from '@/contexts/AuthContext';
 
 const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
     { title: 'Submit History Essay Outline', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline', description: 'Final outline due to Professor Smith.'},
@@ -23,17 +19,14 @@ const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
   ];
 
 export default function DashboardPage() {
-  const [dashboardEvents, setDashboardEvents] = useState<PlannerEvent[]>(
+  const { currentUser } = useAuth();
+  const [dashboardEvents] = useState<PlannerEvent[]>(
     initialDashboardEvents.map((event, index) => ({
       ...event,
       id: `dash-event-${index + 1}-${Date.now()}`,
       color: eventTypeColors[event.type],
     }))
   );
-
-  const [isEventDialogOpen, setIsEventDialogOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<PlannerEvent | null>(null);
-  const [newStartTime, setNewStartTime] = useState<Date | null>(null);
 
   const [greeting, setGreeting] = useState('');
   useEffect(() => {
@@ -43,88 +36,19 @@ export default function DashboardPage() {
     else setGreeting('Good evening');
   }, []);
 
-  const today = new Date();
-  const displayDays = [today, addDays(today, 1), addDays(today, 2)];
-
-  const handleSlotClick = (dateTime: Date) => {
-    setSelectedEvent(null);
-    setNewStartTime(dateTime);
-    setIsEventDialogOpen(true);
-  };
-
-  const handleEventClick = (event: PlannerEvent) => {
-    setSelectedEvent(event);
-    setNewStartTime(null);
-    setIsEventDialogOpen(true);
-  };
-
-  const handleSaveEvent = (eventData: Omit<PlannerEvent, 'id' | 'color'> & { id?: string }) => {
-    if (eventData.id) {
-      setDashboardEvents(prevEvents =>
-        prevEvents.map(e =>
-          e.id === eventData.id ? { ...e, ...eventData, color: eventTypeColors[eventData.type] } : e
-        )
-      );
-    } else {
-      const newEvent: PlannerEvent = {
-        ...eventData,
-        id: `dash-event-${Date.now()}`,
-        color: eventTypeColors[eventData.type],
-      };
-      setDashboardEvents(prevEvents => [...prevEvents, newEvent]);
+  const getGreetingTitle = () => {
+    if (currentUser?.displayName) {
+      return `${greeting}, ${currentUser.displayName.split(' ')[0]}!`;
     }
-    setIsEventDialogOpen(false);
-    setSelectedEvent(null);
-    setNewStartTime(null);
-  };
-
-  const handleDeleteEvent = (eventId: string) => {
-    setDashboardEvents(prevEvents => prevEvents.filter(e => e.id !== eventId));
-    setIsEventDialogOpen(false);
-    setSelectedEvent(null);
-    setNewStartTime(null);
-  };
+    return `${greeting}!`;
+  }
 
   return (
     <div className="flex-grow space-y-6 xl:space-y-8">
       <DashboardAgendaView 
         events={dashboardEvents} 
-        title={<>{greeting}!</>} 
+        title={getGreetingTitle()} 
         subtitle="Here’s what’s on your plate for the next few days." 
-      />
-
-      <JumpBackInCard />
-
-      <ContentCard className="flex flex-col">
-         <h2 className="text-xl font-semibold p-4 sm:p-6 pb-3 flex items-center gap-2 text-foreground">
-            <Calendar className="w-5 h-5" />
-            Week At a Glance
-        </h2>
-        <div className="flex-grow overflow-hidden p-1 sm:p-2 pt-0">
-          <WeekCalendarGrid
-            currentDate={new Date()}
-            daysToDisplay={displayDays}
-            events={dashboardEvents}
-            startHour={8}
-            endHour={18}
-            condensedMode={true}
-            onSlotClick={handleSlotClick}
-            onEventClick={handleEventClick}
-          />
-        </div>
-      </ContentCard>
-
-      <EventFormDialog
-        isOpen={isEventDialogOpen}
-        onClose={() => {
-          setIsEventDialogOpen(false);
-          setSelectedEvent(null);
-          setNewStartTime(null);
-        }}
-        eventData={selectedEvent}
-        proposedStartTime={newStartTime}
-        onSave={handleSaveEvent}
-        onDelete={selectedEvent ? handleDeleteEvent : undefined}
       />
     </div>
   );
