@@ -61,8 +61,8 @@ export function DashboardPlannerPreview() {
             <WeekCalendarGrid
                 currentDate={today}
                 events={initialEvents}
-                startHour={7}
-                endHour={22}
+                startHour={8}
+                endHour={18}
                 daysToDisplay={daysToDisplay}
                 condensedMode={true}
             />
