@@ -3,9 +3,9 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { SmallCalendar } from '@/components/dashboard/SmallCalendar';
 import { TaskList } from '@/components/dashboard/TaskList';
 import { StudySpinner } from '@/components/dashboard/StudySpinner';
+import { DashboardPlannerPreview } from '@/components/dashboard/DashboardPlannerPreview';
 
 export default function DashboardPage() {
   const { currentUser } = useAuth();
@@ -48,7 +48,7 @@ export default function DashboardPage() {
                 <TaskList />
             </div>
             <div className="space-y-6">
-                <SmallCalendar />
+                <DashboardPlannerPreview />
                 <StudySpinner topics={studyTopics} />
             </div>
         </div>
