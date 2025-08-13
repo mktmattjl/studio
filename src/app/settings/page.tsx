@@ -3,10 +3,9 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import { ContentCard } from '@/components/ui/ContentCard';
-// import { Button } from '@/components/ui/button'; // Not used currently
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { PixelFantasySettingsIcon as PixelGearIcon } from '@/components/icons/fantasy/PixelFantasySettingsIcon';
+import { Settings } from 'lucide-react';
 
 export default function SettingsPage() {
   const { currentUser, loading } = useAuth();
@@ -19,7 +18,7 @@ export default function SettingsPage() {
   }, [currentUser, loading, router]);
 
   if (loading) {
-    return <div className="text-center p-10 font-pixel text-xl">Loading ancient settings...</div>;
+    return <div className="text-center p-10 font-semibold text-xl">Loading settings...</div>;
   }
 
   if (!currentUser) {
@@ -31,23 +30,20 @@ export default function SettingsPage() {
       <ContentCard>
         <div className="flex items-center gap-4 mb-6">
             <div className="p-3 bg-primary/10 rounded-lg border border-primary/30">
-                <PixelGearIcon className="w-8 h-8 text-primary" />
+                <Settings className="w-8 h-8 text-primary" />
             </div>
             <div>
-                <h1 className="text-2xl md:text-3xl font-pixel text-primary">Realm Configuration</h1>
-                <p className="text-muted-foreground mt-1">Adjust thy application preferences and arcane settings.</p>
+                <h1 className="text-2xl md:text-3xl font-semibold text-primary">Settings</h1>
+                <p className="text-muted-foreground mt-1">Adjust your application preferences.</p>
             </div>
         </div>
         
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            Settings for altering login credentials, visual themes, and notification enchantments are currently under development by the Guild Artificers.
+            More settings for themes and notifications are currently under development.
           </p>
         </div>
-         <p className="text-xs text-muted-foreground text-center pt-6">Advanced configurations are being etched into reality.</p>
       </ContentCard>
     </div>
   );
 }
-
-    

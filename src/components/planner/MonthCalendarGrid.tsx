@@ -25,7 +25,7 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
         {dayNames.map((dayName) => (
           <div
             key={dayName}
-            className="py-2 px-1 text-center text-xs font-pixel text-muted-foreground border-b border-r border-border" 
+            className="py-2 px-1 text-center text-xs font-semibold text-muted-foreground border-b border-r border-border" 
           >
             <span className="hidden sm:inline">{dayName}</span>
             <span className="sm:hidden">{dayName.substring(0,1)}</span> 
@@ -44,8 +44,8 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
               key={day ? day.toISOString() : `empty-${index}`}
               className={cn(
                 'min-h-[5rem] sm:min-h-[6rem] md:min-h-[7rem] border-b border-r border-border p-1.5 sm:p-2 flex flex-col overflow-hidden relative group', 
-                isCurrentMonth ? 'bg-card hover:bg-card/80' : 'bg-background/50 opacity-70 hover:bg-background/70',
-                isCurrentDay && 'bg-primary/20 ring-2 ring-inset ring-primary', // Primary Accent for today highlight
+                isCurrentMonth ? 'bg-card hover:bg-muted/30' : 'bg-background hover:bg-muted/30',
+                isCurrentDay && 'bg-secondary/30 ring-1 ring-inset ring-secondary',
                 day && onDateClick && 'cursor-pointer transition-colors duration-150 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none'
               )}
               onClick={() => day && onDateClick?.(day)}
@@ -55,8 +55,8 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
                 <>
                   <span
                     className={cn(
-                      'text-sm font-pixel self-start mb-1', 
-                      isCurrentDay ? 'text-primary-foreground bg-primary px-1.5 py-0.5 rounded-sm shadow-sm' : isCurrentMonth ? 'text-foreground' : 'text-muted-foreground/70'
+                      'text-sm font-semibold self-start mb-1', 
+                      isCurrentDay ? 'text-primary-foreground bg-primary px-1.5 py-0.5 rounded-sm shadow' : isCurrentMonth ? 'text-foreground' : 'text-muted-foreground/70'
                     )}
                   >
                     {format(day, 'd')}
@@ -69,9 +69,9 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
                         key={event.id}
                         title={`${event.title} (${format(event.startTime, 'p')})`}
                         className={cn(
-                            'px-1.5 py-1 rounded-sm border-l-2 text-[0.7rem] sm:text-[0.75rem] leading-tight truncate shadow-sm text-foreground',
+                            'px-1.5 py-1 rounded-sm border-l-2 text-[0.7rem] sm:text-[0.75rem] leading-tight truncate text-foreground/90 font-medium',
                             eventStyleClasses, 
-                            onEventClick ? 'cursor-pointer group-hover:opacity-80 hover:brightness-125 hover:shadow-lg focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : ''
+                            onEventClick ? 'cursor-pointer hover:brightness-125 hover:shadow focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : ''
                            )}
                         onClick={(e) => {
                             e.stopPropagation(); 
@@ -97,4 +97,3 @@ export function MonthCalendarGrid({ currentDate, events, onDateClick, onEventCli
     </div>
   );
 }
-    

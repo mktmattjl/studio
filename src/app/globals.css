@@ -5,100 +5,66 @@
 
 @layer base {
   :root {
-    /* Heroic Fantasy Dark Theme - Base: Deep Navy Blues, Dark Wood Browns, Parchment Creams for Text */
-    /* Main Backgrounds */
-    --background: 220 35% 9%; /* #10131C - Very Dark Navy Blue */
-    --card: 220 30% 14%; /* #161C29 - Slightly Lighter Dark Navy Blue for cards/popovers */
-    --card-border-highlight: 220 30% 17%; /* #1E2636 - Slightly lighter for card top border */
-    --popover: 220 30% 14%; /* Matches Card */
+    /* Clean & Professional Dark Theme */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    /* Text Colors */
-    --foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --card-foreground: 0 0% 95%;
-    --popover-foreground: 0 0% 95%;
-    --muted-foreground: 0 0% 70%; /* #B3B3B3 - Light Grey for less emphasized text */
-    --text-accent-thematic: 0 0% 95%; /* #F2F2F2 - Off-White (WAS #C5A690) */
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    /* Accent Colors (Backgrounds for interactive elements if text on them is white) */
-    --primary: 200 100% 55%; /* #1AA3FF - Neon Blue */
-    --primary-foreground: 210 15% 8%; /* #0F1114 - Very Dark Grey/Near-Black (for text on Neon Blue) */
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --secondary: 145 50% 50%; /* #40BF80 - Emerald Green (SECONDARY ACCENT) */
-    --secondary-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on secondary buttons) */
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --accent: 210 70% 40%; /* #215D99 - Darker Blue for NavItem hover */
-    --accent-foreground: 0 0% 95%; /* #F2F2F2 - Off-White (for text on blue hovers) */
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    /* Destructive Actions */
-    --destructive: 0 70% 45%; /* #CC3D3D - Muted Red */
-    --destructive-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    /* Borders & Inputs */
-    --border: 220 25% 18%; /* #202838 - Subtle Border for general use */
-    --input: 220 35% 7%; /* #0A0F15 - Very Dark Input Background */
-    --input-foreground: 0 0% 95%; /* #F2F2F2 - Off-White */
-    --ring: 200 100% 55%; /* Neon Blue for focus ring */
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --radius: 0.375rem; /* Slightly less rounded for a more "solid" feel */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    /* Custom Thematic Colors */
-    --gold-accent: 40 70% 55%; /* #E0A040 - Gold for coins, slightly desaturated */
-    --xp-bar-color: var(--primary); /* Neon Blue for XP bar */
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
 
-    --parchment-bg: 40 35% 85%; /* #E2DECF - Aged Parchment for calendar events */
-    --parchment-text: 30 20% 25%; /* #4D423A - Dark Sepia/Brown text on parchment */
-
-    /* Chart Colors */
-    --chart-1: var(--primary);   /* Neon Blue */
-    --chart-2: var(--secondary); /* Emerald Green */
-    --chart-3: var(--text-accent-thematic); /* WAS Light Beige/Brown, NOW Off-White */
-    --chart-4: 195 7% 50%;  /* Mid Grey */
-    --chart-5: var(--gold-accent);   /* Gold */
+    --radius: 0.5rem;
   }
 
   .dark {
-    /* All :root variables define the dark theme directly now */
-    --background: 220 35% 9%; /* #10131C - Very Dark Navy Blue */
-    --foreground: 0 0% 95%;
-    --card: 220 30% 14%; /* #161C29 - Slightly Lighter Dark Navy Blue */
-    --card-foreground: 0 0% 95%;
-    --card-border-highlight: 220 30% 17%;
-    --popover: 220 30% 14%;
-    --popover-foreground: 0 0% 95%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --primary: 200 100% 55%; /* Neon Blue */
-    --primary-foreground: 210 15% 8%; /* Very Dark Grey/Near-Black */
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --secondary: 145 50% 50%; /* Emerald Green */
-    --secondary-foreground: 0 0% 95%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --muted: 220 30% 17%; /* Adjusted for navy theme, slightly lighter than card */
-    --muted-foreground: 0 0% 70%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --accent: 210 70% 40%; /* Darker Blue for NavItem hover */
-    --accent-foreground: 0 0% 95%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 0 0% 95%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --border: 220 25% 18%; /* #202838 */
-    --input: 220 35% 7%; /* #0A0F15 */
-    --input-foreground: 0 0% 95%;
-    --ring: 200 100% 55%; /* Neon Blue */
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --radius: 0.375rem;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --text-accent-thematic: 0 0% 95%; /* #F2F2F2 - Off-White (WAS #C5A690) */
-    --gold-accent: 40 70% 55%;
-    --xp-bar-color: var(--primary); /* Neon Blue */
-    --parchment-bg: 40 35% 85%;
-    --parchment-text: 30 20% 25%;
-
-    --chart-1: var(--primary);
-    --chart-2: var(--secondary);
-    --chart-3: var(--text-accent-thematic);
-    --chart-4: 195 7% 50%;
-    --chart-5: var(--gold-accent);
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 215 20.2% 65.1%;
   }
 }
 
@@ -111,41 +77,8 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss03";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.7; /* Increased base line-height */
   }
-  /* Ensure font-pixel uses the correct CSS variable from layout.tsx */
-  .font-pixel {
-    font-family: var(--font-pixelify-sans), monospace;
-    text-rendering: optimizeSpeed;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-    -ms-interpolation-mode: nearest-neighbor;
-  }
-
-  a {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background rounded-sm;
-  }
-
-  /* General link styling */
-  a:not(.button):not([class*="no-underline"]):not([data-variant="button-like"]):not([class*="text-primary"]):not([class*="text-destructive"]):not([class*="text-foreground"]):not([class*="text-muted-foreground"]) {
-    @apply text-[hsl(var(--text-accent-thematic))] hover:text-[hsl(var(--text-accent-thematic)/0.8)] hover:underline;
-  }
-}
-
-@layer components {
-  /* Primary buttons now use primary accent bg, primary-foreground text */
-  .btn-primary-action {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-  }
-  /* Secondary buttons use secondary accent bg, secondary-foreground text */
-  .btn-secondary-action {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm hover:shadow-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-  }
-  /* Destructive buttons use their own destructive colors */
-  .button[data-variant="destructive"] {
-     @apply focus-visible:ring-destructive;
-  }
+  /* Removed .font-pixel class */
 }
 
 @layer utilities {
@@ -154,22 +87,22 @@
     height: 10px;
   }
   .styled-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.6);
+    background: hsl(var(--muted-foreground) / 0.4);
     border-radius: var(--radius);
     border: 2px solid hsl(var(--card));
   }
   .styled-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground) / 0.8);
+    background: hsl(var(--muted-foreground) / 0.6);
   }
   .styled-scrollbar::-webkit-scrollbar-track {
     background: hsl(var(--background) / 0.7);
     border-radius: var(--radius);
   }
 
-  /* Quiz Animations */
+  /* Simplified Quiz Animations */
   @keyframes pulse-correct {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0px hsl(var(--secondary) / 0.4); } /* Secondary is Emerald Green */
-    50% { transform: scale(1.03); box-shadow: 0 0 10px 2px hsl(var(--secondary) / 0.5); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
   }
   .animate-button-correct-pulse {
     animation: pulse-correct 0.6s ease-in-out;
@@ -177,21 +110,9 @@
 
   @keyframes glow-card-correct {
     0%, 100% { border-color: hsl(var(--border)); box-shadow: none; }
-    50% { border-color: hsl(var(--secondary)); box-shadow: 0 0 15px hsl(var(--secondary) / 0.3); } /* Secondary is Emerald Green */
+    50% { border-color: hsl(120 70% 45%); box-shadow: 0 0 15px hsl(120 70% 45% / 0.3); }
   }
   .animate-card-correct-glow {
     animation: glow-card-correct 0.8s ease-in-out;
   }
-
-  @keyframes coin-bonus-animation {
-    0% { opacity: 0; transform: translateY(20px) scale(0.8); }
-    20% { opacity: 1; transform: translateY(0) scale(1); }
-    80% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-40px) scale(1.1); }
-  }
-  .coin-bonus-animate {
-    animation: coin-bonus-animation 1.5s ease-out forwards;
-  }
 }
-
-    

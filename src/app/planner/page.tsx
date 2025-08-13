@@ -9,7 +9,7 @@ import { PlannerControls, type PlannerViewMode } from '@/components/planner/Plan
 import { MonthCalendarGrid } from '@/components/planner/MonthCalendarGrid';
 import { WeekCalendarGrid } from '@/components/planner/WeekCalendarGrid';
 import { EventFormDialog } from '@/components/planner/EventFormDialog';
-import { PixelQuillIcon } from '@/components/icons/fantasy'; 
+import { PlusCircle } from 'lucide-react'; 
 
 export interface PlannerEvent {
   id: string;
@@ -21,39 +21,38 @@ export interface PlannerEvent {
   color: string; 
 }
 
-// Event Type Colors using Heroic Fantasy Theme
 export const eventTypeColors: Record<PlannerEvent['type'], string> = {
-  class: 'bg-secondary/40 border-l-secondary text-primary-foreground', // WAS: bg-secondary/20
-  deadline: 'bg-destructive/40 border-l-destructive text-destructive-foreground', // WAS: bg-destructive/20
-  study_session: 'bg-secondary/40 border-l-secondary text-secondary-foreground', // WAS: bg-secondary/20
-  exam: 'bg-destructive/40 border-l-destructive text-destructive-foreground', // WAS: bg-destructive/20
-  meeting: 'bg-secondary/40 border-l-secondary text-primary-foreground', // WAS: bg-secondary/20
-  personal: 'bg-secondary/40 border-l-secondary text-secondary-foreground', // WAS: bg-secondary/20
+  class: 'bg-blue-900/80 border-l-blue-400',
+  deadline: 'bg-red-900/80 border-l-red-400',
+  study_session: 'bg-indigo-900/80 border-l-indigo-400',
+  exam: 'bg-purple-900/80 border-l-purple-400',
+  meeting: 'bg-green-900/80 border-l-green-400',
+  personal: 'bg-gray-700/80 border-l-gray-400',
 };
 
 
 const todayDate = new Date();
 const sampleEventsData: Omit<PlannerEvent, 'id' | 'color'>[] = [
   {
-    title: 'Lecture: Advanced Dragonomics',
+    title: 'Lecture: Advanced Algorithms',
     startTime: setSeconds(setMinutes(setHours(todayDate, 9), 0), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 10), 50), 0),
     type: 'class',
-    description: 'Grand Library, Chamber 3 / Loremaster Elara',
+    description: 'Room 301 / Prof. Elara',
   },
   {
-    title: 'Potion Brewing Practicum',
+    title: 'Project Alpha Sync',
     startTime: setSeconds(setMinutes(setHours(todayDate, 14), 0), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 15), 30), 0),
-    type: 'study_session',
-    description: 'Alchemist\'s Guild - Focus on Healing Draughts',
+    type: 'meeting',
+    description: 'Weekly team sync up.',
   },
   {
-    title: 'Ancient Runes Translation DUE',
+    title: 'History Paper DUE',
     startTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     endTime: setSeconds(setMinutes(setHours(todayDate, 23), 59), 0),
     type: 'deadline',
-    description: 'Submit scroll to the Scribe Master - Tablet #V',
+    description: 'Submit online via course portal.',
   },
 ];
 
@@ -162,12 +161,12 @@ export default function PlannerPage() {
       <ContentCard padding="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-pixel text-[hsl(var(--text-accent-thematic))]">The Grand Almanac</h1>
-            <p className="text-muted-foreground mt-1">Chart thy quests, trials, and scholarly pursuits.</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-foreground">Planner</h1>
+            <p className="text-muted-foreground mt-1">Organize your classes, deadlines, and study sessions.</p>
           </div>
-          <Button onClick={() => openNewEventDialog()} className="btn-primary-action w-full sm:w-auto">
-            <PixelQuillIcon className="w-4 h-4 mr-2" />
-            Decree New Entry
+          <Button onClick={() => openNewEventDialog()} className="w-full sm:w-auto">
+            <PlusCircle className="w-4 h-4 mr-2" />
+            Add Event
           </Button>
         </div>
       </ContentCard>
@@ -222,4 +221,3 @@ export default function PlannerPage() {
     </div>
   );
 }
-    

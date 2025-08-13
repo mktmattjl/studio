@@ -17,9 +17,8 @@ import {
   setMinutes,
   setSeconds,
 } from '@/lib/dateUtils';
-import type { HourSegment } from '@/lib/dateUtils';
 
-const DEFAULT_HOUR_ROW_HEIGHT_REM = 3;
+const DEFAULT_HOUR_ROW_HEIGHT_REM = 3.5;
 const CONDENSED_HOUR_ROW_HEIGHT_REM = 2.75; 
 
 interface WeekCalendarGridProps {
@@ -47,20 +46,30 @@ export function WeekCalendarGrid({
   const hourSegments = getHourSegments(startHour, endHour);
   const hourRowHeightRem = condensedMode ? CONDENSED_HOUR_ROW_HEIGHT_REM : DEFAULT_HOUR_ROW_HEIGHT_REM;
 
-  const [clientCurrentHour, setClientCurrentHour] = useState<number | null>(null);
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    setClientCurrentHour(getHours(new Date()));
+    setCurrentTime(new Date());
     const timerId = setInterval(() => {
-      setClientCurrentHour(getHours(new Date()));
+      setCurrentTime(new Date());
     }, 60000); 
     return () => clearInterval(timerId); 
   }, []);
 
-
   const getEventsForDay = (day: Date) => {
     return events.filter(event => event.startTime && isSameDay(event.startTime, day));
   };
+  
+  const calculateCurrentTimePosition = (now: Date) => {
+      const currentHour = getHours(now);
+      const currentMinutes = getMinutes(now);
+      if(currentHour >= startHour && currentHour <= endHour) {
+          const totalMinutesInView = (endHour - startHour + 1) * 60;
+          const minutesFromStart = (currentHour - startHour) * 60 + currentMinutes;
+          return (minutesFromStart / totalMinutesInView) * (hourSegments.length * hourRowHeightRem) + 'rem';
+      }
+      return null;
+  }
 
   return (
     <div className="flex-grow flex flex-col border-t border-l border-border rounded-b-md bg-card text-card-foreground overflow-auto styled-scrollbar">
@@ -69,14 +78,8 @@ export function WeekCalendarGrid({
         style={{ gridTemplateColumns: `auto repeat(${daysToUse.length}, minmax(0, 1fr))` }}
       >
         {/* Header Row */}
-        <div className={cn(
-            "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
-            condensedMode ? "p-1" : "p-1 sm:p-2" 
-          )}>
-          <span className={cn(
-              "text-muted-foreground font-pixel", 
-              condensedMode ? "text-[0.65rem] sm:text-[0.7rem]" : "text-xs sm:text-sm"
-            )}>Time</span>
+        <div className="border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm p-1 sm:p-2">
+          <span className="text-muted-foreground font-semibold text-xs sm:text-sm">Time</span>
         </div>
         {daysToUse.map((day, index) => (
           <div
@@ -84,17 +87,17 @@ export function WeekCalendarGrid({
             className={cn(
               "border-b border-r border-border text-center sticky top-0 bg-card z-20 shadow-sm",
               condensedMode ? "p-1 min-w-[50px] sm:min-w-[60px]" : "p-1 sm:p-2 min-w-[70px] sm:min-w-[90px]", 
-              isToday(day) && "bg-primary/10 ring-1 ring-inset ring-primary/50" 
+              isToday(day) && "bg-secondary/30" 
             )}
           >
             <div className={cn(
-                "text-muted-foreground font-pixel", 
+                "text-muted-foreground font-semibold", 
                 condensedMode ? "text-[0.65rem] sm:text-[0.7rem]" : "text-xs sm:text-sm"
               )}>{format(day, 'EEE')}</div>
             <div className={cn(
-                "font-pixel",
-                isToday(day) ? "text-primary font-semibold" : "text-foreground font-medium",
-                condensedMode ? "text-[0.75rem] sm:text-[0.85rem]" : "text-sm sm:text-lg"
+                "font-semibold",
+                isToday(day) ? "text-primary" : "text-foreground",
+                condensedMode ? "text-[0.75rem] sm:text-lg" : "text-sm sm:text-lg"
               )}>{format(day, 'd')}</div>
           </div>
         ))}
@@ -103,62 +106,57 @@ export function WeekCalendarGrid({
         {hourSegments.map((segment) => (
           <React.Fragment key={segment.hour}>
             <div className={cn(
-              "border-b border-r border-border text-right text-muted-foreground sticky left-0 bg-card z-10 font-pixel", 
-              condensedMode ? "px-1 py-0.5 text-[0.6rem] sm:text-[0.65rem]" : "px-1.5 py-1 text-[0.7rem] sm:text-xs" 
+              "border-b border-r border-border text-right text-muted-foreground sticky left-0 bg-card z-10 font-semibold", 
+              condensedMode ? "px-1 py-0.5 text-[0.6rem] sm:text-[0.65rem]" : "px-1.5 py-1 text-xs" 
               )}
               style={{ height: `${hourRowHeightRem}rem` }}
             >
-              {condensedMode ? segment.label.split(' ')[0] : segment.label}
+              {segment.label}
             </div>
 
             {daysToUse.map((day, dayIndex) => {
               const slotDateTime = setSeconds(setMinutes(setHours(day, segment.hour), 0),0);
               const dayEvents = getEventsForDay(day);
-              
-              const eventsInThisHourSlot = dayEvents.filter(event => {
-                const eventStartHour = getHours(event.startTime);
-                return eventStartHour === segment.hour;
-              });
+              const eventsInThisHourSlot = dayEvents.filter(event => getHours(event.startTime) === segment.hour);
 
               return (
                 <div
                   key={`${segment.hour}-${dayIndex}`}
                   className={cn(
-                    "border-b border-r border-border relative group",
+                    "border-b border-r border-border relative",
                     condensedMode ? "min-w-[50px] sm:min-w-[60px]" : "min-w-[70px] sm:min-w-[90px]",
-                    isToday(day) && clientCurrentHour !== null && segment.hour === clientCurrentHour && "bg-primary/10",
-                    onSlotClick ? "cursor-pointer hover:bg-card/80 transition-colors duration-100 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none" : "hover:bg-card/90"
+                    onSlotClick ? "cursor-pointer hover:bg-muted/40 transition-colors duration-100 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none" : "hover:bg-muted/30"
                   )}
                   style={{ height: `${hourRowHeightRem}rem` }}
                   onClick={() => onSlotClick?.(slotDateTime)}
                   tabIndex={onSlotClick ? 0 : undefined} 
                 >
+                  {isToday(day) && currentTime && getHours(currentTime) === segment.hour && (
+                     <div className="absolute w-full border-t-2 border-red-500 z-20" style={{top: `${(getMinutes(currentTime) / 60) * 100}%`}}>
+                         <div className="w-2 h-2 bg-red-500 rounded-full -mt-1 -ml-1"></div>
+                     </div>
+                  )}
+
                   {eventsInThisHourSlot.map(event => {
-                    const eventStartMinutes = getMinutes(event.startTime);
-                    const topOffsetPercent = (eventStartMinutes / 60) * 100;
-                    
+                    const topOffsetPercent = (getMinutes(event.startTime) / 60) * 100;
                     const durationMinutes = event.endTime ? Math.max(15, differenceInMinutes(event.endTime, event.startTime)) : 60; 
-                    
-                    const eventHeightRem = Math.min(
-                        (durationMinutes / 60) * hourRowHeightRem,
-                        (endHour + 1 - getHours(event.startTime)) * hourRowHeightRem - (getMinutes(event.startTime) / 60) * hourRowHeightRem
-                    );
+                    const eventHeightRem = (durationMinutes / 60) * hourRowHeightRem;
 
                     const eventStyleClasses = event.color || 'bg-muted/30 border-l-muted';
 
                     return (
                       <div
                         key={event.id}
-                        title={!condensedMode ? `${event.title} (${format(event.startTime, 'p')} - ${event.endTime ? format(event.endTime, 'p'): ''})` : event.title}
+                        title={`${event.title} (${format(event.startTime, 'p')} - ${event.endTime ? format(event.endTime, 'p'): ''})`}
                         className={cn(
-                          'absolute left-0.5 right-0.5 rounded-sm overflow-hidden shadow-[1px_1px_3px_rgba(0,0,0,0.2)] text-foreground border-l-4 border-border', // Added thematic border
+                          'absolute left-0.5 right-0.5 rounded-md overflow-hidden shadow text-white border-l-4',
                            eventStyleClasses, 
                            onEventClick ? 'cursor-pointer hover:brightness-125 hover:shadow-lg transition-all duration-150 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none' : '',
-                           condensedMode ? "p-0.5 text-[0.6rem] sm:text-[0.65rem] leading-tight" : "p-1.5 text-[0.7rem] sm:text-xs leading-tight"
+                           condensedMode ? "p-1 text-[0.65rem] leading-tight" : "p-1.5 text-xs leading-tight"
                         )}
                         style={{
                           top: `${topOffsetPercent}%`,
-                          height: `${Math.max(eventHeightRem, hourRowHeightRem / (condensedMode ? 2.5 : 4) )}rem`, 
+                          height: `${eventHeightRem}rem`,
                           zIndex: 10,
                         }}
                         onClick={(e) => {
@@ -168,10 +166,10 @@ export function WeekCalendarGrid({
                         tabIndex={onEventClick ? 0 : undefined} 
                       >
                         <p className={cn(
-                          "font-semibold truncate font-pixel", // Added font-pixel
-                          condensedMode && "text-[0.55rem] sm:text-[0.6rem]"
+                          "font-bold truncate",
+                          condensedMode && "text-[0.6rem]"
                           )}>{event.title}</p>
-                        {!condensedMode && event.endTime && <p className="truncate hidden sm:block text-[0.65rem] opacity-80">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>}
+                        {!condensedMode && event.endTime && <p className="truncate opacity-80">{format(event.startTime, 'p')} - {format(event.endTime, 'p')}</p>}
                       </div>
                     );
                   })}
@@ -184,4 +182,3 @@ export function WeekCalendarGrid({
     </div>
   );
 }
-    

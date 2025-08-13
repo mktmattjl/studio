@@ -1,6 +1,5 @@
 
 import type { Config } from "tailwindcss";
-import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
     darkMode: ["class"],
@@ -12,74 +11,51 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1rem",
+      padding: "2rem",
       screens: {
-        "sm": "640px",
-        "md": "768px",
-        "lg": "1024px",
-        "xl": "1280px",
         "2xl": "1400px",
       },
     },
-    fontFamily: {
-      sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-      // Ensure .font-pixel uses the --font-pixelify-sans CSS variable
-      pixel: ['var(--font-pixelify-sans)', ...defaultTheme.fontFamily.mono],
-    },
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))',
-          'border-highlight': 'hsl(var(--card-border-highlight))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-        'gold-accent': 'hsl(var(--gold-accent))',
-        'xp-bar-color': 'hsl(var(--xp-bar-color))',
-        'parchment-bg': 'hsl(var(--parchment-bg))',
-        'parchment-text': 'hsl(var(--parchment-text))',
-        'text-accent-thematic': 'hsl(var(--text-accent-thematic))',
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-        'input-foreground': 'hsl(var(--input-foreground))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			},
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
-  			md: 'var(--radius)',
-  			sm: 'calc(var(--radius) - 2px)'
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
   		},
   		keyframes: {
   			'accordion-down': {
@@ -99,18 +75,12 @@ export default {
   				}
   			},
         'pulse-correct': {
-          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0px hsl(var(--secondary) / 0.4)' },
-          '50%': { transform: 'scale(1.03)', boxShadow: '0 0 10px 2px hsl(var(--secondary) / 0.5)' },
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.02)' },
         },
         'glow-card-correct': {
           '0%, 100%': { borderColor: 'hsl(var(--border))', boxShadow: 'none' },
-          '50%': { borderColor: 'hsl(var(--secondary))', boxShadow: '0 0 15px hsl(var(--secondary) / 0.3)' },
-        },
-        'coin-bonus-animation': {
-          '0%': { opacity: '0', transform: 'translateY(20px) scale(0.8)' },
-          '20%': { opacity: '1', transform: 'translateY(0) scale(1)' },
-          '80%': { opacity: '1', transform: 'translateY(0) scale(1)' },
-          '100%': { opacity: '0', transform: 'translateY(-40px) scale(1.1)' },
+          '50%': { borderColor: 'hsl(120 70% 45%)', boxShadow: '0 0 15px hsl(120 70% 45% / 0.3)' },
         }
   		},
   		animation: {
@@ -118,7 +88,6 @@ export default {
   			'accordion-up': 'accordion-up 0.2s ease-out',
         'button-correct-pulse': 'pulse-correct 0.6s ease-in-out',
         'card-correct-glow': 'glow-card-correct 0.8s ease-in-out',
-        'coin-bonus-animate': 'coin-bonus-animation 1.5s ease-out forwards',
   		}
   	}
   },

@@ -11,8 +11,7 @@ import { Label } from '@/components/ui/label';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
-import { Loader2 } from 'lucide-react';
-import { PixelFantasyAvatarIcon } from '@/components/icons/fantasy';
+import { Loader2, UserPlus } from 'lucide-react';
 
 const signupSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -20,7 +19,7 @@ const signupSchema = z.object({
   confirmPassword: z.string(),
 }).refine(data => data.password === data.confirmPassword, {
   message: "Passwords don't match",
-  path: ["confirmPassword"], // path of error
+  path: ["confirmPassword"],
 });
 
 type SignupFormInputs = z.infer<typeof signupSchema>;
@@ -53,9 +52,9 @@ export default function SignupPage() {
       <ContentCard className="w-full max-w-md p-6 sm:p-8">
         <div className="text-center mb-8">
           <div className="inline-block p-3 bg-primary/10 rounded-lg mb-4 border border-primary/30">
-            <PixelFantasyAvatarIcon className="w-10 h-10 text-primary" />
+            <UserPlus className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-pixel text-primary">Create Your Account</h1>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-primary">Create Your Account</h1>
           <p className="text-muted-foreground mt-1">Join Cerebro and start your learning journey!</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -94,7 +93,7 @@ export default function SignupPage() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-pixel text-base py-2.5 px-6 rounded-md border-2 border-primary-foreground/40 shadow-[3px_3px_0px_hsl(var(--primary-foreground)/0.7)] hover:shadow-[2px_2px_0px_hsl(var(--primary-foreground)/0.7)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all duration-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="w-full"
             disabled={isLoading}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

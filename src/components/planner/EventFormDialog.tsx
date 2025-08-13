@@ -14,7 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import type { PlannerEvent } from '@/app/planner/page';
-import { PixelTrashIcon } from '@/components/icons/fantasy'; // Preserved Thematic Trash Icon
+import { Trash2 } from 'lucide-react';
 
 const eventFormSchema = z.object({
   title: z.string().min(1, 'Title is required').max(100, 'Title is too long'),
@@ -64,8 +64,7 @@ export function EventFormDialog({
         initialEndTime = eventData.endTime;
       } else if (proposedStartTime) {
         initialStartTime = proposedStartTime;
-        const potentialEndTime = addHours(proposedStartTime, 1);
-        initialEndTime = (potentialEndTime <= proposedStartTime) ? addHours(proposedStartTime, 1) : potentialEndTime;
+        initialEndTime = addHours(proposedStartTime, 1);
       } else {
         initialStartTime = new Date();
         initialEndTime = addHours(new Date(), 1);
@@ -103,18 +102,15 @@ export function EventFormDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      {/* Dialog uses --popover background from globals.css */}
       <DialogContent className="bg-popover border border-border shadow-xl rounded-lg p-6 max-w-lg">
         <DialogHeader>
-          {/* Title uses .font-pixel and --primary color */}
-          <DialogTitle className="text-xl text-primary font-pixel"> 
-            {eventData ? 'Amend Decree' : 'New Decree'}
+          <DialogTitle className="text-xl text-primary font-semibold"> 
+            {eventData ? 'Edit Event' : 'Add New Event'}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 pt-2">
           <div>
             <Label htmlFor="title" className="text-foreground text-sm font-medium">Title</Label>
-            {/* Inputs use --input background and --input-foreground text color */}
             <Input id="title" {...register('title')} className="bg-input text-input-foreground border-border focus:border-primary rounded-md mt-1 shadow-sm" />
             {errors.title && <p className="text-xs text-destructive mt-1">{errors.title.message}</p>}
           </div>
@@ -146,7 +142,7 @@ export function EventFormDialog({
           </div>
 
           <div>
-            <Label htmlFor="type" className="text-foreground text-sm font-medium">Type of Quest</Label>
+            <Label htmlFor="type" className="text-foreground text-sm font-medium">Event Type</Label>
             <Controller
               name="type"
               control={control}
@@ -155,14 +151,13 @@ export function EventFormDialog({
                   <SelectTrigger className="w-full bg-input text-input-foreground border-border focus:border-primary rounded-md mt-1 shadow-sm">
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
-                  {/* SelectContent uses --popover background */}
                   <SelectContent className="bg-popover border-border text-popover-foreground rounded-md shadow-lg">
-                    <SelectItem value="class" className="hover:bg-muted/50">Lecture</SelectItem>
-                    <SelectItem value="deadline" className="hover:bg-muted/50">Deadline</SelectItem>
-                    <SelectItem value="study_session" className="hover:bg-muted/50">Study Ritual</SelectItem>
-                    <SelectItem value="exam" className="hover:bg-muted/50">Trial (Exam)</SelectItem>
-                    <SelectItem value="meeting" className="hover:bg-muted/50">Council (Meeting)</SelectItem>
-                    <SelectItem value="personal" className="hover:bg-muted/50">Personal Errand</SelectItem>
+                    <SelectItem value="class">Class</SelectItem>
+                    <SelectItem value="deadline">Deadline</SelectItem>
+                    <SelectItem value="study_session">Study Session</SelectItem>
+                    <SelectItem value="exam">Exam</SelectItem>
+                    <SelectItem value="meeting">Meeting</SelectItem>
+                    <SelectItem value="personal">Personal</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -171,7 +166,7 @@ export function EventFormDialog({
           </div>
 
           <div>
-            <Label htmlFor="description" className="text-foreground text-sm font-medium">Details (Optional)</Label>
+            <Label htmlFor="description" className="text-foreground text-sm font-medium">Description (Optional)</Label>
             <Textarea id="description" {...register('description')} className="bg-input text-input-foreground border-border focus:border-primary rounded-md mt-1 shadow-sm" rows={3} />
              {errors.description && <p className="text-xs text-destructive mt-1">{errors.description.message}</p>}
           </div>
@@ -181,22 +176,22 @@ export function EventFormDialog({
                 {eventData && onDelete && (
                     <Button
                         type="button"
-                        variant="destructive" // Uses --destructive colors
+                        variant="destructive"
                         onClick={() => onDelete(eventData.id)}
                         className="w-full sm:w-auto"
                     >
-                        <PixelTrashIcon className="w-4 h-4 mr-2" /> Banish {/* Preserved icon */}
+                        <Trash2 className="w-4 h-4 mr-2" /> Delete
                     </Button>
                 )}
             </div>
             <div className="flex gap-2 flex-col-reverse sm:flex-row">
                  <DialogClose asChild>
-                    <Button type="button" variant="outline" className="w-full sm:w-auto hover:bg-accent/20 hover:border-accent">
+                    <Button type="button" variant="outline" className="w-full sm:w-auto">
                         Cancel
                     </Button>
                 </DialogClose>
-                <Button type="submit" className="w-full sm:w-auto btn-primary-action"> {/* Uses --primary accent */}
-                {eventData ? 'Update Decree' : 'Issue Decree'}
+                <Button type="submit" className="w-full sm:w-auto">
+                {eventData ? 'Update Event' : 'Create Event'}
                 </Button>
             </div>
           </DialogFooter>
@@ -205,4 +200,3 @@ export function EventFormDialog({
     </Dialog>
   );
 }
-    

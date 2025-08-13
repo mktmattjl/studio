@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -10,8 +11,7 @@ import { Label } from '@/components/ui/label';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
-import { Loader2 } from 'lucide-react';
-import { PixelUserIcon } from '@/components/icons/PixelUserIcon';
+import { Loader2, User } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -48,10 +48,10 @@ export default function LoginPage() {
       <ContentCard className="w-full max-w-md p-6 sm:p-8">
         <div className="text-center mb-8">
           <div className="inline-block p-3 bg-primary/10 rounded-lg mb-4">
-            <PixelUserIcon className="w-10 h-10 text-primary" />
+            <User className="w-10 h-10 text-primary" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">Welcome Back!</h1>
-          <p className="text-muted-foreground mt-1">Log in to access your Cerebro dashboard.</p>
+          <p className="text-muted-foreground mt-1">Log in to access your dashboard.</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
             />
             {errors.password && <p className="text-destructive text-sm mt-1">{errors.password.message}</p>}
           </div>
-          <Button type="submit" className="w-full btn-primary-action" disabled={isLoading}>
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Log In
           </Button>

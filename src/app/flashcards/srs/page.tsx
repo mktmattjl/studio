@@ -1,7 +1,7 @@
 
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
-import { PixelLightningIcon } from '@/components/icons/fantasy/PixelLightningIcon';
+import { Zap } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SrsPage() {
@@ -10,15 +10,15 @@ export default function SrsPage() {
       <ContentCard>
         <div className="flex flex-col items-center">
           <div className="p-4 bg-primary/10 rounded-lg inline-block mb-6 border border-primary/30">
-            <PixelLightningIcon className="w-12 h-12 text-primary" />
+            <Zap className="w-12 h-12 text-primary" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-pixel text-primary mb-3">Ancient Mnemonics (SRS)</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary mb-3">Spaced Repetition (SRS)</h1>
           <p className="text-lg text-muted-foreground mb-8 max-w-md">
-            The Mages are still deciphering the optimal Spaced Repetition System. It shall be unveiled soon to aid your mastery of lore!
+            This intelligent study mode is currently in development and will be available soon to optimize your learning!
           </p>
           <Link href="/flashcards" passHref>
-            <Button className="btn-secondary-action">
-              Back to Scroll Library
+            <Button variant="secondary">
+              Back to Flashcards
             </Button>
           </Link>
         </div>
@@ -26,5 +26,3 @@ export default function SrsPage() {
     </div>
   );
 }
-
-    

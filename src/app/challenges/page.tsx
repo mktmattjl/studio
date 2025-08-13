@@ -1,7 +1,7 @@
 
 import { ContentCard } from '@/components/ui/ContentCard';
 import { Button } from '@/components/ui/button';
-import { PixelTrophyIcon } from '@/components/icons/fantasy/PixelTrophyIcon';
+import { Trophy } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ChallengesPage() {
@@ -10,15 +10,15 @@ export default function ChallengesPage() {
       <ContentCard>
         <div className="flex flex-col items-center">
           <div className="p-4 bg-primary/10 rounded-lg inline-block mb-6 border border-primary/30">
-            <PixelTrophyIcon className="w-12 h-12 text-primary" />
+            <Trophy className="w-12 h-12 text-primary" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-pixel text-primary mb-3">The Gauntlet of Trials</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold text-primary mb-3">Challenges</h1>
           <p className="text-lg text-muted-foreground mb-8 max-w-md">
-            Test thy knowledge and compete for glory. New challenge scrolls are being forged by the Guild Artificers!
+            Test your knowledge and compete for glory. New challenges are coming soon!
           </p>
           <Link href="/" passHref>
-            <Button className="btn-secondary-action">
-              Back to the Stronghold
+            <Button variant="secondary">
+              Back to Dashboard
             </Button>
           </Link>
         </div>
@@ -26,5 +26,3 @@ export default function ChallengesPage() {
     </div>
   );
 }
-
-    
