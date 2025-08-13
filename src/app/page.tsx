@@ -2,33 +2,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { DashboardAgendaView } from '@/components/dashboard/DashboardAgendaView';
-import type { PlannerEvent } from '@/app/planner/page';
-import { eventTypeColors } from '@/app/planner/page';
-import { addDays, setHours, setMinutes, setSeconds } from '@/lib/dateUtils';
 import { useAuth } from '@/contexts/AuthContext';
-
-const initialDashboardEvents: Omit<PlannerEvent, 'id' | 'color'>[] = [
-    { title: 'Submit History Essay Outline', startTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 0),0),0), type: 'deadline', description: 'Final outline due to Professor Smith.'},
-    { title: 'Lecture: Advanced Algorithms', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 10),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 11),30),0), type: 'class', description: 'Room 301, Engineering Building.'},
-    { title: 'Team Sync Meeting', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 14),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 1), 15),0),0), type: 'meeting', description: 'Discuss progress on Q3 project goals.'},
-    { title: 'Study Session: Biology Chapter 3', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 16),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 2), 17),30),0), type: 'study_session', description: 'Focus on cellular respiration.'},
-    { title: 'Mid-term Exam: Physics II', startTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 9),0),0), endTime: setSeconds(setMinutes(setHours(addDays(new Date(), 5), 11),0),0), type: 'exam', description: 'Covers chapters 4-7.'},
-    { title: 'Daily Scrum', startTime: setSeconds(setMinutes(setHours(new Date(), 9),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 9),30),0), type: 'meeting', description: 'Quick alignment with the team.' },
-    { title: 'Work on Project Cerebro', startTime: setSeconds(setMinutes(setHours(new Date(), 14),0),0), endTime: setSeconds(setMinutes(setHours(new Date(), 16),0),0), type: 'study_session', description: 'Dedicated time for the main project.' }
-  ];
+import { SmallCalendar } from '@/components/dashboard/SmallCalendar';
+import { TaskList } from '@/components/dashboard/TaskList';
+import { StudySpinner } from '@/components/dashboard/StudySpinner';
 
 export default function DashboardPage() {
   const { currentUser } = useAuth();
-  const [dashboardEvents] = useState<PlannerEvent[]>(
-    initialDashboardEvents.map((event, index) => ({
-      ...event,
-      id: `dash-event-${index + 1}-${Date.now()}`,
-      color: eventTypeColors[event.type],
-    }))
-  );
-
   const [greeting, setGreeting] = useState('');
+
   useEffect(() => {
     const hour = new Date().getHours();
     if (hour < 12) setGreeting('Good morning');
@@ -41,15 +23,35 @@ export default function DashboardPage() {
       return `${greeting}, ${currentUser.displayName.split(' ')[0]}!`;
     }
     return `${greeting}!`;
-  }
+  };
+
+  const studyTopics = [
+    { value: 'React Hooks', color: '#61DAFB' },
+    { value: 'Python Lists', color: '#3776AB' },
+    { value: 'CSS Flexbox', color: '#1572B6' },
+    { value: 'Data Structures', color: '#F7DF1E' },
+    { value: 'Algorithms', color: '#FF4136' },
+    { value: 'Next.js', color: '#000000' },
+  ];
 
   return (
     <div className="flex-grow space-y-6 xl:space-y-8">
-      <DashboardAgendaView 
-        events={dashboardEvents} 
-        title={getGreetingTitle()} 
-        subtitle="Here’s what’s on your plate for the next few days." 
-      />
+        <div className="mb-6">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">
+            {getGreetingTitle()}
+            </h1>
+            <p className="text-md text-muted-foreground mt-1">Here’s your dashboard for today.</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-6">
+                <TaskList />
+            </div>
+            <div className="space-y-6">
+                <SmallCalendar />
+                <StudySpinner topics={studyTopics} />
+            </div>
+        </div>
     </div>
   );
 }

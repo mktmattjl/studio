@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 import type { PlannerEvent } from '@/app/planner/page';
 import { Progress } from '@/components/ui/progress';
-import { CalendarDays, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 const eventTypeColorMap: Record<PlannerEvent['type'], string> = {
     'deadline': 'border-l-red-500',
